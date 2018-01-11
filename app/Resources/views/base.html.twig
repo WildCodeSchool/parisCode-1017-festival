@@ -3,11 +3,45 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        {#<link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">#}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
         {% block stylesheets %}{% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+        <div id="header">
+            <a href="#" class="brand-logo">
+                {#<img src="{{ asset('img/logorond.png') }}">#}
+                <img src="{{ asset('img/logorondblanc.png') }}">
+            </a>
+
+            <a class="btn right">Log In</a>
+            <a class="btn right">Sign In</a>
+
+            <a class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
+            <a class="waves-effect waves-light btn-large hide-on-small-only">Sign In</a>
+        </div>
+
+        {% block body %}
+
+        {% endblock %}
+
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+        <script src="js/style.js"></script>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
