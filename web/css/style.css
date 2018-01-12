@@ -1,5 +1,3 @@
-
-
 /* TYPO
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
 h2 {
@@ -13,11 +11,11 @@ h2 {
     margin: 0 auto;
     line-height: 0.5em;
 }
-i {
+
+.icon {
     font-size: 8em !important;
     color: white;
 }
-
 
 /* SECTION
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -27,37 +25,72 @@ section {
     height: 50vh;
 }
 
-
 /* NAV
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+nav img {
+    width: 4%;
+}
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 50px;
+    line-height: 50px;
+}
+
 li {
     text-align: center;
 }
 
-#header, #footer {
+.side-nav {
+    width: 50vw;
+}
+
+#header {
     position: fixed;
-    /*height: 50px;*/
+    background: #8E24AA;
     display: block;
     width: 100%;
-    /*background: #333;*/
     z-index: 999;
     color: #f2f2f2;
     top: 0;
 }
 
-.btn-large {
-    float: right;
-    margin: 2em 0.5em;
+#header img {
+    width: 1.7em;
+    margin: 0.1em 0 0 0.1em;
 }
 
-#header img {
-    width: 15%;
+nav .button-collapse {
+    float: right;
+}
+
+nav .brand-logo {
+    float: left;
+    transform: initial;
+    left: 0;
+}
+
+#header-index {
+    position: fixed;
+    display: block;
+    width: 100%;
+    z-index: 999;
+    color: #f2f2f2;
+    top: 0;
+}
+
+#header-index img {
+    width: 10%;
     margin: 0.5em 0 0 0.5em;
 }
 
 .btn {
     margin: 1em 0.5em;
     padding: 0 1rem;
+}
+
+.btn-large {
+    float: right;
+    margin: 2em 0.5em;
 }
 
 
@@ -71,7 +104,6 @@ li {
     top: 0;
     object-fit: cover;
 }
-
 
 /* VIDEO
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -92,8 +124,6 @@ li {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
 }
 
-
-
 /* MEDIA QUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -101,15 +131,15 @@ li {
 
     /* SECTION STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
     h2 {
         font-size: 8em;
         padding-top: 70vh;
     }
 
-    #header img {
+    #header-index img {
         width: 10%;
     }
+
 
 }
 
@@ -122,11 +152,21 @@ li {
         padding-top: 70vh;
     }
 
-    i {
+    .icon {
         font-size: 10em !important;
     }
 
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 70px;
+        line-height: 70px;
+    }
+
     #header img {
+        width: 2.3em;
+
+    }
+
+    #header-index img {
         width: 7%;
     }
 
