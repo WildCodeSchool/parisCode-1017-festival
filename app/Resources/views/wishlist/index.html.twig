@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Wishlists list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Festival</th>
+                <th>Genre</th>
+                <th>Location</th>
+                <th>Artist</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for wishlist in wishlists %}
+            <tr>
+                <td><a href="{{ path('wishlist_show', { 'id': wishlist.id }) }}">{{ wishlist.id }}</a></td>
+                <td>{{ wishlist.user }}</td>
+                <td>{% for festival in wishlist.festival %}{{ festival }}{% endfor %}</td>
+                <td>{% for genre in wishlist.genre %}{{ genre }}{% endfor %}</td>
+                <td>{% for location in wishlist.location %}{{ location }}{% endfor %}</td>
+                <td>{% for artist in wishlist.artist %}{{ artist }}{% endfor %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('wishlist_show', { 'id': wishlist.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('wishlist_edit', { 'id': wishlist.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('wishlist_new') }}">Create a new wishlist</a>
+        </li>
+    </ul>
+{% endblock %}

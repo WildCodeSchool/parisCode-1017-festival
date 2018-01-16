@@ -1,0 +1,144 @@
+/************************************************\
+==================================================
+1. Discover Base
+2. Discover Modal
+3.
+4.
+5.
+==================================================
+\************************************************/
+
+/************************************************\
+==================================================
+1. Discover Base
+==================================================
+\************************************************/
+
+.card-image img{
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.zoom-in {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.festival::-webkit-scrollbar,
+.map::-webkit-scrollbar {
+    display: none;
+}
+
+/* Google Maps */
+.map {
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+#map {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.festival {
+    top: 120px;
+    position: relative;
+}
+
+/* Desktop */
+@media screen and (min-width: 993px) {
+    .browser {
+        z-index: 3;
+        background-color: white;
+        position: fixed;
+        top: 0;
+        width: 41vw;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 601px) and (max-width: 992px) {
+    .browser {
+        z-index: 3;
+        background-color: white;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+    .browser {
+        z-index: 3;
+        background-color: white;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+    }
+}
+
+.modal {
+    width: 94%;
+    height: 90vh;
+    max-height: 95%;
+    margin-left: 3%;
+    margin-right: 3%;
+    top: 0px !important;
+    bottom: 0px !important;
+}
+
+
+
+/************************************************\
+==================================================
+2. Discover Modal
+==================================================
+\************************************************/
+
+
+
+
+/************************************************\
+==================================================
+3.
+==================================================
+\************************************************/
+
+
+/************************************************\
+==================================================
+4.
+==================================================
+\************************************************/
+
+
+/************************************************\
+==================================================
+5.
+==================================================
+\************************************************/
+
+
