@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Festival</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ festival.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ festival.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ festival.description }}</td>
+            </tr>
+            <tr>
+                <th>Datestart</th>
+                <td>{% if festival.dateStart %}{{ festival.dateStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateend</th>
+                <td>{% if festival.dateEnd %}{{ festival.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Budget</th>
+                <td>{{ festival.budget }}</td>
+            </tr>
+            <tr>
+                <th>Linkwebsite</th>
+                <td>{{ festival.linkWebsite }}</td>
+            </tr>
+            <tr>
+                <th>Linkfbevent</th>
+                <td>{{ festival.linkFbEvent }}</td>
+            </tr>
+            <tr>
+                <th>Linkfbpage</th>
+                <td>{{ festival.linkFbPage }}</td>
+            </tr>
+            <tr>
+                <th>Linkinstagram</th>
+                <td>{{ festival.location }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ festival.location }}</td>
+            </tr>
+            <tr>
+                <th>Concert</th>
+                <td>{% for concert in festival.concert %}{{ concert }}{% endfor %}</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>{{ festival.genre }}</td>
+            </tr>
+            <tr>
+                <th>Iscomplete</th>
+                <td>{% if festival.isComplete %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Issoldout</th>
+                <td>{% if festival.isSoldOut %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Isvalid</th>
+                <td>{% if festival.isValid %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('festival_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('festival_edit', { 'id': festival.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

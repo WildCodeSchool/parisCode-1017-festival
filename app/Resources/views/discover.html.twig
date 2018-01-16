@@ -1,0 +1,241 @@
+{% block header %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Go Fest</title>
+        <!--Let browser know website is optimized for mobile-->
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Google Icon Font & FontAwesome-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css"  media="screen,projection"/>
+        <!--Custom css style.css-->
+        <link href="{{ asset('css/stylediscover.css') }}" rel="stylesheet" type="text/css">
+
+    </head>
+    <body>
+
+{% endblock header %}
+
+{% block body %}
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col s12 l5 festival">
+                    <div class="row browser">
+
+                        <h1>Search</h1>
+
+                        <div class="input-field">
+                            <input type="text" id="autocomplete-input" class="autocomplete">
+                            <label for="autocomplete-input">Search by festival, genre, artist</label>
+                        </div>
+                    </div>
+                    <div class="row hide-on-small-only festival">
+                        <h1>Festival</h1>
+                        {% for festival in festivals %}
+                            <div class="card horizontal">
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <p>{{ festival.title }}</p>
+                                        <p>Style: {{ festival.genre }}</p>
+                                        <p>19/09 - 22/09/2018</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a class="cyan-text" target="_blank" href="{{ festival.linkWebsite }}">Site</a>
+                                        <a class="cyan-text" target="_blank" href="{{ festival.linkFbEvent }}">Event</a>
+                                    </div>
+                                </div>
+                                <div class="card-image">
+                                    <!-- Modal Trigger -->
+                                    <a class="favorite btn btn-floating btn-medium pink pulse modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'a' }}"><i class="material-icons">favorite</i></a>
+                                    <!-- Modal Structure -->
+                                    <div id="{{ 'modal' ~ festival.id ~ 'a' }}" class="modal">
+                                        <div class="modal-content">
+                                            <h4>{{ festival.title }}</h4>
+                                            <p>Added to your wishlist!</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">x</a>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Trigger -->
+                                    <a class="zoom-in btn btn-floating btn-medium cyan pulse modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
+                                    <!-- Modal Structure -->
+                                    <div id="{{ 'modal' ~ festival.id ~ 'b' }}" class="modal">
+                                        <div class="modal-content">
+                                            <h4>{{ festival.title }}</h4>
+                                            <div class="row">
+                                                <div class="col s12 l6">
+                                                    <img class="responsive-img" src="{{ festival.imageBanner }}">
+                                                </div>
+                                                <div class="col s12 l6">
+                                                    <div class="card">
+                                                        <div class="card-content">
+                                                            <h5><i class="material-icons">location_on</i>  {{ festival.location }}</h5>
+                                                            <h5><i class="material-icons">date_range</i>
+                                                                {% if festival.dateStart %}
+                                                                {{ festival.dateStart|date("d M") }} - {{ festival.dateEnd|date("d M Y") }} ({{ ((festival.dateEnd).diff(festival.dateStart))|date }})</h5>
+                                                                {% else %}  TBA
+                                                                {% endif %}
+
+                                                        </div>
+                                                        <div class="card-tabs">
+                                                            <ul class="tabs tabs-fixed-width">
+                                                                <li class="tab"><a class="active" href="{{ '#general' ~ festival.id }}">General</a></li>
+                                                                <li class="tab"><a href="{{ '#lineup' ~ festival.id }}">Line Up</a></li>
+                                                                <li class="tab"><a href="{{ '#map' ~ '2' ~ festival.id }}">Map</a></li>
+                                                                <li class="tab"><a href="{{ '#links' ~ festival.id }}">Links</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <div id="{{ 'general' ~ festival.id }}">
+                                                                <ul class="collection">
+                                                                    <li class="collection-item avatar">
+                                                                        <i class="material-icons circle blue lighten-2">music_note</i>
+                                                                        <span class="title">Genre</span>
+                                                                        <p><br>{{ festival.genre }}</p>
+                                                                    </li>
+                                                                    <li class="collection-item avatar">
+                                                                        <i class="material-icons circle blue lighten-2">subject</i>
+                                                                        <span class="title">Description</span>
+                                                                        <p><br>{{ festival.description }}</p>
+                                                                    </li>
+                                                                    <li class="collection-item avatar">
+                                                                        <i class="material-icons circle blue lighten-2">monetization_on</i>
+                                                                        <span class="title">Budget</span>
+                                                                        <p><br>{% if festival.budget %}{{ festival.budget }} euros{% else %}N/A{% endif %}</p>
+                                                                        {% if festival.linkTickets %}
+                                                                        <a href="{{ festival.linkTickets }}" target="_blank" class="secondary-content"><i class="material-icons">local_play</i></a>
+                                                                        {% endif %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div id="{{ 'lineup' ~ festival.id }}">
+                                                                <ul class="collection">
+                                                                    {% if festival.concert %}
+                                                                    {% for concert in festival.concert %}
+                                                                        <li class="collection-item avatar">
+                                                                            <i class="material-icons circle deep-purple lighten-2">people</i>
+                                                                            <span class="title">{{ concert.artist }}</span>
+                                                                            <p>{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateStart|date("d D H:i") }}<br>
+                                                                                {{ concert.location.address }}
+                                                                            </p>
+                                                                            <a href="#wishlist" class="secondary-content"><i class="material-icons">favorite_border</i></a>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                    {% else %}N/A
+                                                                    {% endif %}
+                                                                </ul>
+                                                            </div>
+                                                            <div class="center" id="{{ 'map' ~ '2' ~ festival.id }}">
+                                                                <iframe
+                                                                        width="450"
+                                                                        height="350"
+                                                                        frameborder="0" style="border:0"
+                                                                        src={{ "https://www.google.com/maps/embed/v1/place?key=" ~ GOOGLE_MAPS_API ~ "&q=" ~ festival.location.address }}>
+                                                                </iframe>
+                                                            </div>
+                                                            <div id="{{ 'links' ~ festival.id }}">
+                                                                <div class="row center">
+                                                                    <p>
+                                                                        {% if festival.linkWebsite %}<a href="{{ festival.linkWebsite }}" target="_blank" class="btn-floating amber "><i class="material-icons">insert_link</i></a>{% endif %}
+                                                                        {% if festival.linkFbPage %}<a href="{{ festival.linkFbPage }}" target="_blank" class="btn-floating blue darken-3 "><i class="fa fa-facebook"></i></a>{% endif %}
+                                                                        {% if festival.linkFbEvent %}<a href="{{ festival.linkFbEvent }}" target="_blank" class="btn-floating blue darken-3 "><i class="material-icons">date_range</i></a>{% endif %}
+                                                                        {% if festival.linkInstagram %}<a href="{{ festival.linkInstagram }}" target="_blank" class="btn-floating purple"><i class="fa fa-instagram"></i></a>{% endif %}
+                                                                    </p><br><br>
+                                                                    <p>Missing some info, tell us!</p>
+                                                                    <br>
+                                                                    <p><a href="#edit" target="_blank" class="btn-floating red"><i class="material-icons">edit</i></a>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                                        </div>
+                                    </div>
+                                    <img src="{{ festival.imageIcon }}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col s12 offset-l5 l7 map">
+                    <div id="map"></div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+        <!--GoogleMaps scripts-->
+        <script>
+            function initMap() {
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 5,
+                    center: {
+                        lat: {{ users.address.latitude }},
+                        lng: {{ users.address.longitude }}
+                    }
+                });
+                // Create an array of alphabetical characters used to label the markers.
+                var labels = [
+                    // 'Reeperbahn Festival',
+                    // 'Bateau Music Festival'
+                ];
+
+                var infoWin = new google.maps.InfoWindow();
+                // Add some markers to the map.
+                // Note: The code uses the JavaScript Array.prototype.map() method to
+                // create an array of markers based on a given "locations" array.
+                // The map() method here has nothing to do with the Google Maps API.
+                var markers = locations.map(function(location, i) {
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        label: labels[i % labels.length]
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infoWin.setContent(location.info);
+                        infoWin.open(map, marker);
+                    })
+                    return marker;
+                });
+
+                // markerCluster.setMarkers(markers);
+                // Add a marker clusterer to manage the markers.
+                var markerCluster = new MarkerClusterer(map, markers, {
+                    imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            }
+            var locations = [
+                {% for festival in festivals %}{
+                    lat: {{ festival.location.latitude }},
+                    lng: {{ festival.location.longitude }},
+                    info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'
+                },{% endfor %}
+            ];
+        </script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+        </script>
+        <script async defer
+                src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ GOOGLE_MAPS_API  ~ '&content_copy&callback=initMap' }}>
+        </script>
+        <!--Modal scripts-->
+        <script src="{{ asset('js/scriptdiscover.js') }}"></script>
+    </body>
+</html>
+
+{% endblock body %}
+

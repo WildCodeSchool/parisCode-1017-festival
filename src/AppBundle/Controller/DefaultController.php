@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Festival;
 
 class DefaultController extends Controller
 {
@@ -58,16 +59,23 @@ class DefaultController extends Controller
      */
     public function discoverAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
+        $users = $em->getRepository('AppBundle:User')->findOneById(1);
+
+        return $this->render('discover.html.twig', array(
+            'festivals' => $festivals,
+            'users' => $users
+        ));
+
+        // TODO : la modal n'apparait pas dans tous les medias queries
+        // TODO : database, fixtures,...
+        // TODO : ajouter des ifs pour les informations facultatives
+        // TODO : relation wishlist aveugle coté user
         // TODO : LN
+
         return $this->render('default/discover.html.twig');
     }
 
-    /**
-     * @Route("/plan", name="plan")
-     */
-    public function planAction(Request $request)
-    {
-        // TODO : All
-        return $this->render('default/plan.html.twig');
-    }
 }

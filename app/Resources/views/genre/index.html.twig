@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Genres list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td><a href="{{ path('genre_show', { 'id': genre.id }) }}">{{ genre.id }}</a></td>
+                <td>{{ genre.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('genre_show', { 'id': genre.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('genre_edit', { 'id': genre.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('genre_new') }}">Create a new genre</a>
+        </li>
+    </ul>
+{% endblock %}

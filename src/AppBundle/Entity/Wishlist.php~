@@ -1,0 +1,62 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Wishlist
+ *
+ * @ORM\Table(name="wishlist")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\WishlistRepository")
+ */
+class Wishlist
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="wishlist")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $festival;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Genre")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $genre;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Location")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $location;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Artist")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $artist;
+
+    /**
+     * NBLN-T : ToString
+     */
+    public function __toString()
+    {
+        return $this->user;
+    }
+
+}
