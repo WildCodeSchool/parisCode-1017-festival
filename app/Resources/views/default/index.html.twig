@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-
+{% block navbar %}
     <div id="header-index">
         <a href="#" class="brand-logo">
             <img src="{{ asset('img/logorondblanc.png') }}">
@@ -13,9 +12,9 @@
         <a class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
         <a class="waves-effect waves-light btn-large hide-on-small-only">Sign In</a>
     </div>
+{% endblock %}
 
-
-
+{% block body %}
     <div id="fullpage">
 
         <section class="mobile-homepage">
@@ -60,7 +59,6 @@
             </a>
         </section>
     </div>
-
 {% endblock %}
 
 

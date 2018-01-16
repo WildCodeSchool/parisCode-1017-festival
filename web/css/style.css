@@ -93,6 +93,14 @@ nav .brand-logo {
     margin: 2em 0.5em;
 }
 
+#footer {
+    background: #8E24AA;
+    display: block;
+    width: 100%;
+    z-index: 998;
+    color: #f2f2f2;
+}
+
 
 /* HOMEPAGE
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
