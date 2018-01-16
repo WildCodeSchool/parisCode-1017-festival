@@ -1,6 +1,6 @@
 /* TYPO
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
-h2 {
+.homepage-h2 {
     position: relative;
     text-transform: uppercase;
     text-align: center;
@@ -15,6 +15,10 @@ h2 {
 .icon {
     font-size: 8em !important;
     color: white;
+}
+
+h1 {
+    display:none;
 }
 
 /* SECTION
@@ -132,6 +136,8 @@ nav .brand-logo {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
 }
 
+
+
 /* MEDIA QUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -139,7 +145,7 @@ nav .brand-logo {
 
     /* SECTION STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
-    h2 {
+    .homepage-h2 {
         font-size: 8em;
         padding-top: 70vh;
     }
@@ -155,7 +161,7 @@ nav .brand-logo {
 
     /* SECTION STYLES
     –––––––––––––––––––––––––––––––––––––––––––––––––– */
-    h2 {
+    .homepage-h2 {
         font-size: 10em;
         padding-top: 70vh;
     }

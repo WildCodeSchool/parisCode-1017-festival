@@ -2,15 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}Welcome!{% endblock %}</title>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     {% block stylesheets %}{% endblock %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
@@ -20,6 +18,7 @@
 {% block navbar %}
     <nav id="header">
         <div class="nav-wrapper">
+            <h1>Go Fest</h1>
             <a href="#!" class="brand-logo"><img src="{{ asset('img/logorondblanc.png') }}"></a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -48,21 +47,17 @@
     </footer>
 {% endblock %}
 
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-<script src="js/style.js"></script>
-
-
+<!-- js burger -->
 <script>
-    $(document).ready(function () {
+    $( document ).ready(function(){
         $(".button-collapse").sideNav();
     })
 </script>
 
-
 {% block javascripts %}{% endblock %}
+
 </body>
 </html>
