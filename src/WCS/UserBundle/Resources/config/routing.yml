@@ -1,0 +1,3 @@
+wcs_user_homepage:
+    path:     /
+    defaults: { _controller: WCSUserBundle:Default:index }

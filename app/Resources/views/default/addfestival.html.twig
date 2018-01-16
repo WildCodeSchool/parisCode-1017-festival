@@ -1,0 +1,210 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleform.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+
+        <div class="row center-align">
+            <div class="col s12">
+                <h2>Add a Festival</h2>
+                <h3>General Informations</h3>
+            </div>
+        </div>
+
+
+        <!-- FIL D'ARIANE -->
+        <div class="row">
+            <div class="input-field col s12">
+                <nav>
+                    <div class="nav-wrapper">
+                        <div class="col s12">
+                            <a href="Page1.html" class="breadcrumb current">General Informations</a>
+                            <a href="Page2.html" class="breadcrumb">Description</a>
+                            <a href="Page3.html" class="breadcrumb">Links</a>
+                            <a href="Page4.html" class="breadcrumb">Pictures</a>
+                            <a href="Page5.html" class="breadcrumb">Artists</a>
+                            <a href="Page6.html" class="breadcrumb">Sent</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <form class="col s12">
+
+                <!-- Choix du nom-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">music_note</i>
+                        <input id="icon_prefix" type="text" class="validate" data-length="30">
+                        <label for="icon_prefix">Festival Name</label>
+                    </div>
+                </div>
+
+                <!-- Choix de l'adresse-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">location_city</i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Adress</label>
+                    </div>
+                </div>
+
+                <!-- Choix du style-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">music_video</i>
+                        <select>
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Pop</option>
+                            <option value="2">Rock</option>
+                            <option value="3">Punk</option>
+                        </select>
+                        <label>Style</label>
+                    </div>
+                </div>
+
+                <!-- Choix du tarif max-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">attach_money</i>
+                        <input id="icon_prefix" type="text" class="validate" data-length="3">
+                        <label for="icon_prefix">Amount</label>
+                    </div>
+                </div>
+
+                <!-- Le DatePicker de  Materialize ne reconnait pas la sélection multiples de dates dans l'agenda,
+                il a donc fallu en créer 2, 1 pour la date de début, 1 pour la date de fin -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">date_range</i>
+                        <div class="date_position"
+                             style="position: relative;padding: 40px 20px 20px 60px;margin: 20px 0px 0px 0px;">
+                            <input type="date" class="datepicker">
+                        </div>
+                        <label for="icon_prefix">Start Date</label>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">date_range</i>
+                                <div class="date_position"
+                                     style="position: relative;padding: 40px 20px 20px 60px;margin: 20px 0px 0px 0px;">
+                                    <input type="date" class="datepicker">
+                                </div>
+                                <label for="icon_prefix">End Date</label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Description Festival -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">announcement</i>
+                <textarea id="textarea" class="materialize-textarea" data-length="1000"></textarea>
+                <label for="icon_prefix">Description</label>
+            </div>
+        </div>
+
+        <!-- Lien FB-->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">insert_link</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Facebook link</label>
+            </div>
+        </div>
+
+        <!-- Lien FB Event-->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">insert_link</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Facebook Event link</label>
+            </div>
+        </div>
+
+        <!-- Lien Insta-->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">insert_link</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Instagram link</label>
+            </div>
+        </div>
+
+        <!-- Lien Officiel-->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">insert_link</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Official link</label>
+            </div>
+        </div>
+
+        <!-- Choix de l'icône-->
+        <div class="row">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Icon</span>
+                    <input type="file">
+                </div>
+
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+        </div>
+
+        <!-- Choix de la bannière-->
+        <div class="row">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Banner</span>
+                    <input type="file">
+                </div>
+
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">star_border</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Artists</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3>Festival sent!</h3>
+            </div>
+        </div>
+
+        <a class="waves-effect waves-light btn" href="Page6.html"><i class="material-icons right">fast_forward</i>Next</a>
+
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script src="https://use.fontawesome.com/a4cc06d132.js"></script>
+    <script type="text/javascript" src="{{ asset('js/scriptform.js') }}"></script>
+
+{% endblock javascripts %}

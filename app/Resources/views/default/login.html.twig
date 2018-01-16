@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styleform.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row center-align">
+            <div class="col s12">
+                <h2>Login</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <form class="col s12">
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Pseudo</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">mail_outline</i>
+                        <input id="icon_prefix" type="email" class="validate">
+                        <label for="icon_prefix" data-error="Please enter a valid email address" data-success="Perfect!">Email</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="icon_prefix" type="password" class="validate">
+                        <label for="icon_prefix" data-error="Please enter a valid password" data-success="Perfect!">Password</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 center-align">
+
+                        <ul>
+                            <li class="fb_btn">
+                                <a class="waves-effect waves-light btn-floating btn-large social facebook login_facebook">
+                                    <i class="fa fa-facebook"></i>Login in with facebook</a>
+                            </li>
+
+                            <li class="gg_btn">
+                                <a class="waves-effect waves-light btn-floating btn-large social google login_google">
+                                    <i class="fa fa-google"></i>Login in with google</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="center-align forgot_password">
+                    <a href="forgotten_password.html">Forgot your password?</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script src="https://use.fontawesome.com/a4cc06d132.js"></script>
+    <script type="text/javascript" src="{{ asset('js/scriptform.js') }}"></script>
+
+{% endblock javascripts %}

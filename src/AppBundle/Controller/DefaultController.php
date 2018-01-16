@@ -14,17 +14,44 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // TODO : inserer code amandine
+        // TODO : Amandine
+        return $this->render('default/index.html.twig');
+    }
 
-        $em = $this->getDoctrine()->getManager();
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction(Request $request)
+    {
+        // TODO : Agathe
+        return $this->render('default/register.html.twig');
+    }
 
-        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
-        $users = $em->getRepository('AppBundle:User')->findOneById(1);
+    /**
+     * @Route("/login", name="login")
+     */
+    public function loginAction(Request $request)
+    {
+        // TODO : Agathe - css body pour descendre le titre
+        return $this->render('default/login.html.twig');
+    }
 
-        return $this->render('discover.html.twig', array(
-            'festivals' => $festivals,
-            'users' => $users
-        ));
+    /**
+     * @Route("/addfestival", name="addfestival")
+     */
+    public function addfestivalAction(Request $request)
+    {
+        // TODO : Agathe
+        return $this->render('default/addfestival.html.twig');
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contactAction(Request $request)
+    {
+        // TODO : Agathe
+        return $this->render('default/contact.html.twig');
     }
 
     /**
@@ -46,6 +73,9 @@ class DefaultController extends Controller
         // TODO : database, fixtures,...
         // TODO : ajouter des ifs pour les informations facultatives
         // TODO : relation wishlist aveugle coté user
+        // TODO : LN
+
+        return $this->render('default/discover.html.twig');
     }
 
 }
