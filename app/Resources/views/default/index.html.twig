@@ -2,5 +2,70 @@
 
 {% block body %}
 
-    page amandine
+    <div id="header-index">
+        <a href="#" class="brand-logo">
+            <img src="{{ asset('img/logorondblanc.png') }}">
+        </a>
+
+        <a class="btn right hide-on-med-and-up">Log In</a>
+        <a class="btn right hide-on-med-and-up">Sign In</a>
+
+        <a class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
+        <a class="waves-effect waves-light btn-large hide-on-small-only">Sign In</a>
+    </div>
+
+
+
+    <div id="fullpage">
+
+        <section class="mobile-homepage">
+            <img class="homepage-img hide-on-med-and-up" src="{{ asset('img/tomorrowland.jpg') }}">
+            <a href="#"><h2 class="homepage-h2">Discover</h2></a>
+        </section>
+        <section class="mobile-homepage">
+            <img class="homepage-img hide-on-med-and-up" src="{{ asset('img/coachella.jpg') }}">
+            <a href="#"><h2 class="homepage-h2">Plan</h2></a>
+        </section>
+
+        <section class="vertical-scrolling  hide-on-small-only" id="section0">
+            <a href="#">
+                <video id="video" playsinline="" autoplay muted loop class="bgvid">
+                    <source src="https://www.woovapp.com/wp-content/uploads/2017/10/ML-aftermovie.mp4" type="video/mp4">
+                </video>
+
+                <div class="ml-gradient">
+                    <h2>Discover</h2>
+                    <ul id="menu">
+                        <li data-menuanchor="secondPage"><a href="#secondPage"><i class="material-icons icon">keyboard_arrow_down</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </section>
+
+        <section class="vertical-scrolling hide-on-small-only" id="section1">
+            <a href="#">
+                <video id="video2" playsinline="" autoplay muted loop class="bgvid">
+                    <source src="http://2ukju42ryr9x2tkb6r2yfz8a.wpengine.netdna-cdn.com/wp-content/themes/summercamp/library/images/sc-homepage_video-2015_12_18.mp4"
+                            type="video/mp4">
+                </video>
+
+                <div class="ml-gradient">
+                    <a href="#"><h2 id="second">Plan</h2></a>
+                    <ul id="menu">
+                        <li data-menuanchor="firstPage" class="active"><a href="#firstPage"><i class="material-icons icon">keyboard_arrow_up</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </section>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        document.querySelector('#video').play();
+    </script>
 {% endblock %}
