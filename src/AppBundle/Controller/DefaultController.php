@@ -15,6 +15,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         // TODO : Amandine
+        // TODO : Footer en bas de toutes les pages
         return $this->render('default/index.html.twig');
     }
 
@@ -23,7 +24,7 @@ class DefaultController extends Controller
      */
     public function registerAction(Request $request)
     {
-        // TODO : Agathe
+        // TODO : All sprint 3
         return $this->render('default/register.html.twig');
     }
 
@@ -32,31 +33,13 @@ class DefaultController extends Controller
      */
     public function loginAction(Request $request)
     {
-        // TODO : Agathe - css body pour descendre le titre
+        // TODO : All sprint 3
         return $this->render('default/login.html.twig');
     }
 
     /**
-     * @Route("/addfestival", name="addfestival")
-     */
-    public function addfestivalAction(Request $request)
-    {
-        // TODO : Agathe
-        return $this->render('default/addfestival.html.twig');
-    }
-
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contactAction(Request $request)
-    {
-        // TODO : Agathe
-        return $this->render('default/contact.html.twig');
-    }
-
-    /**
-     * @Route("/discover", name="discover")
-     */
+    * @Route("/discover", name="discover")
+    */
     public function discoverAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -64,18 +47,53 @@ class DefaultController extends Controller
         $festivals = $em->getRepository('AppBundle:Festival')->findAll();
         $users = $em->getRepository('AppBundle:User')->findOneById(1);
 
-        return $this->render('discover.html.twig', array(
+        return $this->render('default/discover.html.twig', array(
             'festivals' => $festivals,
             'users' => $users
         ));
 
+        // TODO : LN
         // TODO : la modal n'apparait pas dans tous les medias queries
-        // TODO : database, fixtures,...
         // TODO : ajouter des ifs pour les informations facultatives
         // TODO : relation wishlist aveugle coté user
-        // TODO : LN
 
-        return $this->render('default/discover.html.twig');
+    }
+
+    /**
+     * @Route("/addfestival", name="addfestival")
+     */
+    public function addfestivalAction(Request $request)
+    {
+        // TODO : Helene
+        return $this->render('default/addfestival.html.twig');
+    }
+
+    /**
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profileAction(Request $request)
+    {
+        // TODO : Agathe
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')->findOneById(1);
+
+        return $this->render('default/profile.html.twig', array(
+            'user' => $user
+        ));
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function adminAction(Request $request)
+    {
+        // TODO : Amandine
+
+        return $this->render('default/admin.html.twig');
     }
 
 }

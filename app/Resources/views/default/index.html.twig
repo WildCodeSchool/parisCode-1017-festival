@@ -3,32 +3,34 @@
 {% block navbar %}
     <div id="header-index">
         <h1>Go Fest</h1>
-        <a href="#" class="brand-logo">
+        <a href="{{ path('discover') }}" class="brand-logo">
             <img src="{{ asset('img/logorondblanc.png') }}">
         </a>
 
-        <a class="btn right hide-on-med-and-up">Log In</a>
-        <a class="btn right hide-on-med-and-up">Sign In</a>
+        <a href="{{ path('login') }}" class="btn right hide-on-med-and-up">Log In</a>
+        <a href="{{ path('register') }}" class="btn right hide-on-med-and-up">Register</a>
 
-        <a class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
-        <a class="waves-effect waves-light btn-large hide-on-small-only">Sign In</a>
+        <a href="{{ path('login') }}" class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
+        <a href="{{ path('register') }}" class="waves-effect waves-light btn-large hide-on-small-only">Register</a>
+
     </div>
 {% endblock %}
 
 {% block body %}
+
     <div id="fullpage">
 
         <section class="mobile-homepage">
             <img class="homepage-img hide-on-med-and-up" src="{{ asset('img/tomorrowland.jpg') }}">
-            <a href="#"><h2 class="homepage-h2">Discover</h2></a>
+            <a href="{{ path('discover') }}"><h2 class="homepage-h2">Discover</h2></a>
         </section>
         <section class="mobile-homepage">
             <img class="homepage-img hide-on-med-and-up" src="{{ asset('img/coachella.jpg') }}">
-            <a href="#"><h2 class="homepage-h2">Plan</h2></a>
+            <a href=""><h2 class="homepage-h2">Plan</h2></a>
         </section>
 
         <section class="vertical-scrolling  hide-on-small-only" id="section0">
-            <a href="#">
+            <a href="{{ path('discover') }}">
                 <video id="video" playsinline="" autoplay muted loop class="bgvid">
                     <source src="https://www.woovapp.com/wp-content/uploads/2017/10/ML-aftermovie.mp4" type="video/mp4">
                 </video>
@@ -51,7 +53,7 @@
                 </video>
 
                 <div class="ml-gradient">
-                    <a href="#"><h2 id="second" class="homepage-h2">Plan</h2></a>
+                    <a href="{{ path('profile') }}"><h2 id="second" class="homepage-h2">Plan</h2></a>
                     <ul id="menu">
                         <li data-menuanchor="firstPage" class="active"><a href="#firstPage"><i class="material-icons icon">keyboard_arrow_up</i></a>
                         </li>

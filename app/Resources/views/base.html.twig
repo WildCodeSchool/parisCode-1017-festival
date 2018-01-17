@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    {% block stylesheets %}{% endblock %}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+        {% block stylesheets %}{% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-</head>
-<body>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    </head>
+    <body>
 
-{% block navbar %}
-    <nav id="header">
-        <div class="nav-wrapper">
-            <h1>Go Fest</h1>
-            <a href="#!" class="brand-logo"><img src="{{ asset('img/logorondblanc.png') }}"></a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">Sign In</a></li>
-                <li><a href="#">Log In</a></li>
-                <li><a href="#">Discover</a></li>
-                <li><a href="#">Plan</a></li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="#">Sign In</a></li>
-                <li><a href="#">Log In</a></li>
-                <li><a href="#">Discover</a></li>
-                <li><a href="#">Plan</a></li>
-            </ul>
-        </div>
-    </nav>
-{% endblock %}
+    {% block navbar %}
+        <nav id="header">
+            <div class="nav-wrapper">
+                <h1>Go Fest</h1>
+                <a href="{{ path('discover') }}" class="brand-logo"><img src="{{ asset('img/logorondblanc.png') }}"></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ path('register') }}">Register</a></li>
+                    <li><a href="{{ path('login') }}">Log In</a></li>
+                    <li><a href="{{ path('profile') }}">My profile</a></li>
+                    <li><a href="{{ path('addfestival') }}">Add Festival</a></li>
 
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="{{ path('register') }}">Register</a></li>
+                    <li><a href="{{ path('login') }}">Log In</a></li>
+                    <li><a href="{{ path('profile') }}">My profile</a></li>
+                    <li><a href="{{ path('addfestival') }}">Add Festival</a></li>
+                </ul>
+            </div>
+        </nav>
+    {% endblock %}
 
-{% block body %}
-{% endblock %}
+    {% block body %}
+    {% endblock %}
 
-{% block footer %}
-    <footer id="footer">
-        <p>Footer</p>
-    </footer>
-{% endblock %}
+    {% block footer %}
+        <footer id="footer">
+            <p>Footer</p>
+        </footer>
+    {% endblock %}
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<!-- js burger -->
-<script>
-    $( document ).ready(function(){
-        $(".button-collapse").sideNav();
-    })
-</script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <!-- js burger -->
+        <script>
+            $( document ).ready(function(){
+                $(".button-collapse").sideNav();
+            })
+        </script>
 
-{% block javascripts %}{% endblock %}
+    {% block javascripts %}
+    {% endblock %}
 
 </body>
 </html>
