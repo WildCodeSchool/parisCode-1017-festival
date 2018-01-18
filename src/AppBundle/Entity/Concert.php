@@ -36,7 +36,7 @@ class Concert
     private $dateEnd;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Artist", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Artist", inversedBy="concert", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $artist;
