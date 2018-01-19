@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         {#<title>{% block title %}Go Fest{% endblock %}</title>#}
         {% set current_path = app.request.get('_route') %}
-        {{ current_path }}
         <title>{% block title %}Go Fest · {{ current_path|capitalize }}{% endblock %}</title>
 
 
