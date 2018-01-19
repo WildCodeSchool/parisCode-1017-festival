@@ -4,13 +4,41 @@
     <h1>User creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+
+    <div>
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username) }}
+        {{ form_errors(form.username) }}
+    </div>
+    <div>
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password) }}
+        {{ form_errors(form.password) }}
+    </div>
+    <div>
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+    <div>
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address) }}
+        {{ form_errors(form.address) }}
+    </div>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">Send
+        <i class="material-icons right">send</i>
+    </button>
+
     {{ form_end(form) }}
+
 
     <ul>
         <li>
             <a href="{{ path('user_index') }}">Back to the list</a>
         </li>
     </ul>
+
+
+
 {% endblock %}

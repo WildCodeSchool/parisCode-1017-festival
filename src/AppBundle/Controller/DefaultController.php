@@ -14,8 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // TODO : Amandine
-        // TODO : Footer en bas de toutes les pages
+        // TODO : Amandine Footer en bas de toutes les pages
         return $this->render('default/index.html.twig');
     }
 
@@ -24,7 +23,7 @@ class DefaultController extends Controller
      */
     public function registerAction(Request $request)
     {
-        // TODO : All sprint 3
+        // TODO : All sprint 3 (FOSUserBundle)
         return $this->render('default/register.html.twig');
     }
 
@@ -33,7 +32,7 @@ class DefaultController extends Controller
      */
     public function loginAction(Request $request)
     {
-        // TODO : All sprint 3
+        // TODO : All sprint 3 (FOSUserBundle)
         return $this->render('default/login.html.twig');
     }
 
@@ -52,20 +51,18 @@ class DefaultController extends Controller
             'users' => $users
         ));
 
-        // TODO : LN
-        // TODO : la modal n'apparait pas dans tous les medias queries
-        // TODO : ajouter des ifs pour les informations facultatives
-        // TODO : relation wishlist aveugle coté user
-
-    }
-
-    /**
-     * @Route("/addfestival", name="addfestival")
-     */
-    public function addfestivalAction(Request $request)
-    {
-        // TODO : Helene
-        return $this->render('default/addfestival.html.twig');
+        // TODO : LN - la modal n'apparait pas dans tous les medias queries
+        // TODO : LN - relation wishlist aveugle coté user dans fixtures
+        // TODO : LN - close modal avec moins de marge
+        // TODO : LN - faire apparaitre les cards festivals avec un bouton en vue mobile
+        // Done : LN - descendre cards en dessous de "search" sur vue tablette et desktop
+        // Done: LN - texte modal alignement gauche
+        // Done : LN - centrer icon sur les boutons wishlist et zoom-in
+        // TODO : All - comportement des liens sur les boutons
+        // Done : changement syntaxe bdd many to many
+        // Done : centrage des icones et logo
+        // Done : regarder si la route festival/new ou concert/new affecte la partie admin
+        // Done : carte mobile taille
     }
 
     /**
@@ -91,7 +88,8 @@ class DefaultController extends Controller
      */
     public function adminAction(Request $request)
     {
-        // TODO : Amandine
+        // TODO : Amandine : liste deroulante et saisie pour l'admin
+        // TODO : Amandine : recuperer info au lieu de l'ID
 
         return $this->render('default/admin.html.twig');
     }

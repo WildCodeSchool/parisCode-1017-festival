@@ -127,6 +127,7 @@ class Festival
     private $isValid;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */

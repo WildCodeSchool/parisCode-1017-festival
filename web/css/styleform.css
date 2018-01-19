@@ -1,89 +1,37 @@
-/* ####### */
+/*.login_facebook {*/
+    /*background-color: #3b5998;*/
+/*}*/
+/*.login_google {*/
+    /*background-color: #DD4B39;*/
+    /*margin-top: 20px;*/
+/*}*/
+/*#slider_position, #date_position {*/
+    /*position: relative;*/
+    /*padding: 40px 20px 20px 60px;*/
+    /*margin: 20px 0px 0px 0px;*/
+/*}*/
+/*.forgot_password { margin-top: 20px; }*/
+/*.or { text-align: center; }*/
+/*.sent, .back {*/
+    /*display: inline-block;*/
+/*}*/
+/*.btn {*/
+    /*width: 170px;*/
+/*}*/
+/*.homepage {*/
+    /*width: 180px;*/
+/*}*/
 
-/* LOGIN PAGE */
-
-/* ####### */
-.login_facebook { 
-	background-color: #3b5998;
-}
-
-.login_google {
-	background-color: #DD4B39;
-	margin-top: 20px;
-}
-
-#slider_position, #date_position {
-	position: relative;
-	padding: 40px 20px 20px 60px;
-	margin: 20px 0px 0px 0px;
-}
-
-.forgot_password { margin-top: 20px; }
-
-.or { text-align: center; }
-
-
-/* ####### */
-
-/* LOGIN AND ACCOUNT PAGE - Facebook and Google Links */
-
-/* ####### */
-@media screen and (min-width: 600px) {
-    /* Si taille screen > à 768px: icônes Facebook et Google alignées horizontalement */
-    li {
-        display: inline-block;
-    }
-    .login_google {
-    	margin-top: 0;
-    	margin-left: 15px;
-    }
-    .sign_in_google {
-    	margin-top: 0;
-    }
-}
-
-.sent, .back {
-    display: inline-block;
-}
-
-.breadcrumb:last-child {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.breadcrumb {
-    margin-left: 43px;
-}
-
-.current {
-    color: #b71c1c !important ;
-}
-
-.btn {
-    width: 170px;
-}
-.homepage {
-    width: 180px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*@media screen and (min-width: 600px) {*/
+    /*!* Si taille screen > à 768px: icônes Facebook et Google alignées horizontalement *!*/
+    /*li {*/
+        /*display: inline-block;*/
+    /*}*/
+    /*.login_google {*/
+        /*margin-top: 0;*/
+        /*margin-left: 15px;*/
+    /*}*/
+    /*.sign_in_google {*/
+        /*margin-top: 0;*/
+    /*}*/
+/*}*/

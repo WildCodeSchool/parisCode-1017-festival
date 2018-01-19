@@ -1,16 +1,218 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
 {% block body %}
+
     <h1>Festival creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <div class="container container-top">
+        <div class="row center-align">
+            <div class="col s12">
+                <h2>Add a Festival</h2>
+            </div>
+        </div>
+        <!-- FIL D'ARIANE -->
+        <div class="row">
+            <div class="input-field col s12">
+                <nav class="nav-wrapper center-align">
+                    <a class="breadcrumb">General</a>
+                    <a class="breadcrumb">Line Up</a>
+                </nav>
+            </div>
+        </div>
+        <!-- FORM -->
+        <div class="row">
+            {{ form_start(form) }}
+                <!-- $title -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">music_note</i>
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+                </div>
+                <!-- $description -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">announcement</i>
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                </div>
+                <!-- $location -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">location_city</i>
+                        {{ form_label(form.location.address) }}
+                        {{ form_widget(form.location.address) }}
+                        {{ form_errors(form.location.address) }}
+                    </div>
+                </div>
+            <!-- $genre -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">music_video</i>
+                        {{ form_label(form.genre) }}
+                        {{ form_widget(form.genre) }}
+                        {{ form_errors(form.genre) }}
+                    </div>
+                </div>
+                <!-- $budget -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">attach_money</i>
+                        {{ form_label(form.budget) }}
+                        {{ form_widget(form.budget) }}
+                        {{ form_errors(form.budget) }}
+                    </div>
+                </div>
+                <!-- $dateStart + $dateEnd -->
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <div class="date_position"
+                             style="position: relative;padding: 40px 20px 20px 60px;margin: 20px 0px 0px 0px;">
+                        </div>
+                        {{ form_label(form.dateStart) }}
+                        {{ form_widget(form.dateStart) }}
+                        {{ form_errors(form.dateStart) }}
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">date_range</i>
+                        <div class="date_position"
+                             style="position: relative;padding: 40px 20px 20px 60px;margin: 20px 0px 0px 0px;">
+                        </div>
+                        {{ form_label(form.dateEnd) }}
+                        {{ form_widget(form.dateEnd) }}
+                        {{ form_errors(form.dateEnd) }}
+                    </div>
+                </div>
+                <!-- $linkWebsite -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.linkWebsite) }}
+                        {{ form_widget(form.linkWebsite) }}
+                        {{ form_errors(form.linkWebsite) }}
+                    </div>
+                </div>
+                <!-- $linkFbPage -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.linkFbPage) }}
+                        {{ form_widget(form.linkFbPage) }}
+                        {{ form_errors(form.linkFbPage) }}
+                    </div>
+                </div>
+                <!-- $linkFbEvent -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.linkFbEvent) }}
+                        {{ form_widget(form.linkFbEvent) }}
+                        {{ form_errors(form.linkFbEvent) }}
+                    </div>
+                </div>
+                <!-- $linkInstagram -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.linkInstagram) }}
+                        {{ form_widget(form.linkInstagram) }}
+                        {{ form_errors(form.linkInstagram) }}
+                    </div>
+                </div>
+                <!-- $imageIcon -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.imageIcon) }}
+                        {{ form_widget(form.imageIcon) }}
+                        {{ form_errors(form.imageIcon) }}
+                    </div>
+                </div>
+                <!-- $imageBanner -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.imageBanner) }}
+                        {{ form_widget(form.imageBanner) }}
+                        {{ form_errors(form.imageBanner) }}
+                    </div>
+                </div>
+                <!-- ADMIN -->
+                <div class="row">
+                    <!-- $isComplete -->
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.isComplete) }}
+                        {{ form_widget(form.isComplete) }}
+                        {{ form_errors(form.isComplete) }}
+                    </div>
+                    <!-- $isSoldOut -->
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.isSoldOut) }}
+                        {{ form_widget(form.isSoldOut) }}
+                        {{ form_errors(form.isSoldOut) }}
+                    </div>
+                    <!-- $isValid -->
+                    <div class="input-field col s4">
+                        <i class="material-icons prefix">insert_link</i>
+                        {{ form_label(form.isValid) }}
+                        {{ form_widget(form.isValid) }}
+                        {{ form_errors(form.isValid) }}
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <input type="submit" class="waves-effect waves-light btn" value="Create" />
+                </div>
+            {{ form_end(form) }}
+        </div>
+        <!-- .FORM -->
+    </div>
+    <!-- .container -->
 
-    <ul>
-        <li>
-            <a href="{{ path('festival_index') }}">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $('input.autocomplete-location').autocomplete({
+                data: {
+                    "Hippodrome": null,
+                    "Paris": null,
+                    "Hamburg": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('input.autocomplete-genre').autocomplete({
+                data: {
+                    "Rock": null,
+                    "Pop": null,
+                    "Drum n bass": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+        });
+    </script>
+
+
+{% endblock javascripts %}
