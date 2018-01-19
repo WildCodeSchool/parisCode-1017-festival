@@ -89,7 +89,7 @@ class DefaultController extends Controller
     /**
      * @Route("/admin", name="admin")
      */
-    public function adminAction(Request $request)
+    public function admiinAction(Request $request)
     {
         // TODO : Amandine : liste deroulante et saisie pour l'admin
         // TODO : Amandine : recuperer info au lieu de l'ID

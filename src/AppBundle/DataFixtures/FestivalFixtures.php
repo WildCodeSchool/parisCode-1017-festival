@@ -45,8 +45,8 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival3 = new Festival();
         $festival3->setTitle('Dummy 1');
         $festival3->setDescription('The Reeperbahn Festival is a music festival held in Hamburg, Germany over 4 days at the end of September.');
-        $festival3->setDateStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
-        $festival3->setDateEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
+        $festival3->setStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
+        $festival3->setEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
         $festival3->setBudget(99);
         $festival3->setLinkWebsite('http://www.reeperbahnfestival.com');
         $festival3->setLinkFbPage('https://www.facebook.com/reeperbahnfestival/');
@@ -65,8 +65,8 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival4 = new Festival();
         $festival4->setTitle('Dummy 2');
         $festival4->setDescription('The Reeperbahn Festival is a music festival held in Hamburg, Germany over 4 days at the end of September.');
-        $festival4->setDateStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
-        $festival4->setDateEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
+        $festival4->setStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
+        $festival4->setEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
         $festival4->setBudget(99);
         $festival4->setLinkWebsite('http://www.reeperbahnfestival.com');
         $festival4->setLinkFbPage('https://www.facebook.com/reeperbahnfestival/');
