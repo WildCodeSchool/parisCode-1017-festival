@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class LocationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllLocations(): array
+    {
+        // Création de la requete (qui devient un objet) qui va select * from genre et on la stocke pour utilisation
+        $qb = $this->createQueryBuilder('l')
+            // On affiche par odre alphabétique
+            ->orderBy('l.address', 'ASC')
+            ->getQuery();
+
+        // On demande à l'objet d'executer la requete, on renvoie donc toutes les localisations
+        return $qb->execute();
+    }
 }
