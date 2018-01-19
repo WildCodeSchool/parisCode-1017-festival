@@ -19,23 +19,23 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig');
     }
 
-    /**
-     * @Route("/register", name="register")
-     */
-    public function registerAction(Request $request)
-    {
-        // TODO : All sprint 3
-        return $this->render('default/register.html.twig');
-    }
+//    /**
+//     * @Route("/register", name="register")
+//     */
+//    public function registerAction(Request $request)
+//    {
+//        // TODO : All sprint 3
+//        return $this->render('default/register.html.twig');
+//    }
 
-    /**
-     * @Route("/login", name="login")
-     */
-    public function loginAction(Request $request)
-    {
-        // TODO : All sprint 3
-        return $this->render('default/login.html.twig');
-    }
+//    /**
+//     * @Route("/login", name="login")
+//     */
+//    public function loginAction(Request $request)
+//    {
+//        // TODO : All sprint 3
+//        return $this->render('default/login.html.twig');
+//    }
 
     /**
     * @Route("/discover", name="discover")
