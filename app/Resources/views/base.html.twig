@@ -3,7 +3,11 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>{% block title %}Go Fest{% endblock %}</title>
+        {#<title>{% block title %}Go Fest{% endblock %}</title>#}
+        {% set current_path = app.request.get('_route') %}
+        {{ current_path }}
+        <title>{% block title %}Go Fest · {{ current_path|capitalize }}{% endblock %}</title>
+
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
