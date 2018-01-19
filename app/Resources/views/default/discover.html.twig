@@ -63,8 +63,8 @@
                                                 <div class="card-content">
                                                     <h5><i class="material-icons">location_on</i>  {{ festival.location }}</h5>
                                                     <h5><i class="material-icons">date_range</i>
-                                                        {% if festival.dateStart %}
-                                                            {{ festival.dateStart|date("d M") }} - {{ festival.dateEnd|date("d M Y") }} ({{ ((festival.dateEnd).diff(festival.dateStart))|date }})
+                                                        {% if festival.start %}
+                                                            {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }} ({{ ((festival.end).diff(festival.start))|date }})
                                                         {% else %}TBA
                                                         {% endif %}
                                                     </h5>

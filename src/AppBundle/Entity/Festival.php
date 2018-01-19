@@ -38,16 +38,16 @@ class Festival
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateStart", type="datetime", nullable=true)
+     * @ORM\Column(name="start", type="datetime", nullable=true)
      */
-    private $dateStart;
+    private $start;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateEnd", type="datetime", nullable=true)
+     * @ORM\Column(name="end", type="datetime", nullable=true)
      */
-    private $dateEnd;
+    private $end;
 
     /**
      * @var float
@@ -160,6 +160,8 @@ class Festival
     public function __construct()
     {
         $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->start = new \DateTime();
+        $this->end = new \DateTime();
     }
 
     /**
@@ -221,39 +223,39 @@ class Festival
     }
 
     /**
-     * Set dateStart.
+     * Set start.
      *
-     * @param \DateTime|null $dateStart
+     * @param \DateTime|null $start
      *
      * @return Festival
      */
-    public function setDateStart($dateStart = null)
+    public function setStart($start = null)
     {
-        $this->dateStart = $dateStart;
+        $this->start = $start;
 
         return $this;
     }
 
     /**
-     * Get dateStart.
+     * Get start.
      *
      * @return \DateTime|null
      */
-    public function getDateStart()
+    public function getStart()
     {
-        return $this->dateStart;
+        return $this->start;
     }
 
     /**
      * Set dateEnd.
      *
-     * @param \DateTime|null $dateEnd
+     * @param \DateTime|null $end
      *
      * @return Festival
      */
-    public function setDateEnd($dateEnd = null)
+    public function setEnd($end = null)
     {
-        $this->dateEnd = $dateEnd;
+        $this->end = $end;
 
         return $this;
     }
@@ -263,9 +265,9 @@ class Festival
      *
      * @return \DateTime|null
      */
-    public function getDateEnd()
+    public function getEnd()
     {
-        return $this->dateEnd;
+        return $this->end;
     }
 
     /**

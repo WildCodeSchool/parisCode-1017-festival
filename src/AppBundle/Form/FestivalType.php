@@ -13,7 +13,7 @@ class FestivalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('description')->add('dateStart')->add('dateEnd')->add('budget')->add('linkWebsite')->add('linkFbEvent')->add('linkFbPage')->add('linkInstagram')->add('isComplete')->add('isSoldOut')->add('isValid')->add('imageIcon')->add('imageBanner')->add('location')->add('genre');
+        $builder->add('title')->add('description')->add('start')->add('end')->add('budget')->add('linkWebsite')->add('linkFbEvent')->add('linkFbPage')->add('linkInstagram')->add('isComplete')->add('isSoldOut')->add('isValid')->add('imageIcon')->add('imageBanner')->add('location')->add('genre');
     }/**
      * {@inheritdoc}
      */
