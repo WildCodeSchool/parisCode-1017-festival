@@ -53,11 +53,6 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
 
-        $this->addReference('Ibeyi @ Reeperbahn', $concert1);
-        $this->addReference('David August @ Reeperbahn', $concert2);
-        $this->addReference('Her @ Reeperbahn', $concert3);
-        $this->addReference('Lewis Capaldi @ Reeperbahn', $concert4);
-        $this->addReference('Bear’s Den @ Reeperbahn', $concert5);
     }
 
     public function getDependencies()

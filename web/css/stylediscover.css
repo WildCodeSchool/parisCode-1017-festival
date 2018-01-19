@@ -1,144 +1,164 @@
 /************************************************\
 ==================================================
-1. Discover Base
-2. Discover Modal
-3.
-4.
-5.
+1. All
+2. Discover Base
+3. Discover Media Queries
+4. Forms
 ==================================================
 \************************************************/
 
 /************************************************\
 ==================================================
-1. Discover Base
+1. All
 ==================================================
 \************************************************/
 
-.card-image img{
-    height: 100% !important;
-    width: 100% !important;
-}
-
-.favorite {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 18px;
-    z-index: 1;
-}
-
-.zoom-in {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 18px;
-    z-index: 1;
-}
-
-.festival::-webkit-scrollbar,
-.map::-webkit-scrollbar {
-    display: none;
-}
-
-/* Google Maps */
-.map {
-    position: fixed;
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-}
-#map {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-}
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
-.festival {
-    top: 120px;
-    position: relative;
+.card-image img{
+    height: 100% !important;
+    width: 100% !important;
+}
+.favorite{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}
+.zoom-in{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 1;
+}
+.festival::-webkit-scrollbar,
+.map::-webkit-scrollbar {
+    display: none;
 }
 
-/* Desktop */
-@media screen and (min-width: 993px) {
-    .browser {
-        z-index: 2;
-        background-color: white;
-        position: fixed;
-        top: 0;
-        width: 41vw;
-    }
+.container-top{
+    margin-top: 9vh;
 }
 
-/* Tablet */
-@media screen and (min-width: 601px) and (max-width: 992px) {
-    .browser {
-        z-index: 2;
-        background-color: white;
-        position: fixed;
-        top: 0;
-        width: 100vw;
-    }
-}
-
-/* Mobile */
-@media screen and (max-width: 600px) {
-    .browser {
-        z-index: 2;
-        background-color: white;
-        position: fixed;
-        top: 0;
-        width: 100vw;
-    }
+.discover-text{
+    text-align: left;
 }
 
 .modal {
-    width: 94%;
-    height: 90vh;
-    max-height: 95%;
-    margin-left: 3%;
-    margin-right: 3%;
-    top: 0px !important;
-    bottom: 0px !important;
+    width: 90% !important;
+    height: 90% !important;
+    left: 5% !important;
+    right: 5% !important;
+    top: 5% !important;
+    bottom: 5% !important;
+}
+
+/************************************************\
+==================================================
+2. Discover Mobile
+==================================================
+\************************************************/
+
+.search {
+    background-color: white;
+    position: fixed;
+    z-index: 3;
+    top: 10vh;
+    width: 96vw;
+}
+.map {
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+#map {
+    right: 0;
+    position: fixed;
+    width: 100%;
+    top: 22vh;
+    height: 78vh;
+    z-index: 2;
+}
+
+/************************************************\
+==================================================
+3. Discover Media Queries
+==================================================
+\************************************************/
+
+/* Tablet */
+@media screen and (min-width: 601px) and (max-width: 992px){
+    .search {
+        z-index: 2;
+        top: 9vh;
+        width: 33vw;
+    }
+    .map {
+        z-index: 3;
+    }
+    #map {
+        top: 8vh;
+        height: 92vh;
+        z-index: 3;
+    }
+    .modal {
+        width: 90% !important;
+        height: 90% !important;
+        left: 5% !important;
+        right: 5% !important;
+        top: 5% !important;
+        bottom: 5% !important;
+    }
+    .container-top{
+        margin-top: 8vh;
+    }
+    .festival-cards{
+        margin-top: 25vh;
+    }
+
 }
 
 
+/* Desktop */
+@media screen and (min-width: 993px) {
+    .search {
+        z-index: 2;
+        top: 12vh;
+        width: 33vw;
+    }
+    /* Google Maps */
+    .map {
+        z-index: 3;
+    }
+    #map {
+        top: 10vh;
+        height: 90vh;
+        z-index: 3;
+    }
+    .modal {
+        width: 90% !important;
+        height: 90% !important;
+        left: 5% !important;
+        right: 5% !important;
+        top: 5% !important;
+        bottom: 5% !important;
+    }
+    .container-top{
+        margin-top: 12vh;
+    }
+    .festival-cards{
+        margin-top: 25vh;
+    }
+}
 
 /************************************************\
 ==================================================
-2. Discover Modal
+4. Forms
 ==================================================
 \************************************************/
-
-
-
-
-/************************************************\
-==================================================
-3.
-==================================================
-\************************************************/
-
-
-/************************************************\
-==================================================
-4.
-==================================================
-\************************************************/
-
-
-/************************************************\
-==================================================
-5.
-==================================================
-\************************************************/
-
 

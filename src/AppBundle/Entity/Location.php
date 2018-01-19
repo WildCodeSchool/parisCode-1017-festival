@@ -24,6 +24,14 @@ class Location
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="string", length=250)
+     *
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="string", length=250)
      *
      */
@@ -133,4 +141,22 @@ class Location
     {
         return $this->longitude;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+
 }
