@@ -53,7 +53,7 @@ class FestivalType extends AbstractType
                     'type' => 'number'
                 )
             ))
-            ->add('dateStart', DateTimeType::class, array(
+            ->add('start', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'required' => 'false',
@@ -64,7 +64,7 @@ class FestivalType extends AbstractType
                     'placeholder' => 'YYYY-MM-DD HH:mm'
                 )
             ))
-            ->add('dateEnd', DateTimeType::class, array(
+            ->add('end', DateTimeType::class, array(
                 'label' => 'Start Date',
                 'attr' => array(
                     'class' => 'datepicker',
