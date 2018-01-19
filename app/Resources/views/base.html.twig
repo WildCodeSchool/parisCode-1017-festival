@@ -17,7 +17,7 @@
     <body>
 
     {% block navbar %}
-        <nav id="header">
+        {#<nav id="header">
             <div class="nav-wrapper">
                 <h1>Go Fest</h1>
                 <a href="{{ path('discover') }}" class="brand-logo"><img src="{{ asset('img/logorondblanc.png') }}"></a>
@@ -27,7 +27,6 @@
                     <li><a href="{{ path('login') }}">Log In</a></li>
                     <li><a href="{{ path('user_account') }}">My profile</a></li>
                     <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
-
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li><a href="{{ path('register') }}">Register</a></li>
@@ -36,7 +35,7 @@
                     <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
                 </ul>
             </div>
-        </nav>
+        </nav>#}
     {% endblock %}
 
     {% block body %}

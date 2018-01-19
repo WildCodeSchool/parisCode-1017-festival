@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Artist;
+use AppBundle\Entity\Genre;
+use AppBundle\Entity\Location;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,5 +96,71 @@ class DefaultController extends Controller
 
         return $this->render('default/admin.html.twig');
     }
+
+    /**
+     * @Route("/myaccount", name="user_account")
+     */
+    public function myAccountAction(Request $request)
+    {
+        // TODO : Agathe
+
+        return $this->render('default/myaccount.html.twig');
+    }
+
+    /**
+     * @Route("/changemail", name="change_mail")
+     */
+    public function changeEmailAction(Request $request)
+    {
+        // TODO : Agathe
+
+        return $this->render('default/change_email.html.twig');
+    }
+
+    /**
+     * @Route("/changepassword", name="change_password")
+     */
+    public function changePasswordAction(Request $request)
+    {
+        // TODO : Agathe
+
+        return $this->render('default/change_password.html.twig');
+    }
+
+    /**
+     * @Route("/wishlist", name="wishlist")
+     */
+    public function wishlistAction(Request $request)
+    {
+        // TODO : Agathe
+
+        return $this->render('default/wishlist.html.twig');
+    }
+
+    // 2 - Création de la fonction qui a pour Action de Select tous les artistes et de les rendre sur la vue choisie:
+    /**
+     * @Route("/wishlist", name="wishlist")
+     */
+    public function selectAction(Request $request)
+    {
+        $genres = $this->getDoctrine()
+        ->getRepository(Genre::class)
+        ->getAllGenres();
+
+        $artists = $this->getDoctrine()
+        ->getRepository(Artist::class)
+        ->getAllArtists();
+
+        $locations = $this->getDoctrine()
+        ->getRepository(Location::class)
+        ->getAllLocations();
+
+        return $this->render('default/wishlist.html.twig', array(
+            'genres'=>$genres,
+            'artists'=>$artists,
+            'locations'=>$locations,
+        ));
+    }
+    // Next: 3 - Faire une boucle dans la vue choisie pour afficher les Artistes contenus dans la base.
 
 }

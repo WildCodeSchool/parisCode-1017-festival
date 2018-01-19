@@ -10,4 +10,20 @@ namespace AppBundle\Repository;
  */
 class GenreRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+     * Recovering all Genres
+     */
+    public function getAllGenres(): array
+    {
+        // Création de la requete (qui devient un objet) qui va select * from genre et on la stocke pour utilisation
+        $qb = $this->createQueryBuilder('g')
+            // On affiche par odre alphabétique
+            ->orderBy('g.name', 'ASC')
+            ->getQuery();
+
+        // On demande à l'objet d'executer la requete, on renvoie donc tous les genres
+        return $qb->execute();
+    }
+
 }
