@@ -19,11 +19,11 @@
             </tr>
             <tr>
                 <th>Datestart</th>
-                <td>{% if festival.dateStart %}{{ festival.dateStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if festival.start %}{{ festival.start|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Dateend</th>
-                <td>{% if festival.dateEnd %}{{ festival.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if festival.end %}{{ festival.end|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Budget</th>

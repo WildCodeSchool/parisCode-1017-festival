@@ -24,8 +24,8 @@
                                 <div class="card-content">
                                     <p>{{ festival.title }}</p>
                                     <p>Style: {{ festival.genre }}</p>
-                                    <p>{% if festival.dateStart %}
-                                            {{ festival.dateStart|date("d M") }} - {{ festival.dateEnd|date("d M Y") }}
+                                    <p>{% if festival.start %}
+                                            {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }}
                                         {% else %}TBA
                                         {% endif %}
                                     </p>
@@ -60,8 +60,8 @@
                                                 <img class="responsive-img" src="{{ festival.imageBanner }}">
                                                 <p><i class="material-icons">location_on</i>  {{ festival.location }}</p>
                                                 <p><i class="material-icons">date_range</i>
-                                                    {% if festival.dateStart %}
-                                                        {{ festival.dateStart|date("d M") }} - {{ festival.dateEnd|date("d M Y") }} ({{ ((festival.dateEnd).diff(festival.dateStart))|date }})
+                                                    {% if festival.start %}
+                                                        {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }} ({{ ((festival.end).diff(festival.start))|date }})
                                                     {% else %}TBA
                                                     {% endif %}
                                                 </p>

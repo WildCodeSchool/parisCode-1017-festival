@@ -14,8 +14,8 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival1 = new Festival();
         $festival1->setTitle('Reeperbahn Festival');
         $festival1->setDescription('The Reeperbahn Festival is a music festival held in Hamburg, Germany over 4 days at the end of September.');
-        $festival1->setDateStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
-        $festival1->setDateEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
+        $festival1->setStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
+        $festival1->setEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
         $festival1->setBudget(99);
         $festival1->setLinkWebsite('http://www.reeperbahnfestival.com');
         $festival1->setLinkFbPage('https://www.facebook.com/reeperbahnfestival/');

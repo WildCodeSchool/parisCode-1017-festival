@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1>Users list</h1>
 
@@ -43,4 +49,36 @@
             <a href="{{ path('user_new') }}">Create a new user</a>
         </li>
     </ul>
+
+    <div id='calendar' class="container"></div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            // page is now ready, initialize the calendar...
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                navLinks: true, // can click day/week names to navigate views
+                /*editable: true,*/
+                displayEventTime: false,
+                eventLimit: true, // allow "more" link when too many events
+                events: "{{ path('api_calendar') }}"
+            })
+        });
+    </script>
+
 {% endblock %}
