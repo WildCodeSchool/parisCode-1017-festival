@@ -42,10 +42,52 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival2->setImageBanner('https://cdn.2017bestnine.com/user_images/bateau.music.jpg');
         $manager->persist($festival2);
 
+        $festival3 = new Festival();
+        $festival3->setTitle('Dummy 1');
+        $festival3->setDescription('The Reeperbahn Festival is a music festival held in Hamburg, Germany over 4 days at the end of September.');
+        $festival3->setDateStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
+        $festival3->setDateEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
+        $festival3->setBudget(99);
+        $festival3->setLinkWebsite('http://www.reeperbahnfestival.com');
+        $festival3->setLinkFbPage('https://www.facebook.com/reeperbahnfestival/');
+        $festival3->setLinkFbEvent('https://www.facebook.com/events/165917984004747/');
+        $festival3->setLinkInstagram('https://www.instagram.com/reeperbahn_festival/');
+        $festival3->setLinkTickets('https://www.reeperbahnfestival.com/en/tickets');
+        $festival3->setImageIcon('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/24174179_10156009503503000_2218269298435332860_n.jpg?oh=dfd88081ae98f63e7a1376339e680140&oe=5AF13320');
+        $festival3->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
+        $festival3->setIsComplete(0);
+        $festival3->setIsSoldOut(0);
+        $festival3->setIsValid(0);
+        $festival3->setLocation($this->getReference('Hélène address'));
+        $festival3->setGenre($this->getReference('General'));
+        $manager->persist($festival3);
+
+        $festival4 = new Festival();
+        $festival4->setTitle('Dummy 2');
+        $festival4->setDescription('The Reeperbahn Festival is a music festival held in Hamburg, Germany over 4 days at the end of September.');
+        $festival4->setDateStart(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-19T00:00:00+0000'));
+        $festival4->setDateEnd(\DateTime::createFromFormat("Y-m-d\TH:i:sO", '2018-09-23T01:10:00+0000'));
+        $festival4->setBudget(99);
+        $festival4->setLinkWebsite('http://www.reeperbahnfestival.com');
+        $festival4->setLinkFbPage('https://www.facebook.com/reeperbahnfestival/');
+        $festival4->setLinkFbEvent('https://www.facebook.com/events/165917984004747/');
+        $festival4->setLinkInstagram('https://www.instagram.com/reeperbahn_festival/');
+        $festival4->setLinkTickets('https://www.reeperbahnfestival.com/en/tickets');
+        $festival4->setImageIcon('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/24174179_10156009503503000_2218269298435332860_n.jpg?oh=dfd88081ae98f63e7a1376339e680140&oe=5AF13320');
+        $festival4->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
+        $festival4->setIsComplete(0);
+        $festival4->setIsSoldOut(0);
+        $festival4->setIsValid(0);
+        $festival4->setLocation($this->getReference('Agathe address'));
+        $festival4->setGenre($this->getReference('General'));
+        $manager->persist($festival4);
+
         $manager->flush();
 
-        $this->addReference('Reeperbahn Festival', $festival1);
-        $this->addReference('Bateau Music Festival', $festival2);
+        $this->addReference($festival1->getTitle(), $festival1);
+        $this->addReference($festival2->getTitle(), $festival2);
+        $this->addReference($festival3->getTitle(), $festival3);
+        $this->addReference($festival4->getTitle(), $festival4);
     }
 
     public function getDependencies()

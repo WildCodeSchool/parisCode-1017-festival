@@ -24,8 +24,8 @@ class GenreFixtures extends Fixture
 
         $manager->flush();
 
-        $this->addReference('General', $genre1);
-        $this->addReference('Pop', $genre2);
-        $this->addReference('Rock', $genre3);
+        $this->addReference($genre1->getName(), $genre1);
+        $this->addReference($genre2->getName(), $genre2);
+        $this->addReference($genre3->getName(), $genre3);
     }
 }

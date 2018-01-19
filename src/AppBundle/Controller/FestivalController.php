@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Festival;
+use AppBundle\Services\GoogleMaps;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +38,7 @@ class FestivalController extends Controller
      * @Route("/new", name="festival_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, GoogleMaps $formattedaddress)
     {
         $festival = new Festival();
         $form = $this->createForm('AppBundle\Form\FestivalType', $festival);
@@ -45,6 +46,13 @@ class FestivalController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+//            $formattedaddress->regularGeocoding($festival->getLocation());
+//
+//            $festival->getLocation()->setLatitude($formattedaddress['lat']);
+//            $festival->getLocation()->setLongitude($formattedaddress['lng']);
+
+//            var_dump($festival);
             $em->persist($festival);
             $em->flush();
 

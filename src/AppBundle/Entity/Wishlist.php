@@ -28,28 +28,34 @@ class Wishlist
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival", inversedBy="wishlist_id")
+     * @ORM\JoinTable(name="wishlist_festival")
      */
     private $festival;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Genre")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Genre", inversedBy="wishlist_id")
+     * @ORM\JoinTable(name="wishlist_genre")
      */
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Location")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Location", inversedBy="wishlist_id")
+     * @ORM\JoinTable(name="wishlist_location")
      */
     private $location;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Artist")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Artist", inversedBy="wishlist_id")
+     * @ORM\JoinTable(name="wishlist_artist")
      */
     private $artist;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concert", inversedBy="wishlist_id")
+     * @ORM\JoinTable(name="wishlist_concert")
+     */
+    private $concert;
 
     /**
      * NBLN-T : ToString
@@ -247,4 +253,22 @@ class Wishlist
     {
         return $this->artist;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getConcert()
+    {
+        return $this->concert;
+    }
+
+    /**
+     * @param mixed $concert
+     */
+    public function setConcert($concert)
+    {
+        $this->concert = $concert;
+    }
+
+
 }

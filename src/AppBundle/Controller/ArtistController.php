@@ -23,7 +23,6 @@ class ArtistController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $artists = $em->getRepository('AppBundle:Artist')->findAll();
 
         return $this->render('artist/index.html.twig', array(

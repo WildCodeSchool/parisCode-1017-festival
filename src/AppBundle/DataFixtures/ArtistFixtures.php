@@ -32,10 +32,10 @@ class ArtistFixtures extends Fixture
 
         $manager->flush();
 
-        $this->addReference('Ibeyi', $artist1);
-        $this->addReference('David August', $artist2);
-        $this->addReference('Her', $artist3);
-        $this->addReference('Lewis Capaldi', $artist4);
-        $this->addReference('Bear\'s Den', $artist5);
+        $this->addReference($artist1->getName(), $artist1);
+        $this->addReference($artist2->getName(), $artist2);
+        $this->addReference($artist3->getName(), $artist3);
+        $this->addReference($artist4->getName(), $artist4);
+        $this->addReference($artist5->getName(), $artist5);
     }
 }
