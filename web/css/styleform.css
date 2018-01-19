@@ -29,8 +29,8 @@
 
 /* ####### */
 @media screen and (min-width: 600px) {
-    /* Si taille screen > à 768px: icônes Facebook et Google alignées horizontalement */
-    li {
+    /* Si taille screen < à 600px: icônes Facebook et Google alignées horizontalement */
+    .gg_btn, .fb_btn {
         display: inline-block;
     }
     .login_google {
@@ -39,6 +39,20 @@
     }
     .sign_in_google {
     	margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 992px) {
+    /* Si taille screen > à 601px et < à 992px: icônes Facebook et Google alignées horizontalement */
+    .gg_btn, .fb_btn {
+        display: inline-block;
+    }
+    .login_google {
+        margin-top: 0;
+        margin-left: 15px;
+    }
+    .sign_in_google {
+        margin-top: 0;
     }
 }
 

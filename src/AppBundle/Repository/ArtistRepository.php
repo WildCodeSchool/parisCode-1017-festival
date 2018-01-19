@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class ArtistRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllArtists(): array
+    {
+        // 1 - Création de la requete (qui devient un objet) qui va select * from genre et on la stocke pour la réutiliser
+        $qb = $this->createQueryBuilder('a')
+            // On affiche par odre alphabétique
+            ->orderBy('a.name', 'ASC')
+            ->getQuery();
+
+        // On demande à l'objet d'executer la requete, on renvoie donc tous les artistes
+        return $qb->execute();
+
+        // Next: 2 - Dans le DefaultController, créer une nouvelle fonction
+    }
 }
