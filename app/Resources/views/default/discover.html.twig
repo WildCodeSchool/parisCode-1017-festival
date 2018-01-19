@@ -179,13 +179,15 @@
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if users %}
-                    lat: {{ users.address.latitude }},
-                    lng: {{ users.address.longitude }}
+                    lat: 48.864716,
+                    lng: 2.349014
+                    {#{% if users %}#}
+                    {#lat: {{ users.address.latitude }},#}
+                    {#lng: {{ users.address.longitude }}#}
                     {#{% else %}#}
                     {#lat: {{ users.address.latitude }},#}
                     {#lng: {{ users.address.longitude }}#}
-                    {% endif%}
+                    {#{% endif%}#}
                 }
             });
             // Create an array of alphabetical characters used to label the markers.

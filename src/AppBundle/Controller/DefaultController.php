@@ -47,11 +47,11 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $festivals = $em->getRepository('AppBundle:Festival')->findAll();
-        $users = $em->getRepository('AppBundle:User')->findOneById(1);
+//        $users = $em->getRepository('AppBundle:User')->findOneById(1);
 
         return $this->render('default/discover.html.twig', array(
-            'festivals' => $festivals,
-            'users' => $users
+            'festivals' => $festivals
+//            'users' => $users
         ));
 
         // TODO : LN - la modal n'apparait pas dans tous les medias queries
