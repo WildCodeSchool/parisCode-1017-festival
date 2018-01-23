@@ -71,10 +71,9 @@ easy_admin:
     site_name: 'GO FEST'
     design:
         brand_color: '#8033A4'
-        color_scheme: 'light'
+        color_scheme: 'dark'
     list:
         actions:
-            - { name: 'show', label: '', icon: 'search' }
             - { name: 'edit', label: '', icon: 'edit' }
             - { name: 'delete', label: '', icon: 'trash' }
     entities:
@@ -85,11 +84,11 @@ easy_admin:
                 title: 'Most recent festivals'
                 fields:
                     - id
+                    - { property: 'imageIcon', type: 'image' }
                     - title
                     - isComplete
                     - isSoldOut
                     - isValid
-                    - { property: 'imageIcon', type: 'image' }
             form:
                 fields:
                     - title
@@ -113,6 +112,7 @@ easy_admin:
                     - isValid
         Concert:
             class: AppBundle\Entity\Concert
+            label: 'Concerts'
             list:
                 fields:
                     - id
@@ -121,6 +121,7 @@ easy_admin:
                     - location
         User:
             class: AppBundle\Entity\User
+            label: 'Users'
             list:
                 fields:
                     - id
@@ -128,18 +129,27 @@ easy_admin:
                     - email
         Wishlist:
             class: AppBundle\Entity\Wishlist
+            label: 'Wishlists'
             list:
                 fields:
                     - id
                     - user
-                    - { property: 'festival'}
-                    - { property: 'genre', label:'Genres' }
+                    - { property: 'festival', type: 'array' }
+                    - { property: 'genre', type: 'array' }
         Artist:
             class: AppBundle\Entity\Artist
+            label: 'Artists'
+            list:
+                fields:
+                    - id
+                    - name
+                    - { property: 'concert', type: 'array' }
         Genre:
             class: AppBundle\Entity\Genre
+            label: 'Genres'
         Location:
             class: AppBundle\Entity\Location
+            label: 'Locations'
             list:
                 fields:
                     - id
