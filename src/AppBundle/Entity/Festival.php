@@ -38,14 +38,14 @@ class Festival
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start", type="datetime", nullable=true)
+     * @ORM\Column(name="start", type="date", nullable=true)
      */
     private $start;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end", type="datetime", nullable=true)
+     * @ORM\Column(name="end", type="date", nullable=true)
      */
     private $end;
 
@@ -108,9 +108,9 @@ class Festival
     /**
      * @var bool
      *
-     * @ORM\Column(name="isComplete", type="boolean", nullable=true)
+     * @ORM\Column(name="isCancelled", type="boolean", nullable=true)
      */
-    private $isComplete;
+    private $isCancelled;
 
     /**
      * @var bool
@@ -152,8 +152,6 @@ class Festival
     {
         return $this->title;
     }
-
-
 
     /**
      * Constructor
@@ -464,27 +462,27 @@ class Festival
     }
 
     /**
-     * Set isComplete.
+     * Set isCancelled.
      *
-     * @param bool|null $isComplete
+     * @param bool|null $isCancelled
      *
      * @return Festival
      */
-    public function setIsComplete($isComplete = null)
+    public function setIsCancelled($isCancelled = null)
     {
-        $this->isComplete = $isComplete;
+        $this->isCancelled = $isCancelled;
 
         return $this;
     }
 
     /**
-     * Get isComplete.
+     * Get isCancelled.
      *
      * @return bool|null
      */
-    public function getIsComplete()
+    public function getIsCancelled()
     {
-        return $this->isComplete;
+        return $this->isCancelled;
     }
 
     /**

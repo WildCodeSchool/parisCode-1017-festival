@@ -54,6 +54,13 @@ class Concert
     private $festival;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="isCancelled", type="boolean", nullable=true)
+     */
+    private $isCancelled;
+
+    /**
      * NBLN-T : ToString
      */
     public function __toString()
@@ -189,5 +196,29 @@ class Concert
     public function getFestival()
     {
         return $this->festival;
+    }
+
+    /**
+     * Set isCancelled.
+     *
+     * @param bool|null $isCancelled
+     *
+     * @return Festival
+     */
+    public function setIsCancelled($isCancelled = null)
+    {
+        $this->isCancelled = $isCancelled;
+
+        return $this;
+    }
+
+    /**
+     * Get isCancelled.
+     *
+     * @return bool|null
+     */
+    public function getIsCancelled()
+    {
+        return $this->isCancelled;
     }
 }

@@ -24,7 +24,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival1->setLinkTickets('https://www.reeperbahnfestival.com/en/tickets');
         $festival1->setImageIcon('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/24174179_10156009503503000_2218269298435332860_n.jpg?oh=dfd88081ae98f63e7a1376339e680140&oe=5AF13320');
         $festival1->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
-        $festival1->setIsComplete(0);
+        $festival1->setIsCancelled(0);
         $festival1->setIsSoldOut(0);
         $festival1->setIsValid(0);
         $festival1->setLocation($this->getReference('Reeperbahn'));
@@ -55,7 +55,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival3->setLinkTickets('https://www.reeperbahnfestival.com/en/tickets');
         $festival3->setImageIcon('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/24174179_10156009503503000_2218269298435332860_n.jpg?oh=dfd88081ae98f63e7a1376339e680140&oe=5AF13320');
         $festival3->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
-        $festival3->setIsComplete(0);
+        $festival3->setIsCancelled(0);
         $festival3->setIsSoldOut(0);
         $festival3->setIsValid(0);
         $festival3->setLocation($this->getReference('Hélène address'));
@@ -75,7 +75,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival4->setLinkTickets('https://www.reeperbahnfestival.com/en/tickets');
         $festival4->setImageIcon('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/24174179_10156009503503000_2218269298435332860_n.jpg?oh=dfd88081ae98f63e7a1376339e680140&oe=5AF13320');
         $festival4->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
-        $festival4->setIsComplete(0);
+        $festival4->setIsCancelled(0);
         $festival4->setIsSoldOut(0);
         $festival4->setIsValid(0);
         $festival4->setLocation($this->getReference('Agathe address'));

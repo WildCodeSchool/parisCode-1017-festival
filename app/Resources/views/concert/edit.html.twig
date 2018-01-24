@@ -1,21 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Concert edit</h1>
+{% block stylesheets %}
 
-    {{ form_start(edit_form) }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container container-top">
+        <h2>Edit concert</h2>
+
+        {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+        {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('concert_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <ul>
+            <li>
+                <a href="{{ path('festival_edit', { 'festival_id': concert.festival.id}) }}">Back to the list</a>
+            </li>
+        </ul>
+    </div>
+
 {% endblock %}

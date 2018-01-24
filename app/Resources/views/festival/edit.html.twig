@@ -1,21 +1,250 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Festival edit</h1>
+{% block stylesheets %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
 
-    <ul>
-        <li>
-            <a href="{{ path('festival_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}
+
+{% block body %}
+
+    <div class="container container-top">
+
+        <div class="row center-align">
+            <div class="col s12">
+                <h2>Edit a Festival</h2>
+            </div>
+        </div>
+        <div class="card">
+            {#<div class="card-content">#}
+            {#</div>#}
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#test4">General</a></li>
+                    <li class="tab"><a href="#test5">Line Up</a></li>
+                </ul>
+            </div>
+            <div class="card-content grey lighten-4">
+                <div id="test4">
+                    <!-- FORM -->
+                    <div class="row">
+                        {{ form_start(edit_form) }}
+                        <!-- $title -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">music_note</i>
+                                {{ form_label(edit_form.title) }}
+                                {{ form_widget(edit_form.title) }}
+                                {{ form_errors(edit_form.title) }}
+                            </div>
+                        </div>
+                        <!-- $description -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">announcement</i>
+                                {{ form_label(edit_form.description) }}
+                                {{ form_widget(edit_form.description) }}
+                                {{ form_errors(edit_form.description) }}
+                            </div>
+                        </div>
+                        <!-- $location -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">location_city</i>
+                                {{ form_label(edit_form.location.address) }}
+                                {{ form_widget(edit_form.location.address) }}
+                                {{ form_errors(edit_form.location.address) }}
+                            </div>
+                        </div>
+                        <!-- $genre -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">music_video</i>
+                                {{ form_label(edit_form.genre.name) }}
+                                {{ form_widget(edit_form.genre.name) }}
+                                {{ form_errors(edit_form.genre.name) }}
+                            </div>
+                        </div>
+                        <!-- $budget -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">attach_money</i>
+                                {{ form_label(edit_form.budget) }}
+                                {{ form_widget(edit_form.budget) }}
+                                {{ form_errors(edit_form.budget) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- $start -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">date_range</i>
+                                {{ form_label(edit_form.start) }}
+                                {{ form_widget(edit_form.start) }}
+                                {{ form_errors(edit_form.start) }}
+                            </div>
+                            <!-- $end -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">date_range</i>
+                                {{ form_label(edit_form.end) }}
+                                {{ form_widget(edit_form.end) }}
+                                {{ form_errors(edit_form.end) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- $linkWebsite -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.linkWebsite) }}
+                                {{ form_widget(edit_form.linkWebsite) }}
+                                {{ form_errors(edit_form.linkWebsite) }}
+                            </div>
+                            <!-- $linkInstagram -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.linkInstagram) }}
+                                {{ form_widget(edit_form.linkInstagram) }}
+                                {{ form_errors(edit_form.linkInstagram) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- $linkFbPage -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.linkFbPage) }}
+                                {{ form_widget(edit_form.linkFbPage) }}
+                                {{ form_errors(edit_form.linkFbPage) }}
+                            </div>
+                            <!-- $linkFbEvent -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.linkFbEvent) }}
+                                {{ form_widget(edit_form.linkFbEvent) }}
+                                {{ form_errors(edit_form.linkFbEvent) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- $imageIcon -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.imageIcon) }}
+                                {{ form_widget(edit_form.imageIcon) }}
+                                {{ form_errors(edit_form.imageIcon) }}
+                            </div>
+                            <!-- $imageBanner -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.imageBanner) }}
+                                {{ form_widget(edit_form.imageBanner) }}
+                                {{ form_errors(edit_form.imageBanner) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Switch -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(edit_form.isCancelled) }}
+                                {{ form_widget(edit_form.isCancelled) }}
+                                {{ form_errors(edit_form.isCancelled) }}
+                            </div>
+                        </div>
+                        <div class="row center-align">
+                            <input type="submit" class="waves-effect waves-light btn" value="Submit" />
+                        </div>
+                        {{ form_end(edit_form) }}
+                    </div>
+                    <!-- .FORM -->
+
+                </div>
+                <div id="test5">
+                    <table class="striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Datestart</th>
+                            <th>Dateend</th>
+                            <th>Artist</th>
+                            <th>Location</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for concert in concerts %}
+                            <tr>
+                                <td>{{ concert.id }}</a></td>
+                                <td>{% if concert.dateStart %}{{ concert.dateStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>{% if concert.dateEnd %}{{ concert.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>{{ concert.artist }}</td>
+                                <td>{{ concert.location }}</td>
+                                <td><a href="{{ path('concert_edit', { 'concert_id': concert.id, 'festival_id': concert.festival.id }) }}">edit</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <a href="{{ path('concert_new', { 'festival_id': festival.id }) }}">Create a new concert</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- .container -->
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $('input.autocomplete-location').autocomplete({
+                data: {
+                    "Hippodrome": null,
+                    "Paris": null,
+                    "Hamburg": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('input.autocomplete-genre').autocomplete({
+                data: {
+                    "Rock": null,
+                    "Pop": null,
+                    "Drum n bass": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 3, // Creates a dropdown of 15 years to control year,
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Ok',
+                format: 'yyyy-mm-dd',
+                closeOnSelect: true // Close upon selecting a date,
+            });
+            $('.timepicker').pickatime({
+                default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+                fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+                twelvehour: false, // Use AM/PM or 24-hour format
+                donetext: 'OK', // text for done-button
+                cleartext: 'Clear', // text for clear-button
+                canceltext: 'Cancel', // Text for cancel-button
+                autoclose: false, // automatic close timepicker
+                ampmclickable: true, // make AM PM clickable
+                aftershow: function(){} //Function for after opening timepicker
+            });
+        });
+    </script>
+
+{% endblock javascripts %}

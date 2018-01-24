@@ -6,19 +6,27 @@ use Symfony\Component\HttpKernel\Tests\Controller;
 
 class GoogleMaps
 {
+    private $api_google;
+
+    public function __construct($api_google)
+    {
+        $this->api_google = $api_google;
+    }
+
     public function regularGeocoding($formattedaddress){
 
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedaddress . '&key=' . 'AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA';
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedaddress . '&key=' . $this->api_google;
+
         $client = new Client();
         $google = $client->request("GET", $url);
         $google = json_decode($google->getBody()->getContents());
-        // Traitement du resultat retourné par la requete
 
-        // Renvoie du tableau contenant toutes les citations
         $location['lat'] = $google->results[0]->geometry->location->lat;
         $location['lng'] = $google->results[0]->geometry->location->lng;
-//        $location = '{lat: ' . $location['lat'] . ', lng: ' . $location['lng'] . '}';
+        $location['place_id'] = $google->results[0]->place_id;
+
         return $location;
+
     }
 
     public function reverseGeocoding($lat, $lng){
@@ -27,10 +35,9 @@ class GoogleMaps
         $client = new Client();
         $google = $client->request("GET", $url);
         $google = json_decode($google->getBody()->getContents());
-        // Traitement du resultat retourné par la requete
 
-        // Renvoie du tableau contenant toutes les citations
         $formattedaddress['formatted_address'] = $google->results[0]->formattedaddress;
+
         return $formattedaddress;
     }
 }

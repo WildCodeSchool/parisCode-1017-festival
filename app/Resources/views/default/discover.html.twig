@@ -24,7 +24,7 @@
                                 <div class="card-content">
                                     <p>{{ festival.title }}</p>
                                     <p>Style: {{ festival.genre }}</p>
-                                    <p>{% if festival.start %}
+                                    <p>{% if festival.start is defined %}
                                             {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }}
                                         {% else %}TBA
                                         {% endif %}
@@ -32,22 +32,19 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <!-- Modal Trigger -->
-                                <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'a' }}"><i class="material-icons">favorite</i></a>
-                                {#<a class="favorite btn btn-floating btn-medium pink pulse modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'a' }}" ><i class="material-icons">favorite</i></a>#}
-                                <!-- Modal Structure -->
-                                <div id="{{ 'modal' ~ festival.id ~ 'a' }}" class="modal">
-                                    <div class="modal-footer">
-                                        <a class=" modal-action modal-close waves-effect waves-green btn-flat">x</a>
-                                    </div>
-                                    <div class="modal-content">
-                                        <h4>{{ festival.title }}</h4>
-                                        <p>Added to your wishlist!</p>
-                                    </div>
-                                </div>
-                                <!-- Modal Trigger -->
+                                <!-- Add/remove to/from wishlist -->
+                                {% if user.wishlist.festival is defined %}
+                                    {% if festival in user.wishlist.festival %}
+                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': 1, 'id': 1, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                                    {% else %}
+                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': 1, 'id': 1, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                    {% endif %}
+                                {% else %}
+                                    <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': 1, 'id': 1, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                {% endif %}
+                                <!-- Modal Festival - Trigger -->
                                 <a class="zoom-in btn-floating waves-effect waves-light cyan pulse modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
-                                <!-- Modal Structure -->
+                                <!-- Modal Festival - Structure -->
                                 <div id="{{ 'modal' ~ festival.id ~ 'b' }}" class="modal">
                                     <div class="modal-footer">
                                         <a class="modal-action modal-close waves-effect waves-green btn-flat">X</a>
@@ -111,9 +108,16 @@
                                                                             <span class="title left">{{ concert.artist }}</span>
                                                                             <br>
                                                                             <p class="left-align">{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateEnd|date("d D H:i") }}<br>
-                                                                                {{ concert.location.name }}
+                                                                                {% if concert.location %}{{ concert.location }}{% endif %}
                                                                             </p>
-                                                                            <a href="" class="secondary-content"><i class="material-icons">favorite_border</i></a>
+                                                                            <!-- Add/remove to/from wishlist -->
+                                                                            {% if user.wishlist.concert is defined %}
+                                                                                {% if concert in user.wishlist.concert %}
+                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': 1, 'id': 1, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                                {% else %}
+                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': 1, 'id': 1, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                                {% endif %}
+                                                                            {% endif %}
                                                                         </li>
                                                                     {% endfor %}
                                                                 {% else %}N/A
@@ -138,7 +142,7 @@
                                                                 </p><br><br>
                                                                 <p>Missing some info, tell us!</p>
                                                                 <br>
-                                                                <p><a href="#edit" target="_blank" class="btn-floating red"><i class="material-icons">edit</i></a>
+                                                                <p><a href="{{ path('festival_edit', { 'festival_id': festival.id }) }}" target="_blank" class="btn-floating red"><i class="material-icons">edit</i></a>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -170,6 +174,7 @@
 {% block footer %}
 {% endblock footer %}
 
+
 {% block javascripts %}
 
     <!--GoogleMaps scripts-->
@@ -179,21 +184,17 @@
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    lat: 48.864716,
-                    lng: 2.349014
-                    {#{% if users %}#}
-                    {#lat: {{ users.address.latitude }},#}
-                    {#lng: {{ users.address.longitude }}#}
-                    {#{% else %}#}
-                    {#lat: {{ users.address.latitude }},#}
-                    {#lng: {{ users.address.longitude }}#}
-                    {#{% endif%}#}
+                    {% if user.address is defined %}
+                        lat: {{ user.address.latitude }},
+                        lng: {{ user.address.longitude }}
+                    {% else %}
+                        lat: 48.864716,
+                        lng: 2.349014
+                    {% endif %}
                 }
             });
             // Create an array of alphabetical characters used to label the markers.
             var labels = [
-                // 'Reeperbahn Festival',
-                // 'Bateau Music Festival'
             ];
 
             var infoWin = new google.maps.InfoWindow();

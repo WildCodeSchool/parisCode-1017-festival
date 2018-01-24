@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,10 +20,20 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
+            ->add('usernameCanonical', TextType::class)
             ->add('email', EmailType::class)
+            ->add('emailCanonical', TextType::class)
+            ->add('enabled', TextType::class)
+            ->add('salt', TextType::class)
+            ->add('plainPassword', TextType::class)
+            ->add('lastLogin', DateTimeType::class)
+            ->add('confirmationToken', TextType::class)
+            ->add('password', PasswordType::class)
+//            ->add('groups', TextType::class)
+//            ->add('roles', TextType::class)
+            ->add('passwordRequestedAt', DateTimeType::class)
             ->add('address', LocationType::class)
-            ->add('wishlist', HiddenType::class);
+            ;
     }/**
      * {@inheritdoc}
      */
@@ -41,5 +52,15 @@ class UserType extends AbstractType
         return 'appbundle_user';
     }
 
+    public function getParent()
+    {
+        return 'fos_user_registration';
+    }
+
+    public function getName()
+    {
+        return 'app_user_registration';
+
+    }
 
 }

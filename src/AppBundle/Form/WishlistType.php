@@ -13,7 +13,12 @@ class WishlistType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('user')->add('festival')->add('genre')->add('location')->add('artist');
+        $builder
+            ->add('user')
+            ->add('festival')
+            ->add('genre')
+            ->add('location')
+            ->add('artist');
     }/**
      * {@inheritdoc}
      */

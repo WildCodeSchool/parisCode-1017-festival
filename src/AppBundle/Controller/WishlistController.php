@@ -2,7 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Artist;
+use AppBundle\Entity\Concert;
+use AppBundle\Entity\Festival;
+use AppBundle\Entity\Genre;
+use AppBundle\Entity\Location;
+use AppBundle\Entity\User;
 use AppBundle\Entity\Wishlist;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -10,127 +17,140 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Wishlist controller.
  *
- * @Route("wishlist")
+ * @Route("/user/{user_id}/wishlist", requirements={"user_id": "\d+"}))
+ * @ParamConverter("user",   options={"mapping": {"user_id": "id"}})
+ * @ParamConverter("wishlist")
  */
 class WishlistController extends Controller
 {
     /**
-     * Lists all wishlist entities.
+     * Add/remove festival to wishlist
      *
-     * @Route("/", name="wishlist_index")
-     * @Method("GET")
+     * @Route("/{id}/add/festival/{festival_id}", name="wishlist_festival", requirements={"festival_id": "\d+"}))
+     * @Method({"GET", "POST"})
+     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
      */
-    public function indexAction()
+    public function festivalAction(Festival $festival_id, Wishlist $wishlist)
     {
+        // TODO : LN - rafraichir apparence icon en direct
+
         $em = $this->getDoctrine()->getManager();
 
-        $wishlists = $em->getRepository('AppBundle:Wishlist')->findAll();
+        $array = (array) $wishlist->getFestival()->getValues();
+        if (in_array($festival_id, $array)){
+            $wishlist->removeFestival($festival_id);
+        } else {
+            $wishlist->addFestival($festival_id);
+        }
 
-        return $this->render('wishlist/index.html.twig', array(
-            'wishlists' => $wishlists,
-        ));
+        $em->persist($wishlist);
+        $em->flush();
+
+        return $this->redirectToRoute('discover');
     }
 
     /**
-     * Creates a new wishlist entity.
+     * Add/remove concert to wishlist
      *
-     * @Route("/new", name="wishlist_new")
+     * @Route("/{id}/add/concert/{concert_id}", name="wishlist_concert", requirements={"concert_id": "\d+"}))
      * @Method({"GET", "POST"})
+     * @ParamConverter("concert",   options={"mapping": {"concert_id": "id"}})
      */
-    public function newAction(Request $request)
+    public function concertAction(Concert $concert_id, Wishlist $wishlist)
     {
-        $wishlist = new Wishlist();
-        $form = $this->createForm('AppBundle\Form\WishlistType', $wishlist);
-        $form->handleRequest($request);
+        // TODO : LN - rafraichir apparence icon en direct
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($wishlist);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('wishlist_show', array('id' => $wishlist->getId()));
+        $array = (array) $wishlist->getConcert()->getValues();
+        if (in_array($concert_id, $array)){
+            $wishlist->removeConcert($concert_id);
+        } else {
+            $wishlist->addConcert($concert_id);
         }
 
-        return $this->render('wishlist/new.html.twig', array(
-            'wishlist' => $wishlist,
-            'form' => $form->createView(),
-        ));
+        $em->persist($wishlist);
+        $em->flush();
+
+        return $this->redirectToRoute('discover');
     }
 
     /**
-     * Finds and displays a wishlist entity.
+     * Add/remove artist to wishlist
      *
-     * @Route("/{id}", name="wishlist_show")
-     * @Method("GET")
-     */
-    public function showAction(Wishlist $wishlist)
-    {
-        $deleteForm = $this->createDeleteForm($wishlist);
-
-        return $this->render('wishlist/show.html.twig', array(
-            'wishlist' => $wishlist,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing wishlist entity.
-     *
-     * @Route("/{id}/edit", name="wishlist_edit")
+     * @Route("/{id}/add/artist/{artist_id}", name="wishlist_artist", requirements={"artist_id": "\d+"}))
      * @Method({"GET", "POST"})
+     * @ParamConverter("artist",   options={"mapping": {"artist_id": "id"}})
      */
-    public function editAction(Request $request, Wishlist $wishlist)
+    public function artistAction(Artist $artist_id, Wishlist $wishlist)
     {
-        $deleteForm = $this->createDeleteForm($wishlist);
-        $editForm = $this->createForm('AppBundle\Form\WishlistType', $wishlist);
-        $editForm->handleRequest($request);
+        // TODO : LN - rafraichir apparence icon en direct
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $em = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('wishlist_edit', array('id' => $wishlist->getId()));
+        $array = (array) $wishlist->getArtist()->getValues();
+        if (in_array($artist_id, $array)){
+            $wishlist->removeArtist($artist_id);
+        } else {
+            $wishlist->addArtist($artist_id);
         }
 
-        return $this->render('wishlist/edit.html.twig', array(
-            'wishlist' => $wishlist,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $em->persist($wishlist);
+        $em->flush();
+
+        return $this->redirectToRoute('fos_user_profile_show');
     }
 
     /**
-     * Deletes a wishlist entity.
+     * Add/remove genre to wishlist
      *
-     * @Route("/{id}", name="wishlist_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/add/genre/{genre_id}", name="wishlist_genre", requirements={"genre_id": "\d+"}))
+     * @Method({"GET", "POST"})
+     * @ParamConverter("genre",   options={"mapping": {"genre_id": "id"}})
      */
-    public function deleteAction(Request $request, Wishlist $wishlist)
+    public function genreAction(Genre $genre_id, Wishlist $wishlist)
     {
-        $form = $this->createDeleteForm($wishlist);
-        $form->handleRequest($request);
+        // TODO : LN - rafraichir apparence icon en direct
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($wishlist);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+
+        $array = (array) $wishlist->getGenre()->getValues();
+        if (in_array($genre_id, $array)){
+            $wishlist->removeGenre($genre_id);
+        } else {
+            $wishlist->addGenre($genre_id);
         }
 
-        return $this->redirectToRoute('wishlist_index');
+        $em->persist($wishlist);
+        $em->flush();
+
+        return $this->redirectToRoute('fos_user_profile_show');
     }
 
     /**
-     * Creates a form to delete a wishlist entity.
+     * Add/remove concert to wishlist
      *
-     * @param Wishlist $wishlist The wishlist entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @Route("/{id}/add/location/{location_id}", name="wishlist_location", requirements={"location_id": "\d+"}))
+     * @Method({"GET", "POST"})
+     * @ParamConverter("location",   options={"mapping": {"location_id": "id"}})
      */
-    private function createDeleteForm(Wishlist $wishlist)
+    public function locationAction(Location $location_id, Wishlist $wishlist)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('wishlist_delete', array('id' => $wishlist->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
+        // TODO : LN - rafraichir apparence icon en direct
+
+        $em = $this->getDoctrine()->getManager();
+
+        $array = (array) $wishlist->getLocation()->getValues();
+        if (in_array($location_id, $array)){
+            $wishlist->removeLocation($location_id);
+        } else {
+            $wishlist->addLocation($location_id);
+        }
+
+        $em->persist($wishlist);
+        $em->flush();
+
+        return $this->redirectToRoute('fos_user_profile_show');
     }
+
 }
