@@ -15,6 +15,7 @@ class GenreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, array(
+            'label' => 'Genre',
             'attr' => array(
                 'type' => 'search',
                 'id' => 'appbundle_festival_genre',

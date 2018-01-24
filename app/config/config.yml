@@ -7,6 +7,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    google_maps_api: '%api_google%'
 
 framework:
     #esi: ~
@@ -35,6 +36,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        GOOGLE_MAPS_API: '%api_google%'
 
 # Doctrine Configuration
 doctrine:
@@ -157,7 +160,7 @@ easy_admin:
                     - address
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
     service:
@@ -165,4 +168,7 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
-
+    registration:
+            form:
+                name: app_user_registration
+                

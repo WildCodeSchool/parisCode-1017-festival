@@ -94,8 +94,9 @@ html, body {
 /* Tablet */
 @media screen and (min-width: 601px) and (max-width: 992px){
     .search {
+        padding-top: 2vh;
         z-index: 2;
-        top: 9vh;
+        top: 8vh;
         width: 33vw;
     }
     .map {
@@ -119,16 +120,17 @@ html, body {
     }
     .festival-cards{
         margin-top: 25vh;
+        margin-left: 1vh;
     }
 
 }
 
-
 /* Desktop */
 @media screen and (min-width: 993px) {
     .search {
+        padding-top: 4vh;
         z-index: 2;
-        top: 12vh;
+        top: 8vh;
         width: 33vw;
     }
     /* Google Maps */
@@ -153,12 +155,6 @@ html, body {
     }
     .festival-cards{
         margin-top: 25vh;
+        margin-left: 1vh;
     }
 }
-
-/************************************************\
-==================================================
-4. Forms
-==================================================
-\************************************************/
-

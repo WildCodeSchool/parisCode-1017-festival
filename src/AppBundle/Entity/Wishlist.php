@@ -28,12 +28,16 @@ class Wishlist
     private $user;
 
     /**
+     * @var \AppBundle\Entity\Festival $festival
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival", inversedBy="wishlist_id")
      * @ORM\JoinTable(name="wishlist_festival")
      */
     private $festival;
 
     /**
+     * @var \AppBundle\Entity\Genre $genre
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Genre", inversedBy="wishlist_id")
      * @ORM\JoinTable(name="wishlist_genre")
      */
@@ -46,12 +50,16 @@ class Wishlist
     private $location;
 
     /**
+     * @var \AppBundle\Entity\Artist $artist
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Artist", inversedBy="wishlist_id")
      * @ORM\JoinTable(name="wishlist_artist")
      */
     private $artist;
 
     /**
+     * @var \AppBundle\Entity\Concert $concert
+     *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concert", inversedBy="wishlist_id")
      * @ORM\JoinTable(name="wishlist_concert")
      */
@@ -74,6 +82,15 @@ class Wishlist
         $this->genre = new \Doctrine\Common\Collections\ArrayCollection();
         $this->location = new \Doctrine\Common\Collections\ArrayCollection();
         $this->artist = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -255,20 +272,42 @@ class Wishlist
     }
 
     /**
-     * @return mixed
+     * Add concert.
+     *
+     * @param \AppBundle\Entity\Concert $concert
+     *
+     * @return Wishlist
+     */
+    public function addConcert(\AppBundle\Entity\Concert $concert)
+    {
+        $this->concert[] = $concert;
+
+        return $this;
+    }
+
+    /**
+     * Remove concert.
+     *
+     * @param \AppBundle\Entity\Concert $concert
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeConcert(\AppBundle\Entity\Concert $concert)
+    {
+        return $this->concert->removeElement($concert);
+    }
+
+    /**
+     * Get concert.
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getConcert()
     {
         return $this->concert;
     }
 
-    /**
-     * @param mixed $concert
-     */
-    public function setConcert($concert)
-    {
-        $this->concert = $concert;
-    }
+
 
 
 }

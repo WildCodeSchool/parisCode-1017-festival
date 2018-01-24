@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -53,24 +54,44 @@ class FestivalType extends AbstractType
                     'type' => 'number'
                 )
             ))
-            ->add('start', DateTimeType::class, array(
+            ->add('start', DateType::class, array(
                 'widget' => 'single_text',
-                'input' => 'datetime',
-                'required' => 'false',
-                'format' => 'YYYY-MM-dd HH:mm',
-                'attr' => array(
-                    'data-date-format' => 'YYYY-MM-DD HH:mm',
-                    'readonly' => false,
-                    'placeholder' => 'YYYY-MM-DD HH:mm'
-                )
-            ))
-            ->add('end', DateTimeType::class, array(
-                'label' => 'Start Date',
+                'format' => 'yyyy-MM-dd',
                 'attr' => array(
                     'class' => 'datepicker',
-                    'type' => 'date'
+                    'data-date-format' => 'yyyy-MM-dd'
                 )
             ))
+            ->add('end', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'attr' => array(
+                    'class' => 'datepicker',
+                    'data-date-format' => 'yyyy-MM-dd'
+                )
+            ))
+//            ->add('start', DateTimeType::class, array(
+//                'widget' => 'single_text',
+//                'input' => 'datetime',
+//                'required' => 'false',
+//                'format' => 'YYYY-MM-dd HH:mm',
+//                'attr' => array(
+//                    'data-date-format' => 'YYYY-MM-DD HH:mm',
+//                    'readonly' => false,
+//                    'placeholder' => 'YYYY-MM-DD HH:mm'
+//                )
+//            ))
+//            ->add('end', DateTimeType::class, array(
+//                'widget' => 'single_text',
+//                'input' => 'datetime',
+//                'required' => 'false',
+//                'format' => 'YYYY-MM-dd HH:mm',
+//                'attr' => array(
+//                    'data-date-format' => 'YYYY-MM-DD HH:mm',
+//                    'readonly' => false,
+//                    'placeholder' => 'YYYY-MM-DD HH:mm'
+//                )
+//            ))
             ->add('linkWebsite', UrlType::class, array(
                 'label' => 'Official website',
                 'attr' => array(
@@ -113,18 +134,12 @@ class FestivalType extends AbstractType
                 ),
                 'required' => false
             ))
-            ->add('isComplete', CheckboxType::class, array(
-                'label'    => 'Complete?',
-                'required' => false,
+            ->add('isCancelled', TextType::class, array(
+                'label' => 'Cancelled?',
+                'required' => false
             ))
-            ->add('isSoldOut', CheckboxType::class, array(
-                'label'    => 'Sold Out?',
-                'required' => false,
-            ))
-            ->add('isValid', CheckboxType::class, array(
-                'label'    => 'Valid?',
-                'required' => false,
-            ));
+           ;
+
     }/**
      * {@inheritdoc}
      */

@@ -4,6 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Festival;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Wishlist;
+use AppBundle\Services\GoogleMaps;
+use FOS\UserBundle\Controller\ProfileController;
+use FOS\UserBundle\Controller\RegistrationController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -15,31 +19,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class UserController extends Controller
 {
-
-    /**
-     * Lists all user entities.
-     *
-     * @Route("/", name="user_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('AppBundle:User')->findAll();
-
-        return $this->render('user/index.html.twig', array(
-            'users' => $users,
-        ));
-    }
-
     /**
      * Creates a new user entity.
      *
      * @Route("/new", name="user_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, GoogleMaps $formattedaddress)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\UserType', $user);
@@ -47,8 +33,26 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($user->getAddress()){
+                $location = $formattedaddress->regularGeocoding($user->getAddress());
+
+                $user->getAddress()->setLatitude($location['lat']);
+                $user->getAddress()->setLongitude($location['lng']);
+                $user->getAddress()->setName($location['place_id']);
+                $user->getAddress()->setName($location['place_id']);
+            }
+
             $em->persist($user);
             $em->flush();
+
+            $wishlist = new Wishlist();
+            $wishlist->setId($user->getId());
+            $wishlist->setUser($user);
+            $em->persist($wishlist);
+            $em->flush();
+
+            $user->setWishlist($wishlist->getId());
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
@@ -67,9 +71,24 @@ class UserController extends Controller
      */
     public function showAction(User $user)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $genres = $em->getRepository('AppBundle:Genre')->findAll();
+        $artists = $em->getRepository('AppBundle:Artist')->findAll();
+        $locations = $em->getRepository('AppBundle:Location')->findAll();
+        $concerts = $em->getRepository('AppBundle:Concert')->findAll();
+        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
+        $wishlist = $em->getRepository('AppBundle:Wishlist')->findAll();
+        
         $deleteForm = $this->createDeleteForm($user);
 
-        return $this->render('user/show.html.twig', array(
+        return $this->render('@FOSUser/Profile/show.html.twig', array(
+            'wishlist' => $wishlist,
+            'genres' => $genres,
+            'artists' => $artists,
+            'locations' => $locations,
+            'concerts' => $concerts,
+            'festivals' => $festivals,
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -93,7 +112,7 @@ class UserController extends Controller
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
         }
 
-        return $this->render('user/edit.html.twig', array(
+        return $this->render('@FOSUser/Profile/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -117,7 +136,7 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('fos_user_profile_show');
     }
 
     /**

@@ -3,134 +3,86 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Concert;
+use AppBundle\Entity\Festival;
+use AppBundle\Services\GoogleMaps;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Concert controller.
+ * Festival controller.
  *
- * @Route("concert")
+ * @Route("festival")
  */
 class ConcertController extends Controller
 {
     /**
-     * Lists all concert entities.
+     * Page: Create a concert.
      *
-     * @Route("/", name="concert_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $concerts = $em->getRepository('AppBundle:Concert')->findAll();
-
-        return $this->render('concert/index.html.twig', array(
-            'concerts' => $concerts,
-        ));
-    }
-
-    /**
-     * Creates a new concert entity.
-     *
-     * @Route("/new", name="concert_new")
+     * @Route("/{festival_id}/concert/new", name="concert_new", requirements={"festival_id": "\d+"}))
      * @Method({"GET", "POST"})
+     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
+     * @ParamConverter("concert")
      */
-    public function newAction(Request $request)
+    public function newConcertAction(Request $request, GoogleMaps $formattedaddress, $festival_id)
     {
+        // TODO : ID propal / deuxieme table ???
+
+        $em = $this->getDoctrine()->getManager();
+        $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
+
         $concert = new Concert();
         $form = $this->createForm('AppBundle\Form\ConcertType', $concert);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($concert->getLocation()){
+                $location = $formattedaddress->regularGeocoding($concert->getLocation());
+
+                $concert->getLocation()->setLatitude($location['lat']);
+                $concert->getLocation()->setLongitude($location['lng']);
+                $concert->getLocation()->setName($location['place_id']);
+            }
+
             $em->persist($concert);
             $em->flush();
 
-            return $this->redirectToRoute('concert_show', array('id' => $concert->getId()));
+            return $this->redirectToRoute('festival_edit', array('id' => $concert->getId(), 'festival_id' => $concert->getFestival()->getId()));
         }
 
-        return $this->render('concert/new.html.twig', array(
+        return $this->render('concert/index.html.twig', array(
+            'festival' => $festival,
             'concert' => $concert,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a concert entity.
+     * Page: Edit a concert.
      *
-     * @Route("/{id}", name="concert_show")
-     * @Method("GET")
-     */
-    public function showAction(Concert $concert)
-    {
-        $deleteForm = $this->createDeleteForm($concert);
-
-        return $this->render('concert/show.html.twig', array(
-            'concert' => $concert,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing concert entity.
-     *
-     * @Route("/{id}/edit", name="concert_edit")
+     * @Route("/{festival_id}/concert/{concert_id}/edit", name="concert_edit", requirements={"festival_id": "\d+"}))
+     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
+     * @ParamConverter("concert",   options={"mapping": {"concert_id": "id"}})
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Concert $concert)
+    public function editConcertAction(Request $request, Concert $concert, $festival_id)
     {
-        $deleteForm = $this->createDeleteForm($concert);
         $editForm = $this->createForm('AppBundle\Form\ConcertType', $concert);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('concert_edit', array('id' => $concert->getId()));
+            return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
         }
 
-        return $this->render('concert/edit.html.twig', array(
+        return $this->render('concert/index.html.twig', array(
             'concert' => $concert,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    /**
-     * Deletes a concert entity.
-     *
-     * @Route("/{id}", name="concert_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Concert $concert)
-    {
-        $form = $this->createDeleteForm($concert);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($concert);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('concert_index');
-    }
-
-    /**
-     * Creates a form to delete a concert entity.
-     *
-     * @param Concert $concert The concert entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Concert $concert)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('concert_delete', array('id' => $concert->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

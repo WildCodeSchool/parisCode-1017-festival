@@ -18,6 +18,4 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    twig:
-        globals:
-            GOOGLE_MAPS_API: AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA
+    api_google: ~

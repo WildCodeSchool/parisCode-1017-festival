@@ -12,32 +12,28 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-//        $user1 = new User();
-//        $user1->setUsername('Hélène');
-//        $user1->setPassword('password');
-//        $user1->setEmail('email@gmail.com');
-//        $user1->setAddress($this->getReference('Hélène address'));
-//        $manager->persist($user1);
-//
-//        $user2 = new User();
-//        $user2->setUsername('Amandine');
-//        $user2->setPassword('password');
-//        $user2->setEmail('email@gmail.com');
-//        $user2->setAddress($this->getReference('Amandine address'));
-//        $manager->persist($user2);
-//
-//        $user3 = new User();
-//        $user3->setUsername('Agathe');
-//        $user3->setPassword('password');
-//        $user3->setEmail('email@gmail.com');
-//        $user3->setAddress($this->getReference('Agathe address'));
-//        $manager->persist($user3);
-//
-//        $manager->flush();
-//
-//        $this->addReference($user1->getUsername(), $user1);
-//        $this->addReference($user2->getUsername(), $user2);
-//        $this->addReference($user3->getUsername(), $user3);
+        $user1 = new User();
+        $user1->setUsername('root');
+        $user1->setEmail('email@gmail.com');
+        $user1->setEnabled(1);
+        $user1->setPlainPassword('root');
+        $user1->setRoles(array('ROLE_ADMIN'));
+        $user1->setAddress($this->getReference('Hélène address'));
+        $manager->persist($user1);
+
+        $user2 = new User();
+        $user2->setUsername('ln-t');
+        $user2->setEmail('gmail@gmail.com');
+        $user2->setEnabled(1);
+        $user2->setPlainPassword('qwerty');
+        $user2->setRoles(array('ROLE_USER'));
+        $user2->setAddress($this->getReference('Hélène address'));
+        $manager->persist($user2);
+
+        $manager->flush();
+
+        $this->addReference($user1->getUsername(), $user1);
+        $this->addReference($user2->getUsername(), $user2);
     }
 
     public function getDependencies()
