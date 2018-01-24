@@ -1,3 +1,21 @@
+/* FOOTER
+   –––––––––––––––––––––––––––––––––––––––––––––––––– */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.page-footer {
+    background: #8E24AA;
+    color: #f2f2f2;
+}
+
+
 /* TYPO
    –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .homepage-h2 {
@@ -95,14 +113,6 @@ nav .brand-logo {
 .btn-large {
     float: right;
     margin: 2em 0.5em;
-}
-
-#footer {
-    background: #8E24AA;
-    display: block;
-    width: 100%;
-    z-index: 998;
-    color: #f2f2f2;
 }
 
 

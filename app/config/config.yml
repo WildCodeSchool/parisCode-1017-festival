@@ -71,14 +71,93 @@ swiftmailer:
 
 # app/config/config.yml
 easy_admin:
+    site_name: 'GO FEST'
+    design:
+        brand_color: '#8033A4'
+        color_scheme: 'dark'
+    list:
+        actions:
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash' }
     entities:
-        - AppBundle\Entity\Artist
-        - AppBundle\Entity\Concert
-        - AppBundle\Entity\Festival
-        - AppBundle\Entity\Genre
-        - AppBundle\Entity\Location
-        - AppBundle\Entity\User
-        - AppBundle\Entity\Wishlist
+        Festival:
+            class: AppBundle\Entity\Festival
+            label: 'Festivals'
+            list:
+                title: 'Most recent festivals'
+                fields:
+                    - id
+                    - { property: 'imageIcon', type: 'image' }
+                    - title
+                    - isComplete
+                    - isSoldOut
+                    - isValid
+            form:
+                fields:
+                    - title
+                    - description
+                    - { property: 'genre'}
+                    - { property: 'location'}
+                    - { property: 'start', type: 'date' }
+                    - { property: 'end', type: 'date' }
+                    - budget
+                    - { type: 'divider' }
+                    - { property: 'linkWebsite', type: 'url' }
+                    - { property: 'linkFbEvent', type: 'url' }
+                    - { property: 'linkFbPage', type: 'url' }
+                    - { property: 'linkInstagram', type: 'url' }
+                    - { property: 'linkTickets', type: 'url' }
+                    - { property: 'imageIcon', type: 'url' }
+                    - { property: 'imageBanner', type: 'url' }
+                    - { type: 'group' }
+                    - isComplete
+                    - isSoldOut
+                    - isValid
+        Concert:
+            class: AppBundle\Entity\Concert
+            label: 'Concerts'
+            list:
+                fields:
+                    - id
+                    - artist
+                    - festival
+                    - location
+        User:
+            class: AppBundle\Entity\User
+            label: 'Users'
+            list:
+                fields:
+                    - id
+                    - username
+                    - email
+        Wishlist:
+            class: AppBundle\Entity\Wishlist
+            label: 'Wishlists'
+            list:
+                fields:
+                    - id
+                    - user
+                    - { property: 'festival', type: 'array' }
+                    - { property: 'genre', type: 'array' }
+        Artist:
+            class: AppBundle\Entity\Artist
+            label: 'Artists'
+            list:
+                fields:
+                    - id
+                    - name
+                    - { property: 'concert', type: 'array' }
+        Genre:
+            class: AppBundle\Entity\Genre
+            label: 'Genres'
+        Location:
+            class: AppBundle\Entity\Location
+            label: 'Locations'
+            list:
+                fields:
+                    - id
+                    - name
+                    - address
 
 fos_user:
     db_driver: orm
@@ -92,3 +171,4 @@ fos_user:
     registration:
             form:
                 name: app_user_registration
+                
