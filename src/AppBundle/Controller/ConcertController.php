@@ -53,7 +53,7 @@ class ConcertController extends Controller
             return $this->redirectToRoute('festival_edit', array('id' => $concert->getId(), 'festival_id' => $concert->getFestival()->getId()));
         }
 
-        return $this->render('concert/new.html.twig', array(
+        return $this->render('concert/index.html.twig', array(
             'festival' => $festival,
             'concert' => $concert,
             'form' => $form->createView(),
@@ -79,7 +79,7 @@ class ConcertController extends Controller
             return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
         }
 
-        return $this->render('concert/edit.html.twig', array(
+        return $this->render('concert/index.html.twig', array(
             'concert' => $concert,
             'edit_form' => $editForm->createView(),
         ));

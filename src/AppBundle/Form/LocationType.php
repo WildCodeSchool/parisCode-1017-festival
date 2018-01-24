@@ -16,6 +16,7 @@ class LocationType extends AbstractType
     {
         $builder
             ->add('address', TextType::class, array(
+                'label' => 'Location',
                 'attr' => array(
                 'type' => 'search',
                 'id' => 'appbundle_festival_location',

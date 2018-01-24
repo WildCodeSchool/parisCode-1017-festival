@@ -6,6 +6,7 @@ use AppBundle\Entity\Festival;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -20,8 +21,7 @@ class ConcertType extends AbstractType
         $builder
             ->add('festival', EntityType::class, array(
                 'class' => Festival::class,
-                'choice_label' => 'title',
-                'label' => 'Festival'
+                'label' => false
             ))
             ->add('dateStart', DateTimeType::class, array(
                 'widget' => 'single_text',
@@ -48,6 +48,10 @@ class ConcertType extends AbstractType
             ->add('artist', ArtistType::class)
             ->add('location', LocationType::class, array(
                 'required' => false,
+            ))
+            ->add('isCancelled', TextType::class, array(
+                'label' => 'Cancelled?',
+                'required' => false
             ))
         ;
     }/**

@@ -134,7 +134,10 @@ class FestivalType extends AbstractType
                 ),
                 'required' => false
             ))
-            ->add('isCancelled', TextType::class)
+            ->add('isCancelled', TextType::class, array(
+                'label' => 'Cancelled?',
+                'required' => false
+            ))
            ;
 
     }/**

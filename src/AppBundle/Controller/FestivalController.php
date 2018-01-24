@@ -45,14 +45,14 @@ class FestivalController extends Controller
             return $this->redirectToRoute('festival_edit', array('festival_id' => $festival->getId()));
         }
 
-        return $this->render('festival/new.html.twig', array(
+        return $this->render('festival/index.html.twig', array(
             'festival' => $festival,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Page: Edit a festival (TODO change style <=> festival_new)
+     * Page: Edit a festival.
      *
      * @Route("/{festival_id}/edit", name="festival_edit", requirements={"festival_id": "\d+"}))
      * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
@@ -72,7 +72,7 @@ class FestivalController extends Controller
             return $this->redirectToRoute('festival_edit', array('festival_id' => $festival->getId()));
         }
 
-        return $this->render('festival/edit.html.twig', array(
+        return $this->render('festival/index.html.twig', array(
             'festival' => $festival,
             'concerts' => $concerts,
             'edit_form' => $editForm->createView(),

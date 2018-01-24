@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container container-top">
+
+        <div class="row center-align">
+            <div class="col s12">
+                <h2>{{ app.request.get('_route') == 'concert_new' ? 'Add a ' : 'Edit ' }}Concert</h2>
+            </div>
+        </div>
+        <div class="card">
+            {#<div class="card-content">#}
+            {#</div>#}
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab disabled"><a href="#test4">General</a></li>
+                    <li class="tab"><a class="active" href="#test5">Line Up</a></li>
+
+                </ul>
+            </div>
+            <div class="card-content">
+                <div id="test4">
+                </div>
+                <div id="test5">
+                    <!-- FORM -->
+                    <div class="row">
+                        {{ app.request.get('_route') == 'concert_new' ? form_start(form) : form_start(edit_form) }}
+                        <!-- $artist -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">music_video</i>
+                                {{ app.request.get('_route') == 'concert_new' ? form_label(form.artist.name) : form_label(edit_form.artist.name) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_widget(form.artist.name) : form_widget(edit_form.artist.name) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_errors(form.artist.name) : form_errors(edit_form.artist.name) }}
+                            </div>
+                        </div>
+                        <!-- $location -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">location_city</i>
+                                {{ app.request.get('_route') == 'concert_new' ? form_label(form.location.address) : form_label(edit_form.location.address) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_widget(form.location.address) : form_widget(edit_form.location.address) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_errors(form.location.address) : form_errors(edit_form.location.address) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- $dateStart -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">date_range</i>
+                                {{ app.request.get('_route') == 'concert_new' ? form_label(form.dateStart) : form_label(edit_form.dateStart) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_widget(form.dateStart) : form_widget(edit_form.dateStart) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_errors(form.dateStart) : form_errors(edit_form.dateStart) }}
+                            </div>
+                            <!-- $dateEnd -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">date_range</i>
+                                {{ app.request.get('_route') == 'concert_new' ? form_label(form.dateEnd) : form_label(edit_form.dateEnd) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_widget(form.dateEnd) : form_widget(edit_form.dateEnd) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_errors(form.dateEnd) : form_errors(edit_form.dateEnd) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- $isCancelled -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ app.request.get('_route') == 'concert_new' ? form_label(form.isCancelled) : form_label(edit_form.isCancelled) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_widget(form.isCancelled) : form_widget(edit_form.isCancelled) }}
+                                {{ app.request.get('_route') == 'concert_new' ? form_errors(form.isCancelled) : form_errors(edit_form.isCancelled) }}
+                            </div>
+                        </div>
+                        <div class="row center-align">
+                            <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'concert_new' ? 'Create' : 'Edit' }}>
+                        </div>
+                        {{ app.request.get('_route') == 'concert_new' ? form_end(form) : form_end(edit_form) }}
+                    </div>
+                    <!-- .FORM -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .container -->
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $('input.autocomplete-location').autocomplete({
+                data: {
+                    "Hippodrome": null,
+                    "Paris": null,
+                    "Hamburg": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('input.autocomplete-genre').autocomplete({
+                data: {
+                    "Rock": null,
+                    "Pop": null,
+                    "Drum n bass": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 3, // Creates a dropdown of 15 years to control year,
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Ok',
+                format: 'yyyy-mm-dd',
+                closeOnSelect: true // Close upon selecting a date,
+            });
+            $('.timepicker').pickatime({
+                default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+                fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+                twelvehour: false, // Use AM/PM or 24-hour format
+                donetext: 'OK', // text for done-button
+                cleartext: 'Clear', // text for clear-button
+                canceltext: 'Cancel', // Text for cancel-button
+                autoclose: false, // automatic close timepicker
+                ampmclickable: true, // make AM PM clickable
+                aftershow: function(){} //Function for after opening timepicker
+            });
+        });
+    </script>
+
+{% endblock javascripts %}
