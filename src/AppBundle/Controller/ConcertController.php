@@ -27,7 +27,7 @@ class ConcertController extends Controller
      */
     public function newConcertAction(Request $request, GoogleMaps $formattedaddress, $festival_id)
     {
-        // TODO : ID propal / deuxieme table ???
+        // TODO All : ID propal / deuxieme table ???
 
         $em = $this->getDoctrine()->getManager();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);

@@ -32,7 +32,7 @@ class WishlistController extends Controller
      */
     public function festivalAction(Festival $festival_id, Wishlist $wishlist)
     {
-        // TODO : LN - rafraichir apparence icon en direct
+        // TODO : All - Ajax - rafraichir apparence icon en direct
 
         $em = $this->getDoctrine()->getManager();
 
@@ -58,7 +58,7 @@ class WishlistController extends Controller
      */
     public function concertAction(Concert $concert_id, Wishlist $wishlist)
     {
-        // TODO : LN - rafraichir apparence icon en direct
+        // TODO : All - Ajax - rafraichir apparence icon en direct
 
         $em = $this->getDoctrine()->getManager();
 
@@ -84,7 +84,7 @@ class WishlistController extends Controller
      */
     public function artistAction(Artist $artist_id, Wishlist $wishlist)
     {
-        // TODO : LN - rafraichir apparence icon en direct
+        // TODO : All - Ajax - rafraichir apparence icon en direct
 
         $em = $this->getDoctrine()->getManager();
 
@@ -110,7 +110,7 @@ class WishlistController extends Controller
      */
     public function genreAction(Genre $genre_id, Wishlist $wishlist)
     {
-        // TODO : LN - rafraichir apparence icon en direct
+        // TODO : All - Ajax - rafraichir apparence icon en direct
 
         $em = $this->getDoctrine()->getManager();
 
@@ -136,7 +136,7 @@ class WishlistController extends Controller
      */
     public function locationAction(Location $location_id, Wishlist $wishlist)
     {
-        // TODO : LN - rafraichir apparence icon en direct
+        // TODO : All - Ajax - rafraichir apparence icon en direct
 
         $em = $this->getDoctrine()->getManager();
 
