@@ -15,6 +15,48 @@ main {
     color: #f2f2f2;
 }
 
+.footer-logo{
+    width: 30%;
+}
+
+footer .btn-large{
+    float: none;
+    margin: 0.5em!important;
+}
+
+.facebook {
+    background-color: #3b5998;
+    color: #fff !important;
+}
+.facebook i {
+    color: #fff !important;
+}
+.facebook:hover {
+    background-color: #546EA5 !important;
+}
+
+.instagram {
+    background: radial-gradient(circle farthest-corner at 32% 106%, rgb(255, 225, 125) 0%, rgb(255, 205, 105) 10%, rgb(250, 145, 55) 28%, rgb(235, 65, 65) 42%, transparent 82%), linear-gradient(135deg, rgb(35, 75, 215) 12%, rgb(195, 60, 190) 58%);
+    color: #fff !important;
+}
+.instagram i {
+    color: #fff !important;
+}
+.instagram:hover {
+    background: radial-gradient(circle farthest-corner at 32% 106%, rgb(255, 229, 141) 0%, rgb(255, 211, 124) 10%, rgb(251, 159, 80) 28%, rgb(237, 89, 89) 42%, transparent 82%), linear-gradient(135deg, rgb(63, 98, 220) 12%, rgb(203, 84, 198) 58%);
+}
+
+.twitter {
+    background-color: #55acee;
+    color: #fff !important;
+}
+.twitter i {
+    color: #fff !important;
+}
+.twitter:hover {
+    background-color: #6AB6F0 !important;
+}
+
 
 /* TYPO
    –––––––––––––––––––––––––––––––––––––––––––––––––– */

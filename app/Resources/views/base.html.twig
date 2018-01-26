@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        {#<title>{% block title %}Go Fest{% endblock %}</title>#}
-        {% set current_path = app.request.get('_route') %}
-        <title>{% block title %}Go Fest · {{ current_path|capitalize }}{% endblock %}</title>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {#<title>{% block title %}Go Fest{% endblock %}</title>#}
+    {% set current_path = app.request.get('_route') %}
+    <title>{% block title %}Go Fest · {{ current_path|capitalize }}{% endblock %}</title>
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-        {% block stylesheets %}{% endblock %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    {% block stylesheets %}{% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    </head>
-    <body>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
 <main>
     {% block navbar %}
         <nav id="header">
@@ -50,43 +50,40 @@
 
     {% endblock %}
 </main>
-    {% block footer %}
-        <footer class="page-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                    </div>
-                    <div class="col l4 offset-l2 s12">
-                        <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        </ul>
-                    </div>
-                </div>
+{% block footer %}
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s8 offset-s2 center-align">
+                <a class="social btn-floating btn-large facebook">
+                    <i class="fa fa-facebook"></i></a>
+                <a class="btn-floating btn-large social instagram">
+                    <i class="fa fa-instagram"></i></a>
+                <a class="btn-floating btn-large social twitter">
+                    <i class="fa fa-twitter"></i></a>
+                 </div>
             </div>
-            <div class="footer-copyright">
-                <div class="container center">
-                    Go Fest - © 2018 Copyright
-                </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center">
+                Go Fest © 2018 Copyright - All rights reserved
             </div>
-        </footer>
-    {% endblock %}
+        </div>
+    </footer>
+{% endblock %}
 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <!-- js burger -->
-        <script>
-            $( document ).ready(function(){
-                $(".button-collapse").sideNav();
-            })
-        </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!-- js burger -->
+<script>
+    $(document).ready(function () {
+        $(".button-collapse").sideNav();
+    })
+</script>
 
-    {% block javascripts %}
-    {% endblock %}
+{% block javascripts %}
+{% endblock %}
 
 </body>
 </html>
