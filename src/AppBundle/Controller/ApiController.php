@@ -44,6 +44,6 @@ class ApiController extends Controller
         $jsonFestivals = $serializer->serialize($festivals, 'json');
         return new Response($jsonFestivals);
 
-        // TODO : Amandine / ajouter concerts
+        // TODO Amandine : ajouter concerts
     }
 }

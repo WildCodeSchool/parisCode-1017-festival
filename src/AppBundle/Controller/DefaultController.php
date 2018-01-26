@@ -20,9 +20,11 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // TODO (P1) : Amandine Footer en bas de toutes les pages
-        // TODO (P3) : Amandine : liste deroulante et saisie modifiable pour l'admin
-        // TODO : form a changer /profile/edit
+        // TODO Amandine (P1) - Footer en bas de toutes les pages
+        // TODO Amandine (P3) - liste deroulante et saisie modifiable pour l'admin
+        // TODO All : form a changer /profile/edit / wishlist
+        // TODO All : register/confirmed redirection vers mon compte
+
         return $this->render('default/index.html.twig');
     }
 
@@ -34,7 +36,10 @@ class DefaultController extends Controller
      */
     public function discoverAction()
     {
-        // TODO : bouton rechargement live/ajax
+        // TODO All : bouton rechargement live/ajax
+        // TODO All : choisir carte ou fiche festival en version mobile
+        // TODO All : affichage modal
+        // TODO All : addresse googlemaps nom dans bdd
 
         $user = $this->getUser();
 
