@@ -146,7 +146,7 @@
                                                                     width="450"
                                                                     height="350"
                                                                     frameborder="0" style="border:0"
-                                                                    src={{ "https://www.google.com/maps/embed/v1/place?key=" ~ GOOGLE_MAPS_API ~ "&q=" ~ festival.location.address }}>
+                                                                    src={{ "https://www.google.com/maps/embed/v1/place?key=" ~ google_maps_api ~ "&q=" ~ festival.location.address }}>
                                                             </iframe>
                                                         </div>
                                                         <div id="{{ 'links' ~ festival.id }}">
@@ -246,7 +246,7 @@
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer
-            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ GOOGLE_MAPS_API  ~ '&content_copy&callback=initMap' }}>
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&content_copy&callback=initMap' }}>
     </script>
     <!--.GoogleMaps script -->
     <!--Modal script -->

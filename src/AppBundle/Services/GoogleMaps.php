@@ -31,7 +31,7 @@ class GoogleMaps
 
     public function reverseGeocoding($lat, $lng){
 
-        $url = ' https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $lat . ',' . $lng . '&key=' . 'AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA';
+        $url = ' https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $lat . ',' . $lng . '&key=' . $this->api_google;
         $client = new Client();
         $google = $client->request("GET", $url);
         $google = json_decode($google->getBody()->getContents());
