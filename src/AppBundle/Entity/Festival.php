@@ -164,8 +164,6 @@ class Festival
     }
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId()
@@ -174,22 +172,6 @@ class Festival
     }
 
     /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Festival
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title.
-     *
      * @return string
      */
     public function getTitle()
@@ -198,22 +180,14 @@ class Festival
     }
 
     /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return Festival
+     * @param string $title
      */
-    public function setDescription($description)
+    public function setTitle($title)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->title = $title;
     }
 
     /**
-     * Get description.
-     *
      * @return string
      */
     public function getDescription()
@@ -222,23 +196,15 @@ class Festival
     }
 
     /**
-     * Set start.
-     *
-     * @param \DateTime|null $start
-     *
-     * @return Festival
+     * @param string $description
      */
-    public function setStart($start = null)
+    public function setDescription($description)
     {
-        $this->start = $start;
-
-        return $this;
+        $this->description = $description;
     }
 
     /**
-     * Get start.
-     *
-     * @return \DateTime|null
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -246,23 +212,15 @@ class Festival
     }
 
     /**
-     * Set dateEnd.
-     *
-     * @param \DateTime|null $end
-     *
-     * @return Festival
+     * @param \DateTime $start
      */
-    public function setEnd($end = null)
+    public function setStart($start)
     {
-        $this->end = $end;
-
-        return $this;
+        $this->start = $start;
     }
 
     /**
-     * Get dateEnd.
-     *
-     * @return \DateTime|null
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -270,23 +228,15 @@ class Festival
     }
 
     /**
-     * Set budget.
-     *
-     * @param float|null $budget
-     *
-     * @return Festival
+     * @param \DateTime $end
      */
-    public function setBudget($budget = null)
+    public function setEnd($end)
     {
-        $this->budget = $budget;
-
-        return $this;
+        $this->end = $end;
     }
 
     /**
-     * Get budget.
-     *
-     * @return float|null
+     * @return float
      */
     public function getBudget()
     {
@@ -294,23 +244,15 @@ class Festival
     }
 
     /**
-     * Set linkWebsite.
-     *
-     * @param string|null $linkWebsite
-     *
-     * @return Festival
+     * @param float $budget
      */
-    public function setLinkWebsite($linkWebsite = null)
+    public function setBudget($budget)
     {
-        $this->linkWebsite = $linkWebsite;
-
-        return $this;
+        $this->budget = $budget;
     }
 
     /**
-     * Get linkWebsite.
-     *
-     * @return string|null
+     * @return string
      */
     public function getLinkWebsite()
     {
@@ -318,23 +260,15 @@ class Festival
     }
 
     /**
-     * Set linkFbEvent.
-     *
-     * @param string|null $linkFbEvent
-     *
-     * @return Festival
+     * @param string $linkWebsite
      */
-    public function setLinkFbEvent($linkFbEvent = null)
+    public function setLinkWebsite($linkWebsite)
     {
-        $this->linkFbEvent = $linkFbEvent;
-
-        return $this;
+        $this->linkWebsite = $linkWebsite;
     }
 
     /**
-     * Get linkFbEvent.
-     *
-     * @return string|null
+     * @return string
      */
     public function getLinkFbEvent()
     {
@@ -342,23 +276,15 @@ class Festival
     }
 
     /**
-     * Set linkFbPage.
-     *
-     * @param string|null $linkFbPage
-     *
-     * @return Festival
+     * @param string $linkFbEvent
      */
-    public function setLinkFbPage($linkFbPage = null)
+    public function setLinkFbEvent($linkFbEvent)
     {
-        $this->linkFbPage = $linkFbPage;
-
-        return $this;
+        $this->linkFbEvent = $linkFbEvent;
     }
 
     /**
-     * Get linkFbPage.
-     *
-     * @return string|null
+     * @return string
      */
     public function getLinkFbPage()
     {
@@ -366,23 +292,15 @@ class Festival
     }
 
     /**
-     * Set linkInstagram.
-     *
-     * @param string|null $linkInstagram
-     *
-     * @return Festival
+     * @param string $linkFbPage
      */
-    public function setLinkInstagram($linkInstagram = null)
+    public function setLinkFbPage($linkFbPage)
     {
-        $this->linkInstagram = $linkInstagram;
-
-        return $this;
+        $this->linkFbPage = $linkFbPage;
     }
 
     /**
-     * Get linkInstagram.
-     *
-     * @return string|null
+     * @return string
      */
     public function getLinkInstagram()
     {
@@ -390,23 +308,15 @@ class Festival
     }
 
     /**
-     * Set linkTickets.
-     *
-     * @param string|null $linkTickets
-     *
-     * @return Festival
+     * @param string $linkInstagram
      */
-    public function setLinkTickets($linkTickets = null)
+    public function setLinkInstagram($linkInstagram)
     {
-        $this->linkTickets = $linkTickets;
-
-        return $this;
+        $this->linkInstagram = $linkInstagram;
     }
 
     /**
-     * Get linkTickets.
-     *
-     * @return string|null
+     * @return string
      */
     public function getLinkTickets()
     {
@@ -414,23 +324,15 @@ class Festival
     }
 
     /**
-     * Set imageIcon.
-     *
-     * @param string|null $imageIcon
-     *
-     * @return Festival
+     * @param string $linkTickets
      */
-    public function setImageIcon($imageIcon = null)
+    public function setLinkTickets($linkTickets)
     {
-        $this->imageIcon = $imageIcon;
-
-        return $this;
+        $this->linkTickets = $linkTickets;
     }
 
     /**
-     * Get imageIcon.
-     *
-     * @return string|null
+     * @return string
      */
     public function getImageIcon()
     {
@@ -438,23 +340,15 @@ class Festival
     }
 
     /**
-     * Set imageBanner.
-     *
-     * @param string|null $imageBanner
-     *
-     * @return Festival
+     * @param string $imageIcon
      */
-    public function setImageBanner($imageBanner = null)
+    public function setImageIcon($imageIcon)
     {
-        $this->imageBanner = $imageBanner;
-
-        return $this;
+        $this->imageIcon = $imageIcon;
     }
 
     /**
-     * Get imageBanner.
-     *
-     * @return string|null
+     * @return string
      */
     public function getImageBanner()
     {
@@ -462,95 +356,63 @@ class Festival
     }
 
     /**
-     * Set isCancelled.
-     *
-     * @param bool|null $isCancelled
-     *
-     * @return Festival
+     * @param string $imageBanner
      */
-    public function setIsCancelled($isCancelled = null)
+    public function setImageBanner($imageBanner)
     {
-        $this->isCancelled = $isCancelled;
-
-        return $this;
+        $this->imageBanner = $imageBanner;
     }
 
     /**
-     * Get isCancelled.
-     *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsCancelled()
+    public function isCancelled()
     {
         return $this->isCancelled;
     }
 
     /**
-     * Set isSoldOut.
-     *
-     * @param bool|null $isSoldOut
-     *
-     * @return Festival
+     * @param bool $isCancelled
      */
-    public function setIsSoldOut($isSoldOut = null)
+    public function setIsCancelled($isCancelled)
     {
-        $this->isSoldOut = $isSoldOut;
-
-        return $this;
+        $this->isCancelled = $isCancelled;
     }
 
     /**
-     * Get isSoldOut.
-     *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsSoldOut()
+    public function isSoldOut()
     {
         return $this->isSoldOut;
     }
 
     /**
-     * Set isValid.
-     *
-     * @param bool|null $isValid
-     *
-     * @return Festival
+     * @param bool $isSoldOut
      */
-    public function setIsValid($isValid = null)
+    public function setIsSoldOut($isSoldOut)
     {
-        $this->isValid = $isValid;
-
-        return $this;
+        $this->isSoldOut = $isSoldOut;
     }
 
     /**
-     * Get isValid.
-     *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsValid()
+    public function isValid()
     {
         return $this->isValid;
     }
 
     /**
-     * Set location.
-     *
-     * @param \AppBundle\Entity\Location $location
-     *
-     * @return Festival
+     * @param bool $isValid
      */
-    public function setLocation(\AppBundle\Entity\Location $location)
+    public function setIsValid($isValid)
     {
-        $this->location = $location;
-
-        return $this;
+        $this->isValid = $isValid;
     }
 
     /**
-     * Get location.
-     *
-     * @return \AppBundle\Entity\Location
+     * @return mixed
      */
     public function getLocation()
     {
@@ -558,35 +420,15 @@ class Festival
     }
 
     /**
-     * Add concert.
-     *
-     * @param \AppBundle\Entity\Concert $concert
-     *
-     * @return Festival
+     * @param mixed $location
      */
-    public function addConcert(\AppBundle\Entity\Concert $concert)
+    public function setLocation($location)
     {
-        $this->concert[] = $concert;
-
-        return $this;
+        $this->location = $location;
     }
 
     /**
-     * Remove concert.
-     *
-     * @param \AppBundle\Entity\Concert $concert
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeConcert(\AppBundle\Entity\Concert $concert)
-    {
-        return $this->concert->removeElement($concert);
-    }
-
-    /**
-     * Get concert.
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return mixed
      */
     public function getConcert()
     {
@@ -594,26 +436,27 @@ class Festival
     }
 
     /**
-     * Set genre.
-     *
-     * @param \AppBundle\Entity\Genre $genre
-     *
-     * @return Festival
+     * @param mixed $concert
      */
-    public function setGenre(\AppBundle\Entity\Genre $genre)
+    public function setConcert($concert)
     {
-        $this->genre = $genre;
-
-        return $this;
+        $this->concert = $concert;
     }
 
     /**
-     * Get genre.
-     *
-     * @return \AppBundle\Entity\Genre
+     * @return mixed
      */
     public function getGenre()
     {
         return $this->genre;
     }
+
+    /**
+     * @param mixed $genre
+     */
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+    }
+
 }

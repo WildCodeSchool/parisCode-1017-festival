@@ -44,7 +44,7 @@
 
             {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
             {% else %}
-            <div class="container container-top">
+                <div class="container container-top">
             {% endif %}
 
             {% block body %}
@@ -56,7 +56,7 @@
 
             {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
             {% else %}
-            </div>
+                </div>
             {% endif %}
 
         </main>

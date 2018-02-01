@@ -3,7 +3,6 @@
 namespace AppBundle\DataFixtures;
 
 use AppBundle\Entity\User;
-use AppBundle\Entity\Wishlist;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Festival;
+use AppBundle\Entity\Wishlist;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,12 @@ use Symfony\Component\Serializer\Serializer;
 class ApiController extends Controller
 {
     /**
-     * @Route("/calendar", name="api_calendar")
+     * @Route("/calendar/", name="api_calendar")
      */
     public function getJsonEventAction(){
+
         $em = $this->getDoctrine()->getManager();
+
         $festivals = $em->getRepository(Festival::class)->findAll();
         $normalizer = new ObjectNormalizer();
         $encoder = new JsonEncoder();
