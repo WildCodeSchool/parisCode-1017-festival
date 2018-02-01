@@ -246,7 +246,7 @@ class Festival
     }
 
     /**
-     * Set dateEnd.
+     * Set end.
      *
      * @param \DateTime|null $end
      *
@@ -260,7 +260,7 @@ class Festival
     }
 
     /**
-     * Get dateEnd.
+     * Get end.
      *
      * @return \DateTime|null
      */

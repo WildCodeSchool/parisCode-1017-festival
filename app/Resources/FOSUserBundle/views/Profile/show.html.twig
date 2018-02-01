@@ -45,7 +45,7 @@
                             <td>{% if user.wishlist.concert is defined %}
                                     {% for concert in user.wishlist.concert %}
                                         <p>{{ concert.id }} - {{ concert.artist }} - {{ concert.location.name }}</p></p>
-                                        <p>{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateEnd|date("d D H:i") }}</p>
+                                        <p>{{ concert.dateStart|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}</p>
                                     {% endfor %}
                                 {% endif %}
                             </td>

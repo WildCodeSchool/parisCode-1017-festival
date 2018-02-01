@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,6 +25,7 @@ class ApiController extends Controller
     public function getJsonEventAction(){
         $em = $this->getDoctrine()->getManager();
         $festivals = $em->getRepository(Festival::class)->findAll();
+        $concerts = $em->getRepository(Concert::class)->findAll();
         $normalizer = new ObjectNormalizer();
         $encoder = new JsonEncoder();
         $callback = function ($datetime) {
@@ -33,17 +35,20 @@ class ApiController extends Controller
         };
         $normalizer->setCallbacks(array(
             'start' => $callback,
-            'end' =>$callback,
-            'dateStart' => $callback,
-            'dateEnd' => $callback
+            'end' =>$callback
         ));
         $normalizer->setCircularReferenceHandler(function ($object){
             return $object->getId();
         });
         $serializer = new Serializer(array($normalizer), array($encoder));
         $jsonFestivals = $serializer->serialize($festivals, 'json');
-        return new Response($jsonFestivals);
+        $jsonConcerts = $serializer->serialize($concerts, 'json');
+        $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
+        return new Response($json);
 
         // TODO : Amandine / ajouter concerts
+
     }
+
+
 }

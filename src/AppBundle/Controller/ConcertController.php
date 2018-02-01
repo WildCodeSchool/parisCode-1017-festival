@@ -45,6 +45,7 @@ class ConcertController extends Controller
                 $concert->getLocation()->setLatitude($location['lat']);
                 $concert->getLocation()->setLongitude($location['lng']);
                 $concert->getLocation()->setName($location['place_id']);
+                $concert->setTitle();
             }
 
             $em->persist($concert);
@@ -68,13 +69,25 @@ class ConcertController extends Controller
      * @ParamConverter("concert",   options={"mapping": {"concert_id": "id"}})
      * @Method({"GET", "POST"})
      */
-    public function editConcertAction(Request $request, Concert $concert, $festival_id)
+    public function editConcertAction(Request $request, GoogleMaps $formattedaddress, Concert $concert, $festival_id)
     {
         $editForm = $this->createForm('AppBundle\Form\ConcertType', $concert);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+
+            if ($concert->getLocation()){
+                $location = $formattedaddress->regularGeocoding($concert->getLocation());
+
+                $concert->getLocation()->setLatitude($location['lat']);
+                $concert->getLocation()->setLongitude($location['lng']);
+                $concert->getLocation()->setName($location['place_id']);
+                $concert->setTitle();
+            }
+
+            $em->persist($concert);
+            $em->flush();
 
             return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
         }

@@ -160,8 +160,8 @@
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Datestart</th>
-                            <th>Dateend</th>
+                            <th>start</th>
+                            <th>end</th>
                             <th>Artist</th>
                             <th>Location</th>
                             <th>Edit</th>
@@ -172,8 +172,8 @@
                         {% for concert in concerts %}
                             <tr>
                                 <td>{{ concert.id }}</a></td>
-                                <td>{% if concert.dateStart %}{{ concert.dateStart|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                <td>{% if concert.dateEnd %}{{ concert.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>{% if concert.start %}{{ concert.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>{% if concert.end %}{{ concert.end|date('Y-m-d H:i:s') }}{% endif %}</td>
                                 <td>{{ concert.artist }}</td>
                                 <td>{{ concert.location }}</td>
                                 <td><a href="{{ path('concert_edit', { 'concert_id': concert.id, 'festival_id': concert.festival.id }) }}">edit</a></td>

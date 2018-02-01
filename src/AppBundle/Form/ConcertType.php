@@ -23,7 +23,7 @@ class ConcertType extends AbstractType
                 'class' => Festival::class,
                 'label' => false
             ))
-            ->add('dateStart', DateTimeType::class, array(
+            ->add('start', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'required' => false,
@@ -34,7 +34,7 @@ class ConcertType extends AbstractType
                     'placeholder' => 'YYYY-MM-DD HH:mm'
                 )
             ))
-            ->add('dateEnd', DateTimeType::class, array(
+            ->add('end', DateTimeType::class, array(
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'required' => false,

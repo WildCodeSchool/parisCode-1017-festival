@@ -22,18 +22,25 @@ class Concert
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="dateStart", type="datetime", nullable=true)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $dateStart;
+    private $title;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateEnd", type="datetime", nullable=true)
+     * @ORM\Column(name="start", type="datetime", nullable=true)
      */
-    private $dateEnd;
+    private $start;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end", type="datetime", nullable=true)
+     */
+    private $end;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Artist", inversedBy="concert", cascade={"persist"})
@@ -65,12 +72,10 @@ class Concert
      */
     public function __toString()
     {
-        return $this->festival . " + " . $this->artist;
+        return $this->title;
     }
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId()
@@ -79,71 +84,55 @@ class Concert
     }
 
     /**
-     * Set dateStart.
-     *
-     * @param \DateTime|null $dateStart
-     *
-     * @return Concert
+     * @return string
      */
-    public function setDateStart($dateStart = null)
+    public function getTitle()
     {
-        $this->dateStart = $dateStart;
-
-        return $this;
+        return $this->title;
     }
 
     /**
-     * Get dateStart.
      *
-     * @return \DateTime|null
      */
-    public function getDateStart()
+    public function setTitle()
     {
-        return $this->dateStart;
+        $this->title = $this->getArtist() . ' @ ' . $this->getFestival();
     }
 
     /**
-     * Set dateEnd.
-     *
-     * @param \DateTime|null $dateEnd
-     *
-     * @return Concert
+     * @return \DateTime
      */
-    public function setDateEnd($dateEnd = null)
+    public function getStart()
     {
-        $this->dateEnd = $dateEnd;
-
-        return $this;
+        return $this->start;
     }
 
     /**
-     * Get dateEnd.
-     *
-     * @return \DateTime|null
+     * @param \DateTime $start
      */
-    public function getDateEnd()
+    public function setStart($start)
     {
-        return $this->dateEnd;
+        $this->start = $start;
     }
 
     /**
-     * Set artist.
-     *
-     * @param \AppBundle\Entity\Artist $artist
-     *
-     * @return Concert
+     * @return \DateTime
      */
-    public function setArtist(\AppBundle\Entity\Artist $artist)
+    public function getEnd()
     {
-        $this->artist = $artist;
-
-        return $this;
+        return $this->end;
     }
 
     /**
-     * Get artist.
-     *
-     * @return \AppBundle\Entity\Artist
+     * @param \DateTime $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+    }
+
+    /**
+     * @return mixed
      */
     public function getArtist()
     {
@@ -151,23 +140,15 @@ class Concert
     }
 
     /**
-     * Set location.
-     *
-     * @param \AppBundle\Entity\Location|null $location
-     *
-     * @return Concert
+     * @param mixed $artist
      */
-    public function setLocation(\AppBundle\Entity\Location $location = null)
+    public function setArtist($artist)
     {
-        $this->location = $location;
-
-        return $this;
+        $this->artist = $artist;
     }
 
     /**
-     * Get location.
-     *
-     * @return \AppBundle\Entity\Location|null
+     * @return mixed
      */
     public function getLocation()
     {
@@ -175,23 +156,15 @@ class Concert
     }
 
     /**
-     * Set festival.
-     *
-     * @param \AppBundle\Entity\Festival $festival
-     *
-     * @return Concert
+     * @param mixed $location
      */
-    public function setFestival(\AppBundle\Entity\Festival $festival)
+    public function setLocation($location)
     {
-        $this->festival = $festival;
-
-        return $this;
+        $this->location = $location;
     }
 
     /**
-     * Get festival.
-     *
-     * @return \AppBundle\Entity\Festival
+     * @return mixed
      */
     public function getFestival()
     {
@@ -199,26 +172,27 @@ class Concert
     }
 
     /**
-     * Set isCancelled.
-     *
-     * @param bool|null $isCancelled
-     *
-     * @return Festival
+     * @param mixed $festival
      */
-    public function setIsCancelled($isCancelled = null)
+    public function setFestival($festival)
     {
-        $this->isCancelled = $isCancelled;
-
-        return $this;
+        $this->festival = $festival;
     }
 
     /**
-     * Get isCancelled.
-     *
-     * @return bool|null
+     * @return bool
      */
-    public function getIsCancelled()
+    public function isCancelled()
     {
         return $this->isCancelled;
     }
+
+    /**
+     * @param bool $isCancelled
+     */
+    public function setIsCancelled($isCancelled)
+    {
+        $this->isCancelled = $isCancelled;
+    }
+
 }
