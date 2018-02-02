@@ -6,6 +6,7 @@ use AppBundle\Entity\Festival;
 use AppBundle\Entity\Wishlist;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -24,28 +25,34 @@ class ApiController extends Controller
      */
     public function getJsonEventAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
-        $concerts = $em->getRepository('AppBundle:Concert')->findAll();
+//        $em = $this->getDoctrine()->getManager();
+//        $wishlists = $em->getRepository(Wishlist::class)->findOneByUser($this->getUser());
+//        dump($wishlists);die();
+//
+////        $wishlists = $em->getRepository(Wishlist::class)->calendar($this->getUser()->getId());
+//
+//
+//        $normalizer = new ObjectNormalizer();
+//        $encoder = new JsonEncoder();
+//        $callback = function ($datetime) {
+//            return $datetime instanceof \DateTime
+//                ? $datetime->format(\DateTime::ISO8601)
+//                : '';
+//        };
+//        $normalizer->setCallbacks(array(
+//            'start' => $callback,
+//            'end' =>$callback,
+//        ));
+//        $normalizer->setCircularReferenceHandler(function ($object){
+//            return $object->getId();
+//        });
+//        $serializer = new Serializer(array($normalizer), array($encoder));
+//
+//        $jsonConcerts = $serializer->serialize($concerts, 'json');
+//        $jsonFestivals = $serializer->serialize($festivals, 'json');
+//        $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
+//
+//        return new Response($json);
 
-        $normalizer = new ObjectNormalizer();
-        $encoder = new JsonEncoder();
-        $callback = function ($datetime) {
-            return $datetime instanceof \DateTime
-                ? $datetime->format(\DateTime::ISO8601)
-                : '';
-        };
-        $normalizer->setCallbacks(array(
-            'start' => $callback,
-            'end' =>$callback,
-        ));
-        $normalizer->setCircularReferenceHandler(function ($object){
-            return $object->getId();
-        });
-        $serializer = new Serializer(array($normalizer), array($encoder));
-        $jsonFestivals = $serializer->serialize($festivals, 'json');
-        $jsonConcerts = $serializer->serialize($concerts, 'json');
-        $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
-        return new Response($json);
     }
 }
