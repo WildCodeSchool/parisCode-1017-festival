@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         {% block stylesheets %}{% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     </head>
     <body>
@@ -48,54 +49,48 @@
 
             {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
             {% else %}
-                <div class="container container-top">
+            <div class="container container-top">
+                {% endif %}
+                {% block body %}
+                    {% block fos_user_content %}
+                    {% endblock fos_user_content %}
+                {% endblock %}
+                {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
+                {% else %}
+            </div>
             {% endif %}
-
-            {% block body %}
-
-                {% block fos_user_content %}
-                {% endblock fos_user_content %}
-
-            {% endblock %}
-
-            {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
-            {% else %}
-                </div>
-            {% endif %}
-
         </main>
-
-        {% block footer %}
-            <footer class="page-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s8 offset-s2 center-align">
-                            <a class="social btn-floating btn-large facebook">
-                                <i class="fa fa-facebook"></i></a>
-                            <a class="btn-floating btn-large social instagram">
-                                <i class="fa fa-instagram"></i></a>
-                            <a class="btn-floating btn-large social twitter">
-                                <i class="fa fa-twitter"></i></a>
-                        </div>
+    {% block footer %}
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col s8 offset-s2 center-align">
+                        <a class="social btn-floating btn-large facebook">
+                            <i class="fa fa-facebook"></i></a>
+                        <a class="btn-floating btn-large social instagram">
+                            <i class="fa fa-instagram"></i></a>
+                        <a class="btn-floating btn-large social twitter">
+                            <i class="fa fa-twitter"></i></a>
                     </div>
                 </div>
-                <div class="footer-copyright">
-                    <div class="container center">
-                        Go Fest © 2018 Copyright - All rights reserved
-                    </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container center">
+                    Go Fest © 2018 Copyright - All rights reserved
                 </div>
-            </footer>
-        {% endblock %}
+            </div>
+        </footer>
+    {% endblock %}
 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <!--js burger -->
-        <script>
-            $( document ).ready(function(){
-                $(".button-collapse").sideNav();
-            })
-        </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--js burger -->
+    <script>
+        $(document).ready(function () {
+            $(".button-collapse").sideNav();
+        })
+    </script>
 
     {% block javascripts %}
     {% endblock %}

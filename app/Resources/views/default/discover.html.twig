@@ -88,7 +88,7 @@
                                                             <li class="tab"><a class="active" href="{{ '#general' ~ festival.id }}">General</a></li>
                                                             <li class="tab"><a href="{{ '#lineup' ~ festival.id }}">Line Up</a></li>
                                                             <li class="tab"><a href="{{ '#map' ~ '2' ~ festival.id }}">Map</a></li>
-                                                            <li class="tab"><a href="{{ '#links' ~ festival.id }}">Links</a></li>
+                                                            <li class="tab"><a href="{{ '#links' ~ festival.id }}">Social</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="card-content">
@@ -124,7 +124,7 @@
                                                                         <li class="collection-item avatar">
                                                                             <i class="material-icons circle deep-purple lighten-2">people</i>
                                                                             <h3 class="left-align">{{ concert.artist }}</h3>
-                                                                            <p class="left-align">{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateEnd|date("d D H:i") }}<br>
+                                                                            <p class="left-align truncate">{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateEnd|date("d D H:i") }}<br>
                                                                                 {% if concert.location %}{{ concert.location }}{% endif %}
                                                                             </p>
                                                                             <!-- Add/remove to/from wishlist -->
@@ -134,6 +134,8 @@
                                                                                 {% else %}
                                                                                     <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
                                                                                 {% endif %}
+                                                                            {% else %}
+                                                                                <a class="secondary-content" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                                                             {% endif %}
                                                                         </li>
                                                                     {% endfor %}
@@ -150,18 +152,41 @@
                                                             </iframe>
                                                         </div>
                                                         <div id="{{ 'links' ~ festival.id }}">
-                                                            <div class="row center">
-                                                                <p>
-                                                                    {% if festival.linkWebsite %}<a href="{{ festival.linkWebsite }}" target="_blank" class="btn-floating amber "><i class="material-icons">insert_link</i></a>{% endif %}
-                                                                    {% if festival.linkFbPage %}<a href="{{ festival.linkFbPage }}" target="_blank" class="btn-floating blue darken-3 "><i class="fa fa-facebook"></i></a>{% endif %}
-                                                                    {% if festival.linkFbEvent %}<a href="{{ festival.linkFbEvent }}" target="_blank" class="btn-floating blue darken-3 "><i class="material-icons">date_range</i></a>{% endif %}
-                                                                    {% if festival.linkInstagram %}<a href="{{ festival.linkInstagram }}" target="_blank" class="btn-floating purple"><i class="fa fa-instagram"></i></a>{% endif %}
-                                                                </p><br><br>
-                                                                <p>Missing some info, tell us!</p>
-                                                                <br>
-                                                                <p><a href="{{ path('festival_edit', { 'festival_id': festival.id }) }}" target="_blank" class="btn-floating red"><i class="material-icons">edit</i></a>
-                                                                </p>
-                                                            </div>
+                                                            <ul class="collection">
+                                                                <li class="collection-item avatar">
+                                                                    <i class="material-icons circle blue-grey lighten-3">perm_identity</i>
+                                                                        <div class="row">
+                                                                            {% if festival.wishlist is not empty  %}
+                                                                                {% for wishlist in festival.wishlist %}
+                                                                                <div class="col s2 m2 l1">
+                                                                                    {% if wishlist.user.imageIcon is not empty  %}
+                                                                                        <img src="{{ wishlist.user.imageIcon }}" alt="" style="border-radius: 50%">
+                                                                                    {% else %}
+                                                                                        <img src="http://bestchoice.property/wp-content/uploads/2015/07/empty-agent-profile.png" alt="" style="border-radius: 50%">
+                                                                                    {% endif %}
+                                                                                </div>
+                                                                                {% endfor %}
+                                                                            {% else %}
+                                                                                <p class="center">No attendee yet :/</p>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                </li>
+                                                                <li class="collection-item avatar">
+                                                                    <i class="material-icons circle blue-grey lighten-3">insert_link</i>
+                                                                    <p class="center-align">
+                                                                        {% if festival.linkWebsite %}<a href="{{ festival.linkWebsite }}" target="_blank" class="btn-floating amber "><i class="material-icons">insert_link</i></a>{% endif %}
+                                                                        {% if festival.linkFbPage %}<a href="{{ festival.linkFbPage }}" target="_blank" class="btn-floating blue darken-3 "><i class="fa fa-facebook"></i></a>{% endif %}
+                                                                        {% if festival.linkFbEvent %}<a href="{{ festival.linkFbEvent }}" target="_blank" class="btn-floating blue darken-3 "><i class="material-icons">date_range</i></a>{% endif %}
+                                                                        {% if festival.linkInstagram %}<a href="{{ festival.linkInstagram }}" target="_blank" class="btn-floating purple"><i class="fa fa-instagram"></i></a>{% endif %}
+                                                                    </p>
+                                                                </li>
+                                                                <li class="collection-item avatar">
+                                                                    <i class="material-icons circle blue-grey lighten-3">edit</i>
+                                                                    <p class="center-align">
+                                                                        <a href="{{ path('festival_edit', { 'festival_id': festival.id }) }}" target="_blank">Missing some info, tell us!</a>
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,6 +229,7 @@
                         lat: {{ user.address.latitude }},
                         lng: {{ user.address.longitude }}
                     {% else %}
+
                         lat: 48.864716,
                         lng: 2.349014
                     {% endif %}
@@ -263,7 +289,5 @@
         });
     </script>
     <!--.Maps/cards mobile script -->
-
-
 
 {% endblock javascripts %}

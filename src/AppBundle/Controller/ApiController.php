@@ -22,11 +22,12 @@ class ApiController extends Controller
     /**
      * @Route("/calendar/", name="api_calendar")
      */
-    public function getJsonEventAction(){
-
+    public function getJsonEventAction()
+    {
         $em = $this->getDoctrine()->getManager();
+        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
+        $concerts = $em->getRepository('AppBundle:Concert')->findAll();
 
-        $festivals = $em->getRepository(Festival::class)->findAll();
         $normalizer = new ObjectNormalizer();
         $encoder = new JsonEncoder();
         $callback = function ($datetime) {
@@ -37,16 +38,14 @@ class ApiController extends Controller
         $normalizer->setCallbacks(array(
             'start' => $callback,
             'end' =>$callback,
-            'dateStart' => $callback,
-            'dateEnd' => $callback
         ));
         $normalizer->setCircularReferenceHandler(function ($object){
             return $object->getId();
         });
         $serializer = new Serializer(array($normalizer), array($encoder));
         $jsonFestivals = $serializer->serialize($festivals, 'json');
-        return new Response($jsonFestivals);
-
-        // TODO Amandine : ajouter concerts
+        $jsonConcerts = $serializer->serialize($concerts, 'json');
+        $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
+        return new Response($json);
     }
 }

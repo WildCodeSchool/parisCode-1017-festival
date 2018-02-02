@@ -69,6 +69,7 @@ h3{
 .festival-cards{
     margin-top: 32vh;
     margin-left: 1vh;
+    margin-right: 1vh;
 }
 .map {
     position: fixed;
@@ -81,8 +82,8 @@ h3{
     right: 0;
     position: fixed;
     width: 100%;
-    top: 32vh;
-    height: 68vh;
+    top: 28vh;
+    height: 72vh;
     z-index: 2;
 }
 .modal {

@@ -34,6 +34,13 @@ class User extends BaseUser
     private $wishlist;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="imageIcon", type="string", length=250, nullable=true)
+     */
+    private $imageIcon;
+
+    /**
      * NBLN-T : ToString
      */
     public function __toString()
@@ -97,5 +104,29 @@ class User extends BaseUser
     public function getWishlist()
     {
         return $this->wishlist;
+    }
+
+    /**
+     * Set imageIcon.
+     *
+     * @param string|null $imageIcon
+     *
+     * @return User
+     */
+    public function setImageIcon($imageIcon = null)
+    {
+        $this->imageIcon = $imageIcon;
+
+        return $this;
+    }
+
+    /**
+     * Get imageIcon.
+     *
+     * @return string|null
+     */
+    public function getImageIcon()
+    {
+        return $this->imageIcon;
     }
 }
