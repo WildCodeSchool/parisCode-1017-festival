@@ -13,17 +13,23 @@
             <div class="col s12 m4 festival">
                 <div class="row search">
                     <div class="input-field">
+                        <!-- TODO All : search bar in Ajax -->
                         <input type="text" id="autocomplete-input" class="autocomplete">
                         <label for="autocomplete-input">Search by festival, genre, artist</label>
+                        <div class="center-align hide-on-med-and-up">
+                            <button id="switch">Change View</button>
+                        </div>
+                        <br>
+                        <!-- Switch -->
                     </div>
                 </div>
-                <div class="row hide-on-small-only festival-cards">
+                <div class="row festival-cards">
                     {% for festival in festivals %}
                         <div class="card horizontal">
                             <div class="card-stacked">
                                 <div class="card-content">
                                     <p>{{ festival.title }}</p>
-                                    <p>Style: {{ festival.genre }}</p>
+                                    <p class="italic">{{ festival.genre }}</p>
                                     <p>{% if festival.start is defined %}
                                             {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }}
                                         {% else %}TBA
@@ -35,33 +41,45 @@
                                 <!-- Add/remove to/from wishlist -->
                                 {% if user.wishlist.festival is defined %}
                                     {% if festival in user.wishlist.festival %}
-                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': 1, 'id': 1, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
                                     {% else %}
-                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': 1, 'id': 1, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
                                     {% endif %}
                                 {% else %}
-                                    <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': 1, 'id': 1, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                    <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                 {% endif %}
                                 <!-- Modal Festival - Trigger -->
                                 <a class="zoom-in btn-floating waves-effect waves-light cyan pulse modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
                                 <!-- Modal Festival - Structure -->
                                 <div id="{{ 'modal' ~ festival.id ~ 'b' }}" class="modal">
-                                    <div class="modal-footer">
-                                        <a class="modal-action modal-close waves-effect waves-green btn-flat">X</a>
-                                    </div>
                                     <div class="modal-content">
-                                        {#<h4>{{ festival.title }}</h4>#}
+                                        <div class="row">
+                                           <div class="col offset-s1 s10">
+                                                <h2 class="center-align festival-title">{{ festival.title|upper }}</h2>
+                                           </div>
+                                            <div class="col s1">
+                                                <p class="modal-action modal-close right-align">X</p>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col s12 m3">
-                                                <p>{{ festival.title|upper }}</p>
-                                                <img class="responsive-img" src="{{ festival.imageBanner }}">
-                                                <p><i class="material-icons">location_on</i>  {{ festival.location }}</p>
-                                                <p><i class="material-icons">date_range</i>
-                                                    {% if festival.start %}
-                                                        {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }} ({{ ((festival.end).diff(festival.start))|date }})
-                                                    {% else %}TBA
-                                                    {% endif %}
-                                                </p>
+                                                <div class="card">
+                                                    <img class="responsive-img" src="{{ festival.imageBanner }}">
+                                                    <br>
+                                                    <div class="collection-item">
+                                                        <div class="row">
+                                                            <div class="col s12 left-align"><i class="material-icons">location_on</i>{{ festival.location }}</div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col s12 left-align"><i class="material-icons">date_range</i>
+                                                                {% if festival.start %} {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }} ({{ ((festival.end).diff(festival.start))|date }})
+                                                                {% else %}TBA
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                </div>
                                             </div>
                                             <div class="col s12 m9">
                                                 <div class="card">
@@ -108,14 +126,15 @@
                                                                             <span class="title left">{{ concert.artist }}</span>
                                                                             <br>
                                                                             <p class="left-align">{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}<br>
+
                                                                                 {% if concert.location %}{{ concert.location }}{% endif %}
                                                                             </p>
                                                                             <!-- Add/remove to/from wishlist -->
                                                                             {% if user.wishlist.concert is defined %}
                                                                                 {% if concert in user.wishlist.concert %}
-                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': 1, 'id': 1, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
                                                                                 {% else %}
-                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': 1, 'id': 1, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
                                                                                 {% endif %}
                                                                             {% endif %}
                                                                         </li>
@@ -129,7 +148,7 @@
                                                                     width="450"
                                                                     height="350"
                                                                     frameborder="0" style="border:0"
-                                                                    src={{ "https://www.google.com/maps/embed/v1/place?key=" ~ GOOGLE_MAPS_API ~ "&q=" ~ festival.location.address }}>
+                                                                    src={{ "https://www.google.com/maps/embed/v1/place?key=" ~ google_maps_api ~ "&q=" ~ festival.location.address }}>
                                                             </iframe>
                                                         </div>
                                                         <div id="{{ 'links' ~ festival.id }}">
@@ -152,6 +171,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--.Modal Festival - Structure -->
                                 <img src="{{ festival.imageIcon }}">
                             </div>
                         </div>
@@ -168,23 +188,21 @@
     </div>
     <!--.discover -->
 
-
 {% endblock %}
 
 {% block footer %}
 {% endblock footer %}
 
-
 {% block javascripts %}
 
-    <!--GoogleMaps scripts-->
+    <!--GoogleMaps script -->
     <script>
         function initMap() {
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if user.address is defined %}
+                    {% if user.address.latitude is defined %}
                         lat: {{ user.address.latitude }},
                         lng: {{ user.address.longitude }}
                     {% else %}
@@ -230,9 +248,24 @@
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer
-            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ GOOGLE_MAPS_API  ~ '&content_copy&callback=initMap' }}>
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&content_copy&callback=initMap' }}>
     </script>
-    <!--Modal scripts-->
-    <script src="{{ asset('js/scriptdiscover.js') }}"></script>
+    <!--.GoogleMaps script -->
+    <!--Modal script -->
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    </script>
+    <!--.Modal script -->
+    <!--Maps/cards mobile script -->
+    <script>
+        $("#switch").click(function(){
+            $("#map").toggleClass("switcher");
+        });
+    </script>
+    <!--.Maps/cards mobile script -->
+
+
 
 {% endblock javascripts %}

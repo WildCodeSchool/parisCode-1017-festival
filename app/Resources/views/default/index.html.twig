@@ -7,10 +7,10 @@
         <a href="{{ path('discover') }}" class="brand-logo">
             <img src="{{ asset('img/logorondblanc.png') }}">
         </a>
-
+        <!--Tablet + Desktop -->
         <a href="{{ path('fos_user_security_login') }}" class="btn right hide-on-med-and-up">Log In</a>
         <a href="{{ path('fos_user_registration_register') }}" class="btn right hide-on-med-and-up">Register</a>
-
+        <!--Mobile -->
         <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
         <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light btn-large hide-on-small-only">Register</a>
     </div>
@@ -20,7 +20,6 @@
 {% block body %}
 
     <div id="fullpage">
-
         <section class="mobile-homepage">
             <img class="homepage-img hide-on-med-and-up" src="{{ asset('img/tomorrowland.jpg') }}">
             <a href="{{ path('discover') }}"><h2 class="homepage-h2">Discover</h2></a>
@@ -29,13 +28,11 @@
             <img class="homepage-img hide-on-med-and-up" src="{{ asset('img/coachella.jpg') }}">
             <a href=""><h2 class="homepage-h2">Plan</h2></a>
         </section>
-
         <section class="vertical-scrolling  hide-on-small-only" id="section0">
             <a href="{{ path('discover') }}">
                 <video id="video" playsinline="" autoplay muted loop class="bgvid">
                     <source src="https://www.woovapp.com/wp-content/uploads/2017/10/ML-aftermovie.mp4" type="video/mp4">
                 </video>
-
                 <div class="ml-gradient">
                     <h2 class="homepage-h2">Discover</h2>
                     <ul id="menu">

@@ -37,7 +37,7 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        GOOGLE_MAPS_API: '%api_google%'
+        google_maps_api: '%api_google%'
 
 # Doctrine Configuration
 doctrine:

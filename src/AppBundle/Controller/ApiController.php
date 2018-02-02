@@ -46,8 +46,7 @@ class ApiController extends Controller
         $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
         return new Response($json);
 
-        // TODO : Amandine / ajouter concerts
-
+        // TODO Amandine : ajouter concerts
     }
 
 

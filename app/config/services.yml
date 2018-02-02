@@ -2,7 +2,6 @@
 # https://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
-     GOOGLE_MAPS_API: sendmail
 
 services:
     # default configuration for services in *this* file
