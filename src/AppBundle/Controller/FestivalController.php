@@ -25,7 +25,6 @@ class FestivalController extends Controller
      */
     public function newAction(Request $request, GoogleMaps $formattedaddress)
     {
-
         $festival = new Festival();
         $form = $this->createForm('AppBundle\Form\FestivalType', $festival);
         $form->handleRequest($request);

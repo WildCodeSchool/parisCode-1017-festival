@@ -1,94 +1,97 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    {#<title>{% block title %}Go Fest{% endblock %}</title>#}
-    {% set current_path = app.request.get('_route') %}
-    <title>{% block title %}Go Fest · {{ current_path|capitalize }}{% endblock %}</title>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        {% set current_path = app.request.get('_route') %}
+        <title>{% block title %}Go Fest · {{ current_path|capitalize }}{% endblock %}</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    {% block stylesheets %}{% endblock %}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+        {% block stylesheets %}{% endblock %}
+      <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+  </head>
+  <body>
+  <main>
+      {% block navbar %}
+          <nav id="header">
+              <div class="nav-wrapper">
+                  <h1>Go Fest</h1>
+                  <a href="{{ path('discover') }}" class="brand-logo"><img src="{{ asset('img/logorondblanc.png') }}"></a>
+                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                  <ul class="right hide-on-med-and-down">
+                      {% if app.user.username is defined %}
+                          <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
+                          <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
+                          <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                      {% else %}
+                          <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                          <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
+                      {% endif %}
+                  </ul>
+                  <ul class="side-nav" id="mobile-demo">
+                      {% if app.user.username is defined %}
+                          <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
+                          <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
+                          <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                      {% else %}
+                          <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                          <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
+                      {% endif %}
+                  </ul>
+              </div>
+          </nav>
+      {% endblock %}
+              {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
+              {% else %}
+                  <div class="container container-top">
+              {% endif %}
+              {% block body %}
+                  {% block fos_user_content %}
+                  {% endblock fos_user_content %}
+              {% endblock %}
+              {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
+              {% else %}
+                  </div>
+              {% endif %}
+          </main>
+          {% block footer %}
+              <footer class="page-footer">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col s8 offset-s2 center-align">
+                              <a class="social btn-floating btn-large facebook">
+                                  <i class="fa fa-facebook"></i></a>
+                              <a class="btn-floating btn-large social instagram">
+                                  <i class="fa fa-instagram"></i></a>
+                              <a class="btn-floating btn-large social twitter">
+                                  <i class="fa fa-twitter"></i></a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="footer-copyright">
+                      <div class="container center">
+                          Go Fest © 2018 Copyright - All rights reserved
+                      </div>
+                  </div>
+              </footer>
+          {% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-</head>
-<body>
-<main>
-    {% block navbar %}
-        <nav id="header">
-            <div class="nav-wrapper">
-                <h1>Go Fest</h1>
-                <a href="{{ path('discover') }}" class="brand-logo"><img src="{{ asset('img/logorondblanc.png') }}"></a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                    {% if app.user.username is defined %}
-                        <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
-                        <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
-                        <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
-                    {% endif %}
-                </ul>
-                <ul class="side-nav" id="mobile-demo">
-                    {% if app.user.username is defined %}
-                        <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
-                        <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
-                        <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    {% endblock %}
+          <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+          <!--js burger -->
+          <script>
+              $( document ).ready(function(){
+                  $(".button-collapse").sideNav();
+              })
+          </script>
 
-    {% block body %}
+      {% block javascripts %}
+      {% endblock %}
 
-        {% block fos_user_content %}
-        {% endblock fos_user_content %}
-
-    {% endblock %}
-</main>
-{% block footer %}
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col s8 offset-s2 center-align">
-                <a class="social btn-floating btn-large facebook">
-                    <i class="fa fa-facebook"></i></a>
-                <a class="btn-floating btn-large social instagram">
-                    <i class="fa fa-instagram"></i></a>
-                <a class="btn-floating btn-large social twitter">
-                    <i class="fa fa-twitter"></i></a>
-                 </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container center">
-                Go Fest © 2018 Copyright - All rights reserved
-            </div>
-        </div>
-    </footer>
-{% endblock %}
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<!-- js burger -->
-<script>
-    $(document).ready(function () {
-        $(".button-collapse").sideNav();
-    })
-</script>
-
-{% block javascripts %}
-{% endblock %}
-
-</body>
+  </body>
 </html>

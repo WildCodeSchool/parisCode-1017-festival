@@ -35,25 +35,26 @@ html, body {
     z-index: 1;
 }
 .festival::-webkit-scrollbar,
-.map::-webkit-scrollbar {
+.map::-webkit-scrollbar{
     display: none;
-}
-
-.container-top{
-    margin-top: 9vh;
 }
 
 .discover-text{
     text-align: left;
 }
-
-.modal {
-    width: 90% !important;
-    height: 90% !important;
-    left: 5% !important;
-    right: 5% !important;
-    top: 5% !important;
-    bottom: 5% !important;
+.festival-title{
+    font-size: 2em;
+}
+h3{
+    font-size: 1.25em;
+    margin:0;
+    text-transform: uppercase;
+}
+.italic{
+    font-style: italic;
+}
+.switcher {
+    display:none;
 }
 
 /************************************************\
@@ -62,12 +63,13 @@ html, body {
 ==================================================
 \************************************************/
 
-.search {
-    background-color: white;
-    position: fixed;
-    z-index: 3;
-    top: 10vh;
-    width: 96vw;
+.container-top{
+    margin-top: 9vh;
+}
+.festival-cards{
+    margin-top: 32vh;
+    margin-left: 1vh;
+    margin-right: 1vh;
 }
 .map {
     position: fixed;
@@ -80,9 +82,25 @@ html, body {
     right: 0;
     position: fixed;
     width: 100%;
-    top: 22vh;
-    height: 78vh;
+    top: 28vh;
+    height: 72vh;
     z-index: 2;
+}
+.modal {
+    width: 90% !important;
+    height: 90% !important;
+    left: 5% !important;
+    right: 5% !important;
+    top: 5% !important;
+    bottom: 5% !important;
+}
+.search {
+    background-color: white;
+    padding-top: 2vh;
+    position: fixed;
+    z-index: 3;
+    top: 8vh;
+    width: 96vw;
 }
 
 /************************************************\
@@ -93,11 +111,15 @@ html, body {
 
 /* Tablet */
 @media screen and (min-width: 601px) and (max-width: 992px){
-    .search {
-        padding-top: 2vh;
-        z-index: 2;
-        top: 8vh;
-        width: 33vw;
+    .container-top{
+        margin-top: 8vh;
+    }
+    .festival-cards{
+        margin-top: 26vh;
+        margin-left: 1vh;
+    }
+    .festival-cards p{
+        font-size: 0.85em;
     }
     .map {
         z-index: 3;
@@ -115,23 +137,22 @@ html, body {
         top: 5% !important;
         bottom: 5% !important;
     }
-    .container-top{
-        margin-top: 8vh;
+    .search {
+        padding-top: 2vh;
+        z-index: 2;
+        top: 8vh;
+        width: 33vw;
     }
-    .festival-cards{
-        margin-top: 25vh;
-        margin-left: 1vh;
-    }
-
 }
 
 /* Desktop */
 @media screen and (min-width: 993px) {
-    .search {
-        padding-top: 4vh;
-        z-index: 2;
-        top: 8vh;
-        width: 33vw;
+    .container-top{
+        margin-top: 12vh;
+    }
+    .festival-cards{
+        margin-top: 26vh;
+        margin-left: 1vh;
     }
     /* Google Maps */
     .map {
@@ -150,11 +171,10 @@ html, body {
         top: 5% !important;
         bottom: 5% !important;
     }
-    .container-top{
-        margin-top: 12vh;
-    }
-    .festival-cards{
-        margin-top: 25vh;
-        margin-left: 1vh;
+    .search {
+        padding-top: 4vh;
+        z-index: 2;
+        top: 8vh;
+        width: 33vw;
     }
 }

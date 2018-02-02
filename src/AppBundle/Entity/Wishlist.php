@@ -73,6 +73,7 @@ class Wishlist
         return " Wishlist - " . $this->user;
     }
 
+
     /**
      * Constructor
      */
@@ -83,14 +84,6 @@ class Wishlist
         $this->location = new \Doctrine\Common\Collections\ArrayCollection();
         $this->artist = new \Doctrine\Common\Collections\ArrayCollection();
         $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -306,8 +299,4 @@ class Wishlist
     {
         return $this->concert;
     }
-
-
-
-
 }

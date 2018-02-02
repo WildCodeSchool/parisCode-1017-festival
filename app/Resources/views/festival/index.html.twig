@@ -8,189 +8,182 @@
 
 {% block body %}
 
-    <div class="container container-top">
-
-        <div class="row center-align">
-            <div class="col s12">
-                <h2>{{ app.request.get('_route') == 'festival_new' ? 'Add a ' : 'Edit ' }}Festival</h2>
-            </div>
+    <div class="row center-align">
+        <div class="col s12">
+            <h2>{{ app.request.get('_route') == 'festival_new' ? 'Add a ' : 'Edit ' }}Festival</h2>
         </div>
-        <div class="card">
-            {#<div class="card-content">#}
-            {#</div>#}
-            <div class="card-tabs">
-                <ul class="tabs tabs-fixed-width">
-                    <li class="tab"><a class="active" href="#test4">General</a></li>
-                    <li class="tab{{ app.request.get('_route') == 'festival_new' ? ' disabled' : '' }}"><a href="#test5">Line Up</a></li>
-                </ul>
-            </div>
-            <div class="card-content">
-                <div id="test4">
-                    <!-- FORM -->
-                    <div class="row">
-                        {{ app.request.get('_route') == 'festival_new' ? form_start(form) : form_start(edit_form) }}
-                        <!-- $title -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">music_note</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.title) : form_label(edit_form.title) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.title) : form_widget(edit_form.title) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.title) : form_errors(edit_form.title) }}
-                            </div>
-                        </div>
-                        <!-- $description -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">announcement</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.description) : form_label(edit_form.description) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.description) : form_widget(edit_form.description) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.description) : form_errors(edit_form.description) }}
-                            </div>
-                        </div>
-                        <!-- $location -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">location_city</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.location.address) : form_label(edit_form.location.address) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.location.address) : form_widget(edit_form.location.address) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.location.address) : form_errors(edit_form.location.address) }}
-                            </div>
-                        </div>
-                        <!-- $genre -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">music_video</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.genre.name) : form_label(edit_form.genre.name) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.genre.name) : form_widget(edit_form.genre.name) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.genre.name) : form_errors(edit_form.genre.name) }}
-                             </div>
-                        </div>
-                        <!-- $budget -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">attach_money</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.budget) : form_label(edit_form.budget) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.budget) : form_widget(edit_form.budget) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.budget) : form_errors(edit_form.budget) }}
-                             </div>
-                        </div>
-                        <div class="row">
-                            <!-- $start -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">date_range</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.start) : form_label(edit_form.start) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.start) : form_widget(edit_form.start) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.start) : form_errors(edit_form.start) }}
-                            </div>
-                            <!-- $end -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">date_range</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.end) : form_label(edit_form.end) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.end) : form_widget(edit_form.end) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.end) : form_errors(edit_form.end) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- $linkWebsite -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkWebsite) : form_label(edit_form.linkWebsite) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkWebsite) : form_widget(edit_form.linkWebsite) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkWebsite) : form_errors(edit_form.linkWebsite) }}
-                            </div>
-                            <!-- $linkInstagram -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkInstagram) : form_label(edit_form.linkInstagram) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkInstagram) : form_widget(edit_form.linkInstagram) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkInstagram) : form_errors(edit_form.linkInstagram) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- $linkFbPage -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkFbPage) : form_label(edit_form.linkFbPage) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkFbPage) : form_widget(edit_form.linkFbPage) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkFbPage) : form_errors(edit_form.linkFbPage) }}
-                            </div>
-                            <!-- $linkFbEvent -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkFbEvent) : form_label(edit_form.linkFbEvent) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkFbEvent) : form_widget(edit_form.linkFbEvent) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkFbEvent) : form_errors(edit_form.linkFbEvent) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- $imageIcon -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.imageIcon) : form_label(edit_form.imageIcon) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.imageIcon) : form_widget(edit_form.imageIcon) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.imageIcon) : form_errors(edit_form.imageIcon) }}
-                            </div>
-                            <!-- $imageBanner -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.imageBanner) : form_label(edit_form.imageBanner) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.imageBanner) : form_widget(edit_form.imageBanner) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.imageBanner) : form_errors(edit_form.imageBanner) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- $isCancelled -->
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">insert_link</i>
-                                {{ app.request.get('_route') == 'festival_new' ? form_label(form.isCancelled) : form_label(edit_form.isCancelled) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_widget(form.isCancelled) : form_widget(edit_form.isCancelled) }}
-                                {{ app.request.get('_route') == 'festival_new' ? form_errors(form.isCancelled) : form_errors(edit_form.isCancelled) }}
-                            </div>
-                        </div>
-                        <div class="row center-align">
-                            <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'festival_new' ? 'Create' : 'Edit' }}>
-                        </div>
-                        {{ app.request.get('_route') == 'festival_new' ? form_end(form) : form_end(edit_form) }}
-                    </div>
-                    <!-- .FORM -->
-                </div>
-                <div id="test5">
-                    {% if app.request.get('_route') != 'festival_new' %}
-                    <table class="striped">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Datestart</th>
-                            <th>Dateend</th>
-                            <th>Artist</th>
-                            <th>Location</th>
-                            <th>Edit</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% for concert in concerts %}
-                            <tr>
-                                <td>{{ concert.id }}</a></td>
-                                <td>{% if concert.dateStart %}{{ concert.dateStart|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                <td>{% if concert.dateEnd %}{{ concert.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                <td>{{ concert.artist }}</td>
-                                <td>{{ concert.location }}</td>
-                                <td><a href="{{ path('concert_edit', { 'concert_id': concert.id, 'festival_id': concert.festival.id }) }}">edit</a></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="row center-align">
-                        <a href="{{ path('concert_new', { 'festival_id': festival.id }) }}" class="waves-effect waves-light btn">Add concert</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
     </div>
-    <!-- .container -->
+    <div class="card">
+        <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab"><a class="active" href="#test4">General</a></li>
+                <li class="tab{{ app.request.get('_route') == 'festival_new' ? ' disabled' : '' }}"><a href="#test5">Line Up</a></li>
+            </ul>
+        </div>
+        <div class="card-content">
+            <div id="test4">
+                <!-- FORM -->
+                <div class="row">
+                    {{ app.request.get('_route') == 'festival_new' ? form_start(form) : form_start(edit_form) }}
+                    <!-- $title -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">music_note</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.title) : form_label(edit_form.title) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.title) : form_widget(edit_form.title) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.title) : form_errors(edit_form.title) }}
+                        </div>
+                    </div>
+                    <!-- $description -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">announcement</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.description) : form_label(edit_form.description) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.description) : form_widget(edit_form.description) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.description) : form_errors(edit_form.description) }}
+                        </div>
+                    </div>
+                    <!-- $location -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">location_city</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.location.address) : form_label(edit_form.location.address) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.location.address) : form_widget(edit_form.location.address) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.location.address) : form_errors(edit_form.location.address) }}
+                        </div>
+                    </div>
+                    <!-- $genre -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">music_video</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.genre.name) : form_label(edit_form.genre.name) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.genre.name) : form_widget(edit_form.genre.name) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.genre.name) : form_errors(edit_form.genre.name) }}
+                         </div>
+                    </div>
+                    <!-- $budget -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">attach_money</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.budget) : form_label(edit_form.budget) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.budget) : form_widget(edit_form.budget) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.budget) : form_errors(edit_form.budget) }}
+                         </div>
+                    </div>
+                    <div class="row">
+                        <!-- $start -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">date_range</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.start) : form_label(edit_form.start) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.start) : form_widget(edit_form.start) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.start) : form_errors(edit_form.start) }}
+                        </div>
+                        <!-- $end -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">date_range</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.end) : form_label(edit_form.end) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.end) : form_widget(edit_form.end) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.end) : form_errors(edit_form.end) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $linkWebsite -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkWebsite) : form_label(edit_form.linkWebsite) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkWebsite) : form_widget(edit_form.linkWebsite) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkWebsite) : form_errors(edit_form.linkWebsite) }}
+                        </div>
+                        <!-- $linkInstagram -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkInstagram) : form_label(edit_form.linkInstagram) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkInstagram) : form_widget(edit_form.linkInstagram) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkInstagram) : form_errors(edit_form.linkInstagram) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $linkFbPage -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkFbPage) : form_label(edit_form.linkFbPage) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkFbPage) : form_widget(edit_form.linkFbPage) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkFbPage) : form_errors(edit_form.linkFbPage) }}
+                        </div>
+                        <!-- $linkFbEvent -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.linkFbEvent) : form_label(edit_form.linkFbEvent) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.linkFbEvent) : form_widget(edit_form.linkFbEvent) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.linkFbEvent) : form_errors(edit_form.linkFbEvent) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $imageIcon -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.imageIcon) : form_label(edit_form.imageIcon) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.imageIcon) : form_widget(edit_form.imageIcon) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.imageIcon) : form_errors(edit_form.imageIcon) }}
+                        </div>
+                        <!-- $imageBanner -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.imageBanner) : form_label(edit_form.imageBanner) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.imageBanner) : form_widget(edit_form.imageBanner) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.imageBanner) : form_errors(edit_form.imageBanner) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $isCancelled -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ app.request.get('_route') == 'festival_new' ? form_label(form.isCancelled) : form_label(edit_form.isCancelled) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_widget(form.isCancelled) : form_widget(edit_form.isCancelled) }}
+                            {{ app.request.get('_route') == 'festival_new' ? form_errors(form.isCancelled) : form_errors(edit_form.isCancelled) }}
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'festival_new' ? 'Create' : 'Edit' }}>
+                    </div>
+                    {{ app.request.get('_route') == 'festival_new' ? form_end(form) : form_end(edit_form) }}
+                </div>
+                <!-- .FORM -->
+            </div>
+            <div id="test5">
+                {% if app.request.get('_route') != 'festival_new' %}
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Datestart</th>
+                        <th>Dateend</th>
+                        <th>Artist</th>
+                        <th>Location</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for concert in concerts %}
+                        <tr>
+                            <td>{{ concert.id }}</a></td>
+                            <td>{% if concert.dateStart %}{{ concert.dateStart|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if concert.dateEnd %}{{ concert.dateEnd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{{ concert.artist }}</td>
+                            <td>{{ concert.location }}</td>
+                            <td><a href="{{ path('concert_edit', { 'concert_id': concert.id, 'festival_id': concert.festival.id }) }}">edit</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row center-align">
+                    <a href="{{ path('concert_new', { 'festival_id': festival.id }) }}" class="waves-effect waves-light btn">Add concert</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
 {% endblock body %}
 
