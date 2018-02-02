@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Controller\WishlistController;
+
 /**
  * WishlistRepository
  *
@@ -10,4 +12,26 @@ namespace AppBundle\Repository;
  */
 class WishlistRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function calendar($id)
+    {
+//        $qb = $this->createQueryBuilder('w')
+//            ->select('w.festival')
+//            ->from(wishlist)
+//            ->where('w.user = :user')
+//            ->setParameter('user', $id)
+//        ;
+//
+//       return $qb->getQuery()->getResult();
+
+        $query = $this->getEntityManager()->createQueryBuilder();
+        $query
+            ->select('w.festival', 'w.concert')
+            ->from('AppBundle:Wishlist', 'w')
+            ->where('w.user = :user')
+            ->setParameter('user', $id);
+        $query->setMaxResults(10);
+        $results = $query->getQuery()->getResult();
+        dump($results);die();
+    }
+
 }
