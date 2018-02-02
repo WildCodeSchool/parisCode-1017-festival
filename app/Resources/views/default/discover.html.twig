@@ -39,9 +39,9 @@
                             </div>
                             <div class="card-image">
                                 <!-- Add/remove to/from wishlist -->
-                                {% if user.wishlist.festival is defined %}
+                                {% if app.user is not null %}
                                     {% if festival in user.wishlist.festival %}
-                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                                        <a class="favorite btn-floating waves-effect waves-light pink modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
                                     {% else %}
                                         <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
                                     {% endif %}
@@ -49,7 +49,7 @@
                                     <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                 {% endif %}
                                 <!-- Modal Festival - Trigger -->
-                                <a class="zoom-in btn-floating waves-effect waves-light cyan pulse modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
+                                <a class="zoom-in btn-floating waves-effect waves-light cyan modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
                                 <!-- Modal Festival - Structure -->
                                 <div id="{{ 'modal' ~ festival.id ~ 'b' }}" class="modal">
                                     <div class="modal-content">
@@ -128,7 +128,7 @@
                                                                                 {% if concert.location %}{{ concert.location }}{% endif %}
                                                                             </p>
                                                                             <!-- Add/remove to/from wishlist -->
-                                                                            {% if user.wishlist.concert is defined %}
+                                                                            {% if app.user is not null %}
                                                                                 {% if concert in user.wishlist.concert %}
                                                                                     <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
                                                                                 {% else %}
