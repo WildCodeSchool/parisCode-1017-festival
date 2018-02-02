@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         {% block stylesheets %}{% endblock %}
-
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     </head>
     <body>
@@ -34,9 +33,14 @@
                             {% endif %}
                         </ul>
                         <ul class="side-nav" id="mobile-demo">
-                            <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
-                            <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
-                            <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
+                            {% if app.user.username is defined %}
+                                <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
+                                <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                            {% else %}
+                                <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
+                                <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>
@@ -96,5 +100,5 @@
     {% block javascripts %}
     {% endblock %}
 
-</body>
+    </body>
 </html>
