@@ -48,6 +48,9 @@ class UserController extends Controller
 
             $wishlist = new Wishlist();
             $wishlist->setId($user->getId());
+
+            // TO DO : overrider controller FOSBundle pour rajouter wishlist et adresse convertie google
+
             $wishlist->setUser($user);
             $em->persist($wishlist);
             $em->flush();

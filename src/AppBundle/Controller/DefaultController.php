@@ -20,7 +20,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // TODO Amandine (P1) - Footer en bas de toutes les pages
         // TODO Amandine (P3) - liste deroulante et saisie modifiable pour l'admin
         // TODO All : form a changer /profile/edit / wishlist
         // TODO All : register/confirmed redirection vers mon compte
@@ -37,8 +36,6 @@ class DefaultController extends Controller
     public function discoverAction()
     {
         // TODO All : bouton rechargement live/ajax
-        // TODO All : choisir carte ou fiche festival en version mobile
-        // TODO All : affichage modal
         // TODO All : addresse googlemaps nom dans bdd
 
         $user = $this->getUser();

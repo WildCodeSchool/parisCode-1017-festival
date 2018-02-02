@@ -40,10 +40,12 @@
                             <div class="card-image">
                                 <!-- Add/remove to/from wishlist -->
                                 {% if app.user is not null %}
-                                    {% if festival in user.wishlist.festival %}
-                                        <a class="favorite btn-floating waves-effect waves-light pink modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
-                                    {% else %}
-                                        <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                    {% if user.wishlist is not empty %}
+                                        {% if festival in user.wishlist.festival %}
+                                            <a class="favorite btn-floating waves-effect waves-light pink modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                                        {% else %}
+                                            <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                        {% endif %}
                                     {% endif %}
                                 {% else %}
                                     <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
@@ -129,10 +131,12 @@
                                                                             </p>
                                                                             <!-- Add/remove to/from wishlist -->
                                                                             {% if app.user is not null %}
-                                                                                {% if concert in user.wishlist.concert %}
-                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
-                                                                                {% else %}
-                                                                                    <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                                {% if user.wishlist is not empty %}
+                                                                                    {% if concert in user.wishlist.concert %}
+                                                                                        <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                                    {% else %}
+                                                                                        <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                                    {% endif %}
                                                                                 {% endif %}
                                                                             {% else %}
                                                                                 <a class="secondary-content" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>

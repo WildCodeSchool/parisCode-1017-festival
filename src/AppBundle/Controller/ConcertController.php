@@ -27,7 +27,7 @@ class ConcertController extends Controller
      */
     public function newConcertAction(Request $request, GoogleMaps $formattedaddress, $festival_id)
     {
-        // TODO All : ID propal / deuxieme table ???
+        // TODO All : ID propal / 2eme table pour que les suggestions de modifications n'ecrasent pas les anciennes sans validation du moderateur
 
         $em = $this->getDoctrine()->getManager();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
@@ -70,6 +70,8 @@ class ConcertController extends Controller
      */
     public function editConcertAction(Request $request, Concert $concert, $festival_id)
     {
+        // TODO All : ID propal / 2eme table pour que les suggestions de modifications n'ecrasent pas les anciennes sans validation du moderateur
+
         $editForm = $this->createForm('AppBundle\Form\ConcertType', $concert);
         $editForm->handleRequest($request);
 
