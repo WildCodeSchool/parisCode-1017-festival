@@ -25,34 +25,43 @@ class ApiController extends Controller
      */
     public function getJsonEventAction()
     {
-//        $em = $this->getDoctrine()->getManager();
-//        $wishlists = $em->getRepository(Wishlist::class)->findOneByUser($this->getUser());
-//        dump($wishlists);die();
-//
-////        $wishlists = $em->getRepository(Wishlist::class)->calendar($this->getUser()->getId());
-//
-//
-//        $normalizer = new ObjectNormalizer();
-//        $encoder = new JsonEncoder();
-//        $callback = function ($datetime) {
-//            return $datetime instanceof \DateTime
-//                ? $datetime->format(\DateTime::ISO8601)
-//                : '';
-//        };
-//        $normalizer->setCallbacks(array(
-//            'start' => $callback,
-//            'end' =>$callback,
-//        ));
-//        $normalizer->setCircularReferenceHandler(function ($object){
-//            return $object->getId();
-//        });
-//        $serializer = new Serializer(array($normalizer), array($encoder));
-//
-//        $jsonConcerts = $serializer->serialize($concerts, 'json');
-//        $jsonFestivals = $serializer->serialize($festivals, 'json');
-//        $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
-//
-//        return new Response($json);
+        $em = $this->getDoctrine()->getManager();
+
+//        $wishlists = $em->getRepository(Wishlist::class)->calendar($this->getUser());
+
+        // code ok pour tous les festivals et concerts
+        $festivals = $em->getRepository(Festival::class)->findAll();
+        $concerts = $em->getRepository(Concert::class)->findAll();
+
+//        $wishlists2 = $em->getRepository(Wishlist::class)->findOneById(1);
+//        $festivals = $wishlists2->getFestival()->toArray();
+//        var_dump($festivals);die();
+//        $festivals = json_encode($festivals);
+//        dump(json_encode($concerts, true));die();
+//        $festivals = $wishlists2->getFestival();
+
+        $normalizer = new ObjectNormalizer();
+        $encoder = new JsonEncoder();
+        $callback = function ($datetime) {
+            return $datetime instanceof \DateTime
+                ? $datetime->format(\DateTime::ISO8601)
+                : '';
+        };
+        $normalizer->setCallbacks(array(
+            'start' => $callback,
+            'end' =>$callback,
+        ));
+        $normalizer->setCircularReferenceHandler(function ($object){
+            return $object->getId();
+        });
+        $serializer = new Serializer(array($normalizer), array($encoder));
+
+        // code ok pour tous les festivals et concerts
+        $jsonFestivals = $serializer->serialize($festivals, 'json');
+        $jsonConcerts = $serializer->serialize($concerts, 'json');
+        $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
+
+        return new Response($json);
 
     }
 }
