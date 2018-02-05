@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use AppBundle\Entity\Wishlist;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,19 +27,9 @@ class ApiController extends Controller
     public function getJsonEventAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-//        $wishlists = $em->getRepository(Wishlist::class)->calendar($this->getUser());
-
-        // code ok pour tous les festivals et concerts
-        $festivals = $em->getRepository(Festival::class)->findAll();
-        $concerts = $em->getRepository(Concert::class)->findAll();
-
-//        $wishlists2 = $em->getRepository(Wishlist::class)->findOneById(1);
-//        $festivals = $wishlists2->getFestival()->toArray();
-//        var_dump($festivals);die();
-//        $festivals = json_encode($festivals);
-//        dump(json_encode($concerts, true));die();
-//        $festivals = $wishlists2->getFestival();
+        $wishlists = $em->getRepository(Wishlist::class)->findOneByUser($this->getUser());
+        $festivals = $wishlists->getFestival();
+        $concerts = $wishlists->getConcert();
 
         $normalizer = new ObjectNormalizer();
         $encoder = new JsonEncoder();
@@ -49,19 +40,15 @@ class ApiController extends Controller
         };
         $normalizer->setCallbacks(array(
             'start' => $callback,
-            'end' =>$callback,
+            'end' =>$callback
         ));
         $normalizer->setCircularReferenceHandler(function ($object){
             return $object->getId();
         });
         $serializer = new Serializer(array($normalizer), array($encoder));
-
-        // code ok pour tous les festivals et concerts
         $jsonFestivals = $serializer->serialize($festivals, 'json');
         $jsonConcerts = $serializer->serialize($concerts, 'json');
         $json = json_encode(array_merge(json_decode($jsonFestivals, true), json_decode($jsonConcerts, true)));
-
         return new Response($json);
-
     }
 }

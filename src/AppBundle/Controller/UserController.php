@@ -46,16 +46,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $wishlist = new Wishlist();
-            $wishlist->setId($user->getId());
-
-            // TO DO : overrider controller FOSBundle pour rajouter wishlist et adresse convertie google
-
-            $wishlist->setUser($user);
-            $em->persist($wishlist);
-            $em->flush();
-
-            $user->setWishlist($wishlist->getId());
+            // TO DO : overrider controller FOSBundle pour rajouter wishlist et adresse convertible google
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
@@ -75,23 +66,10 @@ class UserController extends Controller
     public function showAction(User $user)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $genres = $em->getRepository('AppBundle:Genre')->findAll();
-        $artists = $em->getRepository('AppBundle:Artist')->findAll();
-        $locations = $em->getRepository('AppBundle:Location')->findAll();
-        $concerts = $em->getRepository('AppBundle:Concert')->findAll();
-        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
-        $wishlist = $em->getRepository('AppBundle:Wishlist')->findAll();
         
         $deleteForm = $this->createDeleteForm($user);
 
         return $this->render('@FOSUser/Profile/show.html.twig', array(
-            'wishlist' => $wishlist,
-            'genres' => $genres,
-            'artists' => $artists,
-            'locations' => $locations,
-            'concerts' => $concerts,
-            'festivals' => $festivals,
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
         ));

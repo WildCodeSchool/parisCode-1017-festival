@@ -28,29 +28,29 @@
             <div class="card-content">
                 <div id="test4">
                     <div id='calendar' class="container"></div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>Festivals</th>
-                            <td>{% if user.wishlist.festival is defined %}
-                                {% for festival in user.wishlist.festival %}
-                                <p>{{ festival.id }} - {{ festival.title }}</p>
-                                <p>{{ festival.start|date("d D H:i") }} - {{ festival.end|date("d D H:i") }}</p>
-                                {% endfor %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Concerts</th>
-                            <td>{% if user.wishlist.concert is defined %}
-                                    {% for concert in user.wishlist.concert %}
-                                        <p>{{ concert.id }} - {{ concert.artist }} - {{ concert.location.name }}</p></p>
-                                        <p>{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateEnd|date("d D H:i") }}</p>
-                                    {% endfor %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    </table>
+                    {#<table>#}
+                        {#<tbody>#}
+                        {#<tr>#}
+                            {#<th>Festivals</th>#}
+                            {#<td>{% if user.wishlist.festival is defined %}#}
+                                {#{% for festival in user.wishlist.festival %}#}
+                                {#<p>{{ festival.id }} - {{ festival.title }}</p>#}
+                                {#<p>{{ festival.start|date("d D H:i") }} - {{ festival.end|date("d D H:i") }}</p>#}
+                                {#{% endfor %}#}
+                                {#{% endif %}#}
+                            {#</td>#}
+                        {#</tr>#}
+                        {#<tr>#}
+                            {#<th>Concerts</th>#}
+                            {#<td>{% if user.wishlist.concert is defined %}#}
+                                    {#{% for concert in user.wishlist.concert %}#}
+                                        {#<p>{{ concert.id }} - {{ concert.artist }} - {{ concert.location.name }}</p></p>#}
+                                        {#<p>{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}</p>#}
+                                    {#{% endfor %}#}
+                                {#{% endif %}#}
+                            {#</td>#}
+                        {#</tr>#}
+                    {#</table>#}
                 </div>
                 <div id="test5">
                     <!-- Materialize Collections - Wishlists -->
@@ -185,8 +185,16 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,basicWeek,basicDay'
+                    right: 'listDay,listWeek,month'
                 },
+
+                // customize the button names,
+                // otherwise they'd all just say "list"
+                views: {
+                    listDay: { buttonText: 'list day' },
+                    listWeek: { buttonText: 'list week' }
+                },
+
                 navLinks: true, // can click day/week names to navigate views
                 /*editable: true,*/
                 displayEventTime: false,

@@ -11,3 +11,7 @@
 .fc-state-active, .fc-state-down {
     color: #ff4081 !important;
 }
+
+#calendar::-webkit-scrollbar{
+    display: none;
+}

@@ -126,7 +126,7 @@
                                                                         <li class="collection-item avatar">
                                                                             <i class="material-icons circle deep-purple lighten-2">people</i>
                                                                             <h3 class="left-align">{{ concert.artist }}</h3>
-                                                                            <p class="left-align truncate">{{ concert.dateStart|date("d D H:i") }} - {{ concert.dateEnd|date("d D H:i") }}<br>
+                                                                            <p class="left-align truncate">{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}<br>
                                                                                 {% if concert.location %}{{ concert.location }}{% endif %}
                                                                             </p>
                                                                             <!-- Add/remove to/from wishlist -->

@@ -47,19 +47,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <!--$dateStart -->
+                        <!--$start -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">date_range</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.dateStart) : form_label(edit_form.dateStart) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.dateStart) : form_widget(edit_form.dateStart) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.dateStart) : form_errors(edit_form.dateStart) }}
+                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.start) : form_label(edit_form.start) }}
+                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.start) : form_widget(edit_form.start) }}
+                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.start) : form_errors(edit_form.start) }}
                         </div>
-                        <!--$dateEnd -->
+                        <!--$end -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">date_range</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.dateEnd) : form_label(edit_form.dateEnd) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.dateEnd) : form_widget(edit_form.dateEnd) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.dateEnd) : form_errors(edit_form.dateEnd) }}
+                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.end) : form_label(edit_form.end) }}
+                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.end) : form_widget(edit_form.end) }}
+                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.end) : form_errors(edit_form.end) }}
                         </div>
                     </div>
                     <div class="row">
