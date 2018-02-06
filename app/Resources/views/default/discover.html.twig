@@ -160,15 +160,15 @@
                                                                 <li class="collection-item avatar">
                                                                     <i class="material-icons circle blue-grey lighten-3">perm_identity</i>
                                                                         <div class="row">
-                                                                            {% if user.wishlist is not empty  %}
-                                                                                {% for wishlist in user.wishlist %}
-                                                                                <div class="col s2 m2 l1">
-                                                                                    {% if wishlist.user.imageIcon is not empty  %}
-                                                                                        <img src="{{ wishlist.user.imageIcon }}" alt="" style="border-radius: 50%">
-                                                                                    {% else %}
-                                                                                        <img src="http://bestchoice.property/wp-content/uploads/2015/07/empty-agent-profile.png" alt="" style="border-radius: 50%">
-                                                                                    {% endif %}
-                                                                                </div>
+                                                                            {% if festival.wishlist is not empty  %}
+                                                                                {% for wishlist in festival.wishlist %}
+                                                                                    <div class="col s2 m2 l1">
+                                                                                        {% if wishlist.user.imageIcon is not empty  %}
+                                                                                            <img src="{{ wishlist.user.imageIcon }}" alt="" style="border-radius: 50%">
+                                                                                        {% else %}
+                                                                                            <img src="http://bestchoice.property/wp-content/uploads/2015/07/empty-agent-profile.png" alt="" style="border-radius: 50%">
+                                                                                        {% endif %}
+                                                                                    </div>
                                                                                 {% endfor %}
                                                                             {% else %}
                                                                                 <p class="center">No attendee yet :/</p>
