@@ -173,4 +173,3 @@ fos_user:
             name: app_user_registration
         confirmation:
             enabled: true
-                
