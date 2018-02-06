@@ -62,15 +62,17 @@
                             {{ app.request.get('_route') == 'concert_new' ? form_errors(form.end) : form_errors(edit_form.end) }}
                         </div>
                     </div>
+                    {% if app.request.get('_route') != 'concert_new' %}
                     <div class="row">
                         <!--$isCancelled -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">insert_link</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.isCancelled) : form_label(edit_form.isCancelled) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.isCancelled) : form_widget(edit_form.isCancelled) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.isCancelled) : form_errors(edit_form.isCancelled) }}
+                            {{ form_label(edit_form.isCancelled) }}
+                            {{ form_widget(edit_form.isCancelled) }}
+                            {{ form_errors(edit_form.isCancelled) }}
                         </div>
                     </div>
+                    {% endif %}
                     <div class="row center-align">
                         <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'concert_new' ? 'Create' : 'Edit' }}>
                     </div>

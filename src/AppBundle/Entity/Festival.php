@@ -146,12 +146,6 @@ class Festival
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Wishlist", mappedBy="festival")
-     * @ORM\JoinTable(name="wishlist_festival")
-     */
-    private $wishlist;
-
-    /**
      * NBLN-T : ToString
      */
     public function __toString()
@@ -166,7 +160,6 @@ class Festival
     public function __construct()
     {
         $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->wishlist = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -623,39 +616,4 @@ class Festival
         return $this->genre;
     }
 
-    /**
-     * Add wishlist.
-     *
-     * @param \AppBundle\Entity\Wishlist $wishlist
-     *
-     * @return Festival
-     */
-    public function addWishlist(\AppBundle\Entity\Wishlist $wishlist)
-    {
-        $this->wishlist[] = $wishlist;
-
-        return $this;
-    }
-
-    /**
-     * Remove wishlist.
-     *
-     * @param \AppBundle\Entity\Wishlist $wishlist
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeWishlist(\AppBundle\Entity\Wishlist $wishlist)
-    {
-        return $this->wishlist->removeElement($wishlist);
-    }
-
-    /**
-     * Get wishlist.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWishlist()
-    {
-        return $this->wishlist;
-    }
 }

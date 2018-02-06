@@ -12,7 +12,10 @@ use AppBundle\Entity\Wishlist;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Wishlist controller.
@@ -30,23 +33,26 @@ class WishlistController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
      */
-    public function festivalAction(Festival $festival_id, Wishlist $wishlist)
+    public function festivalAction(Request $request, Festival $festival_id, Wishlist $wishlist)
     {
-        // TODO : All - Ajax - rafraichir apparence icon en direct
+        if ($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
 
-        $em = $this->getDoctrine()->getManager();
+            $array = (array) $wishlist->getFestival()->getValues();
 
-        $array = (array) $wishlist->getFestival()->getValues();
-        if (in_array($festival_id, $array)){
-            $wishlist->removeFestival($festival_id);
-        } else {
-            $wishlist->addFestival($festival_id);
+            if (in_array($festival_id, $array)){
+                $wishlist->removeFestival($festival_id);
+                $response = false;
+            } else {
+                $wishlist->addFestival($festival_id);
+                $response = true;
+            }
+            $em->flush();
+
+            return new JsonResponse($response);
+        } else{
+            throw new HttpException('not an ajax call', 500);
         }
-
-        $em->persist($wishlist);
-        $em->flush();
-
-        return $this->redirectToRoute('discover');
     }
 
     /**
