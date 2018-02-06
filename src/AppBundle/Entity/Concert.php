@@ -68,6 +68,30 @@ class Concert
     private $isCancelled;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="isValid", type="boolean", nullable=true)
+     */
+    private $isValid;
+
+    /**
+     * One Student has One Student.
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Concert")
+     * @ORM\JoinColumn(name="concert_reference", referencedColumnName="id", nullable=true)
+     */
+    private $concert;
+
+    /**
+     * @return $this
+     */
+    public function __clone()
+    {
+        $this->id = null;
+        $this->isValid = false;
+        return $this;
+    }
+
+    /**
      * NBLN-T : ToString
      */
     public function __toString()
@@ -83,7 +107,6 @@ class Concert
         $this->isCancelled = false;
     }
 
-
     /**
      * @return int
      */
@@ -91,7 +114,6 @@ class Concert
     {
         return $this->id;
     }
-
 
     /**
      * @return string
@@ -204,6 +226,38 @@ class Concert
     public function setIsCancelled($isCancelled)
     {
         $this->isCancelled = $isCancelled;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
+        return $this->isValid;
+    }
+
+    /**
+     * @param bool $isValid
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConcert()
+    {
+        return $this->concert;
+    }
+
+    /**
+     * @param mixed $concert
+     */
+    public function setConcert($concert)
+    {
+        $this->concert = $concert;
     }
 
 }

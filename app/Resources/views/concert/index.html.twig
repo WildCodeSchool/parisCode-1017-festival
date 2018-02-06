@@ -27,56 +27,56 @@
             <div id="test5">
                 <!--FORM -->
                 <div class="row">
-                    {{ app.request.get('_route') == 'concert_new' ? form_start(form) : form_start(edit_form) }}
+                    {{ form_start(form) }}
                     <!--$artist -->
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">music_video</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.artist.name) : form_label(edit_form.artist.name) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.artist.name) : form_widget(edit_form.artist.name) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.artist.name) : form_errors(edit_form.artist.name) }}
+                            {{ form_label(form.artist.name) }}
+                            {{ form_widget(form.artist.name) }}
+                            {{ form_errors(form.artist.name) }}
                         </div>
                     </div>
                     <!--$location -->
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">location_city</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.location.address) : form_label(edit_form.location.address) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.location.address) : form_widget(edit_form.location.address) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.location.address) : form_errors(edit_form.location.address) }}
+                            {{ form_label(form.location.address) }}
+                            {{ form_widget(form.location.address) }}
+                            {{ form_errors(form.location.address) }}
                         </div>
                     </div>
                     <div class="row">
                         <!--$start -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">date_range</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.start) : form_label(edit_form.start) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.start) : form_widget(edit_form.start) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.start) : form_errors(edit_form.start) }}
+                            {{ form_label(form.start) }}
+                            {{ form_widget(form.start) }}
+                            {{ form_errors(form.start) }}
                         </div>
                         <!--$end -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">date_range</i>
-                            {{ app.request.get('_route') == 'concert_new' ? form_label(form.end) : form_label(edit_form.end) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_widget(form.end) : form_widget(edit_form.end) }}
-                            {{ app.request.get('_route') == 'concert_new' ? form_errors(form.end) : form_errors(edit_form.end) }}
+                            {{ form_label(form.end) }}
+                            {{ form_widget(form.end) }}
+                            {{ form_errors(form.end) }}
                         </div>
                     </div>
                     {% if app.request.get('_route') != 'concert_new' %}
-                    <div class="row">
-                        <!--$isCancelled -->
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">insert_link</i>
-                            {{ form_label(edit_form.isCancelled) }}
-                            {{ form_widget(edit_form.isCancelled) }}
-                            {{ form_errors(edit_form.isCancelled) }}
+                        <div class="row">
+                            <!--$isCancelled -->
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(form.isCancelled) }}
+                                {{ form_widget(form.isCancelled) }}
+                                {{ form_errors(form.isCancelled) }}
+                            </div>
                         </div>
-                    </div>
                     {% endif %}
                     <div class="row center-align">
                         <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'concert_new' ? 'Create' : 'Edit' }}>
                     </div>
-                    {{ app.request.get('_route') == 'concert_new' ? form_end(form) : form_end(edit_form) }}
+                    {{ form_end(form) }}
                 </div>
                 <!-- .FORM -->
             </div>

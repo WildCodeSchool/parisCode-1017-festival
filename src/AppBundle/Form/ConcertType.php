@@ -18,6 +18,13 @@ class ConcertType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['type'] == 'edit') {
+            $builder->add('isCancelled', TextType::class, array(
+                'label' => 'Cancelled?',
+                'required' => false
+            ));
+        }
+
         $builder
             ->add('festival', EntityType::class, array(
                 'class' => Festival::class,
@@ -43,15 +50,10 @@ class ConcertType extends AbstractType
                     'data-date-format' => 'YYYY-MM-DD HH:mm',
                     'readonly' => false,
                     'placeholder' => 'YYYY-MM-DD HH:mm'
-                )
-            ))
+                )))
             ->add('artist', ArtistType::class)
             ->add('location', LocationType::class, array(
                 'required' => false,
-            ))
-            ->add('isCancelled', TextType::class, array(
-                'label' => 'Cancelled?',
-                'required' => false
             ))
         ;
     }/**
@@ -60,7 +62,8 @@ class ConcertType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Concert'
+            'data_class' => 'AppBundle\Entity\Concert',
+            'type' => false
         ));
     }
 
