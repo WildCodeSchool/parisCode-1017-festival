@@ -11,6 +11,11 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+
+        {% if (app.request.get('_route') != 'homepage') %}
+            <link rel="stylesheet" href="{{ asset('css/stylediscover.css') }}">
+        {% endif %}
+
         {% block stylesheets %}{% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>

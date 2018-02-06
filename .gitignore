@@ -17,3 +17,4 @@
 /web/bundles/
 .idea
 /app/Resources/views/concert/show.html.twig
+'*.*~'

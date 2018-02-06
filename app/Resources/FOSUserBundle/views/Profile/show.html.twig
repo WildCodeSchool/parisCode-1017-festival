@@ -197,9 +197,17 @@
 
                 navLinks: true, // can click day/week names to navigate views
                 /*editable: true,*/
-                displayEventTime: false,
+                displayEventTime: true,
                 eventLimit: true, // allow "more" link when too many events
-                events: "{{ path('api_calendar') }}"
+                events: "{{ path('api_calendar') }}",
+
+                // TODO: If you want custom div calendar render
+                // https://github.com/WildCodeSchool/laloupe-0915-partnet
+//                eventRender: function(event, element) {
+//                    element.each(function() {
+//                        element.append('<strong>' + event.title + ' ' + new Date(event.start) + '</strong>');
+//                    })
+//                }
             })
         });
     </script>

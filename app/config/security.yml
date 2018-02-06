@@ -22,6 +22,7 @@ security:
             logout:
                 target: /discover
             anonymous:    true
+            logout_on_user_change: true
 
             # activate different ways to authenticate
 

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use AppBundle\Services\GoogleMaps;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -59,14 +58,20 @@ class FestivalController extends Controller
      */
     public function editAction(Request $request, Festival $festival)
     {
+        $festivalEdit = clone $festival;
+
         $em = $this->getDoctrine()->getManager();
         $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
-        $editForm = $this->createForm('AppBundle\Form\FestivalType', $festival);
+        $editForm = $this->createForm('AppBundle\Form\FestivalType', $festivalEdit);
         $editForm->handleRequest($request);
 
+        $festivalEdit->setFestival($festival); // festival id 1
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            $em->persist($festivalEdit);
+            $em->flush();
 
             return $this->redirectToRoute('festival_edit', array('festival_id' => $festival->getId()));
         }
@@ -77,5 +82,4 @@ class FestivalController extends Controller
             'edit_form' => $editForm->createView(),
         ));
     }
-
 }

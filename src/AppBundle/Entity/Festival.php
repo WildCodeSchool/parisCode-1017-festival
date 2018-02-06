@@ -146,10 +146,27 @@ class Festival
     private $genre;
 
     /**
+     * One Student has One Student.
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Festival")
+     * @ORM\JoinColumn(name="festival_reference", referencedColumnName="id", nullable=true)
+     */
+    private $festival;
+
+    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Wishlist", mappedBy="festival")
      * @ORM\JoinTable(name="wishlist_festival")
      */
     private $wishlist;
+
+    /**
+     * @return $this
+     */
+    public function __clone()
+    {
+        $this->id = null;
+        $this->isValid = false;
+        return $this;
+    }
 
     /**
      * NBLN-T : ToString
@@ -159,14 +176,12 @@ class Festival
         return $this->title;
     }
 
-
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->wishlist = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -624,6 +639,30 @@ class Festival
     }
 
     /**
+     * Set festival.
+     *
+     * @param \AppBundle\Entity\Festival|null $festival
+     *
+     * @return Festival
+     */
+    public function setFestival(\AppBundle\Entity\Festival $festival = null)
+    {
+        $this->festival = $festival;
+
+        return $this;
+    }
+
+    /**
+     * Get festival.
+     *
+     * @return \AppBundle\Entity\Festival|null
+     */
+    public function getFestival()
+    {
+        return $this->festival;
+    }
+
+    /**
      * Add wishlist.
      *
      * @param \AppBundle\Entity\Wishlist $wishlist
@@ -658,4 +697,5 @@ class Festival
     {
         return $this->wishlist;
     }
+
 }
