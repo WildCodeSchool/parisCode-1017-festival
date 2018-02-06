@@ -27,6 +27,11 @@ class FestivalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // TODO: Florian Update form
+//        if ($options['type'] == 'new'){
+//            $builder->remove('isCancelled');
+//        }
+
         $builder
             ->add('title', TextType::class, array(
                 'label' => 'Title',
@@ -140,13 +145,16 @@ class FestivalType extends AbstractType
             ))
            ;
 
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Festival'
+            'data_class' => 'AppBundle\Entity\Festival',
+//            'type' => false
         ));
     }
 

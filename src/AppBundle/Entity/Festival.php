@@ -146,10 +146,21 @@ class Festival
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Wishlist", mappedBy="festival")
-     * @ORM\JoinTable(name="wishlist_festival")
+     * One Student has One Student.
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Festival")
+     * @ORM\JoinColumn(name="festival_reference", referencedColumnName="id", nullable=true)
      */
-    private $wishlist;
+    private $festival;
+
+    /**
+     * @return $this
+     */
+    public function __clone()
+    {
+        $this->id = null;
+        $this->isValid = false;
+        return $this;
+    }
 
     /**
      * NBLN-T : ToString
@@ -159,14 +170,12 @@ class Festival
         return $this->title;
     }
 
-
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->wishlist = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -623,39 +632,28 @@ class Festival
         return $this->genre;
     }
 
+
     /**
-     * Add wishlist.
+     * Set festival.
      *
-     * @param \AppBundle\Entity\Wishlist $wishlist
+     * @param \AppBundle\Entity\Festival|null $festival
      *
      * @return Festival
      */
-    public function addWishlist(\AppBundle\Entity\Wishlist $wishlist)
+    public function setFestival(\AppBundle\Entity\Festival $festival = null)
     {
-        $this->wishlist[] = $wishlist;
+        $this->festival = $festival;
 
         return $this;
     }
 
     /**
-     * Remove wishlist.
+     * Get festival.
      *
-     * @param \AppBundle\Entity\Wishlist $wishlist
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return \AppBundle\Entity\Festival|null
      */
-    public function removeWishlist(\AppBundle\Entity\Wishlist $wishlist)
+    public function getFestival()
     {
-        return $this->wishlist->removeElement($wishlist);
-    }
-
-    /**
-     * Get wishlist.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWishlist()
-    {
-        return $this->wishlist;
+        return $this->festival;
     }
 }
