@@ -30,7 +30,7 @@ class Wishlist
     /**
      * @var \AppBundle\Entity\Festival $festival
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival", inversedBy="wishlist")
      * @ORM\JoinTable(name="wishlist_festival")
      */
     private $festival;
