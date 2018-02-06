@@ -171,4 +171,3 @@ fos_user:
     registration:
             form:
                 name: app_user_registration
-                
