@@ -146,13 +146,29 @@ class Festival
     private $genre;
 
     /**
+     * One Student has One Student.
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Festival")
+     * @ORM\JoinColumn(name="festival_reference", referencedColumnName="id", nullable=true)
+     */
+    private $festival;
+
+    /**
+     * @return $this
+     */
+    public function __clone()
+    {
+        $this->id = null;
+        $this->isValid = false;
+        return $this;
+    }
+
+    /**
      * NBLN-T : ToString
      */
     public function __toString()
     {
         return $this->title;
     }
-
 
     /**
      * Constructor
@@ -616,4 +632,28 @@ class Festival
         return $this->genre;
     }
 
+
+    /**
+     * Set festival.
+     *
+     * @param \AppBundle\Entity\Festival|null $festival
+     *
+     * @return Festival
+     */
+    public function setFestival(\AppBundle\Entity\Festival $festival = null)
+    {
+        $this->festival = $festival;
+
+        return $this;
+    }
+
+    /**
+     * Get festival.
+     *
+     * @return \AppBundle\Entity\Festival|null
+     */
+    public function getFestival()
+    {
+        return $this->festival;
+    }
 }

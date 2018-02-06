@@ -49,6 +49,8 @@ class ConcertController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            dump($concert); die();
+
             if ($concert->getLocation()){
                 $location = $formattedaddress->regularGeocoding($concert->getLocation());
 
