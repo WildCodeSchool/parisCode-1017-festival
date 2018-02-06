@@ -42,13 +42,13 @@
                                 {% if app.user is not null %}
                                     {% if user.wishlist is not empty %}
                                         {% if festival in user.wishlist.festival %}
-                                            <a class="addFestivalToWishList favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                                            <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
                                         {% else %}
-                                            <a class="addFestivalToWishList favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                            <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
                                         {% endif %}
                                     {% endif %}
                                 {% else %}
-                                    <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
+                                    <a class="favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                 {% endif %}
                                 <!-- Modal Festival - Trigger -->
                                 <a class="zoom-in btn-floating waves-effect waves-light cyan modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
@@ -133,9 +133,9 @@
                                                                             {% if app.user is not null %}
                                                                                 {% if user.wishlist is not empty %}
                                                                                     {% if concert in user.wishlist.concert %}
-                                                                                        <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
                                                                                     {% else %}
-                                                                                        <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
                                                                                     {% endif %}
                                                                                 {% endif %}
                                                                             {% else %}
@@ -290,7 +290,7 @@
         });
 
         // Add a festival to WishLIst
-        $(".addFestivalToWishList").on('click', function(event){
+        $(".addFestivalToWishlist").on('click', function(event){
             event.preventDefault();
             var href = $(this).attr('href');
             var elemen = $(this);
@@ -299,11 +299,32 @@
                 type: "GET",
                 success: function(response){
                     if (response === true){
-                        Materialize.toast('Le festival a bien été ajouté à votre WishList', 4000);
+                        Materialize.toast('Le festival a bien été ajouté à votre WishList', 2000);
                         elemen.html("<i class='material-icons'>favorite</i>");
 
                     } else{
-                        Materialize.toast('Le festival a bien été supprimé de votre WishList', 4000)
+                        Materialize.toast('Le festival a bien été supprimé de votre WishList', 2000)
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        })
+
+        // Add a festival to WishLIst
+        $(".addConcertToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('Le concert a bien été ajouté à votre WishList', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('Le concert a bien été supprimé de votre WishList', 2000)
                         elemen.html("<i class='material-icons'>favorite_border</i>");
                     }
                 }
