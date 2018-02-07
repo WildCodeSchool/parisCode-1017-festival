@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,19 +22,24 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('username', TextType::class)
-            ->add('usernameCanonical', TextType::class)
+//            ->add('usernameCanonical', TextType::class)
             ->add('email', EmailType::class)
-            ->add('emailCanonical', TextType::class)
-            ->add('enabled', TextType::class)
-            ->add('salt', TextType::class)
-            ->add('plainPassword', TextType::class)
-            ->add('lastLogin', DateTimeType::class)
-            ->add('confirmationToken', TextType::class)
-            ->add('password', PasswordType::class)
+//            ->add('emailCanonical', TextType::class)
+//            ->add('enabled', TextType::class)
+//            ->add('salt', TextType::class)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),))
+//            ->add('lastLogin', DateTimeType::class)
+//            ->add('confirmationToken', TextType::class)
+//            ->add('password', PasswordType::class)
 //            ->add('groups', TextType::class)
 //            ->add('roles', TextType::class)
-            ->add('passwordRequestedAt', DateTimeType::class)
-            ->add('address', LocationType::class)
+//            ->add('passwordRequestedAt', DateTimeType::class)
+//            ->add('address', LocationType::class)
+            ->add('imageIcon', FileType::class)
         ;
     }/**
  * {@inheritdoc}

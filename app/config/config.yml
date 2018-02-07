@@ -171,4 +171,5 @@ fos_user:
     registration:
             form:
                 name: app_user_registration
+                type: AppBundle\Form\RegistrationType
                 
