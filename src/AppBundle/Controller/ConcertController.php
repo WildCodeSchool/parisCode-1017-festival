@@ -33,11 +33,23 @@ class ConcertController extends Controller
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
 
         $concert = new Concert();
+
         $form = $this->createForm('AppBundle\Form\ConcertType', $concert);
+
+        // TODO: Send custom option to form
+//        $form = $this->createForm('AppBundle\Form\ConcertType', $concert, array(
+//            'type' => 'new'
+//        ));
+
+        // TODO: Florian, remove field in form for new Action
+        $form->remove('isCancelled');
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            dump($concert); die();
 
             if ($concert->getLocation()){
                 $location = $formattedaddress->regularGeocoding($concert->getLocation());

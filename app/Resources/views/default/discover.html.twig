@@ -42,13 +42,13 @@
                                 {% if app.user is not null %}
                                     {% if user.wishlist is not empty %}
                                         {% if festival in user.wishlist.festival %}
-                                            <a class="favorite btn-floating waves-effect waves-light pink modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                                            <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
                                         {% else %}
-                                            <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                            <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
                                         {% endif %}
                                     {% endif %}
                                 {% else %}
-                                    <a class="favorite btn-floating waves-effect waves-light pink pulse modal-trigger" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
+                                    <a class="favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                 {% endif %}
                                 <!-- Modal Festival - Trigger -->
                                 <a class="zoom-in btn-floating waves-effect waves-light cyan modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <div class="col s12 m3">
                                                 <div class="card">
-                                                    <img class="responsive-img" src="{{ festival.imageBanner }}">
+                                                    <img class="responsive-img" src="{% if festival.imageBanner %}{{ festival.imageBanner }}{% else %}{{ asset('img/logorondblanc.png') }}{% endif %}">
                                                     <br>
                                                     <div class="collection-item">
                                                         <div class="row">
@@ -133,9 +133,9 @@
                                                                             {% if app.user is not null %}
                                                                                 {% if user.wishlist is not empty %}
                                                                                     {% if concert in user.wishlist.concert %}
-                                                                                        <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
                                                                                     {% else %}
-                                                                                        <a class="secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
                                                                                     {% endif %}
                                                                                 {% endif %}
                                                                             {% else %}
@@ -162,13 +162,13 @@
                                                                         <div class="row">
                                                                             {% if festival.wishlist is not empty  %}
                                                                                 {% for wishlist in festival.wishlist %}
-                                                                                <div class="col s2 m2 l1">
-                                                                                    {% if wishlist.user.imageIcon is not empty  %}
-                                                                                        <img src="{{ wishlist.user.imageIcon }}" alt="" style="border-radius: 50%">
-                                                                                    {% else %}
-                                                                                        <img src="http://bestchoice.property/wp-content/uploads/2015/07/empty-agent-profile.png" alt="" style="border-radius: 50%">
-                                                                                    {% endif %}
-                                                                                </div>
+                                                                                    <div class="col s2 m2 l1">
+                                                                                        {% if wishlist.user.imageIcon is not empty  %}
+                                                                                            <img src="{{ wishlist.user.imageIcon }}" alt="" style="border-radius: 50%">
+                                                                                        {% else %}
+                                                                                            <img src="http://bestchoice.property/wp-content/uploads/2015/07/empty-agent-profile.png" alt="" style="border-radius: 50%">
+                                                                                        {% endif %}
+                                                                                    </div>
                                                                                 {% endfor %}
                                                                             {% else %}
                                                                                 <p class="center">No attendee yet :/</p>
@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                                 <!--.Modal Festival - Structure -->
-                                <img src="{{ festival.imageIcon }}">
+                                <img src="{% if festival.imageBanner %}{{ festival.imageIcon }}{% else %}{{ asset('img/logorondblanc.png') }}{% endif %}">
                             </div>
                         </div>
                     {% endfor %}
@@ -221,7 +221,6 @@
 {% endblock footer %}
 
 {% block javascripts %}
-
     <!--GoogleMaps script -->
     <script>
         function initMap() {
@@ -233,7 +232,6 @@
                         lat: {{ user.address.latitude }},
                         lng: {{ user.address.longitude }}
                     {% else %}
-
                         lat: 48.864716,
                         lng: 2.349014
                     {% endif %}
@@ -256,7 +254,7 @@
                 google.maps.event.addListener(marker, 'click', function() {
                     infoWin.setContent(location.info);
                     infoWin.open(map, marker);
-                })
+                });
                 return marker;
             });
 
@@ -272,26 +270,67 @@
                 info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'
             },{% endfor %}
         ];
+
+
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer
             src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&content_copy&callback=initMap' }}>
     </script>
-    <!--.GoogleMaps script -->
-    <!--Modal script -->
+
+     {#Custom script#}
     <script>
         $(document).ready(function(){
             $('.modal').modal();
         });
-    </script>
-    <!--.Modal script -->
-    <!--Maps/cards mobile script -->
-    <script>
+
         $("#switch").click(function(){
             $("#map").toggleClass("switcher");
         });
+
+        // Add a festival to WishLIst
+        $(".addFestivalToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('Le festival a bien été ajouté à votre WishList', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('Le festival a bien été supprimé de votre WishList', 2000)
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        })
+
+        // Add a festival to WishLIst
+        $(".addConcertToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('Le concert a bien été ajouté à votre WishList', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('Le concert a bien été supprimé de votre WishList', 2000)
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        })
+
     </script>
-    <!--.Maps/cards mobile script -->
 
 {% endblock javascripts %}

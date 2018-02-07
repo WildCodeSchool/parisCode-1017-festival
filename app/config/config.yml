@@ -172,4 +172,5 @@ fos_user:
             form:
                 name: app_user_registration
                 type: AppBundle\Form\RegistrationType
-                
+            confirmation:
+                enabled: true

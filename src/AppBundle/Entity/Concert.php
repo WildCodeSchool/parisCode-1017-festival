@@ -77,11 +77,11 @@ class Concert
     }
 
     /**
-     * NBLN-T : construct
+     * Concert constructor.
      */
-    public function __construct($artist, $festival)
+    public function __construct()
     {
-        $this->title = $artist . " @ " . $festival;
+        $this->isCancelled = false;
     }
 
 
@@ -156,6 +156,7 @@ class Concert
     public function setArtist($artist)
     {
         $this->artist = $artist;
+        $this->title = $this->artist . " @ " . $this->festival;
     }
 
     /**

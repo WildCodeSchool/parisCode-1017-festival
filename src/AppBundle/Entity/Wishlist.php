@@ -30,7 +30,7 @@ class Wishlist
     /**
      * @var \AppBundle\Entity\Festival $festival
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival", inversedBy="wishlist_id")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Festival", inversedBy="wishlist")
      * @ORM\JoinTable(name="wishlist_festival")
      */
     private $festival;
@@ -38,13 +38,13 @@ class Wishlist
     /**
      * @var \AppBundle\Entity\Genre $genre
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Genre", inversedBy="wishlist_id")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Genre")
      * @ORM\JoinTable(name="wishlist_genre")
      */
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Location", inversedBy="wishlist_id")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Location")
      * @ORM\JoinTable(name="wishlist_location")
      */
     private $location;
@@ -52,7 +52,7 @@ class Wishlist
     /**
      * @var \AppBundle\Entity\Artist $artist
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Artist", inversedBy="wishlist_id")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Artist")
      * @ORM\JoinTable(name="wishlist_artist")
      */
     private $artist;
@@ -60,7 +60,7 @@ class Wishlist
     /**
      * @var \AppBundle\Entity\Concert $concert
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concert", inversedBy="wishlist_id")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Concert")
      * @ORM\JoinTable(name="wishlist_concert")
      */
     private $concert;
