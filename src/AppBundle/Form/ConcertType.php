@@ -49,18 +49,20 @@ class ConcertType extends AbstractType
                     'data-date-format' => 'yyyy-MM-dd'
                 )
             ))
-            ->add('start', TimeType::class, array(
-                'widget' => 'choice',
+            ->add('timestart', DateTimeType::class, array(
+                'label' => 'Start Time',
+                'widget' => 'single_text',
+                'mapped' => false,
                 'attr' => array(
                     'class' => 'timepicker',
-                    'data-date-format' => 'yyyy-MM-dd'
                 )
             ))
-            ->add('end', TimeType::class, array(
-                'widget' => 'choice',
+           ->add('timeend', DateTimeType::class, array(
+                'label' => 'End Time',
+                'widget' => 'single_text',
+                'mapped' => false,
                 'attr' => array(
                     'class' => 'timepicker',
-                    'data-date-format' => 'yyyy-MM-dd'
                 )
             ))
             ->add('artist', ArtistType::class)

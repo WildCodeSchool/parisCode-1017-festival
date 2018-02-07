@@ -66,16 +66,16 @@
                         <!--TimeStart -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
-                            {{ form_label(form.start) }}
-                            {{ form_widget(form.start) }}
-                            {{ form_errors(form.start) }}
+                            {{ form_label(form.timestart) }}
+                            {{ form_widget(form.timestart) }}
+                            {{ form_errors(form.timestart) }}
                         </div>
                         <!--TimeEnd -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
-                            {{ form_label(form.end) }}
-                            {{ form_widget(form.end) }}
-                            {{ form_errors(form.end) }}
+                            {{ form_label(form.timeend) }}
+                            {{ form_widget(form.timeend) }}
+                            {{ form_errors(form.timeend) }}
                         </div>
                     </div>
                     {% if app.request.get('_route') != 'concert_new' %}
@@ -142,11 +142,11 @@
             $('.timepicker').pickatime({
                 default: 'now', // Set default time: 'now', '1:30AM', '16:30'
                 fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
-                twelvehour: false, // Use AM/PM or 24-hour format
+                twelvehour: true, // Use AM/PM or 24-hour format
                 donetext: 'OK', // text for done-button
                 cleartext: 'Clear', // text for clear-button
                 canceltext: 'Cancel', // Text for cancel-button
-                autoclose: false, // automatic close timepicker
+                autoclose: true, // automatic close timepicker
                 ampmclickable: true, // make AM PM clickable
                 aftershow: function(){} //Function for after opening timepicker
             });

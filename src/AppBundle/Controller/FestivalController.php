@@ -38,8 +38,6 @@ class FestivalController extends Controller
             $festival->getLocation()->setLongitude($location['lng']);
             $festival->getLocation()->setName($location['place_id']);
 
-
-
             $em->persist($festival);
             $em->flush();
 

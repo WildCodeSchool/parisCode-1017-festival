@@ -38,6 +38,12 @@ class ConcertController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            // date and time pickers merging
+            $timestart = new \DateTime($concert->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timestart'])) . ":00");
+            $timeend = new \DateTime($concert->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timeend'])) . ":00");
+            $concert->setStart($timestart);
+            $concert->setEnd($timeend);
+
             if ($concert->getLocation()){
                 $location = $formattedaddress->regularGeocoding($concert->getLocation());
                 $concert->getLocation()->setLatitude($location['lat']);
@@ -70,29 +76,37 @@ class ConcertController extends Controller
      */
     public function editConcertAction(Request $request, Concert $concert, $festival_id)
     {
-        $concertEdit = clone $concert;
+        // NOT WORKING
 
-        $em = $this->getDoctrine()->getManager();
-        $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
-
-        $editForm = $this->createForm('AppBundle\Form\ConcertType', $concertEdit, ['type' => 'edit']);
-
-        $concertEdit->setConcert($concert);
-
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-            $em->persist($concertEdit);
-            $em->flush();
-
-            return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
-        }
-
-        return $this->render('concert/index.html.twig', array(
-            'concert' => $concert,
-            'form' => $editForm->createView(),
-        ));
+//        $concertEdit = clone $concert;
+//
+//        $em = $this->getDoctrine()->getManager();
+//        $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
+//
+//        $editForm = $this->createForm('AppBundle\Form\ConcertType', $concertEdit, ['type' => 'edit']);
+//
+//        $concertEdit->setConcert($concert);
+//
+//        $editForm->handleRequest($request);
+//
+//        if ($editForm->isSubmitted() && $editForm->isValid()) {
+//
+//            // date and time pickers merging
+//            $timestart = new \DateTime($concertEdit->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timestart'])) . ":00");
+//            $timeend = new \DateTime($concertEdit->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timeend'])) . ":00");
+//            $concert->setStart($timestart);
+//            $concert->setEnd($timeend);
+//
+//            $em->persist($concertEdit);
+//            $em->flush();
+//
+//            return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
+//        }
+//
+//        return $this->render('concert/index.html.twig', array(
+//            'concert' => $concert,
+//            'form' => $editForm->createView(),
+//        ));
     }
 
 }
