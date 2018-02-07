@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,20 +20,41 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('usernameCanonical', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('emailCanonical', TextType::class)
-            ->add('enabled', TextType::class)
-            ->add('salt', TextType::class)
-            ->add('plainPassword', TextType::class)
-            ->add('lastLogin', DateTimeType::class)
-            ->add('confirmationToken', TextType::class)
-            ->add('password', PasswordType::class)
-//            ->add('groups', TextType::class)
-//            ->add('roles', TextType::class)
-            ->add('passwordRequestedAt', DateTimeType::class)
+            ->add('username', TextType::class, array(
+                'label' => 'Username',
+                'attr' => array(
+                    'id' => 'icon_prefix',
+                    'type' => 'text',
+                    'class' => 'validate',
+                    'data-length' => '30'
+                )))
+            ->add('email', EmailType::class, array(
+                'label' => 'Username',
+                'attr' => array(
+                    'id' => 'icon_prefix',
+                    'type' => 'text',
+                    'class' => 'validate',
+                    'data-length' => '30'
+                )))
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'required' => true,
+                'attr' => array(
+                    'id' => 'icon_prefix',
+                    'type' => 'text',
+                    'class' => 'validate',
+                    'data-length' => '30'),
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),))
             ->add('address', LocationType::class)
+            ->add('imageIcon', TextType::class, array(
+                'label' => 'Your picture',
+                'attr' => array(
+                    'id' => 'icon_prefix',
+                    'type' => 'text',
+                    'class' => 'validate',
+                    'data-length' => '30'
+                )))
             ;
     }/**
      * {@inheritdoc}
@@ -52,14 +74,9 @@ class UserType extends AbstractType
         return 'appbundle_user';
     }
 
-    public function getParent()
-    {
-        return 'fos_user_registration';
-    }
-
     public function getName()
     {
-        return 'app_user_registration';
+        return 'app_user_account';
 
     }
 

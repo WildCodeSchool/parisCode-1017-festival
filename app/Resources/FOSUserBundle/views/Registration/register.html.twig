@@ -1,61 +1,133 @@
-{#{% trans_default_domain 'FOSUserBundle' %}#}
-
-{#{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}#}
-    {#{{ form_widget(form) }}#}
-    {#<div>#}
-        {#<input type="submit" value="{{ 'registration.submit'|trans }}" />#}
-    {#</div>#}
-{#{{ form_end(form) }}#}
-
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
 
 {% block body %}
 
-    <h2>User creation</h2>
-
-    {{ form_start(form) }}
-
-    <div>
-        {{ form_label(form.username) }}
-        {{ form_widget(form.username) }}
-        {{ form_errors(form.username) }}
+    <div class="row center-align">
+        <div class="col s12">
+            <h2>{{ app.request.get('_route') == 'festival_new' ? 'Register your ' : 'Edit ' }}Account</h2>
+        </div>
     </div>
-    <div>
-        {{ form_label(form.plainPassword.first) }}
-        {{ form_widget(form.plainPassword.first) }}
-        {{ form_errors(form.plainPassword.first) }}
+    <!-- FORM -->
+    <div class="row">
+        {{ form_start(form) }}
+        <!-- $username -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">music_note</i>
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+                {{ form_errors(form.username) }}
+            </div>
+        </div>
+        <!-- $passwordFirst -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">announcement</i>
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first) }}
+                {{ form_errors(form.plainPassword.first) }}
+            </div>
+        </div>
+        <!-- $passwordSecond -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">location_city</i>
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second) }}
+                {{ form_errors(form.plainPassword.second) }}
+            </div>
+        </div>
+        <!-- $email -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">music_video</i>
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <!-- $address -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">attach_money</i>
+                {{ form_label(form.address) }}
+                {{ form_widget(form.address) }}
+                {{ form_errors(form.address) }}
+            </div>
+        </div>
+        <!-- $linkWebsite -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">attach_money</i>
+                {{ form_label(form.imageIcon) }}
+                {{ form_widget(form.imageIcon) }}
+                {{ form_errors(form.imageIcon) }}
+            </div>
+        </div>
+        <div class="row center-align">
+            <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'fos_user_registration_register' ? 'Register' : 'Edit' }}>
+        </div>
+        {{ form_end(form) }}
     </div>
-    <div>
-        {{ form_label(form.plainPassword.second) }}
-        {{ form_widget(form.plainPassword.second) }}
-        {{ form_errors(form.plainPassword.second) }}
-    </div>
-    <div>
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        {{ form_errors(form.email) }}
-    </div>
-    <div>
-        {{ form_label(form.imageIcon) }}
-        {{ form_widget(form.imageIcon) }}
-        {{ form_errors(form.imageIcon) }}
-    </div>
-    {#<div>#}
-    {#{{ form_label(form.address) }}#}
-    {#{{ form_widget(form.address) }}#}
-    {#{{ form_errors(form.address) }}#}
-    {#</div>#}
+    <!-- .FORM -->
 
-    <button class="btn waves-effect waves-light" type="submit" name="action">Send
-        <i class="material-icons right">send</i>
-    </button>
+{% endblock body %}
 
-    {{ form_end(form) }}
+{% block javascripts %}
 
-    <ul>
-        <li>
-            {#<a href="{{ path('user_index') }}">Back to the list</a>#}
-        </li>
-    </ul>
+    <script>
+        $(document).ready(function(){
+            $('input.autocomplete-location').autocomplete({
+                data: {
+                    "Hippodrome": null,
+                    "Paris": null,
+                    "Hamburg": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('input.autocomplete-genre').autocomplete({
+                data: {
+                    "Rock": null,
+                    "Pop": null,
+                    "Drum n bass": 'https://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 3, // Creates a dropdown of 15 years to control year,
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Ok',
+                format: 'yyyy-mm-dd',
+                closeOnSelect: true // Close upon selecting a date,
+            });
+            $('.timepicker').pickatime({
+                default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+                fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+                twelvehour: false, // Use AM/PM or 24-hour format
+                donetext: 'OK', // text for done-button
+                cleartext: 'Clear', // text for clear-button
+                canceltext: 'Cancel', // Text for cancel-button
+                autoclose: false, // automatic close timepicker
+                ampmclickable: true, // make AM PM clickable
+                aftershow: function(){} //Function for after opening timepicker
+            });
+        });
+    </script>
 
-{% endblock %}
+{% endblock javascripts %}
