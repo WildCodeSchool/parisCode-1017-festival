@@ -62,6 +62,22 @@
                             {{ form_errors(form.end) }}
                         </div>
                     </div>
+                    <div class="row">
+                        <!--TimeStart -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">access_time</i>
+                            {{ form_label(form.start) }}
+                            {{ form_widget(form.start) }}
+                            {{ form_errors(form.start) }}
+                        </div>
+                        <!--TimeEnd -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">access_time</i>
+                            {{ form_label(form.end) }}
+                            {{ form_widget(form.end) }}
+                            {{ form_errors(form.end) }}
+                        </div>
+                    </div>
                     {% if app.request.get('_route') != 'concert_new' %}
                         <div class="row">
                             <!--$isCancelled -->
