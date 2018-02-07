@@ -27,30 +27,6 @@
             </div>
             <div class="card-content">
                 <div id="test4">
-                    <div id='calendar' class="container"></div>
-                    {#<table>#}
-                        {#<tbody>#}
-                        {#<tr>#}
-                            {#<th>Festivals</th>#}
-                            {#<td>{% if user.wishlist.festival is defined %}#}
-                                {#{% for festival in user.wishlist.festival %}#}
-                                {#<p>{{ festival.id }} - {{ festival.title }}</p>#}
-                                {#<p>{{ festival.start|date("d D H:i") }} - {{ festival.end|date("d D H:i") }}</p>#}
-                                {#{% endfor %}#}
-                                {#{% endif %}#}
-                            {#</td>#}
-                        {#</tr>#}
-                        {#<tr>#}
-                            {#<th>Concerts</th>#}
-                            {#<td>{% if user.wishlist.concert is defined %}#}
-                                    {#{% for concert in user.wishlist.concert %}#}
-                                        {#<p>{{ concert.id }} - {{ concert.artist }} - {{ concert.location.name }}</p></p>#}
-                                        {#<p>{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}</p>#}
-                                    {#{% endfor %}#}
-                                {#{% endif %}#}
-                            {#</td>#}
-                        {#</tr>#}
-                    {#</table>#}
                 </div>
                 <div id="test5">
                     <!-- Materialize Collections - Wishlists -->
@@ -156,6 +132,14 @@
                                     </div>
                                     <div class="col s7 grey-text text-darken-4 right-align">{{ user.email }}</div>
                                 </div>
+                            </li>
+                            <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5 grey-text darken-1 left-align"><i
+                                            class="mdi-social-domain"></i> Address
+                                </div>
+                                <div class="col s7 grey-text text-darken-4 right-align">{{ user.address }}</div>
+                            </div>
                             </li>
                         </ul>
                     </div>

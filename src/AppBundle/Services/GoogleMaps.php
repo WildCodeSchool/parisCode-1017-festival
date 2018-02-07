@@ -2,7 +2,9 @@
 
 namespace AppBundle\Services;
 use GuzzleHttp\Client;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpKernel\Tests\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class GoogleMaps
 {
