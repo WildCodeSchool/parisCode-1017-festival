@@ -27,10 +27,12 @@ class FestivalType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // TODO: Florian Update form
-//        if ($options['type'] == 'new'){
-//            $builder->remove('isCancelled');
-//        }
+        if ($options['type'] == 'edit') {
+            $builder->add('isCancelled', TextType::class, array(
+                'label' => 'Cancelled?',
+                'required' => false
+            ));
+        }
 
         $builder
             ->add('title', TextType::class, array(
@@ -75,28 +77,6 @@ class FestivalType extends AbstractType
                     'data-date-format' => 'yyyy-MM-dd'
                 )
             ))
-//            ->add('start', DateTimeType::class, array(
-//                'widget' => 'single_text',
-//                'input' => 'datetime',
-//                'required' => 'false',
-//                'format' => 'YYYY-MM-dd HH:mm',
-//                'attr' => array(
-//                    'data-date-format' => 'YYYY-MM-DD HH:mm',
-//                    'readonly' => false,
-//                    'placeholder' => 'YYYY-MM-DD HH:mm'
-//                )
-//            ))
-//            ->add('end', DateTimeType::class, array(
-//                'widget' => 'single_text',
-//                'input' => 'datetime',
-//                'required' => 'false',
-//                'format' => 'YYYY-MM-dd HH:mm',
-//                'attr' => array(
-//                    'data-date-format' => 'YYYY-MM-DD HH:mm',
-//                    'readonly' => false,
-//                    'placeholder' => 'YYYY-MM-DD HH:mm'
-//                )
-//            ))
             ->add('linkWebsite', UrlType::class, array(
                 'label' => 'Official website',
                 'attr' => array(
@@ -138,12 +118,7 @@ class FestivalType extends AbstractType
                     'id' => 'icon_prefix'
                 ),
                 'required' => false
-            ))
-            ->add('isCancelled', TextType::class, array(
-                'label' => 'Cancelled?',
-                'required' => false
-            ))
-           ;
+            ));
 
     }
 
@@ -154,7 +129,7 @@ class FestivalType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Festival',
-//            'type' => false
+            'type' => false
         ));
     }
 

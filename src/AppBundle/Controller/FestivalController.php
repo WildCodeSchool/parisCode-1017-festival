@@ -25,17 +25,20 @@ class FestivalController extends Controller
     public function newAction(Request $request, GoogleMaps $formattedaddress)
     {
         $festival = new Festival();
-        $form = $this->createForm('AppBundle\Form\FestivalType', $festival);
+
+        $form = $this->createForm('AppBundle\Form\FestivalType', $festival, ['type' => 'new']);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             $location = $formattedaddress->regularGeocoding($festival->getLocation());
-
             $festival->getLocation()->setLatitude($location['lat']);
             $festival->getLocation()->setLongitude($location['lng']);
             $festival->getLocation()->setName($location['place_id']);
+
+
 
             $em->persist($festival);
             $em->flush();
@@ -63,10 +66,11 @@ class FestivalController extends Controller
         $em = $this->getDoctrine()->getManager();
         $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
-        $editForm = $this->createForm('AppBundle\Form\FestivalType', $festivalEdit);
-        $editForm->handleRequest($request);
+        $editForm = $this->createForm('AppBundle\Form\FestivalType', $festivalEdit, ['type' => 'edit']);
 
-        $festivalEdit->setFestival($festival); // festival id 1
+        $festivalEdit->setFestival($festival);
+
+        $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
@@ -79,7 +83,7 @@ class FestivalController extends Controller
         return $this->render('festival/index.html.twig', array(
             'festival' => $festival,
             'concerts' => $concerts,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
         ));
     }
 }
