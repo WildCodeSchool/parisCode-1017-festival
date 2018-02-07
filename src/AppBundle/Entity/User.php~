@@ -49,6 +49,17 @@ class User extends BaseUser
     }
 
     /**
+     * NBLN-T : construct
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $wishlist = new Wishlist();
+        $wishlist->setUser($this);
+        $this->wishlist = $wishlist;
+    }
+
+    /**
      * Get id.
      *
      * @return int
