@@ -6,10 +6,12 @@ use AppBundle\Entity\Festival;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 class ConcertType extends AbstractType
 {
@@ -30,27 +32,22 @@ class ConcertType extends AbstractType
                 'class' => Festival::class,
                 'label' => false
             ))
-            ->add('start', DateTimeType::class, array(
+            ->add('start', DateType::class, array(
                 'widget' => 'single_text',
-                'input' => 'datetime',
-                'required' => false,
-                'format' => 'YYYY-MM-dd HH:mm',
+                'format' => 'yyyy-MM-dd',
                 'attr' => array(
-                    'data-date-format' => 'YYYY-MM-DD HH:mm',
-                    'readonly' => false,
-                    'placeholder' => 'YYYY-MM-DD HH:mm'
+                    'class' => 'datepicker',
+                    'data-date-format' => 'yyyy-MM-dd'
                 )
             ))
-            ->add('end', DateTimeType::class, array(
+            ->add('end', DateType::class, array(
                 'widget' => 'single_text',
-                'input' => 'datetime',
-                'required' => false,
-                'format' => 'YYYY-MM-dd HH:mm',
+                'format' => 'yyyy-MM-dd',
                 'attr' => array(
-                    'data-date-format' => 'YYYY-MM-DD HH:mm',
-                    'readonly' => false,
-                    'placeholder' => 'YYYY-MM-DD HH:mm'
-                )))
+                    'class' => 'datepicker',
+                    'data-date-format' => 'yyyy-MM-dd'
+                )
+            ))
             ->add('artist', ArtistType::class)
             ->add('location', LocationType::class, array(
                 'required' => false,

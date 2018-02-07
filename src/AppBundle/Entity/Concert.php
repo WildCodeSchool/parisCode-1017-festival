@@ -67,6 +67,7 @@ class Concert
      */
     private $isCancelled;
 
+
     /**
      * @var bool
      *

@@ -62,23 +62,28 @@ class WishlistController extends Controller
      * @Method({"GET", "POST"})
      * @ParamConverter("concert",   options={"mapping": {"concert_id": "id"}})
      */
-    public function concertAction(Concert $concert_id, Wishlist $wishlist)
+    public function concertAction(Request $request, Concert $concert_id, Wishlist $wishlist)
     {
         // TODO : All - Ajax - rafraichir apparence icon en direct
 
-        $em = $this->getDoctrine()->getManager();
+        if ($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
 
         $array = (array) $wishlist->getConcert()->getValues();
+
         if (in_array($concert_id, $array)){
             $wishlist->removeConcert($concert_id);
+            $response = false;
         } else {
             $wishlist->addConcert($concert_id);
+            $response = true;
         }
-
-        $em->persist($wishlist);
         $em->flush();
 
-        return $this->redirectToRoute('discover');
+            return new JsonResponse($response);
+        } else{
+            throw new HttpException('not an ajax call', 500);
+        }
     }
 
     /**
