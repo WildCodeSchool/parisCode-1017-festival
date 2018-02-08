@@ -182,6 +182,7 @@ class Festival
     public function __construct()
     {
         $this->isCancelled = false;
+        $this->isValid = false;
         $this->concert = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

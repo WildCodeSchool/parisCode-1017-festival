@@ -24,7 +24,7 @@ class ConcertController extends Controller
      * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
      * @ParamConverter("concert")
      */
-    public function newConcertAction(Request $request, GoogleMaps $formattedaddress, $festival_id){
+    public function newConcertAction(Request $request, $festival_id){
 
         $em = $this->getDoctrine()->getManager();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
@@ -69,11 +69,18 @@ class ConcertController extends Controller
      */
     public function editConcertAction(Request $request, Concert $concert, $festival_id)
     {
-        // NOT WORKING
+        $em = $this->getDoctrine()->getManager();
+
+        // if concert already got a clone
+        $concertclone = $em->getRepository('AppBundle:Concert')->findOneByConcert($concert);
+        $error = ['clone' => 'This concert is currently in edition by admin.'];
+        if ($concertclone){
+            return $this->render('concert/index.html.twig', array(
+                'error' => $error
+            ));
+        }
 
         $concertEdit = clone $concert;
-
-        $em = $this->getDoctrine()->getManager();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
 
         $editForm = $this->createForm('AppBundle\Form\ConcertType', $concertEdit, ['type' => 'edit']);
@@ -98,8 +105,8 @@ class ConcertController extends Controller
 
         return $this->render('concert/index.html.twig', array(
             'concert' => $concert,
+            'festival' => $festival,
             'form' => $editForm->createView(),
         ));
     }
-
 }

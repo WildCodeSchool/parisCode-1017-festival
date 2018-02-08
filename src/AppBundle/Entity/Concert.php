@@ -105,6 +105,7 @@ class Concert
      */
     public function __construct()
     {
+        $this->isValid = false;
         $this->isCancelled = false;
     }
 
@@ -211,6 +212,7 @@ class Concert
     public function setFestival($festival)
     {
         $this->festival = $festival;
+        $this->title = $this->artist . " @ " . $this->festival;
     }
 
     /**

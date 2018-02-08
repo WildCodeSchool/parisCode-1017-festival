@@ -58,7 +58,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival3->setIsCancelled(0);
         $festival3->setIsSoldOut(0);
         $festival3->setIsValid(0);
-        $festival3->setLocation($this->getReference('75020 Paris, France'));
+        $festival3->setLocation($this->getReference('75014 Paris, France'));
         $festival3->setGenre($this->getReference('General'));
         $manager->persist($festival3);
 

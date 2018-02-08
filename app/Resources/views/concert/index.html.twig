@@ -13,6 +13,11 @@
             <h2>{{ app.request.get('_route') == 'concert_new' ? 'Add a ' : 'Edit ' }}Concert</h2>
         </div>
     </div>
+
+    {% if error is defined %}
+        {{ error.clone }}
+    {% else %}
+
     <div class="card">
         <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
@@ -98,6 +103,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
 {% endblock body %}
 

@@ -52,7 +52,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user5->setEnabled(1);
         $user5->setPlainPassword('ln-t');
         $user5->setRoles(array('ROLE_USER'));
-        $user5->setLocation($this->getReference('75020 Paris, France'));
+        $user5->setLocation($this->getReference('Micronésie'));
         $manager->persist($user5);
 
         $manager->flush();

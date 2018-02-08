@@ -35,9 +35,9 @@ class LocationFixtures extends Fixture
         $manager->persist($location4);
 
         $location5 = new Location();
-        $location5->setAddress('75020 Paris, France');
-        $location5->setLatitude('48.8624959');
-        $location5->setLongitude('2.3617467');
+        $location5->setAddress('Micronésie');
+        $location5->setLatitude('5.1729981');
+        $location5->setLongitude('141.1805464');
         $manager->persist($location5);
 
         $location6 = new Location();

@@ -9,7 +9,10 @@ use AppBundle\Services\GoogleMaps;
 
 class LocationListener
 {
+    // DOC : https://symfony.com/doc/current/controller/upload_file.html
+
     private $address;
+    private $container;
 
     public function __construct(GoogleMaps $address)
     {
@@ -39,7 +42,13 @@ class LocationListener
 
         $location = $this->address->regularGeocoding($entity->getAddress());
 
-        $entity->setLatitude($location['lat']);
-        $entity->setLongitude($location['lng']);
+        if ($location != 'error'){
+            $entity->setLatitude($location['lat']);
+            $entity->setLongitude($location['lng']);
+        } else {
+            $entity->setAddress('Your address is not valid');
+            $entity->setLatitude(48.864716);
+            $entity->setLongitude(2.349014);
+        }
     }
 }

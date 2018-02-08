@@ -1,10 +1,8 @@
 <?php
 
 namespace AppBundle\Services;
+
 use GuzzleHttp\Client;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpKernel\Tests\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 
 class GoogleMaps
 {
@@ -23,12 +21,13 @@ class GoogleMaps
         $google = $client->request("GET", $url);
         $google = json_decode($google->getBody()->getContents());
 
-        $location['lat'] = $google->results[0]->geometry->location->lat;
-        $location['lng'] = $google->results[0]->geometry->location->lng;
-//        $location['place_id'] = $google->results[0]->place_id;
-
-        return $location;
-
+        if (isset($google->results[0])) {
+            $location['lat'] = $google->results[0]->geometry->location->lat;
+            $location['lng'] = $google->results[0]->geometry->location->lng;
+            return $location;
+        }else {
+            return 'error';
+        }
     }
 
     public function reverseGeocoding($lat, $lng){

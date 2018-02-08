@@ -22,7 +22,7 @@ class FestivalController extends Controller
      * @Route("/new", name="festival_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, GoogleMaps $formattedaddress)
+    public function newAction(Request $request)
     {
         $festival = new Festival();
 
@@ -54,9 +54,18 @@ class FestivalController extends Controller
      */
     public function editAction(Request $request, Festival $festival)
     {
-        $festivalEdit = clone $festival;
-
         $em = $this->getDoctrine()->getManager();
+
+        // if festival already got a clone
+        $festivalclone = $em->getRepository('AppBundle:Festival')->findOneByFestival($festival);
+        $error = ['clone' => 'This festival is currently in edition by admin.'];
+        if ($festivalclone){
+            return $this->render('festival/index.html.twig', array(
+                'error' => $error
+            ));
+        }
+
+        $festivalEdit = clone $festival;
         $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
         $editForm = $this->createForm('AppBundle\Form\FestivalType', $festivalEdit, ['type' => 'edit']);
