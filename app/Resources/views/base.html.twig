@@ -56,16 +56,18 @@
                 </nav>
             {% endblock %}
 
-            {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
+            {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') or status_code is defined %}
             {% else %}
             <div class="container container-top">
-                {% endif %}
+            {% endif %}
+
                 {% block body %}
                     {% block fos_user_content %}
                     {% endblock fos_user_content %}
                 {% endblock %}
-                {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') %}
-                {% else %}
+
+            {% if (app.request.get('_route') == 'homepage') or (app.request.get('_route') == 'discover') or status_code is defined %}
+            {% else %}
             </div>
             {% endif %}
         </main>
