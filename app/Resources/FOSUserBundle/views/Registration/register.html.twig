@@ -19,16 +19,25 @@
         <!-- $username -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">music_note</i>
+                <i class="material-icons prefix">face</i>
                 {{ form_label(form.username) }}
                 {{ form_widget(form.username) }}
                 {{ form_errors(form.username) }}
             </div>
         </div>
+        <!-- $email -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mail</i>
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
         <!-- $passwordFirst -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">announcement</i>
+                <i class="material-icons prefix">https</i>
                 {{ form_label(form.plainPassword.first) }}
                 {{ form_widget(form.plainPassword.first) }}
                 {{ form_errors(form.plainPassword.first) }}
@@ -37,34 +46,25 @@
         <!-- $passwordSecond -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">location_city</i>
+                <i class="material-icons prefix">https</i>
                 {{ form_label(form.plainPassword.second) }}
                 {{ form_widget(form.plainPassword.second) }}
                 {{ form_errors(form.plainPassword.second) }}
             </div>
         </div>
-        <!-- $email -->
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">music_video</i>
-                {{ form_label(form.email) }}
-                {{ form_widget(form.email) }}
-                {{ form_errors(form.email) }}
-            </div>
-        </div>
         <!-- $address -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">attach_money</i>
-                {{ form_label(form.address) }}
-                {{ form_widget(form.address) }}
-                {{ form_errors(form.address) }}
+                <i class="material-icons prefix">map</i>
+                {{ form_label(form.location.address) }}
+                {{ form_widget(form.location.address) }}
+                {{ form_errors(form.location.address) }}
             </div>
         </div>
         <!-- $linkWebsite -->
         <div class="row">
             <div class="input-field col s12">
-                <i class="material-icons prefix">attach_money</i>
+                <i class="material-icons prefix">photo</i>
                 {{ form_label(form.imageIcon) }}
                 {{ form_widget(form.imageIcon) }}
                 {{ form_errors(form.imageIcon) }}
@@ -80,54 +80,4 @@
 {% endblock body %}
 
 {% block javascripts %}
-
-    <script>
-        $(document).ready(function(){
-            $('input.autocomplete-location').autocomplete({
-                data: {
-                    "Hippodrome": null,
-                    "Paris": null,
-                    "Hamburg": 'https://placehold.it/250x250'
-                },
-                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-                onAutocomplete: function(val) {
-                    // Callback function when value is autcompleted.
-                },
-                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-            });
-            $('input.autocomplete-genre').autocomplete({
-                data: {
-                    "Rock": null,
-                    "Pop": null,
-                    "Drum n bass": 'https://placehold.it/250x250'
-                },
-                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-                onAutocomplete: function(val) {
-                    // Callback function when value is autcompleted.
-                },
-                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-            });
-            $('.datepicker').pickadate({
-                selectMonths: true, // Creates a dropdown to control month
-                selectYears: 3, // Creates a dropdown of 15 years to control year,
-                today: 'Today',
-                clear: 'Clear',
-                close: 'Ok',
-                format: 'yyyy-mm-dd',
-                closeOnSelect: true // Close upon selecting a date,
-            });
-            $('.timepicker').pickatime({
-                default: 'now', // Set default time: 'now', '1:30AM', '16:30'
-                fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
-                twelvehour: false, // Use AM/PM or 24-hour format
-                donetext: 'OK', // text for done-button
-                cleartext: 'Clear', // text for clear-button
-                canceltext: 'Cancel', // Text for cancel-button
-                autoclose: false, // automatic close timepicker
-                ampmclickable: true, // make AM PM clickable
-                aftershow: function(){} //Function for after opening timepicker
-            });
-        });
-    </script>
-
 {% endblock javascripts %}

@@ -33,11 +33,6 @@ class FestivalController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $location = $formattedaddress->regularGeocoding($festival->getLocation());
-            $festival->getLocation()->setLatitude($location['lat']);
-            $festival->getLocation()->setLongitude($location['lng']);
-            $festival->getLocation()->setName($location['place_id']);
-
             $em->persist($festival);
             $em->flush();
 

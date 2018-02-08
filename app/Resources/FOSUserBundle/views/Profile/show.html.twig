@@ -20,15 +20,16 @@
             {#</div>#}
             <div class="card-tabs">
                 <ul class="tabs tabs-fixed-width">
-                    <li class="tab"><a class="active" href="#test4">My calendar</a></li>
-                    <li class="tab"><a href="#test5">My wishlist</a></li>
-                    <li class="tab"><a href="#test6">My infos</a></li>
+                    <li class="tab"><a class="active" href="#mycalendar">My calendar</a></li>
+                    <li class="tab"><a href="#mywishlist">My wishlist</a></li>
+                    <li class="tab"><a href="#myinfos">My infos</a></li>
                 </ul>
             </div>
             <div class="card-content">
-                <div id="test4">
+                <div id="mycalendar">
+                    <div id='calendar' class="container"></div>
                 </div>
-                <div id="test5">
+                <div id="mywishlist">
                     <!-- Materialize Collections - Wishlists -->
                     <div class="row">
                         <div class="col s12 m4">
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="test6">
+                <div id="myinfos">
                     <h1>User</h1>
                     <div id="profile-page-sidebar" class="col s12">
                         <ul id="profile-page-about-details" class="collection z-depth-1">
@@ -120,14 +121,6 @@
                             <li class="collection-item">
                                 <div class="row">
                                     <div class="col s5 grey-text darken-1 left-align"><i
-                                                class="mdi-social-poll"></i> Address
-                                    </div>
-                                    <div class="col s7 grey-text text-darken-4 right-align">{{ user.address }}</div>
-                                </div>
-                            </li>
-                            <li class="collection-item">
-                                <div class="row">
-                                    <div class="col s5 grey-text darken-1 left-align"><i
                                                 class="mdi-social-domain"></i> Email
                                     </div>
                                     <div class="col s7 grey-text text-darken-4 right-align">{{ user.email }}</div>
@@ -136,9 +129,9 @@
                             <li class="collection-item">
                             <div class="row">
                                 <div class="col s5 grey-text darken-1 left-align"><i
-                                            class="mdi-social-domain"></i> Address
+                                            class="mdi-social-domain"></i> Location
                                 </div>
-                                <div class="col s7 grey-text text-darken-4 right-align">{{ user.address }}</div>
+                                <div class="col s7 grey-text text-darken-4 right-align">{% if user.location %}{{ user.location.address }}{% endif %}</div>
                             </div>
                             </li>
                         </ul>

@@ -27,14 +27,14 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival1->setIsCancelled(0);
         $festival1->setIsSoldOut(0);
         $festival1->setIsValid(0);
-        $festival1->setLocation($this->getReference('Reeperbahn'));
+        $festival1->setLocation($this->getReference('Reeperbahn, Hambourg, Allemagne'));
         $festival1->setGenre($this->getReference('General'));
         $manager->persist($festival1);
 
         $festival2 = new Festival();
         $festival2->setTitle('Bateau Music Festival');
         $festival2->setDescription('...');
-        $festival2->setLocation($this->getReference('Bateau'));
+        $festival2->setLocation($this->getReference('21 chemin de la Basse Boissière, 78490 Les Mesnuls, France'));
         $festival2->setGenre($this->getReference('General'));
         $festival2->setLinkWebsite('http://www.bateaumusic.com');
         $festival2->setLinkFbPage('https://www.facebook.com/bateaumusic');;
@@ -58,7 +58,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival3->setIsCancelled(0);
         $festival3->setIsSoldOut(0);
         $festival3->setIsValid(0);
-        $festival3->setLocation($this->getReference('Hélène address'));
+        $festival3->setLocation($this->getReference('75020 Paris, France'));
         $festival3->setGenre($this->getReference('General'));
         $manager->persist($festival3);
 
@@ -78,7 +78,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival4->setIsCancelled(0);
         $festival4->setIsSoldOut(0);
         $festival4->setIsValid(0);
-        $festival4->setLocation($this->getReference('Agathe address'));
+        $festival4->setLocation($this->getReference('75010 Paris, France'));
         $festival4->setGenre($this->getReference('General'));
         $manager->persist($festival4);
 

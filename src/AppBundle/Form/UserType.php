@@ -29,7 +29,7 @@ class UserType extends AbstractType
                     'data-length' => '30'
                 )))
             ->add('email', EmailType::class, array(
-                'label' => 'Username',
+                'label' => 'Email',
                 'attr' => array(
                     'id' => 'icon_prefix',
                     'type' => 'text',
@@ -46,9 +46,12 @@ class UserType extends AbstractType
                     'data-length' => '30'),
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),))
-            ->add('address', LocationType::class)
+            ->add('location', LocationType::class, array(
+                    'required' => false
+                ))
             ->add('imageIcon', TextType::class, array(
                 'label' => 'Your picture',
+                'required' => false,
                 'attr' => array(
                     'id' => 'icon_prefix',
                     'type' => 'text',

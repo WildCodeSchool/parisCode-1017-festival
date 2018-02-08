@@ -25,7 +25,7 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $address;
+    private $location;
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Wishlist", inversedBy="user", cascade={"all"})
@@ -70,27 +70,19 @@ class User extends BaseUser
     }
 
     /**
-     * Set address.
-     *
-     * @param \AppBundle\Entity\Location|null $address
-     *
-     * @return User
+     * @return mixed
      */
-    public function setAddress(\AppBundle\Entity\Location $address = null)
+    public function getLocation()
     {
-        $this->address = $address;
-
-        return $this;
+        return $this->location;
     }
 
     /**
-     * Get address.
-     *
-     * @return \AppBundle\Entity\Location|null
+     * @param mixed $location
      */
-    public function getAddress()
+    public function setLocation($location)
     {
-        return $this->address;
+        $this->location = $location;
     }
 
     /**

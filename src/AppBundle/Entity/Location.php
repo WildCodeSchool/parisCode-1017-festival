@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Services\GoogleMaps;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,14 +21,6 @@ class Location
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=250)
-     *
-     */
-    private $name;
 
     /**
      * @var string
@@ -59,10 +52,7 @@ class Location
         return $this->address;
     }
 
-
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId()
@@ -71,22 +61,6 @@ class Location
     }
 
     /**
-     * Set address.
-     *
-     * @param string $address
-     *
-     * @return Location
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address.
-     *
      * @return string
      */
     public function getAddress()
@@ -95,22 +69,14 @@ class Location
     }
 
     /**
-     * Set latitude.
-     *
-     * @param float $latitude
-     *
-     * @return Location
+     * @param string $address
      */
-    public function setLatitude($latitude)
+    public function setAddress($address)
     {
-        $this->latitude = $latitude;
-
-        return $this;
+        $this->address = $address;
     }
 
     /**
-     * Get latitude.
-     *
      * @return float
      */
     public function getLatitude()
@@ -119,22 +85,14 @@ class Location
     }
 
     /**
-     * Set longitude.
-     *
-     * @param float $longitude
-     *
-     * @return Location
+     * @param float $latitude
      */
-    public function setLongitude($longitude)
+    public function setLatitude($latitude)
     {
-        $this->longitude = $longitude;
-
-        return $this;
+        $this->latitude = $latitude;
     }
 
     /**
-     * Get longitude.
-     *
      * @return float
      */
     public function getLongitude()
@@ -143,20 +101,13 @@ class Location
     }
 
     /**
-     * @return string
+     * @param float $longitude
      */
-    public function getName()
+    public function setLongitude($longitude)
     {
-        return $this->name;
+        $this->longitude = $longitude;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
 
 }

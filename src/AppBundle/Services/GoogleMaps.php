@@ -25,7 +25,7 @@ class GoogleMaps
 
         $location['lat'] = $google->results[0]->geometry->location->lat;
         $location['lng'] = $google->results[0]->geometry->location->lng;
-        $location['place_id'] = $google->results[0]->place_id;
+//        $location['place_id'] = $google->results[0]->place_id;
 
         return $location;
 
