@@ -189,6 +189,38 @@ nav .brand-logo {
 }
 
 
+/* ERROR
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.error {
+    background-image: url("../img/error.jpg");
+    background-size: cover;
+    height: 82vh;
+}
+
+.error p {
+    margin-top: 30vh;
+    color: white;
+    text-align: center;
+    font-size: 4em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.error p:last-child {
+    font-size: 3em;
+    text-transform: lowercase;
+    margin-top: 5vh;
+}
+
+.error a {
+    color: white;
+}
+
+.error a:hover {
+    color: #732E93;
+}
+
+
 
 /* MEDIA QUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
