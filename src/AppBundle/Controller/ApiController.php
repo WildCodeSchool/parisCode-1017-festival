@@ -12,10 +12,11 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 /**
  * Class ApiController
@@ -56,5 +57,37 @@ class ApiController extends Controller
         return new Response($json);
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \HttpException
+     *
+     * @Route("/resultSearch", name="search_bar")
+     *
+     * @Method("POST")
+     */
+    public function searchAction(Request $request){
+        if ($request->isXmlHttpRequest()){
+            $search = $request->get('search');
 
+            $em = $this->getDoctrine()->getManager();
+            $results = $em->getRepository(Festival::class)->searchBy($search);
+
+            if ($results == null){
+                $template = "<p>No result</p>";
+            } else {
+                $template = $this->renderView('default/includes/festivalCard.html.twig', array(
+                    'festivals' => $results,
+                    'user' => $this->getUser()
+                ));
+            }
+
+            return new JsonResponse($template);
+
+        } else {
+            throw new HttpException('not an ajax request', 500);
+        }
+
+    }
 }

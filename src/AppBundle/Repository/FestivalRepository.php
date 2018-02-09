@@ -10,4 +10,27 @@ namespace AppBundle\Repository;
  */
 class FestivalRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $search
+     *
+     * @return mixed
+     */
+    public function searchBy($search){
+
+        $pattern = "%" . $search . "%";
+
+        $qb = $this->createQueryBuilder('festival');
+        $qb->select('festival')
+            ->leftJoin('festival.concert', 'concert')
+            ->leftJoin('concert.artist', 'artist')
+            ->leftJoin('festival.location', 'location')
+            ->leftJoin('festival.genre', 'genre')
+            ->orWhere('festival.title LIKE :search')
+            ->orWhere('location.address LIKE :search')
+            ->orWhere('artist.name LIKE :search')
+            ->orWhere('genre.name LIKE :search')
+            ->setParameter('search', $pattern);
+
+        return $qb->getQuery()->getResult();
+    }
 }
