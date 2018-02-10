@@ -102,7 +102,7 @@ class ApiController extends Controller
      *
      * @Route("/autocompleteResult", name="autocomplete_home")
      *
-     * @Method("GET)
+     * @Method("GET")
      */
     public function autoCompleteAction(Request $request, GoogleMaps $googleMaps){
         if ($request->isXmlHttpRequest()){
@@ -110,7 +110,7 @@ class ApiController extends Controller
             $term = $request->get('term');
 
             $results = $em->getRepository(Festival::class)->autocompleteByTerm($term);
-            $cities = $googleMaps->autocompleteCities('paris');
+            $cities = $googleMaps->autocompleteCities($term);
 
             $func = function ($val){
                 return $val[key($val)];
