@@ -72,14 +72,14 @@
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
                             {{ form_label(form.timestart) }}
-                            {{ form_widget(form.timestart) }}
+                            {{ form_widget(form.timestart, {'value' : form.start.vars.data|date('H:i')}) }}
                             {{ form_errors(form.timestart) }}
                         </div>
                         <!--TimeEnd -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
                             {{ form_label(form.timeend) }}
-                            {{ form_widget(form.timeend) }}
+                            {{ form_widget(form.timeend, {'value' : form.end.vars.data|date('H:i')}) }}
                             {{ form_errors(form.timeend) }}
                         </div>
                     </div>

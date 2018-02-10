@@ -7,7 +7,6 @@ use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use AppBundle\Entity\Genre;
 use AppBundle\Entity\Location;
-use AppBundle\Entity\User;
 use AppBundle\Entity\Wishlist;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

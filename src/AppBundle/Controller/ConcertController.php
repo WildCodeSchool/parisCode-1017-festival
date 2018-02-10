@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Artist;
 use AppBundle\Entity\Concert;
 use AppBundle\Services\GoogleMaps;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -50,8 +51,6 @@ class ConcertController extends Controller
             return $this->redirectToRoute('festival_edit', array('id' => $concert->getId(), 'festival_id' => $concert->getFestival()->getId()));
         }
 
-
-
         return $this->render('concert/index.html.twig', array(
             'festival' => $festival,
             'concert' => $concert,
@@ -94,8 +93,13 @@ class ConcertController extends Controller
             // date and time pickers merging
             $timestart = new \DateTime($concertEdit->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timestart'])) . ":00");
             $timeend = new \DateTime($concertEdit->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timeend'])) . ":00");
-            $concert->setStart($timestart);
-            $concert->setEnd($timeend);
+
+            $concertEdit->setStart($timestart);
+            $concertEdit->setEnd($timeend);
+
+//            $artist = new Artist();
+//            $artist->setName('Helene');
+//            $concertEdit->setArtist($artist);
 
             $em->persist($concertEdit);
             $em->flush();

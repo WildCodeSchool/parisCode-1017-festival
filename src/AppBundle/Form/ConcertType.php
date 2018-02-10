@@ -62,8 +62,7 @@ class ConcertType extends AbstractType
                 'widget' => 'single_text',
                 'mapped' => false,
                 'attr' => array(
-                    'class' => 'timepicker',
-                    'value' => '12:10'
+                    'class' => 'timepicker'
                 )
             ))
             ->add('artist', ArtistType::class)
