@@ -21,8 +21,6 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         // TODO Amandine (P3) - liste deroulante et saisie modifiable pour l'admin
-        // TODO All : form a changer /profile/edit / wishlist
-        // TODO All : register/confirmed redirection vers mon compte
 
         return $this->render('default/index.html.twig');
     }
@@ -35,9 +33,6 @@ class DefaultController extends Controller
      */
     public function discoverAction()
     {
-        // TODO All : bouton rechargement live/ajax
-        // TODO All : addresse googlemaps nom dans bdd
-
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();

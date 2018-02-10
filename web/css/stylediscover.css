@@ -67,9 +67,9 @@ h3{
     margin-top: 9vh;
 }
 .festival-cards{
-    margin-top: 32vh;
+    margin-top: 33vh;
     margin-left: 1vh;
-    margin-right: 1vh;
+    margin-right: 0.5vh;
 }
 .map {
     position: fixed;
@@ -140,7 +140,7 @@ h3{
     .search {
         padding-top: 2vh;
         z-index: 2;
-        top: 8vh;
+        top: 7vh;
         width: 33vw;
     }
 }
