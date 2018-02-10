@@ -41,4 +41,27 @@ class GoogleMaps
 
         return $formattedaddress;
     }
+
+    /**
+     * @param string $term
+     *
+     * @return array
+     */
+    public function autocompleteCities($term){
+        $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" . $term . "&types=(cities)&key=" . $this->api_google;
+        $client = new Client();
+        $google = $client->request("GET", $url);
+        $results = json_decode($google->getBody()->getContents());
+
+        $cities = array();
+        foreach ($results->predictions as $key => $result){
+            if (isset($result->terms[1]->value)){
+                $cities[] = $result->terms[0]->value . ', ' . $result->terms[1]->value;
+            } else {
+                $cities[] = $result->terms[0]->value;
+            }
+        }
+
+        return $cities;
+    }
 }

@@ -41,7 +41,7 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
+        $festivals = $em->getRepository('AppBundle:Festival')->myFindALl();
 
         return $this->render('default/discover.html.twig', array(
             'user' => $user,

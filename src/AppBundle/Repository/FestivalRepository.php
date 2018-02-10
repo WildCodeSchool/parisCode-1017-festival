@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Genre;
+
 /**
  * FestivalRepository
  *
@@ -11,7 +13,25 @@ namespace AppBundle\Repository;
 class FestivalRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * @param $search
+     * Get all informations for all festivals
+     * @return mixed
+     */
+    public function myFindALl(){
+        return $this->createQueryBuilder('f')
+            ->select('f', 'c', 'g', 'l', 'w', 'a')
+            ->leftJoin('f.concert', 'c')
+            ->leftJoin('f.genre', 'g')
+            ->leftJoin('f.location', 'l')
+            ->leftJoin  ('f.wishlist', 'w')
+            ->leftJoin('c.artist', 'a')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Search request
+     *
+     * @param string $search
      *
      * @return mixed
      */
@@ -32,5 +52,45 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('search', $pattern);
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Autocomplete request
+     *
+     * @param string $search
+     *
+     * @return mixed
+     */
+    public function autocompleteByTerm($search){
+
+        $pattern = "%" . $search . "%";
+
+        $festivals = $this->createQueryBuilder('festival')
+                          ->select('festival.title')
+                          ->where('festival.title LIKE :search')
+                          ->setParameter('search', $pattern)
+                          ->distinct(true)
+                          ->getQuery()
+                          ->getResult();
+
+        $genres = $this->createQueryBuilder('g')
+                       ->from(Genre::class, 'genre')
+                       ->select('genre.name')
+                       ->where('genre.name LIKE :search')
+                       ->setParameter('search', $pattern)
+                       ->distinct(true)
+                       ->getQuery()
+                       ->getResult();
+
+        $artists = $this->createQueryBuilder('a')
+                        ->from(Genre::class, 'artist')
+                        ->select('artist.name')
+                        ->where('artist.name LIKE :search')
+                        ->setParameter('search', $pattern)
+                        ->distinct(true)
+                        ->getQuery()
+                        ->getResult();
+
+        return array_merge($festivals, $artists, $genres);
     }
 }

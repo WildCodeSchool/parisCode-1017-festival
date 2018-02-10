@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use AppBundle\Entity\Wishlist;
+use AppBundle\Services\GoogleMaps;
+use GuzzleHttp\Client;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,6 +73,8 @@ class ApiController extends Controller
         if ($request->isXmlHttpRequest()){
             $search = $request->get('search');
 
+            $search = preg_replace('/^([^,]*).*$/', '$1', $search);
+
             $em = $this->getDoctrine()->getManager();
             $results = $em->getRepository(Festival::class)->searchBy($search);
 
@@ -87,6 +91,36 @@ class ApiController extends Controller
 
         } else {
             throw new HttpException('not an ajax request', 500);
+        }
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \AppBundle\Services\GoogleMaps            $googleMaps
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @Route("/autocompleteResult", name="autocomplete_home")
+     *
+     * @Method("GET)
+     */
+    public function autoCompleteAction(Request $request, GoogleMaps $googleMaps){
+        if ($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
+            $term = $request->get('term');
+
+            $results = $em->getRepository(Festival::class)->autocompleteByTerm($term);
+            $cities = $googleMaps->autocompleteCities('paris');
+
+            $func = function ($val){
+                return $val[key($val)];
+            };
+
+            $results = array_map($func, $results);
+
+            return new JsonResponse(array_merge($results, $cities));
+        } else {
+            throw new HttpException("not an ajax call", 500);
         }
 
     }
