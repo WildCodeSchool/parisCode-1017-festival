@@ -1,7 +1,17 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+{% block stylesheets %}
 
-{% block fos_user_content %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    {% trans_default_domain 'FOSUserBundle' %}
     <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
-{% endblock fos_user_content %}
+
+{% endblock body %}
+
+{% block javascripts %}
+{% endblock javascripts %}

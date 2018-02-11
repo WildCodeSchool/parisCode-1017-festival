@@ -16,7 +16,7 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
      * Get all informations for all festivals
      * @return mixed
      */
-    public function myFindALl(){
+    public function myFindAll(){
         return $this->createQueryBuilder('f')
             ->select('f', 'c', 'g', 'l', 'w', 'a')
             ->leftJoin('f.concert', 'c')
@@ -24,6 +24,8 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('f.location', 'l')
             ->leftJoin  ('f.wishlist', 'w')
             ->leftJoin('c.artist', 'a')
+            // select only valid festivals
+            ->where('f.isValid = 1')
             ->getQuery()
             ->getResult();
     }
