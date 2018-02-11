@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -88,7 +89,11 @@ class Concert
     public function __clone()
     {
         $this->id = null;
+        $this->artist = clone $this->getArtist();
+        $this->location = clone $this->getLocation();
+        $this->festival = $this->getFestival();
         $this->isValid = false;
+
         return $this;
     }
 

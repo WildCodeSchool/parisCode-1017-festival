@@ -17,6 +17,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
         $concert1->setArtist($this->getReference('Ibeyi'));
         $concert1->setLocation($this->getReference('Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambourg, Allemagne'));
         $concert1->setFestival($this->getReference('Reeperbahn Festival'));
+        $concert1->setIsValid(1);
         $manager->persist($concert1);
 
         $concert2 = new Concert();
@@ -25,6 +26,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
         $concert2->setArtist($this->getReference('David August'));
         $concert2->setLocation($this->getReference('Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambourg, Allemagne'));
         $concert2->setFestival($this->getReference('Reeperbahn Festival'));
+        $concert2->setIsValid(1);
         $manager->persist($concert2);
 
         $concert3 = new Concert();
@@ -33,6 +35,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
         $concert3->setArtist($this->getReference('Her'));
         $concert3->setLocation($this->getReference('Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambourg, Allemagne'));
         $concert3->setFestival($this->getReference('Reeperbahn Festival'));
+        $concert3->setIsValid(1);
         $manager->persist($concert3);
 
         $concert4 = new Concert();
@@ -41,6 +44,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
         $concert4->setArtist($this->getReference('Lewis Capaldi'));
         $concert4->setLocation($this->getReference('Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambourg, Allemagne'));
         $concert4->setFestival($this->getReference('Reeperbahn Festival'));
+        $concert4->setIsValid(1);
         $manager->persist($concert4);
 
         $concert5 = new Concert();
@@ -49,6 +53,7 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
         $concert5->setArtist($this->getReference('Bear\'s Den'));
         $concert5->setLocation($this->getReference('Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambourg, Allemagne'));
         $concert5->setFestival($this->getReference('Reeperbahn Festival'));
+        $concert5->setIsValid(1);
         $manager->persist($concert5);
 
         $manager->flush();
