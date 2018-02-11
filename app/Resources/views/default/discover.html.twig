@@ -3,7 +3,7 @@
 {% block stylesheets %}
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/vendor/jquery-ui.min.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -16,8 +16,13 @@
 
                         {# TODO: search bar in Ajax && create form builder #}
                         <form id="searchBar" action="{{ path('search_bar') }}" method="POST">
-                            <input type="text" id="autocomplete-input" class="autocomplete" name="search">
-                            <label for="autocomplete-input">Search by festival, genre or artist</label>
+                            <input
+                                    type="text"
+                                    id="autocomplete-input"
+                                    class="autocomplete"
+                                    name="search"
+                                    data-url="{{ path('autocomplete_home') }}">
+                            <label for="autocomplete-input">Search by festival, genre, artist</label>
                         </form>
                         <div class="center-align hide-on-med-and-up">
                             <button id="switch">Change View</button>
@@ -99,9 +104,15 @@
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
+
+    <script src="{{ asset('js/vendor/jquery-ui.min.js') }}"></script>
+
     <script async defer
             src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&content_copy&callback=initMap' }}>
     </script>
+
+
+
     <!--.GoogleMaps script -->
     <!--Custom script -->
     <script>
@@ -127,8 +138,9 @@
                 timeout: 2000,
                 success: function(response){
                     $("#festival-cards").html(response);
+                    $('.modal').modal();
                 },
-                errors: function(error){
+                error: function(error){
                     console.log(error)
                 }
             })
@@ -153,7 +165,7 @@
                     }
                 }
             })
-        })
+        });
 
         // Add a concert to WishLIst
         $(".addConcertToWishlist").on('click', function(event){
@@ -174,7 +186,26 @@
                     }
                 }
             })
-        })
+        });
+
+
+        $("#autocomplete-input").autocomplete({
+            source : function(req, resp){
+                $.ajax({
+                    url : $("#autocomplete-input").data('url'),
+                    dataType : 'json',
+                    data: {'term': $("#autocomplete-input").val()},
+                    success : function(response){
+                        resp(response, function(objet){
+                            return objet.festival;
+
+                        });
+                    }
+                });
+            },
+            minLength: 2,
+            delay: 2
+        });
     </script>
     <!--.Custom script -->
 

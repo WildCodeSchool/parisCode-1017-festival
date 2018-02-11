@@ -36,7 +36,9 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $festivals = $em->getRepository('AppBundle:Festival')->findBy(array('isValid' => 1));
+        $festivals = $em->getRepository('AppBundle:Festival')->myFindALl();
+      // TODO : ajuster findAll avec uniquement les festival validés
+//         $festivals = $em->getRepository('AppBundle:Festival')->findBy(array('isValid' => 1));
 
         return $this->render('default/discover.html.twig', array(
             'user' => $user,
