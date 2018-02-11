@@ -13,8 +13,7 @@
             <div class="col s12 m4 festival">
                 <div class="row search">
                     <div class="input-field">
-
-                        {# TODO: search bar in Ajax && create form builder #}
+                        <!--Search bar in Ajax & create form builder -->
                         <form id="searchBar" action="{{ path('search_bar') }}" method="POST">
                             <input
                                     type="text"
@@ -24,10 +23,10 @@
                                     data-url="{{ path('autocomplete_home') }}">
                             <label for="autocomplete-input">Search by festival, genre, artist</label>
                         </form>
+                        <!-- Switch -->
                         <div class="center-align hide-on-med-and-up">
                             <button id="switch">Change View</button>
                         </div>
-                        <!-- Switch -->
                     </div>
                 </div>
                 <div id="festival-cards" class="row festival-cards">
@@ -43,7 +42,6 @@
         <!--.row -->
     </div>
     <!--.discover -->
-
 {% endblock %}
 
 {% block footer %}

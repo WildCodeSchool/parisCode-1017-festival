@@ -2,10 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Artist;
 use AppBundle\Entity\Concert;
-use AppBundle\Entity\Location;
-use AppBundle\Services\GoogleMaps;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -75,7 +72,7 @@ class ConcertController extends Controller
 
         // if concert already got a clone
         $hasClone = $em->getRepository('AppBundle:Concert')->findOneByConcert($concert);
-        $error = ['clone' => 'This concert is currently in edition by admin.'];
+        $error = ['clone'];
         if ($hasClone){
             return $this->render('concert/index.html.twig', array(
                 'error' => $error
@@ -105,7 +102,7 @@ class ConcertController extends Controller
             $em->persist($concertClone);
             $em->flush();
 
-            return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
+            return $this->redirectToRoute('concert_edit', array('concert_id' => $concert->getId(), 'festival_id' => $concert->getFestival()->getId()));
         }
 
         return $this->render('concert/index.html.twig', array(

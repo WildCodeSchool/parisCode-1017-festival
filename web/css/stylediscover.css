@@ -97,6 +97,7 @@ h3{
 .search {
     background-color: white;
     padding-top: 2vh;
+    padding-bottom: 2vh;
     position: fixed;
     z-index: 3;
     top: 8vh;

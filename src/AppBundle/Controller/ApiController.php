@@ -2,15 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use AppBundle\Entity\Wishlist;
 use AppBundle\Services\GoogleMaps;
-use GuzzleHttp\Client;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,7 +76,7 @@ class ApiController extends Controller
             $results = $em->getRepository(Festival::class)->searchBy($search);
 
             if ($results == null){
-                $template = "<p>No result</p>";
+                $template = "<p>No festivals found.</p>";
             } else {
                 $template = $this->renderView('default/includes/festivalCard.html.twig', array(
                     'festivals' => $results,

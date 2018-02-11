@@ -89,9 +89,9 @@ easy_admin:
                     - id
                     - { property: 'imageIcon', type: 'image' }
                     - title
-                    - isCancelled
-                    - isSoldOut
+                    - { property: 'location.name', type: 'text', label: 'Location' }
                     - isValid
+                    - { property: 'festival', type: 'text', label: 'Clone of' }
             form:
                 fields:
                     - title
@@ -122,6 +122,7 @@ easy_admin:
                     - artist
                     - festival
                     - { property: 'location.name', type: 'text', label: 'Location' }
+                    - { property: 'concert', type: 'text', label: 'Clone of' }
             form:
                 fields:
                     - title

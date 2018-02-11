@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Festival;
-use AppBundle\Services\GoogleMaps;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -60,7 +59,7 @@ class FestivalController extends Controller
 
         // if festival already got a clone
         $hasClone = $em->getRepository('AppBundle:Festival')->findOneByFestival($festival);
-        $error = ['clone' => 'This festival is currently in edition by admin.'];
+        $error = ['clone'];
         if ($hasClone){
             return $this->render('festival/index.html.twig', array(
                 'error' => $error

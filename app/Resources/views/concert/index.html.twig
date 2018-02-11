@@ -15,7 +15,10 @@
     </div>
 
     {% if error is defined %}
-        {{ error.clone }}
+        <div class="center-align">
+            <p>Thanks for helping out! This concert is now being updated by admin.</p>
+            <a href="{{ path('discover') }}" class="center-align">Return to Map</a>
+        </div>
     {% else %}
 
     <div class="card">

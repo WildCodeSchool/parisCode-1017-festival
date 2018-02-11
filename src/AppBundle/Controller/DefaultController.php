@@ -2,14 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Artist;
-use AppBundle\Entity\Genre;
-use AppBundle\Entity\Location;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Festival;
 
 class DefaultController extends Controller
 {
@@ -29,7 +25,7 @@ class DefaultController extends Controller
      * @Route("/discover", name="discover")
      * @Method("GET")
      */
-    public function discoverAction()
+    public function discoverAction(Request $request)
     {
         $user = $this->getUser();
 
