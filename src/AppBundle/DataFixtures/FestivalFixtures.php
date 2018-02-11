@@ -26,7 +26,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival1->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
         $festival1->setIsCancelled(0);
         $festival1->setIsSoldOut(0);
-        $festival1->setIsValid(0);
+        $festival1->setIsValid(1);
         $festival1->setLocation($this->getReference('Reeperbahn, Hambourg, Allemagne'));
         $festival1->setGenre($this->getReference('General'));
         $manager->persist($festival1);
@@ -34,12 +34,13 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival2 = new Festival();
         $festival2->setTitle('Bateau Music Festival');
         $festival2->setDescription('...');
-        $festival2->setLocation($this->getReference('21 chemin de la Basse Boissière, 78490 Les Mesnuls, France'));
-        $festival2->setGenre($this->getReference('General'));
         $festival2->setLinkWebsite('http://www.bateaumusic.com');
         $festival2->setLinkFbPage('https://www.facebook.com/bateaumusic');;
         $festival2->setImageIcon('https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/16864557_1276073765846890_1246899853149261249_n.png?oh=3107e54e3468a5d58c61eb4e1ba779e2&oe=5AB20A60');
         $festival2->setImageBanner('https://cdn.2017bestnine.com/user_images/bateau.music.jpg');
+        $festival2->setIsValid(1);
+        $festival2->setLocation($this->getReference('21 chemin de la Basse Boissière, 78490 Les Mesnuls, France'));
+        $festival2->setGenre($this->getReference('General'));
         $manager->persist($festival2);
 
         $festival3 = new Festival();
@@ -57,7 +58,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival3->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
         $festival3->setIsCancelled(0);
         $festival3->setIsSoldOut(0);
-        $festival3->setIsValid(0);
+        $festival3->setIsValid(1);
         $festival3->setLocation($this->getReference('75014 Paris, France'));
         $festival3->setGenre($this->getReference('General'));
         $manager->persist($festival3);
@@ -77,7 +78,7 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $festival4->setImageBanner('https://2017bestnine.s3-us-west-2.amazonaws.com/user_images/reeperbahn_festival.jpg');
         $festival4->setIsCancelled(0);
         $festival4->setIsSoldOut(0);
-        $festival4->setIsValid(0);
+        $festival4->setIsValid(1);
         $festival4->setLocation($this->getReference('75010 Paris, France'));
         $festival4->setGenre($this->getReference('General'));
         $manager->persist($festival4);

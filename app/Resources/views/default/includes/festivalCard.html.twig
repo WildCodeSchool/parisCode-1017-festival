@@ -98,25 +98,27 @@
                                         <ul class="collection">
                                             {% if festival.concert %}
                                                 {% for concert in festival.concert %}
-                                                    <li class="collection-item avatar">
-                                                        <i class="material-icons circle deep-purple lighten-2">people</i>
-                                                        <h3 class="left-align">{{ concert.artist }}</h3>
-                                                        <p class="left-align truncate">{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}<br>
-                                                            {% if concert.location %}{{ concert.location }}{% endif %}
-                                                        </p>
-                                                        <!-- Add/remove to/from wishlist -->
-                                                        {% if app.user is not null %}
-                                                            {% if user.wishlist is not empty %}
-                                                                {% if concert in user.wishlist.concert %}
-                                                                    <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
-                                                                {% else %}
-                                                                    <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                    {% if concert.isValid == true %}
+                                                        <li class="collection-item avatar">
+                                                            <i class="material-icons circle deep-purple lighten-2">people</i>
+                                                            <h3 class="left-align">{{ concert.artist }}</h3>
+                                                            <p class="left-align truncate">{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}<br>
+                                                                {% if concert.location %}{{ concert.location }}{% endif %}
+                                                            </p>
+                                                            <!-- Add/remove to/from wishlist -->
+                                                            {% if app.user is not null %}
+                                                                {% if user.wishlist is not empty %}
+                                                                    {% if concert in user.wishlist.concert %}
+                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                    {% else %}
+                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                    {% endif %}
                                                                 {% endif %}
+                                                            {% else %}
+                                                                <a class="secondary-content" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                                             {% endif %}
-                                                        {% else %}
-                                                            <a class="secondary-content" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
-                                                        {% endif %}
-                                                    </li>
+                                                        </li>
+                                                    {% endif %}
                                                 {% endfor %}
                                             {% else %}N/A
                                             {% endif %}

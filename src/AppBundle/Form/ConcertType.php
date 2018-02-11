@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Festival;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,10 +23,21 @@ class ConcertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['type'] == 'edit') {
+//            $builder->add('isCancelled', ChoiceType::class, array(
+//                'choices' => array(
+//                    'No' => 0,
+//                    'Yes' => 1
+//                ),
+//                'expanded' => true,
+//                'multiple' => false,
+//                'required' => true,
+//                'data' => 0
+//            ));
             $builder->add('isCancelled', TextType::class, array(
-                'label' => 'Cancelled?',
+                'label' => 'Is it cancelled?',
                 'required' => false
             ));
+           ;
         }
 
         $builder

@@ -54,27 +54,28 @@ class FestivalController extends Controller
      */
     public function editAction(Request $request, Festival $festival)
     {
+        // get concerts infos in render
         $em = $this->getDoctrine()->getManager();
+        $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
         // if festival already got a clone
-        $festivalclone = $em->getRepository('AppBundle:Festival')->findOneByFestival($festival);
+        $hasClone = $em->getRepository('AppBundle:Festival')->findOneByFestival($festival);
         $error = ['clone' => 'This festival is currently in edition by admin.'];
-        if ($festivalclone){
+        if ($hasClone){
             return $this->render('festival/index.html.twig', array(
                 'error' => $error
             ));
         }
 
+        // set form with clone
         $festivalEdit = clone $festival;
-        $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
         $editForm = $this->createForm('AppBundle\Form\FestivalType', $festivalEdit, ['type' => 'edit']);
-
-        $festivalEdit->setFestival($festival);
-
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $festivalEdit->setFestival($festival);
 
             $em->persist($festivalEdit);
             $em->flush();
