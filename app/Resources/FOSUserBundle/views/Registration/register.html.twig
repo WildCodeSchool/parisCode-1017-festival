@@ -57,10 +57,7 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix">map</i>
                     {{ form_label(form.location.address) }}
-                    <input id="autocomplete"
-                           onFocus="geolocate()" type="text">
-                    </input>
-                    {#{{ form_widget(form.location.address) }}#}
+                    {{ form_widget(form.location.address) }}
                     {{ form_errors(form.location.address) }}
             </div>
         </div>
@@ -83,16 +80,22 @@
 {% endblock body %}
 
 {% block javascripts %}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA&libraries=places&callback=initAutocomplete" async defer></script>
+
     <script>
 
         function initAutocomplete() {
             // Create the autocomplete object, restricting the search to geographical
             // location types.
             autocomplete = new google.maps.places.Autocomplete(
-                /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+                /** @type {!HTMLInputElement} */(document.getElementById('app_user_account_location_address')),
                 {types: ['geocode']});
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
         }
+
     </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA&libraries=places&callback=initAutocomplete" async defer></script>
 
 {% endblock javascripts %}
