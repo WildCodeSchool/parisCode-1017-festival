@@ -47,8 +47,13 @@ class UserType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),))
             ->add('location', LocationType::class, array(
-                    'required' => false
-                ))
+                'required' => false,
+                'attr' => array(
+                    'id' => 'autocomplete',
+                    'onFocus' => 'geolocate()',
+                    'placeholder' => 'Location',
+                    'type' => 'text'
+                )))
             ->add('imageIcon', TextType::class, array(
                 'label' => 'Your picture',
                 'required' => false,

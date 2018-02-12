@@ -1,0 +1,100 @@
+@keyframes scroll-numbers{
+    from{
+        top:0;
+    }
+    to{
+        top:-30em;
+    }
+}
+
+body {
+    font-family: "Roboto", Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.roulette-title {
+    position: absolute;
+    top:7vh;
+    text-align: center;
+    font-size: 2em;
+    padding: 0.5em;
+    background-color: teal;
+    color: white;
+    width: 100vw;
+    z-index: 500;
+    text-transform: uppercase;
+}
+
+#map-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.spinner {
+    margin: 0;
+    font-size: 1.5em;
+    position: absolute;
+    bottom: -40vh;
+    left: 25vw;
+    width: 50vw;
+    z-index: 100;
+}
+
+.roulette-footer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15vw;
+    height: 100%;
+}
+
+.roulette-footer .stop {
+    width: 100%;
+    height: 2em;
+    background-color: darkorange;
+}
+
+
+.stop {
+    display: block;
+    margin: 0;
+    line-height: 1.5em;
+    font-size: 1em;
+    width: 100%;
+    border: 0 none;
+    color: white;
+    text-transform: uppercase;
+    outline: 0 none;
+}
+
+.roller {
+    background: teal;
+    color: white;
+    font-weight: bold;
+    width: 35vw;
+    height: 2em;
+    position: relative;
+    overflow: hidden;
+}
+
+.roulette-ul {
+    width: 100%;
+    position: absolute;
+    font-size: 1em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+    height: 2em;
+}
+
+.roulette-ul li {
+    display: block;
+    text-align: center;
+}
+
