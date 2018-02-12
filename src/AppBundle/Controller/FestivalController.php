@@ -45,6 +45,18 @@ class FestivalController extends Controller
     }
 
     /**
+     * Page: Show a festival.
+     *
+     * @Route("/{festival_id}", name="festival_show", requirements={"festival_id": "\d+"}))
+     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
+     * @Method({"GET", "POST"})
+     */
+    public function showAction(Festival $festival)
+    {
+       // TODO: one page per festival
+    }
+
+    /**
      * Page: Edit a festival.
      *
      * @Route("/{festival_id}/edit", name="festival_edit", requirements={"festival_id": "\d+"}))

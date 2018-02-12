@@ -103,8 +103,11 @@
                 imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
             );
 
+
             if (typeof reload !== 'undefined'){
                 map.fitBounds(bounds);
+
+                map.setZoom(10);
                 map.panToBounds(bounds);
             }
         }
