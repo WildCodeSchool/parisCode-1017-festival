@@ -75,6 +75,15 @@ class ApiController extends Controller
             $em = $this->getDoctrine()->getManager();
             $results = $em->getRepository(Festival::class)->searchBy($search);
 
+            $locations = array();
+            foreach ($results as $festival){
+                $locations[] = [
+                    "lat" => $festival->getLocation()->getLatitude(),
+                    "lng" => $festival->getLocation()->getLongitude(),
+                    "info" => "<a class='modal-trigger' href='#modal" . $festival->getId() . "b'>" . $festival->getTitle() . "</a>"
+                    ];
+            }
+
             if ($results == null){
                 $template = "<p>No festivals found.</p>";
             } else {
@@ -84,7 +93,7 @@ class ApiController extends Controller
                 ));
             }
 
-            return new JsonResponse($template);
+            return new JsonResponse(array("festivals" => $template, "locations" => $locations));
 
         } else {
             throw new HttpException('not an ajax request', 500);

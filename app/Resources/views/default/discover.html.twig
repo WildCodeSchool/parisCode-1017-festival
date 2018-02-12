@@ -50,9 +50,21 @@
 {% block javascripts %}
     <!--GoogleMaps script -->
     <script>
-        function initMap() {
 
-            var map = new google.maps.Map(document.getElementById('map'), {
+        var map;
+        var markerCluster;
+        var markers = [];
+
+        locations = [
+                {% for festival in festivals %}{
+                lat: {{ festival.location.latitude }},
+                lng: {{ festival.location.longitude }},
+                info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'
+            },{% endfor %}
+        ];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
                     {% if user.location.latitude is defined %}
@@ -62,41 +74,49 @@
                         lat: 48.864716,
                         lng: 2.349014
                     {% endif %}
-                }
+        }
             });
-            // Create an array of alphabetical characters used to label the markers.
-            var labels = [
-            ];
 
+            addMarker(locations);
+        }
+
+        function addMarker(locations, reload){
+            var labels = [];
+            var bounds = new google.maps.LatLngBounds();
             var infoWin = new google.maps.InfoWindow();
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-            var markers = locations.map(function(location, i) {
+            locations.map(function(location, i) {
                 var marker = new google.maps.Marker({
                     position: location,
-                    label: labels[i % labels.length]
+                    label: labels[i % labels.length],
+                    map: map,
+                    animation: google.maps.Animation.DROP,
                 });
+                bounds.extend(marker.position);
                 google.maps.event.addListener(marker, 'click', function() {
                     infoWin.setContent(location.info);
                     infoWin.open(map, marker);
                 });
-                return marker;
+                markers.push(marker);
             });
 
-            // markerCluster.setMarkers(markers);
-            // Add a marker clusterer to manage the markers.
-            var markerCluster = new MarkerClusterer(map, markers, {
-                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            markerCluster = new MarkerClusterer(map, markers, {
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
+            );
+
+            if (typeof reload !== 'undefined'){
+                map.fitBounds(bounds);
+                map.panToBounds(bounds);
+            }
         }
-        var locations = [
-                {% for festival in festivals %}{
-                lat: {{ festival.location.latitude }},
-                lng: {{ festival.location.longitude }},
-                info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'
-            },{% endfor %}
-        ];
+
+        function deleteMarkers() {
+            markerCluster.clearMarkers();
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markerCluster = null;
+            markers = [];
+        }
 
 
     </script>
@@ -135,8 +155,11 @@
                 data: {'search': search},
                 timeout: 2000,
                 success: function(response){
-                    $("#festival-cards").html(response);
+                    $("#festival-cards").html(response.festivals);
                     $('.modal').modal();
+                    locations = response.locations;
+                    deleteMarkers();
+                    addMarker(locations, true);
                 },
                 error: function(error){
                     console.log(error)
