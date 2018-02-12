@@ -40,13 +40,15 @@ class LocationListener
             return;
         }
 
-        $location = $this->address->regularGeocoding($entity->getAddress());
+        $location = $this->address->nameGeocoding($entity->getAddress());
 
         if ($location != 'error'){
+            $entity->setName($location['name']);
             $entity->setLatitude($location['lat']);
             $entity->setLongitude($location['lng']);
         } else {
-            $entity->setAddress('Your address is not valid');
+            $entity->setName('Unknown address');
+            $entity->setAddress('');
             $entity->setLatitude(48.864716);
             $entity->setLongitude(2.349014);
         }

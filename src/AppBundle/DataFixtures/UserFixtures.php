@@ -26,7 +26,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user2->setEnabled(1);
         $user2->setPlainPassword('amandine');
         $user2->setRoles(array('ROLE_USER'));
-        $user2->setLocation($this->getReference('75014 Paris, France'));
         $manager->persist($user2);
 
         $user3 = new User();
@@ -35,7 +34,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user3->setEnabled(1);
         $user3->setPlainPassword('agathe');
         $user3->setRoles(array('ROLE_USER'));
-        $user3->setLocation($this->getReference('75010 Paris, France'));
         $manager->persist($user3);
 
         $user4 = new User();
@@ -52,7 +50,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user5->setEnabled(1);
         $user5->setPlainPassword('ln-t');
         $user5->setRoles(array('ROLE_USER'));
-        $user5->setLocation($this->getReference('Micronésie'));
         $manager->persist($user5);
 
         $manager->flush();

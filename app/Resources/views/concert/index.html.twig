@@ -15,7 +15,10 @@
     </div>
 
     {% if error is defined %}
-        {{ error.clone }}
+        <div class="center-align">
+            <p>Thanks for helping out! This concert is now being updated by admin.</p>
+            <a href="{{ path('discover') }}" class="center-align">Return to Map</a>
+        </div>
     {% else %}
 
     <div class="card">
@@ -71,15 +74,23 @@
                         <!--TimeStart -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
+                            {% if form.start.vars.data is defined %}
+                            {{ form_widget(form.timestart, {'value' : form.start.vars.data|date('H:i')}) }}
+                            {% else %}
                             {{ form_label(form.timestart) }}
                             {{ form_widget(form.timestart) }}
+                            {% endif %}
                             {{ form_errors(form.timestart) }}
                         </div>
                         <!--TimeEnd -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
-                            {{ form_label(form.timeend) }}
-                            {{ form_widget(form.timeend) }}
+                            {% if form.start.vars.data is defined %}
+                                {{ form_widget(form.timeend, {'value' : form.end.vars.data|date('H:i')}) }}
+                            {% else %}
+                                {{ form_label(form.timeend) }}
+                                {{ form_widget(form.timeend) }}
+                            {% endif %}
                             {{ form_errors(form.timeend) }}
                         </div>
                     </div>
@@ -97,6 +108,7 @@
                     <div class="row center-align">
                         <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'concert_new' ? 'Create' : 'Edit' }}>
                     </div>
+
                     {{ form_end(form) }}
                 </div>
                 <!-- .FORM -->
@@ -146,11 +158,11 @@
                 closeOnSelect: true // Close upon selecting a date,
             });
             $('.timepicker').pickatime({
-                default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+                default: '00:00', // Set default time: 'now', '1:30AM', '16:30'
                 fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
                 twelvehour: true, // Use AM/PM or 24-hour format
                 donetext: 'OK', // text for done-button
-                cleartext: 'Clear', // text for clear-button
+                // cleartext: 'Clear', // text for clear-button
                 canceltext: 'Cancel', // Text for cancel-button
                 autoclose: true, // automatic close timepicker
                 ampmclickable: true, // make AM PM clickable

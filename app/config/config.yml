@@ -89,15 +89,15 @@ easy_admin:
                     - id
                     - { property: 'imageIcon', type: 'image' }
                     - title
-                    - isComplete
-                    - isSoldOut
+                    - { property: 'location.name', type: 'text', label: 'Location' }
                     - isValid
+                    - { property: 'festival', type: 'text', label: 'Clone of' }
             form:
                 fields:
                     - title
                     - description
                     - { property: 'genre'}
-                    - { property: 'location'}
+                    - { property: 'location', type: 'AppBundle\Form\LocationType' }
                     - { property: 'start', type: 'date' }
                     - { property: 'end', type: 'date' }
                     - budget
@@ -110,7 +110,7 @@ easy_admin:
                     - { property: 'imageIcon', type: 'url' }
                     - { property: 'imageBanner', type: 'url' }
                     - { type: 'group' }
-                    - isComplete
+                    - isCancelled
                     - isSoldOut
                     - isValid
         Concert:
@@ -121,7 +121,20 @@ easy_admin:
                     - id
                     - artist
                     - festival
-                    - location
+                    - { property: 'location.name', type: 'text', label: 'Location' }
+                    - { property: 'concert', type: 'text', label: 'Clone of' }
+            form:
+                fields:
+                    - title
+                    - { property: 'start', type: 'date' }
+                    - { property: 'end', type: 'date' }
+                    - { property: 'artist', type: 'AppBundle\Form\ArtistType' }
+                    - { property: 'location', type: 'AppBundle\Form\LocationType' }
+                    - festival
+                    - concert
+                    - { type: 'group' }
+                    - isCancelled
+                    - isValid
         User:
             class: AppBundle\Entity\User
             label: 'Users'
@@ -130,6 +143,13 @@ easy_admin:
                     - id
                     - username
                     - email
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - { property: 'location', type: 'AppBundle\Form\LocationType' }
+
         Wishlist:
             class: AppBundle\Entity\Wishlist
             label: 'Wishlists'

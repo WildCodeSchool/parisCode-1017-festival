@@ -29,7 +29,7 @@ class FestivalType extends AbstractType
     {
         if ($options['type'] == 'edit') {
             $builder->add('isCancelled', TextType::class, array(
-                'label' => 'Cancelled?',
+                'label' => 'Is it cancelled?',
                 'required' => false
             ));
         }
@@ -56,6 +56,7 @@ class FestivalType extends AbstractType
             ->add('genre', GenreType::class)
             ->add('budget', NumberType::class, array(
                 'label' => 'Amount',
+                'required' => false,
                 'attr' => array(
                     'id' => 'icon_prefix',
                     'type' => 'number'

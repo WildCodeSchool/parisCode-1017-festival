@@ -22,6 +22,15 @@ class Location
      */
     private $id;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=250)
+     *
+     */
+    private $name;
+
     /**
      * @var string
      *
@@ -58,6 +67,22 @@ class Location
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -107,5 +132,4 @@ class Location
     {
         $this->longitude = $longitude;
     }
-
 }

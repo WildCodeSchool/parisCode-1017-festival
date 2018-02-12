@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Festival;
-use AppBundle\Services\GoogleMaps;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -46,6 +45,18 @@ class FestivalController extends Controller
     }
 
     /**
+     * Page: Show a festival.
+     *
+     * @Route("/{festival_id}", name="festival_show", requirements={"festival_id": "\d+"}))
+     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
+     * @Method({"GET", "POST"})
+     */
+    public function showAction(Festival $festival)
+    {
+       // TODO: one page per festival
+    }
+
+    /**
      * Page: Edit a festival.
      *
      * @Route("/{festival_id}/edit", name="festival_edit", requirements={"festival_id": "\d+"}))
@@ -54,27 +65,28 @@ class FestivalController extends Controller
      */
     public function editAction(Request $request, Festival $festival)
     {
+        // get concerts infos in render
         $em = $this->getDoctrine()->getManager();
+        $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
         // if festival already got a clone
-        $festivalclone = $em->getRepository('AppBundle:Festival')->findOneByFestival($festival);
-        $error = ['clone' => 'This festival is currently in edition by admin.'];
-        if ($festivalclone){
+        $hasClone = $em->getRepository('AppBundle:Festival')->findOneByFestival($festival);
+        $error = ['clone'];
+        if ($hasClone){
             return $this->render('festival/index.html.twig', array(
                 'error' => $error
             ));
         }
 
+        // set form with clone
         $festivalEdit = clone $festival;
-        $concerts = $em->getRepository('AppBundle:Concert')->findBy(array('festival' => $festival->getId()));
 
         $editForm = $this->createForm('AppBundle\Form\FestivalType', $festivalEdit, ['type' => 'edit']);
-
-        $festivalEdit->setFestival($festival);
-
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $festivalEdit->setFestival($festival);
 
             $em->persist($festivalEdit);
             $em->flush();

@@ -7,7 +7,6 @@ use AppBundle\Entity\Concert;
 use AppBundle\Entity\Festival;
 use AppBundle\Entity\Genre;
 use AppBundle\Entity\Location;
-use AppBundle\Entity\User;
 use AppBundle\Entity\Wishlist;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -64,8 +63,6 @@ class WishlistController extends Controller
      */
     public function concertAction(Request $request, Concert $concert_id, Wishlist $wishlist)
     {
-        // TODO : All - Ajax - rafraichir apparence icon en direct
-
         if ($request->isXmlHttpRequest()){
             $em = $this->getDoctrine()->getManager();
 
@@ -95,8 +92,6 @@ class WishlistController extends Controller
      */
     public function artistAction(Artist $artist_id, Wishlist $wishlist)
     {
-        // TODO : All - Ajax - rafraichir apparence icon en direct
-
         $em = $this->getDoctrine()->getManager();
 
         $array = (array) $wishlist->getArtist()->getValues();
@@ -121,8 +116,6 @@ class WishlistController extends Controller
      */
     public function genreAction(Genre $genre_id, Wishlist $wishlist)
     {
-        // TODO : All - Ajax - rafraichir apparence icon en direct
-
         $em = $this->getDoctrine()->getManager();
 
         $array = (array) $wishlist->getGenre()->getValues();
@@ -147,8 +140,6 @@ class WishlistController extends Controller
      */
     public function locationAction(Location $location_id, Wishlist $wishlist)
     {
-        // TODO : All - Ajax - rafraichir apparence icon en direct
-
         $em = $this->getDoctrine()->getManager();
 
         $array = (array) $wishlist->getLocation()->getValues();

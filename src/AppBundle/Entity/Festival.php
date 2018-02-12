@@ -164,6 +164,8 @@ class Festival
     public function __clone()
     {
         $this->id = null;
+        $this->location = clone $this->getLocation();
+        $this->genre = clone $this->getGenre();
         $this->isValid = false;
         return $this;
     }

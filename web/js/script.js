@@ -2,5 +2,4 @@
 $('#fullpage').fullpage({
     sectionSelector: '.vertical-scrolling',
     anchors: ['firstPage', 'secondPage']
-
 });
