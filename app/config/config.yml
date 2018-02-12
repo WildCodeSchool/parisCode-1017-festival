@@ -147,6 +147,7 @@ easy_admin:
                 fields:
                     - username
                     - email
+                    - enabled
                     - { property: 'location', type: 'AppBundle\Form\LocationType' }
 
         Wishlist:
