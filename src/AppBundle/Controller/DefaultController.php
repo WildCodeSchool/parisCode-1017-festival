@@ -37,4 +37,21 @@ class DefaultController extends Controller
             'festivals' => $festivals,
         ));
     }
+
+    /**
+     * Page: Maps, cards, and search bar for all festivals.
+     *
+     * @Route("/roulette", name="roulette")
+     * @Method("GET")
+     */
+    public function rouletteAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $festivals = $em->getRepository('AppBundle:Festival')->findAll();
+
+        return $this->render('default/roulette.html.twig', array(
+            'festivals' => $festivals,
+        ));
+    }
 }

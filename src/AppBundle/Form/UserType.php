@@ -46,9 +46,7 @@ class UserType extends AbstractType
                     'data-length' => '30'),
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),))
-            ->add('location', LocationType::class, array(
-                    'required' => false
-                ))
+            ->add('location', LocationType::class)
             ->add('imageIcon', TextType::class, array(
                 'label' => 'Your picture',
                 'required' => false,
