@@ -17,7 +17,7 @@
     {% if error is defined %}
         <div class="center-align">
             <p>Thanks for helping out! This festival is now being updated by admin.</p>
-            <a href="{{ path('discover') }}" class="center-align">Return to Map</a>
+            <a href="{{ path('discover') }}" class="center-align">Return to Discover</a>
         </div>
     {% else %}
 
@@ -181,7 +181,7 @@
                             <td>{% if concert.start %}{{ concert.start|date('Y-m-d H:i:s') }}{% endif %}</td>
                             <td>{% if concert.end %}{{ concert.end|date('Y-m-d H:i:s') }}{% endif %}</td>
                             <td>{{ concert.artist }}</td>
-                            <td>{{ concert.location }}</td>
+                            <td>{% if concert.location.name is defined %}{{ concert.location.name }}{% endif %}</td>
                             <td><a href="{{ path('concert_edit', { 'concert_id': concert.id, 'festival_id': concert.festival.id }) }}">edit</a></td>
                         </tr>
                     {% endfor %}
@@ -247,6 +247,24 @@
                 aftershow: function(){} //Function for after opening timepicker
             });
         });
+    </script>
+
+    <script>
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** @type {!HTMLInputElement} */(document.getElementById('appbundle_festival_location_address')),
+                // {types: ['geocode']} /** NB LN-T Remove to get places autocomplete
+                );
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+    </script>
+
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&libraries=places&callback=initAutocomplete' }}>
     </script>
 
 {% endblock javascripts %}

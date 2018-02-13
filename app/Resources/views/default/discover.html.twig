@@ -56,18 +56,20 @@
         var markers = [];
 
         locations = [
-                {% for festival in festivals %}{
-                lat: {{ festival.location.latitude }},
-                lng: {{ festival.location.longitude }},
-                info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'
-            },{% endfor %}
+            {% for festival in festivals %}
+                {% if festival.location.latitude is not null %}{
+                    lat: {{ festival.location.latitude }},
+                    lng: {{ festival.location.longitude }},
+                    info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'}
+                {% endif %},
+            {% endfor %}
         ];
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if user.location.latitude is defined %}
+                    {% if user.location.latitude and user.location.longitude is not null %}
                         lat: {{ user.location.latitude }},
                         lng: {{ user.location.longitude }}
                     {% else %}

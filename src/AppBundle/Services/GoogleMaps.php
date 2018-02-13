@@ -2,6 +2,7 @@
 
 namespace AppBundle\Services;
 
+use AppBundle\Entity\Location;
 use GuzzleHttp\Client;
 
 class GoogleMaps
@@ -14,51 +15,60 @@ class GoogleMaps
     }
 
     /**
+     * Format form address into lat/lng/name if exists. Else, no lat/lng. If empty, nothing.
+     *
      * @param $formattedaddress
      * @return string
      */
-    public function regularGeocoding($formattedaddress){
+    public function regularGeocoding($formattedaddress)
+    {
+        $location['address'] = $formattedaddress;
+        $location['name'] = $formattedaddress;
+        $location['lat'] = null;
+        $location['lng'] = null;
 
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedaddress . '&key=' . $this->api_google;
+        if (!empty($formattedaddress)) {
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $formattedaddress . '&key=' . $this->api_google;
 
-        $client = new Client();
-        $google = $client->request("GET", $url);
-        $google = json_decode($google->getBody()->getContents());
+            $client = new Client();
+            $google = $client->request("GET", $url);
+            $google = json_decode($google->getBody()->getContents());
 
-        if (isset($google->results[0])) {
-            $location['lat'] = $google->results[0]->geometry->location->lat;
-            $location['lng'] = $google->results[0]->geometry->location->lng;
-            $location['place_id'] = $google->results[0]->place_id;
-            return $location;
-        }else {
-            return 'error';
+            if (isset($google->results[0]->geometry->location)) {
+                $location['lat'] = $google->results[0]->geometry->location->lat;
+                $location['lng'] = $google->results[0]->geometry->location->lng;
+            }
+            if (isset($google->results[0]->place_id)) {
+                $location['name'] = $this->nameGeocoding($google->results[0]->place_id);
+            }
         }
+        return $location;
     }
 
     /**
+     * Rename place_id into Place name
+     *
      * @param $formattedaddress
      * @return string
      */
-    public function nameGeocoding($formattedaddress){
+    public function nameGeocoding($place_id){
 
-        $location = $this->regularGeocoding($formattedaddress);
-
-        $url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' . $location['place_id'] . '&key=' . $this->api_google;
+        $url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' . $place_id . '&key=' . $this->api_google;
 
         $client = new Client();
         $google = $client->request("GET", $url);
+
         $google = json_decode($google->getBody()->getContents());
 
         if (isset($google->result->name)) {
             $location['name'] = $google->result->name;
-            return $location;
-        }
-        else {
-            return 'error';
+            return $location['name'];
         }
     }
 
     /**
+     * Reverse geocoding lat/lng into address
+     *
      * @param $lat
      * @param $lng
      * @return mixed

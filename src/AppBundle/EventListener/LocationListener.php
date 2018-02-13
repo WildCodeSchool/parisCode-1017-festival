@@ -2,6 +2,7 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Entity\Festival;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Entity\Location;
@@ -40,17 +41,12 @@ class LocationListener
             return;
         }
 
-        $location = $this->address->nameGeocoding($entity->getAddress());
-
-        if ($location != 'error'){
+        if (!empty($entity)){
+            $location = $this->address->regularGeocoding($entity->getAddress());
             $entity->setName($location['name']);
+            $entity->setAddress($location['address']);
             $entity->setLatitude($location['lat']);
             $entity->setLongitude($location['lng']);
-        } else {
-            $entity->setName('Unknown address');
-            $entity->setAddress('');
-            $entity->setLatitude(48.864716);
-            $entity->setLongitude(2.349014);
         }
     }
 }

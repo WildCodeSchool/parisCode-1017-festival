@@ -17,22 +17,22 @@
     {% if error is defined %}
         <div class="center-align">
             <p>Thanks for helping out! This concert is now being updated by admin.</p>
-            <a href="{{ path('discover') }}" class="center-align">Return to Map</a>
+            <a href="{{ path('discover') }}" class="center-align">Return to Discover</a>
         </div>
     {% else %}
 
     <div class="card">
         <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
-                <li class="tab disabled"><a href="#test4">General</a></li>
-                <li class="tab"><a class="active" href="#test5">Line Up</a></li>
+                <li class="tab disabled"><a href="#general">General</a></li>
+                <li class="tab"><a class="active" href="#lineup">Line Up</a></li>
 
             </ul>
         </div>
         <div class="card-content">
-            <div id="test4">
+            <div id="general">
             </div>
-            <div id="test5">
+            <div id="lineup">
                 <!--FORM -->
                 <div class="row">
                     {{ form_start(form) }}
@@ -74,7 +74,7 @@
                         <!--TimeStart -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
-                            {% if form.start.vars.data is defined %}
+                            {% if form.start.vars.data is not null %}
                             {{ form_widget(form.timestart, {'value' : form.start.vars.data|date('H:i')}) }}
                             {% else %}
                             {{ form_label(form.timestart) }}
@@ -85,7 +85,7 @@
                         <!--TimeEnd -->
                         <div class="input-field col s6">
                             <i class="material-icons prefix">access_time</i>
-                            {% if form.start.vars.data is defined %}
+                            {% if form.start.vars.data is not null %}
                                 {{ form_widget(form.timeend, {'value' : form.end.vars.data|date('H:i')}) }}
                             {% else %}
                                 {{ form_label(form.timeend) }}
@@ -171,5 +171,23 @@
         });
     </script>
     <!--.Autocomplete location and genre -->
+
+    <script>
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** @type {!HTMLInputElement} */(document.getElementById('appbundle_concert_location_address')),
+                // {types: ['geocode']} /** NB LN-T Remove to get places autocomplete
+            );
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+    </script>
+
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&libraries=places&callback=initAutocomplete' }}>
+    </script>
 
 {% endblock javascripts %}
