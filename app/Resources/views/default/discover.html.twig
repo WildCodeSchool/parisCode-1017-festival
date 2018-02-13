@@ -23,12 +23,20 @@
                                     data-url="{{ path('autocomplete_home') }}">
                             <label for="autocomplete-input">Search by festival, genre or artist</label>
                         </form>
-                        <!-- Switch -->
-                        <div class="center-align hide-on-med-and-up">
-                            <button id="switch">Change View</button>
-                        </div>
                     </div>
+
+                    <!-- Switch -->
+                    <div class="switch center">
+                        <label>
+                            Map
+                            <input id="switch" type="checkbox">
+                            <span class="lever"></span>
+                            Festival
+                        </label>
+                    </div>
+
                 </div>
+
                 <div id="festival-cards" class="row festival-cards">
                     {% include ('default/includes/festivalCard.html.twig') %}
                 </div>

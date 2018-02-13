@@ -33,9 +33,14 @@ class ConcertType extends AbstractType
 //                'required' => true,
 //                'data' => 0
 //            ));
-            $builder->add('isCancelled', TextType::class, array(
+            $builder->add('isCancelled', ChoiceType::class, array(
+                'choices'  => array(
+                    'Yes' => true,
+                    'No' => false,
+                ),
+                'expanded' => true,
+                'multiple' => false,
                 'label' => 'Is it cancelled?',
-                'required' => false
             ));
            ;
         }
