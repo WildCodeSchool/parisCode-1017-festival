@@ -5,12 +5,13 @@
 {% endblock %}
 
 {% block body %}
-<h2 class="roulette-title">Where should I go ?</h2>
+    <h2 class="roulette-title">Where should I go ?</h2>
 <section class="spinner">
+
     <div class="roller">
         <ul class="roulette-ul">
             {% for festival in festivals %}
-            <li>{{ festival.title }}</li>
+            <li data-city="{{ festival.location.address }}">{{ festival.title }}</li>
             {% endfor %}
         </ul>
     </div>
@@ -47,7 +48,7 @@
 
             function stop(){
                 var randomIndex = pickRandomIndex();
-                var city = $($(".roller li").get(randomIndex)).text();
+                var city = $($(".roller li").get(randomIndex)).data('city');
                 var top = (randomIndex * -2);
                 $(".roller ul").css({  "top": top+"em", "animation": "none"  });
                 geocodeAddress(city);
@@ -55,7 +56,7 @@
             }
 
             function pickRandomIndex(){
-                return Math.floor(Math.random() * ($(".roller li").length - 1 + 1));
+                return Math.floor(Math.random() * ($(".roller li").data('city').length - 1 + 1));
             }
 
             function initialize() {
@@ -67,7 +68,7 @@
                     disableDefaultUI: true
                 }
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                geocodeAddress("Paris, FR");
+
             }
 
             function geocodeAddress(addr) {

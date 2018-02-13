@@ -49,7 +49,7 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $festivals = $em->getRepository('AppBundle:Festival')->findAll();
-
+        shuffle($festivals);
         return $this->render('default/roulette.html.twig', array(
             'festivals' => $festivals,
         ));
