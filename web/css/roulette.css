@@ -16,15 +16,16 @@ body {
 
 .roulette-title {
     position: absolute;
-    top:7vh;
+    top: 2.30em;
     text-align: center;
     font-size: 2em;
     padding: 0.5em;
-    background-color: teal;
+    background-color: #26a69a;
     color: white;
     width: 100vw;
     z-index: 500;
     text-transform: uppercase;
+    margin: 0;
 }
 
 #map-canvas {
@@ -37,9 +38,9 @@ body {
 
 .spinner {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 2em;
     position: absolute;
-    bottom: -40vh;
+    top: 4.75em;
     left: 25vw;
     width: 50vw;
     z-index: 100;
@@ -55,8 +56,8 @@ body {
 
 .roulette-footer .stop {
     width: 100%;
-    height: 2em;
-    background-color: darkorange;
+    height: 4em;
+    background-color: #8E24AA;
 }
 
 
@@ -64,7 +65,7 @@ body {
     display: block;
     margin: 0;
     line-height: 1.5em;
-    font-size: 1em;
+    font-size: 0.5em;
     width: 100%;
     border: 0 none;
     color: white;
@@ -73,7 +74,7 @@ body {
 }
 
 .roller {
-    background: teal;
+    background: #26a69a;
     color: white;
     font-weight: bold;
     width: 35vw;
@@ -96,5 +97,20 @@ body {
 .roulette-ul li {
     display: block;
     text-align: center;
+    font-size: 0.5em;
 }
 
+@media (min-width: 993px) {
+
+    .roulette-footer .stop {
+        height: 2em;
+    }
+
+    .stop{
+        font-size: 1em;
+    }
+
+    .roulette-ul li {
+        font-size: 1em;
+    }
+}

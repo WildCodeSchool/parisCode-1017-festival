@@ -31,11 +31,13 @@
                         <ul class="right hide-on-med-and-down">
                             {% if app.user.username is defined %}
                                 <li><a href="{{ path('discover') }}">Search</a></li>
+                                <li><a href="{{ path('roulette') }}">Roulette</a></li>
                                 <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
                                 <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
                                 <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                             {% else %}
                                 <li><a href="{{ path('discover') }}">Search</a></li>
+                                <li><a href="{{ path('roulette') }}">Roulette</a></li>
                                 <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
                                 <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
                             {% endif %}
@@ -43,11 +45,13 @@
                         <ul class="side-nav" id="mobile-demo">
                             {% if app.user.username is defined %}
                                 <li><a href="{{ path('discover') }}">Search</a></li>
+                                <li><a href="{{ path('roulette') }}">Roulette</a></li>
                                 <li><a href="{{ path('fos_user_profile_show') }}">My profile</a></li>
                                 <li><a href="{{ path('festival_new') }}">+ Add Fest</a></li>
                                 <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                             {% else %}
                                 <li><a href="{{ path('discover') }}">Search</a></li>
+                                <li><a href="{{ path('roulette') }}">Roulette</a></li>
                                 <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
                                 <li><a href="{{ path('fos_user_security_login' ) }}">Login</a></li>
                             {% endif %}
