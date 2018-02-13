@@ -34,7 +34,7 @@ class UserType extends AbstractType
                     'id' => 'icon_prefix',
                     'type' => 'text',
                     'class' => 'validate',
-                    'data-length' => '30'
+                    'data-length' => '30',
                 )))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -46,7 +46,9 @@ class UserType extends AbstractType
                     'data-length' => '30'),
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),))
-            ->add('location', LocationType::class)
+            ->add('location', LocationType::class, array(
+//                'required' => false
+            ))
             ->add('imageIcon', TextType::class, array(
                 'label' => 'Your picture',
                 'required' => false,

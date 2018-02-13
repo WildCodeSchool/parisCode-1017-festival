@@ -41,6 +41,7 @@
         </div>
         <!--.row -->
     </div>
+
     <!--.discover -->
 {% endblock %}
 
@@ -57,8 +58,8 @@
 
         locations = [
             {% for festival in festivals %}
-                {% if festival.location.latitude is not null %}{
-                    lat: {{ festival.location.latitude }},
+                {% if festival.location.latitude and festival.location.longitude is not null %}
+                    {lat: {{ festival.location.latitude }},
                     lng: {{ festival.location.longitude }},
                     info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'}
                 {% endif %},
@@ -69,7 +70,7 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if user.location.latitude and user.location.longitude is not null %}
+                    {% if (user.location is defined) and (user.location.latitude and user.location.longitude is not null) %}
                         lat: {{ user.location.latitude }},
                         lng: {{ user.location.longitude }}
                     {% else %}

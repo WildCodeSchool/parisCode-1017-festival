@@ -56,10 +56,10 @@ h3{
 .switcher {
     display:none;
 }
-/*::placeholder{*/
-    /*color: white;*/
-    /*opacity: 1;*/
-/*}*/
+::placeholder{
+    color: white;
+    opacity: 1;
+}
 
 /************************************************\
 ==================================================
@@ -156,7 +156,7 @@ h3{
         margin-top: 12vh;
     }
     .festival-cards{
-        margin-top: 26vh;
+        margin-top: 28vh;
         margin-left: 1vh;
     }
     /* Google Maps */

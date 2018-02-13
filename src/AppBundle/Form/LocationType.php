@@ -16,14 +16,14 @@ class LocationType extends AbstractType
     {
         $builder
             ->add('address', TextType::class, array(
-                'label' => 'My Address',
+                'label' => 'Location',
+                'label_attr' => array(
+                    'class' => 'active'),
                 'required' => false,
                 'attr' => array(
                     'onFocus' => 'geolocate()',
-                    'class' => 'validate',
                     'type' => 'text',
-                    'autocomplete' => 'on',
-                    'placeholder' => 'yo'
+                    'autocomplete' => 'off'
                 )))
         ;
     }/**
