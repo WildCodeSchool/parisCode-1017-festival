@@ -112,7 +112,7 @@ easy_admin:
                     - { type: 'group' }
                     - isCancelled
                     - isSoldOut
-                    - isValid
+                      - isValid
         Concert:
             class: AppBundle\Entity\Concert
             label: 'Concerts'
@@ -121,6 +121,7 @@ easy_admin:
                     - id
                     - artist
                     - festival
+                    - isValid
                     - { property: 'location.name', type: 'text', label: 'Location' }
                     - { property: 'concert', type: 'text', label: 'Clone of' }
             form:
