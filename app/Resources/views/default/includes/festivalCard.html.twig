@@ -103,7 +103,7 @@
                                                             <i class="material-icons circle deep-purple lighten-2">people</i>
                                                             <h3 class="left-align">{{ concert.artist }}</h3>
                                                             <p class="left-align truncate">{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}<br>
-                                                                {% if concert.location is defined %}{{ concert.location.name }}{% endif %}
+                                                                {% if concert.location is not null %}{{ concert.location.name }}{% endif %}
                                                             </p>
                                                             <!-- Add/remove to/from wishlist -->
                                                             {% if app.user is not null %}
