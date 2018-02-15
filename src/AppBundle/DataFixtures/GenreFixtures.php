@@ -6,8 +6,17 @@ use AppBundle\Entity\Genre;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class GenreFixtures
+ *
+ * @package AppBundle\DataFixtures
+ */
 class GenreFixtures extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws \Doctrine\Common\DataFixtures\BadMethodCallException
+     */
     public function load(ObjectManager $manager)
     {
         $genre1 = new Genre();

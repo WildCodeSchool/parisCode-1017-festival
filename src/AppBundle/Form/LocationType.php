@@ -7,15 +7,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+/**
+ * Class LocationType
+ *
+ * @package AppBundle\Form
+ */
 class LocationType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('address', TextType::class, array(
+            ->add(
+                'address', TextType::class, array(
                 'label' => 'Location',
                 'label_attr' => array(
                     'class' => 'active'),
@@ -24,20 +33,26 @@ class LocationType extends AbstractType
                     'onFocus' => 'geolocate()',
                     'type' => 'text',
                     'autocomplete' => 'off'
-                )))
-        ;
+                ))
+            );
     }/**
-     * {@inheritdoc}
-     */
+      * {@inheritdoc}
+      *
+      * @param OptionsResolver $resolver
+      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Location'
-        ));
+            )
+        );
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return null|string
      */
     public function getBlockPrefix()
     {

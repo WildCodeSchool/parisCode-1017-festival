@@ -7,8 +7,17 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+/**
+ * Class FestivalFixtures
+ *
+ * @package AppBundle\DataFixtures
+ */
 class FestivalFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws \Doctrine\Common\DataFixtures\BadMethodCallException
+     */
     public function load(ObjectManager $manager)
     {
         $festival1 = new Festival();
@@ -91,6 +100,9 @@ class FestivalFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference($festival4->getTitle(), $festival4);
     }
 
+    /**
+     * @return array
+     */
     public function getDependencies()
     {
         return array(

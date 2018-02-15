@@ -41,7 +41,7 @@ class LocationListener
             return;
         }
 
-        if (!empty($entity)){
+        if (!empty($entity)) {
             $location = $this->address->regularGeocoding($entity->getAddress());
             $entity->setName($location['name']);
             $entity->setAddress($location['address']);

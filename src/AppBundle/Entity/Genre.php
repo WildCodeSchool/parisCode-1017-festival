@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="genre")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GenreRepository")
+ * @package                                                            AppBundle\Entity
  */
 class Genre
 {

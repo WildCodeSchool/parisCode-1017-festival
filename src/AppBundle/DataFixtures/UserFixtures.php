@@ -8,8 +8,17 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+/**
+ * Class UserFixtures
+ *
+ * @package AppBundle\DataFixtures
+ */
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws \Doctrine\Common\DataFixtures\BadMethodCallException
+     */
     public function load(ObjectManager $manager)
     {
         $user1 = new User();
@@ -61,6 +70,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference($user5->getUsername(), $user5);
     }
 
+    /**
+     * @return array
+     */
     public function getDependencies()
     {
         return array(

@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  * Festival controller.
  *
  * @Route("festival")
+ * @package           AppBundle\Controller
  */
 class ConcertController extends Controller
 {
@@ -19,11 +20,15 @@ class ConcertController extends Controller
      * Page: Create a concert.
      *
      * @Route("/{festival_id}/concert/new", name="concert_new", requirements={"festival_id": "\d+"}))
-     * @Method({"GET", "POST"})
-     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
+     * @Method({"GET",                      "POST"})
+     * @ParamConverter("festival",          options={"mapping": {"festival_id": "id"}})
      * @ParamConverter("concert")
+     * @param                               Request     $request
+     * @param                               $festival_id
+     * @return                              \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newConcertAction(Request $request, $festival_id){
+    public function newConcertAction(Request $request, $festival_id)
+    {
 
         $em = $this->getDoctrine()->getManager();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
@@ -50,8 +55,6 @@ class ConcertController extends Controller
                 $concert->setEnd($timeend);
             }
 
-
-
             $em->persist($concert);
 
             $em->flush();
@@ -59,20 +62,26 @@ class ConcertController extends Controller
             return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
         }
 
-        return $this->render('concert/index.html.twig', array(
+        return $this->render(
+            'concert/index.html.twig', array(
             'festival' => $festival,
             'concert' => $concert,
             'form' => $form->createView(),
-        ));
+            )
+        );
     }
 
     /**
      * Page: Edit a concert.
      *
      * @Route("/{festival_id}/concert/{concert_id}/edit", name="concert_edit", requirements={"festival_id": "\d+"}))
-     * @ParamConverter("festival",   options={"mapping": {"festival_id": "id"}})
-     * @ParamConverter("concert",   options={"mapping": {"concert_id": "id"}})
-     * @Method({"GET", "POST"})
+     * @ParamConverter("festival",                        options={"mapping": {"festival_id": "id"}})
+     * @ParamConverter("concert",                         options={"mapping": {"concert_id": "id"}})
+     * @Method({"GET",                                    "POST"})
+     * @param                                             Request     $request
+     * @param                                             Concert     $concert
+     * @param                                             $festival_id
+     * @return                                            \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editConcertAction(Request $request, Concert $concert, $festival_id)
     {
@@ -83,10 +92,12 @@ class ConcertController extends Controller
         // if concert already got a clone
         $hasClone = $em->getRepository('AppBundle:Concert')->findOneByConcert($concert);
         $error = ['clone'];
-        if ($hasClone){
-            return $this->render('concert/index.html.twig', array(
+        if ($hasClone) {
+            return $this->render(
+                'concert/index.html.twig', array(
                 'error' => $error
-            ));
+                )
+            );
         }
 
         // set form with clone
@@ -106,10 +117,10 @@ class ConcertController extends Controller
             $concertClone->setTitle($concertClone->getArtist()->getName() . " @ " . $concertClone->getFestival()->getTitle());
 
             // date and timepickers merging
-            if (!empty($concertClone->getStart())){
+            if (!empty($concertClone->getStart())) {
                 $concertClone->setStart(new \DateTime($concertClone->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($concertClone_timestart)) . ":00"));
             }
-            if (!empty($concertClone->getEnd())){
+            if (!empty($concertClone->getEnd())) {
                 $concertClone->setEnd(new \DateTime($concertClone->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($concertClone_timeend)) . ":00"));
             }
 
@@ -119,10 +130,12 @@ class ConcertController extends Controller
             return $this->redirectToRoute('concert_edit', array('concert_id' => $concert->getId(), 'festival_id' => $concert->getFestival()->getId()));
         }
 
-        return $this->render('concert/index.html.twig', array(
+        return $this->render(
+            'concert/index.html.twig', array(
             'concert' => $concert,
             'festival' => $festival,
             'form' => $editForm->createView(),
-        ));
+            )
+        );
     }
 }

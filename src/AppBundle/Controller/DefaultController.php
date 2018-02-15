@@ -7,6 +7,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DefaultController
+ *
+ * @package AppBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
@@ -14,7 +19,7 @@ class DefaultController extends Controller
      *
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         return $this->render('default/index.html.twig');
     }
@@ -25,17 +30,19 @@ class DefaultController extends Controller
      * @Route("/discover", name="discover")
      * @Method("GET")
      */
-    public function discoverAction(Request $request)
+    public function discoverAction()
     {
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
         $festivals = $em->getRepository('AppBundle:Festival')->myFindAll();
 
-        return $this->render('default/discover.html.twig', array(
+        return $this->render(
+            'default/discover.html.twig', array(
             'user' => $user,
             'festivals' => $festivals,
-        ));
+            )
+        );
     }
 
     /**
@@ -43,6 +50,7 @@ class DefaultController extends Controller
      *
      * @Route("/roulette", name="roulette")
      * @Method("GET")
+     * @return             \Symfony\Component\HttpFoundation\Response
      */
     public function rouletteAction()
     {
@@ -50,8 +58,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $festivals = $em->getRepository('AppBundle:Festival')->findAll();
         shuffle($festivals);
-        return $this->render('default/roulette.html.twig', array(
+        return $this->render(
+            'default/roulette.html.twig', array(
             'festivals' => $festivals,
-        ));
+            )
+        );
     }
 }

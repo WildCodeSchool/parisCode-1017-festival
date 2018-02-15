@@ -6,8 +6,17 @@ use AppBundle\Entity\Location;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class LocationFixtures
+ *
+ * @package AppBundle\DataFixtures
+ */
 class LocationFixtures extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws \Doctrine\Common\DataFixtures\BadMethodCallException
+     */
     public function load(ObjectManager $manager)
     {
         $location1 = new Location();

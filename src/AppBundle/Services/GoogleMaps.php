@@ -2,13 +2,25 @@
 
 namespace AppBundle\Services;
 
-use AppBundle\Entity\Location;
 use GuzzleHttp\Client;
 
+/**
+ * Class GoogleMaps
+ *
+ * @package AppBundle\Services
+ */
 class GoogleMaps
 {
+    /**
+     * @var string
+     */
     private $api_google;
 
+    /**
+     * GoogleMaps constructor.
+     *
+     * @param $api_google
+     */
     public function __construct($api_google)
     {
         $this->api_google = $api_google;
@@ -17,8 +29,8 @@ class GoogleMaps
     /**
      * Format form address into lat/lng/name if exists. Else, no lat/lng. If empty, nothing.
      *
-     * @param $formattedaddress
-     * @return string
+     * @param  $formattedaddress
+     * @return mixed
      */
     public function regularGeocoding($formattedaddress)
     {
@@ -48,10 +60,12 @@ class GoogleMaps
     /**
      * Rename place_id into Place name
      *
-     * @param $formattedaddress
-     * @return string
+     * @param  $formattedaddress
+     * @param  $place_id
+     * @return mixed
      */
-    public function nameGeocoding($place_id){
+    public function nameGeocoding($place_id)
+    {
 
         $url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' . $place_id . '&key=' . $this->api_google;
 
@@ -69,11 +83,12 @@ class GoogleMaps
     /**
      * Reverse geocoding lat/lng into address
      *
-     * @param $lat
-     * @param $lng
+     * @param  $lat
+     * @param  $lng
      * @return mixed
      */
-    public function reverseGeocoding($lat, $lng){
+    public function reverseGeocoding($lat, $lng)
+    {
 
         $url = ' https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $lat . ',' . $lng . '&key=' . $this->api_google;
         $client = new Client();
@@ -88,17 +103,19 @@ class GoogleMaps
     /**
      * @param string $term
      *
+     * @param $term
      * @return array
      */
-    public function autocompleteCities($term){
+    public function autocompleteCities($term)
+    {
         $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" . $term . "&types=(cities)&key=" . $this->api_google;
         $client = new Client();
         $google = $client->request("GET", $url);
         $results = json_decode($google->getBody()->getContents());
 
         $cities = array();
-        foreach ($results->predictions as $key => $result){
-            if (isset($result->terms[1]->value)){
+        foreach ($results->predictions as $key => $result) {
+            if (isset($result->terms[1]->value)) {
                 $cities[] = $result->terms[0]->value . ', ' . $result->terms[1]->value;
             } else {
                 $cities[] = $result->terms[0]->value;

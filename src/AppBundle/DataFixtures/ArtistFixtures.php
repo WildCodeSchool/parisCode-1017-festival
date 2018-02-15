@@ -6,8 +6,17 @@ use AppBundle\Entity\Artist;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class ArtistFixtures
+ *
+ * @package AppBundle\DataFixtures
+ */
 class ArtistFixtures extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws \Doctrine\Common\DataFixtures\BadMethodCallException
+     */
     public function load(ObjectManager $manager)
     {
         $artist1 = new Artist();

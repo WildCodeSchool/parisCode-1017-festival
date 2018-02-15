@@ -6,10 +6,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class WishlistType
+ *
+ * @package AppBundle\Form
+ */
 class WishlistType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,17 +28,23 @@ class WishlistType extends AbstractType
             ->add('location')
             ->add('artist');
     }/**
-     * {@inheritdoc}
-     */
+      * {@inheritdoc}
+      *
+      * @param OptionsResolver $resolver
+      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Wishlist'
-        ));
+            )
+        );
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return null|string
      */
     public function getBlockPrefix()
     {

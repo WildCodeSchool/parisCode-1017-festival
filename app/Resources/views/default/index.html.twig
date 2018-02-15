@@ -15,7 +15,6 @@
             <a href="{{ path('fos_user_security_login') }}" class="btn right hide-on-med-and-up">Log In</a>
             <a href="{{ path('fos_user_registration_register') }}" class="btn right hide-on-med-and-up">Register</a>
         {% endif %}
-
         <!--Mobile -->
         {% if app.user.username is defined %}
             <a href="{{ path('fos_user_security_logout') }}" class="waves-effect waves-light btn-large hide-on-small-only">Logout</a>
@@ -24,8 +23,6 @@
             <a href="{{ path('fos_user_security_login') }}" class="waves-effect waves-light btn-large hide-on-small-only">Log In</a>
             <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light btn-large hide-on-small-only">Register</a>
         {% endif %}
-
-
     </div>
 
 {% endblock %}

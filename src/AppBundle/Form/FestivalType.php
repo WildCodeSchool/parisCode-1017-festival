@@ -20,22 +20,33 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use AppBundle\Entity\Location;
 use AppBundle\Entity\Genre;
 
+/**
+ * Class FestivalType
+ *
+ * @package AppBundle\Form
+ */
 class FestivalType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['type'] == 'edit') {
-            $builder->add('isCancelled', TextType::class, array(
+            $builder->add(
+                'isCancelled', TextType::class, array(
                 'label' => 'Is it cancelled?',
                 'required' => false
-            ));
+                )
+            );
         }
 
         $builder
-            ->add('title', TextType::class, array(
+            ->add(
+                'title', TextType::class, array(
                 'label' => 'Title',
                 'attr' => array(
                     'id' => 'icon_prefix',
@@ -43,99 +54,126 @@ class FestivalType extends AbstractType
                     'class' => 'validate',
                     'data-length' => '30'
                 )
-            ))
-            ->add('description', TextareaType::class, array(
+                )
+            )
+            ->add(
+                'description', TextareaType::class, array(
                 'label' => 'Description',
                 'attr' => array(
                     'id' => 'text-area',
                     'class' => 'materialize-textarea validate',
                     'data-length' => '1000'
                 )
-            ))
+                )
+            )
             ->add('location', LocationType::class)
             ->add('genre', GenreType::class)
-            ->add('budget', NumberType::class, array(
+            ->add(
+                'budget', NumberType::class, array(
                 'label' => 'Amount',
                 'required' => false,
                 'attr' => array(
                     'id' => 'icon_prefix',
                     'type' => 'number'
                 )
-            ))
-            ->add('start', DateType::class, array(
+                )
+            )
+            ->add(
+                'start', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => array(
                     'class' => 'datepicker',
                     'data-date-format' => 'yyyy-MM-dd'
                 )
-            ))
-            ->add('end', DateType::class, array(
+                )
+            )
+            ->add(
+                'end', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => array(
                     'class' => 'datepicker',
                     'data-date-format' => 'yyyy-MM-dd'
                 )
-            ))
-            ->add('linkWebsite', UrlType::class, array(
+                )
+            )
+            ->add(
+                'linkWebsite', UrlType::class, array(
                 'label' => 'Official website',
                 'attr' => array(
                     'id' => 'icon_prefix',
                 ),
                 'required' => false
-            ))
-            ->add('linkFbPage', UrlType::class, array(
+                )
+            )
+            ->add(
+                'linkFbPage', UrlType::class, array(
                 'label' => 'Facebook page',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
                 'required' => false
-            ))
-            ->add('linkFbEvent', UrlType::class, array(
+                )
+            )
+            ->add(
+                'linkFbEvent', UrlType::class, array(
                 'label' => 'Facebook event',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
                 'required' => false
-            ))
-            ->add('linkInstagram', UrlType::class, array(
+                )
+            )
+            ->add(
+                'linkInstagram', UrlType::class, array(
                 'label' => 'Instagram',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
                 'required' => false
-            ))
-            ->add('imageIcon', UrlType::class, array(
+                )
+            )
+            ->add(
+                'imageIcon', UrlType::class, array(
                 'label' => 'Icon image',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
                 'required' => false
-            ))
-            ->add('imageBanner', UrlType::class, array(
+                )
+            )
+            ->add(
+                'imageBanner', UrlType::class, array(
                 'label' => 'Banner image',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
                 'required' => false
-            ));
+                )
+            );
 
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Festival',
             'type' => false
-        ));
+            )
+        );
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return null|string
      */
     public function getBlockPrefix()
     {

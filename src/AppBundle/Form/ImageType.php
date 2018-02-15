@@ -6,26 +6,40 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class ImageType
+ *
+ * @package AppBundle\Form
+ */
 class ImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('url')->add('alt');
     }/**
-     * {@inheritdoc}
-     */
+      * {@inheritdoc}
+      *
+      * @param OptionsResolver $resolver
+      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'AppBundle\Entity\Image'
-        ));
+            )
+        );
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return null|string
      */
     public function getBlockPrefix()
     {

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
+ * @package                                                               AppBundle\Entity
  */
 class Location
 {
@@ -26,7 +27,6 @@ class Location
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=250, nullable=true)
-     *
      */
     private $name;
 
@@ -34,7 +34,6 @@ class Location
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=250, nullable=true)
-     *
      */
     private $address;
 

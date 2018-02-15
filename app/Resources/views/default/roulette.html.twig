@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/roulette.css') }}">
+
 {% endblock %}
 
 {% block body %}
+
     <h2 class="roulette-title">Where should I go ?</h2>
     <section class="spinner">
 
@@ -23,14 +26,13 @@
     <div id="map-canvas"></div>
 {% endblock %}
 
-
 {% block footer %}
 {% endblock footer %}
 
 {% block javascripts %}
-<script type="text/javascript"
-        src="//maps.googleapis.com/maps/api/js?key=AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA">
-</script>
+    <script type="text/javascript"
+            src="//maps.googleapis.com/maps/api/js?key=AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA">
+    </script>
 
     <script>
         $(function(){
@@ -89,4 +91,5 @@
             }
         });
     </script>
+
 {% endblock %}

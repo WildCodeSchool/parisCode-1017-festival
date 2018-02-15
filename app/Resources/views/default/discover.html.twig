@@ -59,11 +59,9 @@
 {% block javascripts %}
     <!--GoogleMaps script -->
     <script>
-
         var map;
         var markerCluster;
         var markers = [];
-
         locations = [
             {% for festival in festivals %}
                 {% if festival.location.latitude and festival.location.longitude is not null %}
@@ -73,7 +71,6 @@
                 {% endif %},
             {% endfor %}
         ];
-
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
@@ -87,10 +84,8 @@
                     {% endif %}
         }
             });
-
             addMarker(locations);
         }
-
         function addMarker(locations, reload){
             var labels = [];
             var bounds = new google.maps.LatLngBounds();
@@ -109,12 +104,9 @@
                 });
                 markers.push(marker);
             });
-
             markerCluster = new MarkerClusterer(map, markers, {
                 imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
             );
-
-
             if (typeof reload !== 'undefined'){
                 map.fitBounds(bounds);
 
@@ -122,7 +114,6 @@
                 map.panToBounds(bounds);
             }
         }
-
         function deleteMarkers() {
             markerCluster.clearMarkers();
             for (var i = 0; i < markers.length; i++) {
@@ -131,31 +122,25 @@
             markerCluster = null;
             markers = [];
         }
-
-
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
-
     <script src="{{ asset('js/vendor/jquery-ui.min.js') }}"></script>
-
     <script async defer
             src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&content_copy&callback=initMap' }}>
     </script>
-
-
-
     <!--.GoogleMaps script -->
-    <!--Custom script -->
+
     <script>
         $(document).ready(function(){
+        // modal
             $('.modal').modal();
         });
-
+        // switch festival cards/map on mobile view
         $("#switch").click(function(){
             $("#map").toggleClass("switcher");
         });
-
+        // display festival cards according search input
         $("#searchBar").submit(function(e){
             e.preventDefault();
             var form = $(this);
@@ -180,8 +165,7 @@
                 }
             })
         });
-
-        // Add a festival to WishLIst
+        // Add a festival to wishlist
         $(".addFestivalToWishlist").on('click', function(event){
             event.preventDefault();
             var href = $(this).attr('href');
@@ -201,8 +185,7 @@
                 }
             })
         });
-
-        // Add a concert to WishLIst
+        // Add a concert to wishlist
         $(".addConcertToWishlist").on('click', function(event){
             event.preventDefault();
             var href = $(this).attr('href');
@@ -222,8 +205,7 @@
                 }
             })
         });
-
-
+        // Autocomplete in search bar
         $("#autocomplete-input").autocomplete({
             source : function(req, resp){
                 $.ajax({
@@ -244,6 +226,5 @@
             delay: 0
         });
     </script>
-    <!--.Custom script -->
 
 {% endblock javascripts %}

@@ -16,12 +16,13 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-
 /**
  * Class ApiController
+ *
  * @package AppBundle\Controller
  *
  * @Route("api")
+ * @package      AppBundle\Controller
  */
 class ApiController extends Controller
 {
@@ -42,13 +43,17 @@ class ApiController extends Controller
                 ? $datetime->format(\DateTime::ISO8601)
                 : '';
         };
-        $normalizer->setCallbacks(array(
+        $normalizer->setCallbacks(
+            array(
             'start' => $callback,
             'end' =>$callback
-        ));
-        $normalizer->setCircularReferenceHandler(function ($object){
-            return $object->getId();
-        });
+            )
+        );
+        $normalizer->setCircularReferenceHandler(
+            function ($object) {
+                return $object->getId();
+            }
+        );
         $serializer = new Serializer(array($normalizer), array($encoder));
         $jsonFestivals = $serializer->serialize($festivals, 'json');
         $jsonConcerts = $serializer->serialize($concerts, 'json');
@@ -66,8 +71,9 @@ class ApiController extends Controller
      *
      * @Method("POST")
      */
-    public function searchAction(Request $request){
-        if ($request->isXmlHttpRequest()){
+    public function searchAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
             $search = $request->get('search');
 
             $search = preg_replace('/^([^,]*).*$/', '$1', $search);
@@ -76,7 +82,7 @@ class ApiController extends Controller
             $results = $em->getRepository(Festival::class)->searchBy($search);
 
             $locations = array();
-            foreach ($results as $festival){
+            foreach ($results as $festival) {
                 $locations[] = [
                     "lat" => $festival->getLocation()->getLatitude(),
                     "lng" => $festival->getLocation()->getLongitude(),
@@ -84,13 +90,15 @@ class ApiController extends Controller
                     ];
             }
 
-            if ($results == null){
+            if ($results == null) {
                 $template = "<p>No festivals found.</p>";
             } else {
-                $template = $this->renderView('default/includes/festivalCard.html.twig', array(
+                $template = $this->renderView(
+                    'default/includes/festivalCard.html.twig', array(
                     'festivals' => $results,
                     'user' => $this->getUser()
-                ));
+                    )
+                );
             }
 
             return new JsonResponse(array("festivals" => $template, "locations" => $locations));
@@ -101,6 +109,8 @@ class ApiController extends Controller
     }
 
     /**
+     * Autocomplete for search bar
+     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \AppBundle\Services\GoogleMaps            $googleMaps
      *
@@ -110,14 +120,15 @@ class ApiController extends Controller
      *
      * @Method("GET")
      */
-    public function autoCompleteAction(Request $request, GoogleMaps $googleMaps){
+    public function autoCompleteAction(Request $request, GoogleMaps $googleMaps)
+    {
 
             $em = $this->getDoctrine()->getManager();
             $term = $request->get('term');
 
             $results = $em->getRepository(Festival::class)->autocompleteByTerm($term);
 
-            $func = function ($val){
+            $func = function ($val) {
                 return $val[key($val)];
             };
 

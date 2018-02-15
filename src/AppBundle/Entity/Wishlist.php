@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="wishlist")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\WishlistRepository")
+ * @package                                                               AppBundle\Entity
  */
 class Wishlist
 {
@@ -99,8 +100,7 @@ class Wishlist
     /**
      * Set user.
      *
-     * @param \AppBundle\Entity\User $user
-     *
+     * @param  \AppBundle\Entity\User $user
      * @return Wishlist
      */
     public function setUser(\AppBundle\Entity\User $user)

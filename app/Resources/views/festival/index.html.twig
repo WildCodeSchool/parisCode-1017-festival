@@ -196,31 +196,20 @@
     </div>
     {% endif %}
 
+
 {% endblock body %}
 
 {% block javascripts %}
 
     <script>
         $(document).ready(function(){
-            $('input.autocomplete-location').autocomplete({
-                data: {
-                    "Hippodrome": null,
-                    "Paris": null,
-                    "Hamburg": 'https://placehold.it/250x250'
-                },
-                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-                onAutocomplete: function(val) {
-                    // Callback function when value is autcompleted.
-                },
-                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-            });
             $('input.autocomplete-genre').autocomplete({
                 data: {
-                    "Rock": null,
-                    "Pop": null,
-                    "Drum n bass": 'https://placehold.it/250x250'
+                    {% for genre in genres %}
+                        "{{ genre.name }}": null,
+                    {% endfor %}
                 },
-                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
                 onAutocomplete: function(val) {
                     // Callback function when value is autcompleted.
                 },
@@ -248,7 +237,6 @@
             });
         });
     </script>
-
     <script>
         function initAutocomplete() {
             // Create the autocomplete object, restricting the search to geographical
@@ -262,7 +250,6 @@
             autocomplete.addListener('place_changed', fillInAddress);
         }
     </script>
-
     <script async defer
             src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&libraries=places&callback=initAutocomplete' }}>
     </script>

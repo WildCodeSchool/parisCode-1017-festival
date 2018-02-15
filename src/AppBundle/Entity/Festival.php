@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="festival")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FestivalRepository")
+ * @package                                                               AppBundle\Entity
  */
 class Festival
 {
@@ -147,8 +148,9 @@ class Festival
 
     /**
      * One Student has One Student.
+     *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Festival")
-     * @ORM\JoinColumn(name="festival_reference", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="festival_reference",              referencedColumnName="id", nullable=true)
      */
     private $festival;
 

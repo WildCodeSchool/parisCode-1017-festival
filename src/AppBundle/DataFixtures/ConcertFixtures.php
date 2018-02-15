@@ -7,8 +7,16 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+/**
+ * Class ConcertFixtures
+ *
+ * @package AppBundle\DataFixtures
+ */
 class ConcertFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $concert1 = new Concert();
@@ -60,6 +68,9 @@ class ConcertFixtures extends Fixture implements DependentFixtureInterface
 
     }
 
+    /**
+     * @return array
+     */
     public function getDependencies()
     {
         return array(
