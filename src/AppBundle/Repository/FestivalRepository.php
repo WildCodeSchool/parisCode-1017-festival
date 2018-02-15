@@ -44,7 +44,6 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
      */
     public function searchBy($search)
     {
-
         $pattern = "%" . $search . "%";
 
         $qb = $this->createQueryBuilder('festival');
@@ -53,11 +52,12 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('concert.artist', 'artist')
             ->leftJoin('festival.location', 'location')
             ->leftJoin('festival.genre', 'genre')
-            ->where('f.isValid = 1')
             ->orWhere('festival.title LIKE :search')
             ->orWhere('location.address LIKE :search')
+            ->orWhere('location.name LIKE :search')
             ->orWhere('artist.name LIKE :search')
             ->orWhere('genre.name LIKE :search')
+            ->andWhere('festival.isValid = 1')
             ->setParameter('search', $pattern);
 
         return $qb->getQuery()->getResult();
@@ -78,7 +78,7 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
         $festivals = $this->createQueryBuilder('festival')
             ->select('festival.title')
             ->where('festival.title LIKE :search')
-            ->where('f.isValid = 1')
+            ->andWhere('festival.isValid = 1')
             ->setParameter('search', $pattern)
             ->distinct(true)
             ->getQuery()

@@ -75,7 +75,7 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if (user.location is not null) and (user.location.latitude and user.location.longitude is not null) %}
+                    {% if (user is defined) and (user.location is defined) and (user.location.latitude and user.location.longitude is not null) %}
                         lat: {{ user.location.latitude }},
                         lng: {{ user.location.longitude }}
                     {% else %}
@@ -90,7 +90,7 @@
             var labels = [];
             var bounds = new google.maps.LatLngBounds();
             var infoWin = new google.maps.InfoWindow();
-            locations.map(function(location, i) {
+            var markers1 = locations.map(function(location, i) {
                 var marker = new google.maps.Marker({
                     position: location,
                     label: labels[i % labels.length],
@@ -109,8 +109,9 @@
             );
             if (typeof reload !== 'undefined'){
                 map.fitBounds(bounds);
-
-                map.setZoom(10);
+                if (markers1.length === 1){
+                    map.setZoom(10);
+                }
                 map.panToBounds(bounds);
             }
         }
@@ -156,6 +157,7 @@
                 success: function(response){
                     $("#festival-cards").html(response.festivals);
                     $('.modal').modal();
+                    $('ul.tabs').tabs();
                     locations = response.locations;
                     deleteMarkers();
                     addMarker(locations, true);

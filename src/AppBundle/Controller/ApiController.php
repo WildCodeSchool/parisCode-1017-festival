@@ -113,30 +113,24 @@ class ApiController extends Controller
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \AppBundle\Services\GoogleMaps            $googleMaps
-     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
-     *
      * @Route("/autocompleteResult", name="autocomplete_home")
-     *
      * @Method("GET")
      */
     public function autoCompleteAction(Request $request, GoogleMaps $googleMaps)
     {
+        $em = $this->getDoctrine()->getManager();
+        $term = $request->get('term');
 
-            $em = $this->getDoctrine()->getManager();
-            $term = $request->get('term');
+        $results = $em->getRepository(Festival::class)->autocompleteByTerm($term);
 
-            $results = $em->getRepository(Festival::class)->autocompleteByTerm($term);
+        $func = function ($val) {
+            return $val[key($val)];
+        };
 
-            $func = function ($val) {
-                return $val[key($val)];
-            };
+        $results = array_map($func, $results);
 
-            $results = array_map($func, $results);
-
-            return new JsonResponse(array_merge($results));
-
-
+        return new JsonResponse(array_merge($results));
     }
 
 }
