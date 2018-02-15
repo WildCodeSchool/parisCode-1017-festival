@@ -227,9 +227,11 @@
         $("#autocomplete-input").autocomplete({
             source : function(req, resp){
                 $.ajax({
+                    source: $("#autocomplete-input").data('url'),
                     url : $("#autocomplete-input").data('url'),
                     dataType : 'json',
                     data: {'term': $("#autocomplete-input").val()},
+                    timeout: 2000,
                     success : function(response){
                         resp(response, function(objet){
                             return objet.festival;
@@ -238,8 +240,8 @@
                     }
                 });
             },
-            minLength: 2,
-            delay: 2
+            minLength: 3,
+            delay: 0
         });
     </script>
     <!--.Custom script -->

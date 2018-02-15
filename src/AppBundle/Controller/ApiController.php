@@ -111,12 +111,11 @@ class ApiController extends Controller
      * @Method("GET")
      */
     public function autoCompleteAction(Request $request, GoogleMaps $googleMaps){
-        if ($request->isXmlHttpRequest()){
+
             $em = $this->getDoctrine()->getManager();
             $term = $request->get('term');
 
             $results = $em->getRepository(Festival::class)->autocompleteByTerm($term);
-            $cities = $googleMaps->autocompleteCities($term);
 
             $func = function ($val){
                 return $val[key($val)];
@@ -124,10 +123,8 @@ class ApiController extends Controller
 
             $results = array_map($func, $results);
 
-            return new JsonResponse(array_merge($results, $cities));
-        } else {
-            throw new HttpException("not an ajax call", 500);
-        }
+            return new JsonResponse(array_merge($results));
+
 
     }
 

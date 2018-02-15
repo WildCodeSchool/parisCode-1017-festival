@@ -6,21 +6,21 @@
 
 {% block body %}
     <h2 class="roulette-title">Where should I go ?</h2>
-<section class="spinner">
+    <section class="spinner">
 
-    <div class="roller">
-        <ul class="roulette-ul">
-            {% for festival in festivals %}
-            <li data-city="{{ festival.location.address }}">{{ festival.title }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="roulette-footer">
-        <button class="stop">Stop</button>
-    </div>
-</section>
+        <div class="roller">
+            <ul class="roulette-ul">
+                {% for festival in festivals %}
+                <li data-city="{{ festival.location.address }}">{{ festival.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="roulette-footer">
+            <button class="stop">Stop</button>
+        </div>
+    </section>
 
-<div id="map-canvas"></div>
+    <div id="map-canvas"></div>
 {% endblock %}
 
 
