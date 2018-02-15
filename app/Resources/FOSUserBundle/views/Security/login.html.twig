@@ -8,60 +8,77 @@
 
 {% block body %}
 
-    <div class="container container-top">
-
-        <div class="row center-align">
-            <div class="col s12">
-                <h2>Login</h2>
-            </div>
-        </div>
-
-        {#<div class="row">#}
-            {#<div class="col s12 center-align">#}
-                {#<h3>Connect with</h3>#}
-                {#<p>#}
-                    {#<a href="" target="_blank" class="btn-floating blue darken-3"><i class="fa fa-facebook"></i></a>#}
-                    {#<a href="" target="_blank" class="btn-floating red darken-1 "><i class="fa fa-google"></i></a>#}
-                {#</p>#}
-                {#<p>Or Log in here</p>#}
-            {#</div>#}
-        {#</div>#}
+    <div class="container-top">
 
         <div class="row">
-            <form class="col s12" action="{{ path("fos_user_security_check") }}" method="post">
-                {% if csrf_token %}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                {% endif %}
+            <h3 class="center-align col s6 login-title hide-on-small-only">Already have an account</h3>
+            <h3 class="center-align col s6 login-title hide-on-small-only">Create an account</h3>
+        </div>
 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+        <div class="row">
+            <div class="col s12 m6">
+                <h3 class="center-align login-title hide-on-med-and-up">Already have an account</h3>
+                <form class="col s12 card-panel" action="{{ path("fos_user_security_check") }}" method="post">
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                    {% endif %}
 
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}"
+                                   required="required"/>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="_password" required="required"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            {% if error %}
+                                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col s12 m6">
+                <h3 class="center-align login-title hide-on-med-and-up">Create an account</h3>
+                <div class="row center-align card-panel">
+                    <div class="col s4">
+                        <i class="material-icons register-icon">account_box</i>
+                        <p>Create an account</p>
+                    </div>
+                    <div class="col s4">
+                        <i class="material-icons register-icon">add_circle</i>
+                        <p>Add festivals and concerts to my wishlist</p>
+                    </div>
+                    <div class="col s4">
+                        <i class="material-icons register-icon">today</i>
+                        <p>Access to my wishlist through a calendar</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light btn">Register</a>
+
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">lock</i>
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="_password" required="required" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 center-align">
-                        {% if error %}
-                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 center-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Login
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
