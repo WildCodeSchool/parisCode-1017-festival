@@ -35,18 +35,28 @@ class ConcertController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
 
+            $concert->setFestival($festival);
+
             // date and time pickers merging
-            $timestart = new \DateTime($concert->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timestart'])) . ":00");
-            $timeend = new \DateTime($concert->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timeend'])) . ":00");
-            $concert->setStart($timestart);
-            $concert->setEnd($timeend);
+            if (!empty($concert->getStart())) {
+                $timestart = new \DateTime($concert->getStart()->format('Y-m-d') . ' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timestart'])) . ":00");
+                $concert->setStart($timestart);
+            }
+            if (!empty($concert->getEnd())) {
+                $timeend = new \DateTime($concert->getEnd()->format('Y-m-d') . ' ' . date("H:i", strtotime($_REQUEST['appbundle_concert']['timeend'])) . ":00");
+                $concert->setEnd($timeend);
+            }
+
+
 
             $em->persist($concert);
+
             $em->flush();
 
-            return $this->redirectToRoute('festival_edit', array('id' => $concert->getId(), 'festival_id' => $concert->getFestival()->getId()));
+            return $this->redirectToRoute('festival_edit', array('festival_id' => $concert->getFestival()->getId()));
         }
 
         return $this->render('concert/index.html.twig', array(
@@ -96,8 +106,12 @@ class ConcertController extends Controller
             $concertClone->setTitle($concertClone->getArtist()->getName() . " @ " . $concertClone->getFestival()->getTitle());
 
             // date and timepickers merging
-            $concertClone->setStart(new \DateTime($concertClone->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($concertClone_timestart)) . ":00"));
-            $concertClone->setEnd(new \DateTime($concertClone->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($concertClone_timeend)) . ":00"));
+            if (!empty($concertClone->getStart())){
+                $concertClone->setStart(new \DateTime($concertClone->getStart()->format('Y-m-d') .' ' . date("H:i", strtotime($concertClone_timestart)) . ":00"));
+            }
+            if (!empty($concertClone->getEnd())){
+                $concertClone->setEnd(new \DateTime($concertClone->getEnd()->format('Y-m-d') .' ' . date("H:i", strtotime($concertClone_timeend)) . ":00"));
+            }
 
             $em->persist($concertClone);
             $em->flush();

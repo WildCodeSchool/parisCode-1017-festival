@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\Genre;
+use AppBundle\Entity\Location;
 
 /**
  * FestivalRepository
@@ -93,6 +94,16 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
                         ->getQuery()
                         ->getResult();
 
-        return array_merge($festivals, $artists, $genres);
+        $locations = $this->createQueryBuilder('a')
+                        ->from(Location::class, 'location')
+                        ->select('location.name')
+                        ->where('location.name LIKE :search')
+                        ->orWhere('location.address LIKE :search')
+                        ->setParameter('search', $pattern)
+                        ->distinct(true)
+                        ->getQuery()
+                        ->getResult();
+
+        return array_merge($festivals, $artists, $genres, $locations);
     }
 }

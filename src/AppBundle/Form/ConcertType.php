@@ -33,9 +33,14 @@ class ConcertType extends AbstractType
 //                'required' => true,
 //                'data' => 0
 //            ));
-            $builder->add('isCancelled', TextType::class, array(
+            $builder->add('isCancelled', ChoiceType::class, array(
+                'choices'  => array(
+                    'Yes' => true,
+                    'No' => false,
+                ),
+                'expanded' => true,
+                'multiple' => false,
                 'label' => 'Is it cancelled?',
-                'required' => false
             ));
            ;
         }
@@ -46,6 +51,7 @@ class ConcertType extends AbstractType
                 'label' => false
             ))
             ->add('start', DateType::class, array(
+                'required' => false,
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => array(
@@ -54,6 +60,7 @@ class ConcertType extends AbstractType
                 )
             ))
             ->add('end', DateType::class, array(
+                'required' => false,
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'attr' => array(
@@ -62,6 +69,7 @@ class ConcertType extends AbstractType
                 )
             ))
             ->add('timestart', DateTimeType::class, array(
+                'required' => false,
                 'label' => 'Start Time',
                 'widget' => 'single_text',
                 'mapped' => false,
@@ -70,7 +78,8 @@ class ConcertType extends AbstractType
                 )
             ))
            ->add('timeend', DateTimeType::class, array(
-                'label' => 'End Time',
+               'required' => false,
+               'label' => 'End Time',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'attr' => array(

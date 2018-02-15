@@ -23,12 +23,20 @@
                                     data-url="{{ path('autocomplete_home') }}">
                             <label for="autocomplete-input">Search by festival, genre or artist</label>
                         </form>
-                        <!-- Switch -->
-                        <div class="center-align hide-on-med-and-up">
-                            <button id="switch">Change View</button>
-                        </div>
                     </div>
+
+                    <!-- Switch -->
+                    <div class="switch center hide-on-med-and-up">
+                        <label>
+                            Map
+                            <input id="switch" type="checkbox">
+                            <span class="lever"></span>
+                            Festival
+                        </label>
+                    </div>
+
                 </div>
+
                 <div id="festival-cards" class="row festival-cards">
                     {% include ('default/includes/festivalCard.html.twig') %}
                 </div>
@@ -41,6 +49,7 @@
         </div>
         <!--.row -->
     </div>
+
     <!--.discover -->
 {% endblock %}
 
@@ -56,18 +65,20 @@
         var markers = [];
 
         locations = [
-                {% for festival in festivals %}{
-                lat: {{ festival.location.latitude }},
-                lng: {{ festival.location.longitude }},
-                info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'
-            },{% endfor %}
+            {% for festival in festivals %}
+                {% if festival.location.latitude and festival.location.longitude is not null %}
+                    {lat: {{ festival.location.latitude }},
+                    lng: {{ festival.location.longitude }},
+                    info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'}
+                {% endif %},
+            {% endfor %}
         ];
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if user.location.latitude is defined %}
+                    {% if (user.location is defined) and (user.location.latitude and user.location.longitude is not null) %}
                         lat: {{ user.location.latitude }},
                         lng: {{ user.location.longitude }}
                     {% else %}
@@ -216,9 +227,11 @@
         $("#autocomplete-input").autocomplete({
             source : function(req, resp){
                 $.ajax({
+                    source: $("#autocomplete-input").data('url'),
                     url : $("#autocomplete-input").data('url'),
                     dataType : 'json',
                     data: {'term': $("#autocomplete-input").val()},
+                    timeout: 2000,
                     success : function(response){
                         resp(response, function(objet){
                             return objet.festival;
@@ -227,8 +240,8 @@
                     }
                 });
             },
-            minLength: 2,
-            delay: 2
+            minLength: 3,
+            delay: 0
         });
     </script>
     <!--.Custom script -->

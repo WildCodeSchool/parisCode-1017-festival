@@ -3,7 +3,7 @@
 1. All
 2. Discover Base
 3. Discover Media Queries
-4. Forms
+
 ==================================================
 \************************************************/
 
@@ -56,6 +56,10 @@ h3{
 .switcher {
     display:none;
 }
+::placeholder{
+    color: white;
+    opacity: 1;
+}
 
 /************************************************\
 ==================================================
@@ -67,7 +71,7 @@ h3{
     margin-top: 9vh;
 }
 .festival-cards{
-    margin-top: 33vh;
+    margin-top: 29vh;
     margin-left: 1vh;
     margin-right: 0.5vh;
 }
@@ -86,6 +90,7 @@ h3{
     height: 72vh;
     z-index: 2;
 }
+
 .modal {
     width: 90% !important;
     height: 90% !important;
@@ -146,13 +151,23 @@ h3{
     }
 }
 
+/************************************************\
+==================================================
+3. Forms
+==================================================
+\************************************************/
+#appbundle_concert_isCancelled{
+    display: inline;
+}
+
+
 /* Desktop */
 @media screen and (min-width: 993px) {
     .container-top{
         margin-top: 12vh;
     }
     .festival-cards{
-        margin-top: 26vh;
+        margin-top: 28vh;
         margin-left: 1vh;
     }
     /* Google Maps */
@@ -177,5 +192,19 @@ h3{
         z-index: 2;
         top: 8vh;
         width: 33vw;
+    }
+}
+
+/* Big screen */
+@media screen and (min-width: 1285px) {
+    #map {
+        top: 7vh;
+        height: 93vh;
+    }
+    .search {
+        top: 4vh;
+    }
+    .festival-cards{
+        margin-top: 20vh;
     }
 }

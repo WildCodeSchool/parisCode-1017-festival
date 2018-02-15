@@ -22,11 +22,10 @@ class Location
      */
     private $id;
 
-
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=250)
+     * @ORM\Column(name="name", type="string", length=250, nullable=true)
      *
      */
     private $name;
@@ -34,7 +33,7 @@ class Location
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=250)
+     * @ORM\Column(name="address", type="string", length=250, nullable=true)
      *
      */
     private $address;
@@ -42,14 +41,14 @@ class Location
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float")
+     * @ORM\Column(name="latitude", type="float", nullable=true)
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float")
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
     private $longitude;
 
@@ -132,4 +131,6 @@ class Location
     {
         $this->longitude = $longitude;
     }
+
+
 }

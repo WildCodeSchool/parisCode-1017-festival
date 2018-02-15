@@ -87,20 +87,21 @@
 {% block javascripts %}
 
     <script>
-
         function initAutocomplete() {
             // Create the autocomplete object, restricting the search to geographical
             // location types.
             autocomplete = new google.maps.places.Autocomplete(
                 /** @type {!HTMLInputElement} */(document.getElementById('app_user_account_location_address')),
-                {types: ['geocode']});
+                // {types: ['geocode']} /** NB LN-T Remove to get places autocomplete
+            );
             // When the user selects an address from the dropdown, populate the address
             // fields in the form.
             autocomplete.addListener('place_changed', fillInAddress);
         }
-
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA&libraries=places&callback=initAutocomplete" async defer></script>
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&libraries=places&callback=initAutocomplete' }}>
+    </script>
 
 {% endblock javascripts %}
