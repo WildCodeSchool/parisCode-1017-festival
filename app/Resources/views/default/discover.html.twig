@@ -95,7 +95,7 @@
                     position: location,
                     label: labels[i % labels.length],
                     map: map,
-                    animation: google.maps.Animation.DROP,
+                    animation: google.maps.Animation.DROP
                 });
                 bounds.extend(marker.position);
                 google.maps.event.addListener(marker, 'click', function() {
@@ -181,7 +181,7 @@
                         elemen.html("<i class='material-icons'>favorite</i>");
 
                     } else{
-                        Materialize.toast('The festival is now deleted from your wishlist!', 2000)
+                        Materialize.toast('The festival is now deleted from your wishlist!', 2000);
                         elemen.html("<i class='material-icons'>favorite_border</i>");
                     }
                 }

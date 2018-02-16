@@ -100,6 +100,10 @@ body {
     font-size: 0.5em;
 }
 
+.roulette-ul li a {
+    color: white;
+}
+
 @media (min-width: 993px) {
 
     .roulette-footer .stop {
