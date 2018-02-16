@@ -55,6 +55,7 @@ h3{
 }
 .switcher {
     display:none;
+    z-index: -1000;
 }
 ::placeholder{
     color: white;

@@ -27,10 +27,11 @@ class ConcertController extends Controller
      * @param                               $festival_id
      * @return                              \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newConcertAction(Request $request, $festival_id)
+    public function newAction(Request $request, $festival_id)
     {
 
         $em = $this->getDoctrine()->getManager();
+        $genres = $em->getRepository('AppBundle:Genre')->findAll();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
 
         $concert = new Concert();
@@ -66,6 +67,7 @@ class ConcertController extends Controller
             'concert/index.html.twig', array(
             'festival' => $festival,
             'concert' => $concert,
+            'genres' => $genres,
             'form' => $form->createView(),
             )
         );
@@ -83,10 +85,11 @@ class ConcertController extends Controller
      * @param                                             $festival_id
      * @return                                            \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editConcertAction(Request $request, Concert $concert, $festival_id)
+    public function editAction(Request $request, Concert $concert, $festival_id)
     {
         // get festival infos in render
         $em = $this->getDoctrine()->getManager();
+        $genres = $em->getRepository('AppBundle:Genre')->findAll();
         $festival = $em->getRepository('AppBundle:Festival')->findOneById($festival_id);
 
         // if concert already got a clone
@@ -95,7 +98,8 @@ class ConcertController extends Controller
         if ($hasClone) {
             return $this->render(
                 'concert/index.html.twig', array(
-                'error' => $error
+                    'error' => $error,
+                    'genres' => $genres
                 )
             );
         }
@@ -134,6 +138,7 @@ class ConcertController extends Controller
             'concert/index.html.twig', array(
             'concert' => $concert,
             'festival' => $festival,
+            'genres' => $genres,
             'form' => $editForm->createView(),
             )
         );

@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col s12 left-align"><i class="material-icons">date_range</i>
-                                            {% if festival.start %} {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }} ({{ ((festival.end).diff(festival.start))|date }})
+                                            {% if festival.start %} {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }}
                                             {% else %}TBA
                                             {% endif %}
                                         </div>
@@ -64,7 +64,6 @@
                                     <ul class="tabs tabs-fixed-width">
                                         <li class="tab"><a class="active" href="{{ '#general' ~ festival.id }}">General</a></li>
                                         <li class="tab"><a href="{{ '#lineup' ~ festival.id }}">Line Up</a></li>
-                                        <li class="tab"><a href="{{ '#map' ~ '2' ~ festival.id }}">Map</a></li>
                                         <li class="tab"><a href="{{ '#links' ~ festival.id }}">Social</a></li>
                                     </ul>
                                 </div>
@@ -123,14 +122,6 @@
                                             {% else %}N/A
                                             {% endif %}
                                         </ul>
-                                    </div>
-                                    <div class="center" id="{{ 'map' ~ '2' ~ festival.id }}">
-                                        <iframe
-                                                width="450"
-                                                height="350"
-                                                frameborder="0" style="border:0"
-                                                src={{ "https://www.google.com/maps/embed/v1/place?key=" ~ google_maps_api ~ "&q=" ~ festival.location.address }}>
-                                        </iframe>
                                     </div>
                                     <div id="{{ 'links' ~ festival.id }}">
                                         <ul class="collection">

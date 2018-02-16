@@ -20,11 +20,10 @@
                                     id="autocomplete-input"
                                     class="autocomplete"
                                     name="search"
-                                    data-url="{{ path('autocomplete_home') }}">
+                                    data-url="{{ path('search_autocomplete') }}">
                             <label for="autocomplete-input">Search by festival, genre or artist</label>
                         </form>
                     </div>
-
                     <!-- Switch -->
                     <div class="switch center hide-on-med-and-up">
                         <label>
@@ -75,7 +74,7 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: {
-                    {% if (user is defined) and (user.location is defined) and (user.location.latitude and user.location.longitude is not null) %}
+                    {% if (user is not null) and (user.location is not null) and (user.location.latitude and user.location.longitude is not null) %}
                         lat: {{ user.location.latitude }},
                         lng: {{ user.location.longitude }}
                     {% else %}
@@ -139,7 +138,7 @@
         });
         // switch festival cards/map on mobile view
         $("#switch").click(function(){
-            $("#map").toggleClass("switcher");
+            $(".map").toggleClass("switcher");
         });
         // display festival cards according search input
         $("#searchBar").submit(function(e){

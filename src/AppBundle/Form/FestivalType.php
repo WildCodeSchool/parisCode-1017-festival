@@ -37,11 +37,17 @@ class FestivalType extends AbstractType
     {
         if ($options['type'] == 'edit') {
             $builder->add(
-                'isCancelled', TextType::class, array(
-                'label' => 'Is it cancelled?',
-                'required' => false
+                'isCancelled', ChoiceType::class, array(
+                    'choices'  => array(
+                        'Yes' => true,
+                        'No' => false,
+                    ),
+                    'expanded' => true,
+                    'multiple' => false,
+                    'label' => 'Is it cancelled?',
                 )
             );
+            ;
         }
 
         $builder
@@ -53,8 +59,7 @@ class FestivalType extends AbstractType
                     'type' => 'text',
                     'class' => 'validate',
                     'data-length' => '30'
-                )
-                )
+                ))
             )
             ->add(
                 'description', TextareaType::class, array(

@@ -23,6 +23,7 @@ security:
                 target: /discover
             anonymous:    true
             logout_on_user_change: true
+            http_basic: ~
 
             # activate different ways to authenticate
 
@@ -45,4 +46,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/profile, role: ROLE_USER }
-
+        - { path: ^/festival, role: ROLE_USER }

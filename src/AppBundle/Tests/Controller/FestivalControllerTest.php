@@ -4,52 +4,39 @@ namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class FestivalControllerTest for festivals routes (connected user)
+ * @package AppBundle\Tests\Controller
+ */
 class FestivalControllerTest extends WebTestCase
 {
-    /*
-    public function testCompleteScenario()
+    // Création d'un client User
+    public function UserConnection()
     {
-        // Create a new client to browse the application
-        $client = static::createClient();
-
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/festival/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /festival/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
-
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'appbundle_festival[field_name]'  => 'Test',
-            // ... other fields to fill
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'root',
+            'PHP_AUTH_PW' => 'root',
         ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
-
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
-
-        $form = $crawler->selectButton('Update')->form(array(
-            'appbundle_festival[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        return $client;
     }
 
-    */
+    /**
+     * Test for "Add Fest" Route
+     */
+    public function testRouteFestivalNew()
+    {
+        $client = $this->UserConnection();
+        $crawler = $client->request('GET', '/festival/new');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Test for festival edit Route
+     */
+    public function testRouteFestivalEdit()
+    {
+        $client = $this->UserConnection();
+        $crawler = $client->request('GET', '/festival/1/edit');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }

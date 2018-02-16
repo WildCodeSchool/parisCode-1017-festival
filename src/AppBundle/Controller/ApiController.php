@@ -27,9 +27,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ApiController extends Controller
 {
     /**
-     * @Route("/calendar/", name="api_calendar")
+     * @Route("/calendar", name="calendar")
      */
-    public function getJsonEventAction()
+    public function calendarAction()
     {
         $em = $this->getDoctrine()->getManager();
         $wishlists = $em->getRepository(Wishlist::class)->findOneByUser($this->getUser());
@@ -67,7 +67,7 @@ class ApiController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \HttpException
      *
-     * @Route("/resultSearch", name="search_bar")
+     * @Route("/search", name="search_bar")
      *
      * @Method("POST")
      */
@@ -114,10 +114,10 @@ class ApiController extends Controller
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \AppBundle\Services\GoogleMaps            $googleMaps
      * @return \Symfony\Component\HttpFoundation\JsonResponse
-     * @Route("/autocompleteResult", name="autocomplete_home")
+     * @Route("/autocomplete", name="search_autocomplete")
      * @Method("GET")
      */
-    public function autoCompleteAction(Request $request, GoogleMaps $googleMaps)
+    public function autocompleteAction(Request $request, GoogleMaps $googleMaps)
     {
         $em = $this->getDoctrine()->getManager();
         $term = $request->get('term');

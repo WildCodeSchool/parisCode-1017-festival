@@ -36,7 +36,6 @@ class FestivalController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $em->persist($festival);
             $em->flush();
 
@@ -75,7 +74,8 @@ class FestivalController extends Controller
         if ($hasClone) {
             return $this->render(
                 'festival/index.html.twig', array(
-                'error' => $error
+                'error' => $error,
+                'genres' => $genres
                 )
             );
         }
