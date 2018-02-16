@@ -60,6 +60,16 @@ h3{
     color: white;
     opacity: 1;
 }
+main {
+    flex: 1 0 auto;
+    background-image: url(../img/background.jpg);
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: 100%;
+}
+.discover {
+    background-color: white!important;
+}
 
 
 
@@ -135,6 +145,9 @@ h3{
 
 .card-panel {
     margin-top: 2em;
+}
+
+.card-panel-size {
     height: 20em;
 }
 

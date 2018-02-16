@@ -15,7 +15,7 @@
     </div>
 
 
-
+    <div class="card-panel">
     <!-- FORM -->
     <div class="row">
         {{ form_start(form) }}
@@ -79,6 +79,7 @@
         {{ form_end(form) }}
     </div>
     <!-- .FORM -->
+    </div>
 
 {% endblock body %}
 
@@ -89,7 +90,7 @@
             // Create the autocomplete object, restricting the search to geographical
             // location types.
             autocomplete = new google.maps.places.Autocomplete(
-                /** @type {!HTMLInputElement} */(document.getElementById('app_user_account_location_address')),
+                /** @type {!HTMLInputElement} */(document.getElementById('app_user_account_location_address'))
                 // {types: ['geocode']} /** NB LN-T Remove to get places autocomplete
             );
             // When the user selects an address from the dropdown, populate the address
