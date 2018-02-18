@@ -95,7 +95,7 @@
                                     </div>
                                     <div id="{{ 'lineup' ~ festival.id }}">
                                         <ul class="collection">
-                                            {% if festival.concert %}
+                                            {% if festival.concert is not empty %}
                                                 {% for concert in festival.concert %}
                                                     {% if concert.isValid == true %}
                                                         <li class="collection-item avatar">
@@ -117,9 +117,11 @@
                                                                 <a class="secondary-content" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
                                                             {% endif %}
                                                         </li>
+                                                    {% else %}
                                                     {% endif %}
                                                 {% endfor %}
-                                            {% else %}N/A
+                                            {% else %}
+                                                <p class="center-align">TBA</p>
                                             {% endif %}
                                         </ul>
                                     </div>
@@ -172,3 +174,46 @@
     </div>
 
 {% endfor %}
+
+    <script>
+        // Add a festival to wishlist
+        $(".addFestivalToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('The festival is now added to your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('The festival is now deleted from your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        });
+        // Add a concert to wishlist
+        $(".addConcertToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('The concert is now added to your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('The concert is now deleted from your wishlist!', 2000)
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        });
+    </script>

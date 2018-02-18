@@ -3,6 +3,7 @@
 1. All
 2. Discover Base
 3. Discover Media Queries
+4.
 
 ==================================================
 \************************************************/
@@ -72,16 +73,20 @@ main {
     background-color: white!important;
 }
 
-
-
 /************************************************\
 ==================================================
 2. Discover Mobile
 ==================================================
 \************************************************/
 
+.row-custom{
+    min-height: 100vh;
+}
 .container-top{
     margin-top: 9vh;
+}
+.row-custom{
+    margin-bottom: 0px !important;
 }
 .festival-cards{
     margin-top: 29vh;
@@ -122,36 +127,6 @@ main {
     width: 96vw;
 }
 
-
-/************************************************\
-==================================================
-3. Forms
-==================================================
-\************************************************/
-#appbundle_concert_isCancelled{
-    display: inline;
-}
-
-/* REGISTER
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.register-icon {
-    font-size: 3em;
-    color: #26a69a;
-}
-
-.login-title {
-    font-size: 2em;
-    font-weight: 600;
-}
-
-.card-panel {
-    margin-top: 2em;
-}
-
-.card-panel-size {
-    height: 20em;
-}
-
 /************************************************\
 ==================================================
 3. Discover Media Queries
@@ -163,26 +138,21 @@ main {
     .container-top {
         margin-top: 8vh;
     }
-
     .festival-cards {
         margin-top: 26vh;
         margin-left: 1vh;
     }
-
     .festival-cards p {
         font-size: 0.85em;
     }
-
     .map {
         z-index: 3;
     }
-
     #map {
         top: 8vh;
         height: 92vh;
         z-index: 3;
     }
-
     .modal {
         width: 90% !important;
         height: 90% !important;
@@ -191,20 +161,16 @@ main {
         top: 5% !important;
         bottom: 5% !important;
     }
-
     .search {
         padding-top: 2vh;
         z-index: 2;
         top: 7vh;
         width: 33vw;
     }
-
     .login-title {
         margin-top: 2em;
     }
 }
-
-
 
 /* Desktop */
 @media screen and (min-width: 993px) {
@@ -258,4 +224,35 @@ main {
     .festival-cards{
         margin-top: 20vh;
     }
+}
+
+/************************************************\
+==================================================
+4. Forms
+==================================================
+\************************************************/
+
+#appbundle_concert_isCancelled{
+    display: inline;
+}
+
+/************************************************\
+==================================================
+5. Register
+==================================================
+\************************************************/
+
+.register-icon {
+    font-size: 3em;
+    color: #26a69a;
+}
+.login-title {
+    font-size: 2em;
+    font-weight: 600;
+}
+.card-panel {
+    margin-top: 2em;
+}
+.card-panel-size {
+    height: 20em;
 }

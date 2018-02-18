@@ -72,7 +72,7 @@ class WishlistController extends Controller
      */
     public function concertAction(Request $request, Concert $concert_id, Wishlist $wishlist)
     {
-        if ($request->isXmlHttpRequest()) {
+//        if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
 
             $array = (array) $wishlist->getConcert()->getValues();
@@ -87,87 +87,9 @@ class WishlistController extends Controller
             $em->flush();
 
             return new JsonResponse($response);
-        } else {
-            throw new HttpException('not an ajax call', 500);
-        }
-    }
-
-    /**
-     * Add/remove artist to wishlist
-     *
-     * @Route("/{id}/add/artist/{artist_id}", name="wishlist_artist", requirements={"artist_id": "\d+"}))
-     * @Method({"GET",                        "POST"})
-     * @ParamConverter("artist",              options={"mapping": {"artist_id": "id"}})
-     * @param                                 Artist   $artist_id
-     * @param                                 Wishlist $wishlist
-     * @return                                \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function artistAction(Artist $artist_id, Wishlist $wishlist)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $array = (array) $wishlist->getArtist()->getValues();
-        if (in_array($artist_id, $array)) {
-            $wishlist->removeArtist($artist_id);
-        } else {
-            $wishlist->addArtist($artist_id);
-        }
-
-        $em->persist($wishlist);
-        $em->flush();
-
-        return $this->redirectToRoute('fos_user_profile_show');
-    }
-
-    /**
-     * Add/remove genre to wishlist
-     *
-     * @Route("/{id}/add/genre/{genre_id}", name="wishlist_genre", requirements={"genre_id": "\d+"}))
-     * @Method({"GET",                      "POST"})
-     * @ParamConverter("genre",             options={"mapping": {"genre_id": "id"}})
-     */
-    public function genreAction(Genre $genre_id, Wishlist $wishlist)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $array = (array) $wishlist->getGenre()->getValues();
-        if (in_array($genre_id, $array)) {
-            $wishlist->removeGenre($genre_id);
-        } else {
-            $wishlist->addGenre($genre_id);
-        }
-
-        $em->persist($wishlist);
-        $em->flush();
-
-        return $this->redirectToRoute('fos_user_profile_show');
-    }
-
-    /**
-     * Add/remove concert to wishlist
-     *
-     * @Route("/{id}/add/location/{location_id}", name="wishlist_location", requirements={"location_id": "\d+"}))
-     * @Method({"GET",                            "POST"})
-     * @ParamConverter("location",                options={"mapping": {"location_id": "id"}})
-     * @param                                     Location $location_id
-     * @param                                     Wishlist $wishlist
-     * @return                                    \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function locationAction(Location $location_id, Wishlist $wishlist)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $array = (array) $wishlist->getLocation()->getValues();
-        if (in_array($location_id, $array)) {
-            $wishlist->removeLocation($location_id);
-        } else {
-            $wishlist->addLocation($location_id);
-        }
-
-        $em->persist($wishlist);
-        $em->flush();
-
-        return $this->redirectToRoute('fos_user_profile_show');
+//        } else {
+//            throw new HttpException('not an ajax call', 500);
+//        }
     }
 
 }
