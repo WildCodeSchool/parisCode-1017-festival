@@ -61,6 +61,16 @@ h3{
     color: white;
     opacity: 1;
 }
+main {
+    flex: 1 0 auto;
+    background-image: url(../img/background.jpg);
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: 100%;
+}
+.discover {
+    background-color: white!important;
+}
 
 
 
@@ -125,7 +135,7 @@ h3{
 /* REGISTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .register-icon {
-    font-size: 2em;
+    font-size: 3em;
     color: #26a69a;
 }
 
@@ -136,6 +146,9 @@ h3{
 
 .card-panel {
     margin-top: 2em;
+}
+
+.card-panel-size {
     height: 20em;
 }
 
@@ -146,25 +159,30 @@ h3{
 \************************************************/
 
 /* Tablet */
-@media screen and (min-width: 601px) and (max-width: 992px){
-    .container-top{
+@media screen and (min-width: 601px) and (max-width: 992px) {
+    .container-top {
         margin-top: 8vh;
     }
-    .festival-cards{
+
+    .festival-cards {
         margin-top: 26vh;
         margin-left: 1vh;
     }
-    .festival-cards p{
+
+    .festival-cards p {
         font-size: 0.85em;
     }
+
     .map {
         z-index: 3;
     }
+
     #map {
         top: 8vh;
         height: 92vh;
         z-index: 3;
     }
+
     .modal {
         width: 90% !important;
         height: 90% !important;
@@ -173,12 +191,14 @@ h3{
         top: 5% !important;
         bottom: 5% !important;
     }
+
     .search {
         padding-top: 2vh;
         z-index: 2;
         top: 7vh;
         width: 33vw;
     }
+
     .login-title {
         margin-top: 2em;
     }
@@ -219,7 +239,7 @@ h3{
         width: 33vw;
     }
     .register-icon {
-        font-size: 5em;
+        font-size: 6em;
     }
     .login-title {
         margin-top: 3em;

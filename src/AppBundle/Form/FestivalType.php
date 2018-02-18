@@ -141,7 +141,7 @@ class FestivalType extends AbstractType
             )
             ->add(
                 'imageIcon', UrlType::class, array(
-                'label' => 'Icon image',
+                'label' => 'Icon image url (square format)',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
@@ -150,7 +150,7 @@ class FestivalType extends AbstractType
             )
             ->add(
                 'imageBanner', UrlType::class, array(
-                'label' => 'Banner image',
+                'label' => 'Banner image url (square format)',
                 'attr' => array(
                     'id' => 'icon_prefix'
                 ),
