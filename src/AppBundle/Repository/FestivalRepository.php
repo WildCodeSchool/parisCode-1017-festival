@@ -113,5 +113,6 @@ class FestivalRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
 
         return array_merge($festivals, $artists, $genres, $locations);
+
     }
 }

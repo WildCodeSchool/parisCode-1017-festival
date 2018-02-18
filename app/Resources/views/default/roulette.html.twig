@@ -30,10 +30,8 @@
 {% endblock footer %}
 
 {% block javascripts %}
-    <script type="text/javascript"
-            src="//maps.googleapis.com/maps/api/js?key=AIzaSyAYXbFnRdca1QCM5X3FgxsQghNl0N6H2gA">
+    <script type="text/javascript" src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api }}>
     </script>
-
     <script>
         $(function(){
             var geocoder,

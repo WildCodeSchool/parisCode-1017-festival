@@ -32,7 +32,7 @@ class Festival
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=250)
+     * @ORM\Column(name="description", type="string", length=500)
      */
     private $description;
 
