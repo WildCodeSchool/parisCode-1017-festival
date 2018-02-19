@@ -73,7 +73,7 @@ class UserType extends AbstractType
                     'id' => 'icon_prefix',
                     'type' => 'text',
                     'class' => 'validate',
-                    'data-length' => '30'
+                    /*'data-length' => '30'*/
                 ))
             );
     }/**

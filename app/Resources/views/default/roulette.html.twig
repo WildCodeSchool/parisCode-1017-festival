@@ -15,7 +15,7 @@
             <ul class="roulette-ul">
                 {% for festival in festivals %}
                 <li data-city="{{ festival.location.address }}">
-                    <a href="includes/festivalCard.html.twig">{{ festival.title }}</a>
+                    {{ festival.title }}
                 </li>
                 {% endfor %}
             </ul>

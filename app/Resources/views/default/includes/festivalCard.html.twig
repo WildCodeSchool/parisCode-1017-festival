@@ -19,14 +19,14 @@
                     {% if festival in user.wishlist.festival %}
                         <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
                     {% else %}
-                        <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                        <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
                     {% endif %}
                 {% endif %}
             {% else %}
-                <a class="favorite btn-floating waves-effect waves-light pink pulse" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
+                <a class="favorite btn-floating waves-effect waves-light pink" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
             {% endif %}
             <!-- Modal Festival - Trigger -->
-            <a class="zoom-in btn-floating waves-effect waves-light cyan modal-trigger" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
+            <a class="zoom-in btn-floating waves-effect waves-light cyan modal-trigger pulse" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
             <!-- Modal Festival - Structure -->
             <div id="{{ 'modal' ~ festival.id ~ 'b' }}" class="modal">
                 <div class="modal-content">
