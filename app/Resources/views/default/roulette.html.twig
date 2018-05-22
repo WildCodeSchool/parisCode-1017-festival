@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/roulette.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <h2 class="roulette-title">Where should I go ?</h2>
+    <section class="spinner">
+
+        <div class="roller">
+            <ul class="roulette-ul">
+                {% for festival in festivals %}
+                <li data-city="{{ festival.location.address }}">
+                    {{ festival.title }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="roulette-footer">
+            <button class="stop">Stop</button>
+        </div>
+    </section>
+
+    <div id="map-canvas"></div>
+{% endblock %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block javascripts %}
+
+    <script>
+        $(function(){
+            var geocoder,
+                map,
+                lastCity;
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+            spin();
+
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(48.86, 2.34);
+                var mapOptions = {
+                    zoom: 5,
+                    center: latlng,
+                    disableDefaultUI: true
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            }
+
+            function spin(){
+                $(".roller ul").css('animation', 'scroll-numbers 1s linear infinite');
+                $(".stop").text("Stop").off().on("click", stop);
+            }
+
+            function stop(){
+                var randomIndex = pickRandomIndex();
+                var city = $($(".roller li").get(randomIndex)).data('city');
+                var top = (randomIndex * -2);
+                $(".roller ul").css({  "top": top+"em", "animation": "none"  });
+                geocodeAddress(city);
+                $(".stop").text("Respin").off().on("click", spin);
+            }
+
+            function pickRandomIndex(){
+                return Math.floor(Math.random() * ($(".roller li").data('city').length - 1 + 1));
+            }
+
+            function geocodeAddress(addr) {
+                lastCity = addr;
+                geocoder.geocode( { 'address': addr},
+                function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            animation: google.maps.Animation.DROP
+                        });
+                    }
+                    /*else {
+                            alert('Geocode was not successful for the following reason: ' + status);
+                        }*/
+                });
+            }
+        });
+    </script>
+
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api}}>
+    </script>
+
+{% endblock %}

@@ -1,0 +1,219 @@
+{% for festival in festivals %}
+
+    <div class="card horizontal">
+        <div class="card-stacked">
+            <div class="card-content">
+                <p>{{ festival.title }}</p>
+                <p class="italic">{{ festival.genre }}</p>
+                <p>{% if festival.start is defined %}
+                        {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }}
+                    {% else %}TBA
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="card-image">
+            <!-- Add/remove to/from wishlist -->
+            {% if app.user is not null %}
+                {% if user.wishlist is not empty %}
+                    {% if festival in user.wishlist.festival %}
+                        <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite</i></a>
+                    {% else %}
+                        <a class="addFestivalToWishlist favorite btn-floating waves-effect waves-light pink" href="{{ path('wishlist_festival', { 'user_id': user.id, 'id': user.wishlist.id, 'festival_id': festival.id }) }}"><i class="material-icons">favorite_border</i></a>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                <a class="favorite btn-floating waves-effect waves-light pink" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
+            {% endif %}
+            <!-- Modal Festival - Trigger -->
+            <a class="zoom-in btn-floating waves-effect waves-light cyan modal-trigger pulse" href="{{ '#modal'  ~ festival.id ~ 'b' }}"><i class="material-icons">zoom_in</i></a>
+            <!-- Modal Festival - Structure -->
+            <div id="{{ 'modal' ~ festival.id ~ 'b' }}" class="modal">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="col offset-s1 s10">
+                            <h2 class="center-align festival-title">{{ festival.title|upper }}</h2>
+                        </div>
+                        <div class="col s1">
+                            <p class="modal-action modal-close right-align">X</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m3">
+                            <div class="card">
+                                <img class="responsive-img" src="{% if festival.imageBanner %}{{ festival.imageBanner }}{% else %}{{ asset('img/logorondblanc.png') }}{% endif %}">
+                                <br>
+                                <div class="collection-item">
+                                    <div class="row">
+                                        <div class="col s12 left-align"><i class="material-icons">location_on</i>{{ festival.location.name }}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 left-align"><i class="material-icons">date_range</i>
+                                            {% if festival.start %} {{ festival.start|date("d M") }} - {{ festival.end|date("d M Y") }}
+                                            {% else %}TBA
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col s12 m9">
+                            <div class="card">
+                                <div class="card-tabs">
+                                    <ul class="tabs tabs-fixed-width">
+                                        <li class="tab"><a class="active" href="{{ '#general' ~ festival.id }}">General</a></li>
+                                        <li class="tab"><a href="{{ '#lineup' ~ festival.id }}">Line Up</a></li>
+                                        <li class="tab"><a href="{{ '#links' ~ festival.id }}">Social</a></li>
+                                    </ul>
+                                </div>
+                                <div class="card-content">
+                                    <div id="{{ 'general' ~ festival.id }}">
+                                        <ul class="collection">
+                                            <li class="collection-item avatar">
+                                                <i class="material-icons circle blue lighten-2">music_note</i>
+                                                <span class="title left">Genre</span>
+                                                <br>
+                                                <p class="left-align"><br>{{ festival.genre }}</p>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <i class="material-icons circle blue lighten-2">subject</i>
+                                                <span class="title left">Description</span>
+                                                <br>
+                                                <p class="left-align"><br>{{ festival.description }}</p>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <i class="material-icons circle blue lighten-2">monetization_on</i>
+                                                <span class="title left">Budget</span>
+                                                <br>
+                                                <p class="left-align"><br>{% if festival.budget %}{{ festival.budget }} euros{% else %}N/A{% endif %}</p>
+                                                {% if festival.linkTickets %}
+                                                    <a href="{{ festival.linkTickets }}" target="_blank" class="secondary-content"><i class="material-icons">local_play</i></a>
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="{{ 'lineup' ~ festival.id }}">
+                                        <ul class="collection">
+                                            {% if festival.concert is not empty %}
+                                                {% for concert in festival.concert %}
+                                                    {% if concert.isValid == true %}
+                                                        <li class="collection-item avatar">
+                                                            <i class="material-icons circle deep-purple lighten-2">people</i>
+                                                            <h3 class="left-align">{{ concert.artist }}</h3>
+                                                            <p class="left-align truncate">{{ concert.start|date("d D H:i") }} - {{ concert.end|date("d D H:i") }}<br>
+                                                                {% if concert.location is not null %}{{ concert.location.name }}{% endif %}
+                                                            </p>
+                                                            <!-- Add/remove to/from wishlist -->
+                                                            {% if app.user is not null %}
+                                                                {% if user.wishlist is not empty %}
+                                                                    {% if concert in user.wishlist.concert %}
+                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite</i></a>
+                                                                    {% else %}
+                                                                        <a class="addConcertToWishlist secondary-content" href="{{ path('wishlist_concert', { 'user_id': user.id, 'id': user.wishlist.id, 'concert_id': concert.id }) }}"><i class="material-icons">favorite_border</i></a>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <a class="secondary-content" href="{{ path('fos_user_security_login') }}"><i class="material-icons">favorite_border</i></a>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% else %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                <p class="center-align">TBA</p>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div id="{{ 'links' ~ festival.id }}">
+                                        <ul class="collection">
+                                            <li class="collection-item avatar">
+                                                <i class="material-icons circle blue-grey lighten-3">perm_identity</i>
+                                                <div class="row">
+                                                    {% if festival.wishlist is not empty  %}
+                                                        {% for wishlist in festival.wishlist %}
+                                                            <div class="col s2 m2 l1">
+                                                                {% if wishlist.user.imageIcon is not empty  %}
+                                                                    <img src="{{ wishlist.user.imageIcon }}" alt="" style="border-radius: 50%">
+                                                                {% else %}
+                                                                    <img src="http://bestchoice.property/wp-content/uploads/2015/07/empty-agent-profile.png" alt="" style="border-radius: 50%">
+                                                                {% endif %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <p class="center">No attendee yet :/</p>
+                                                    {% endif %}
+                                                </div>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <i class="material-icons circle blue-grey lighten-3">insert_link</i>
+                                                <p class="center-align">
+                                                    {% if festival.linkWebsite %}<a href="{{ festival.linkWebsite }}" target="_blank" class="btn-floating amber "><i class="material-icons">insert_link</i></a>{% endif %}
+                                                    {% if festival.linkFbPage %}<a href="{{ festival.linkFbPage }}" target="_blank" class="btn-floating blue darken-3 "><i class="fa fa-facebook"></i></a>{% endif %}
+                                                    {% if festival.linkFbEvent %}<a href="{{ festival.linkFbEvent }}" target="_blank" class="btn-floating blue darken-3 "><i class="material-icons">date_range</i></a>{% endif %}
+                                                    {% if festival.linkInstagram %}<a href="{{ festival.linkInstagram }}" target="_blank" class="btn-floating purple"><i class="fa fa-instagram"></i></a>{% endif %}
+                                                </p>
+                                            </li>
+                                            <li class="collection-item avatar">
+                                                <i class="material-icons circle blue-grey lighten-3">edit</i>
+                                                <p class="center-align">
+                                                    <a href="{{ path('festival_edit', { 'festival_id': festival.id }) }}" target="_blank">Missing some info, tell us!</a>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--.Modal Festival - Structure -->
+            <img src="{% if festival.imageBanner %}{{ festival.imageIcon }}{% else %}{{ asset('img/logorondblanc.png') }}{% endif %}">
+        </div>
+    </div>
+
+{% endfor %}
+
+    <script>
+        // Add a festival to wishlist
+        $(".addFestivalToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('The festival is now added to your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('The festival is now deleted from your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        });
+        // Add a concert to wishlist
+        $(".addConcertToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('The concert is now added to your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('The concert is now deleted from your wishlist!', 2000)
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        });
+    </script>

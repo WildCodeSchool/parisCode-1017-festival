@@ -7,10 +7,11 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    google_maps_api: '%api_google%'
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -35,6 +36,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        google_maps_api: '%api_google%'
 
 # Doctrine Configuration
 doctrine:
@@ -65,3 +68,134 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+# app/config/config.yml
+easy_admin:
+    site_name: 'GO FEST'
+    design:
+        brand_color: '#8033A4'
+        color_scheme: 'dark'
+    list:
+        actions:
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash' }
+    entities:
+        Festival:
+            class: AppBundle\Entity\Festival
+            label: 'Festivals'
+            list:
+                title: 'Most recent festivals'
+                fields:
+                    - id
+                    - { property: 'imageIcon', type: 'image' }
+                    - title
+                    - { property: 'location.name', type: 'text', label: 'Location' }
+                    - isValid
+                    - { property: 'festival', type: 'text', label: 'Clone of' }
+            form:
+                fields:
+                    - title
+                    - description
+                    - { property: 'genre'}
+                    - { property: 'location', type: 'AppBundle\Form\LocationType' }
+                    - { property: 'start', type: 'date' }
+                    - { property: 'end', type: 'date' }
+                    - budget
+                    - { type: 'divider' }
+                    - { property: 'linkWebsite', type: 'url' }
+                    - { property: 'linkFbEvent', type: 'url' }
+                    - { property: 'linkFbPage', type: 'url' }
+                    - { property: 'linkInstagram', type: 'url' }
+                    - { property: 'linkTickets', type: 'url' }
+                    - { property: 'imageIcon', type: 'url' }
+                    - { property: 'imageBanner', type: 'url' }
+                    - { type: 'group' }
+                    - isCancelled
+                    - isSoldOut
+                      - isValid
+        Concert:
+            class: AppBundle\Entity\Concert
+            label: 'Concerts'
+            list:
+                fields:
+                    - id
+                    - artist
+                    - festival
+                    - isValid
+                    - { property: 'location.name', type: 'text', label: 'Location' }
+                    - { property: 'concert', type: 'text', label: 'Clone of' }
+            form:
+                fields:
+                    - title
+                    - { property: 'start', type: 'date' }
+                    - { property: 'end', type: 'date' }
+                    - { property: 'artist', type: 'AppBundle\Form\ArtistType' }
+                    - { property: 'location', type: 'AppBundle\Form\LocationType' }
+                    - festival
+                    - concert
+                    - { type: 'group' }
+                    - isCancelled
+                    - isValid
+        User:
+            class: AppBundle\Entity\User
+            label: 'Users'
+            list:
+                fields:
+                    - id
+                    - username
+                    - email
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - { property: 'location', type: 'AppBundle\Form\LocationType' }
+
+        Wishlist:
+            class: AppBundle\Entity\Wishlist
+            label: 'Wishlists'
+            list:
+                fields:
+                    - id
+                    - user
+                    - { property: 'festival', type: 'array' }
+                    - { property: 'genre', type: 'array' }
+        Artist:
+            class: AppBundle\Entity\Artist
+            label: 'Artists'
+            list:
+                fields:
+                    - id
+                    - name
+                    - { property: 'concert', type: 'array' }
+        Genre:
+            class: AppBundle\Entity\Genre
+            label: 'Genres'
+        Location:
+            class: AppBundle\Entity\Location
+            label: 'Locations'
+            list:
+                fields:
+                    - id
+                    - name
+                    - address
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+            form:
+                name: app_user_account
+                type: AppBundle\Form\UserType
+            confirmation:
+                enabled: true
+    profile:
+            form:
+                name: app_user_account
+                type: AppBundle\Form\UserType

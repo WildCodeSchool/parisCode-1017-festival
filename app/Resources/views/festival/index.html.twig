@@ -1,0 +1,247 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row center-align">
+        <div class="col s12">
+            <h2>{{ app.request.get('_route') == 'festival_new' ? 'Add a ' : 'Edit ' }}Festival</h2>
+        </div>
+    </div>
+
+    {% if error is defined %}
+        <div class="center-align">
+            <p>Thanks for helping out! This festival is now being updated by admin.</p>
+            <a href="{{ path('discover') }}" class="center-align">Return to Discover</a>
+        </div>
+    {% else %}
+
+    <div class="card">
+        <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab"><a class="{{ app.request.get('_route') == 'festival_new' ? ' active' : '' }}" href="#test4">General</a></li>
+                <li class="tab{{ app.request.get('_route') == 'festival_new' ? ' disabled' : '' }}"><a class="{{ app.request.get('_route') == 'festival_new' ? '' : 'active' }}" href="#test5">Line Up</a></li>
+            </ul>
+        </div>
+        <div class="card-content">
+            <div id="test4">
+                <!-- FORM -->
+                <div class="row">
+                    {{ form_start(form) }}
+                    <!-- $title -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">music_note</i>
+                            {{ form_label(form.title) }}
+                            {{ form_widget(form.title) }}
+                            {{ form_errors(form.title) }}
+                        </div>
+                    </div>
+                    <!-- $description -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">announcement</i>
+                            {{ form_label(form.description) }}
+                            {{ form_widget(form.description) }}
+                            {{ form_errors(form.description) }}
+                        </div>
+                    </div>
+                    <!-- $location -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">location_city</i>
+                            {{ form_label(form.location.address) }}
+                            {{ form_widget(form.location.address) }}
+                            {{ form_errors(form.location.address) }}
+                        </div>
+                    </div>
+                    <!-- $genre -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">music_video</i>
+                            {{ form_label(form.genre.name) }}
+                            {{ form_widget(form.genre.name) }}
+                            {{ form_errors(form.genre.name) }}
+                         </div>
+                    </div>
+                    <!-- $budget -->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">attach_money</i>
+                            {{ form_label(form.budget) }}
+                            {{ form_widget(form.budget) }}
+                            {{ form_errors(form.budget) }}
+                         </div>
+                    </div>
+                    <div class="row">
+                        <!-- $start -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">date_range</i>
+                            {{ form_label(form.start)  }}
+                            {{ form_widget(form.start) }}
+                            {{ form_errors(form.start) }}
+                        </div>
+                        <!-- $end -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">date_range</i>
+                            {{ form_label(form.end) }}
+                            {{ form_widget(form.end) }}
+                            {{ form_errors(form.end) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $linkWebsite -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ form_label(form.linkWebsite) }}
+                            {{ form_widget(form.linkWebsite) }}
+                            {{ form_errors(form.linkWebsite) }}
+                        </div>
+                        <!-- $linkInstagram -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ form_label(form.linkInstagram) }}
+                            {{ form_widget(form.linkInstagram) }}
+                            {{ form_errors(form.linkInstagram) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $linkFbPage -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ form_label(form.linkFbPage) }}
+                            {{ form_widget(form.linkFbPage) }}
+                            {{ form_errors(form.linkFbPage) }}
+                        </div>
+                        <!-- $linkFbEvent -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ form_label(form.linkFbEvent) }}
+                            {{ form_widget(form.linkFbEvent) }}
+                            {{ form_errors(form.linkFbEvent) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- $imageIcon -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ form_label(form.imageIcon) }}
+                            {{ form_widget(form.imageIcon) }}
+                            {{ form_errors(form.imageIcon) }}
+                        </div>
+                        <!-- $imageBanner -->
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">insert_link</i>
+                            {{ form_label(form.imageBanner) }}
+                            {{ form_widget(form.imageBanner) }}
+                            {{ form_errors(form.imageBanner) }}
+                        </div>
+                    </div>
+                    {% if app.request.get('_route') != 'festival_new' %}
+                        <div class="row">
+                            <!--$isCancelled -->
+                            <div class="col s6">
+                                <i class="material-icons prefix">insert_link</i>
+                                {{ form_label(form.isCancelled) }}
+                                {{ form_widget(form.isCancelled) }}
+                                {{ form_errors(form.isCancelled) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row center-align">
+                        <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'festival_new' ? 'Create' : 'Edit' }}>
+                    </div>
+                    <h3 class="center-align">Your submission will be reviewed</h3>
+                    {{ form_end(form) }}
+                </div>
+                <!-- .FORM -->
+            </div>
+            <div id="test5">
+                {% if app.request.get('_route') != 'festival_new' %}
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Artist</th>
+                        <th>Location</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for concert in concerts %}
+                        <tr>
+                            <td>{{ concert.id }}</a></td>
+                            <td>{% if concert.start %}{{ concert.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if concert.end %}{{ concert.end|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{{ concert.artist }}</td>
+                            <td>{% if concert.location.name is defined %}{{ concert.location.name }}{% endif %}</td>
+                            <td><a href="{{ path('concert_edit', { 'concert_id': concert.id, 'festival_id': concert.festival.id }) }}">edit</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row center-align">
+                    <a href="{{ path('concert_new', { 'festival_id': festival.id }) }}" class="waves-effect waves-light btn">Add concert</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $('input.autocomplete-genre').autocomplete({
+                data: {
+                    {% for genre in genres %}
+                        "{{ genre.name }}": null,
+                    {% endfor %}
+                },
+                limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 3, // Creates a dropdown of 15 years to control year,
+                today: 'Today',
+                clear: 'Clear',
+                close: 'Ok',
+                format: 'yyyy-mm-dd',
+                closeOnSelect: true // Close upon selecting a date,
+            });
+        });
+    </script>
+    <script>
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** @type {!HTMLInputElement} */(document.getElementById('appbundle_festival_location_address')),
+                // {types: ['geocode']} /** NB LN-T Remove to get places autocomplete
+                );
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+    </script>
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&libraries=places&callback=initAutocomplete' }}>
+    </script>
+
+{% endblock javascripts %}

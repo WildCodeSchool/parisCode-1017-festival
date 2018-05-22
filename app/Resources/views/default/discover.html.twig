@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/vendor/jquery-ui.min.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="discover">
+        <div class="row row-custom">
+            <div class="col s12 m4 festival">
+                <div class="row search">
+                    <div class="input-field">
+                        <!--Search bar in Ajax & create form builder -->
+                        <form id="searchBar" action="{{ path('search_bar') }}" method="POST">
+                            <input
+                                    type="text"
+                                    id="autocomplete-input"
+                                    class="autocomplete"
+                                    name="search"
+                                    data-url="{{ path('search_autocomplete') }}">
+                            <label for="autocomplete-input">Search by festival, genre or artist</label>
+                        </form>
+                    </div>
+                    <!-- Switch -->
+                    <div class="switch center hide-on-med-and-up">
+                        <label>
+                            Map
+                            <input id="switch" type="checkbox">
+                            <span class="lever"></span>
+                            Cards
+                        </label>
+                    </div>
+
+                </div>
+
+                <div id="festival-cards" class="row festival-cards">
+                    {% include ('default/includes/festivalCard.html.twig') %}
+                </div>
+            </div>
+            <!--.festival -->
+            <div class="col s12 offset-m4 m8 map">
+                <div id="map"></div>
+            </div>
+            <!--.map -->
+        </div>
+        <!--.row -->
+    </div>
+
+    <!--.discover -->
+{% endblock %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block javascripts %}
+    <!--GoogleMaps script -->
+    <script>
+        var map;
+        var markerCluster;
+        var markers = [];
+        locations = [
+            {% for festival in festivals %}
+                {% if festival.location.latitude and festival.location.longitude is not null %}
+                    {lat: {{ festival.location.latitude }},
+                    lng: {{ festival.location.longitude }},
+                    info: '<a class="modal-trigger" href="{{ '#modal' ~ festival.id ~ 'b' }}">{{ festival.title }}</a>'}
+                {% endif %},
+            {% endfor %}
+        ];
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: {
+                    {% if (user is not null) and (user.location is not null) and (user.location.latitude and user.location.longitude is not null) %}
+                        lat: {{ user.location.latitude }},
+                        lng: {{ user.location.longitude }}
+                    {% else %}
+                        lat: 48.864716,
+                        lng: 2.349014
+                    {% endif %}
+        }
+            });
+            addMarker(locations);
+        }
+        function addMarker(locations, reload){
+            var labels = [];
+            var bounds = new google.maps.LatLngBounds();
+            var infoWin = new google.maps.InfoWindow();
+            var markers1 = locations.map(function(location, i) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length],
+                    map: map,
+                    animation: google.maps.Animation.DROP
+                });
+                bounds.extend(marker.position);
+                google.maps.event.addListener(marker, 'click', function() {
+                    infoWin.setContent(location.info);
+                    infoWin.open(map, marker);
+                });
+                markers.push(marker);
+            });
+            markerCluster = new MarkerClusterer(map, markers, {
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
+            );
+            if (typeof reload !== 'undefined'){
+                map.fitBounds(bounds);
+                if (markers1.length === 1){
+                    map.setZoom(10);
+                }
+                map.panToBounds(bounds);
+            }
+        }
+        function deleteMarkers() {
+            markerCluster.clearMarkers();
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markerCluster = null;
+            markers = [];
+        }
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="{{ asset('js/vendor/jquery-ui.min.js') }}"></script>
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&content_copy&callback=initMap' }}>
+    </script>
+    <!--.GoogleMaps script -->
+
+    <script>
+        $(document).ready(function(){
+        // modal
+            $('.modal').modal();
+        });
+        // switch festival cards/map on mobile view
+        $("#switch").click(function(){
+            $(".map").toggleClass("switcher");
+        });
+        // display festival cards according search input
+        $("#searchBar").submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            var search = $("#autocomplete-input").val();
+            var action = form.attr('action');
+
+            $.ajax({
+                url: action,
+                type: "POST",
+                dataType: "json",
+                data: {'search': search},
+                timeout: 2000,
+                success: function(response){
+                    $("#festival-cards").html(response.festivals);
+                    $('.modal').modal();
+                    $('ul.tabs').tabs();
+                    locations = response.locations;
+                    deleteMarkers();
+                    addMarker(locations, true);
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            })
+        });
+        // Add a festival to wishlist
+        $(".addFestivalToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('The festival is now added to your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('The festival is now deleted from your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        });
+        // Add a concert to wishlist
+        $(".addConcertToWishlist").on('click', function(event){
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var elemen = $(this);
+            $.ajax({
+                url: href,
+                type: "GET",
+                success: function(response){
+                    if (response === true){
+                        Materialize.toast('The concert is now added to your wishlist!', 2000);
+                        elemen.html("<i class='material-icons'>favorite</i>");
+
+                    } else{
+                        Materialize.toast('The concert is now deleted from your wishlist!', 2000)
+                        elemen.html("<i class='material-icons'>favorite_border</i>");
+                    }
+                }
+            })
+        });
+        // Autocomplete in search bar
+        $("#autocomplete-input").autocomplete({
+            source : function(req, resp){
+                $.ajax({
+                    source: $("#autocomplete-input").data('url'),
+                    url : $("#autocomplete-input").data('url'),
+                    dataType : 'json',
+                    data: {'term': $("#autocomplete-input").val()},
+                    timeout: 2000,
+                    success : function(response){
+                        resp(response, function(objet){
+                            return objet.festival;
+
+                        });
+                    }
+                });
+            },
+            minLength: 3,
+            delay: 0
+        });
+    </script>
+
+{% endblock javascripts %}

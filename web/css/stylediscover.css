@@ -1,0 +1,258 @@
+/************************************************\
+==================================================
+1. All
+2. Discover Base
+3. Discover Media Queries
+4.
+
+==================================================
+\************************************************/
+
+/************************************************\
+==================================================
+1. All
+==================================================
+\************************************************/
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.card-image img{
+    height: 100% !important;
+    width: 100% !important;
+}
+.favorite{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}
+.zoom-in{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 1;
+}
+.festival::-webkit-scrollbar,
+.map::-webkit-scrollbar{
+    display: none;
+}
+
+.discover-text{
+    text-align: left;
+}
+.festival-title{
+    font-size: 2em;
+}
+h3{
+    font-size: 1.25em;
+    margin:0;
+    text-transform: uppercase;
+}
+.italic{
+    font-style: italic;
+}
+.switcher {
+    display:none;
+    z-index: -1000;
+}
+::placeholder{
+    color: white;
+    opacity: 1;
+}
+main {
+    flex: 1 0 auto;
+    background-image: url(../img/background.jpg);
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: 100%;
+}
+.discover {
+    background-color: white!important;
+}
+
+/************************************************\
+==================================================
+2. Discover Mobile
+==================================================
+\************************************************/
+
+.row-custom{
+    min-height: 100vh;
+}
+.container-top{
+    margin-top: 9vh;
+}
+.row-custom{
+    margin-bottom: 0px !important;
+}
+.festival-cards{
+    margin-top: 29vh;
+    margin-left: 1vh;
+    margin-right: 0.5vh;
+}
+.map {
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+#map {
+    right: 0;
+    position: fixed;
+    width: 100%;
+    top: 28vh;
+    height: 72vh;
+    z-index: 2;
+}
+
+.modal {
+    width: 90% !important;
+    height: 90% !important;
+    left: 5% !important;
+    right: 5% !important;
+    top: 5% !important;
+    bottom: 5% !important;
+}
+.search {
+    background-color: white;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    position: fixed;
+    z-index: 3;
+    top: 8vh;
+    width: 96vw;
+}
+
+/************************************************\
+==================================================
+3. Discover Media Queries
+==================================================
+\************************************************/
+
+/* Tablet */
+@media screen and (min-width: 601px) and (max-width: 992px) {
+    .container-top {
+        margin-top: 8vh;
+    }
+    .festival-cards {
+        margin-top: 26vh;
+        margin-left: 1vh;
+    }
+    .festival-cards p {
+        font-size: 0.85em;
+    }
+    .map {
+        z-index: 3;
+    }
+    #map {
+        top: 8vh;
+        height: 92vh;
+        z-index: 3;
+    }
+    .modal {
+        width: 90% !important;
+        height: 90% !important;
+        left: 5% !important;
+        right: 5% !important;
+        top: 5% !important;
+        bottom: 5% !important;
+    }
+    .search {
+        padding-top: 2vh;
+        z-index: 2;
+        top: 7vh;
+        width: 33vw;
+    }
+    .login-title {
+        margin-top: 2em;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width: 993px) {
+    .container-top{
+        margin-top: 12vh;
+    }
+    .festival-cards{
+        margin-top: 28vh;
+        margin-left: 1vh;
+    }
+    /* Google Maps */
+    .map {
+        z-index: 3;
+    }
+    #map {
+        top: 10vh;
+        height: 90vh;
+        z-index: 3;
+    }
+    .modal {
+        width: 90% !important;
+        height: 90% !important;
+        left: 5% !important;
+        right: 5% !important;
+        top: 5% !important;
+        bottom: 5% !important;
+    }
+    .search {
+        padding-top: 4vh;
+        z-index: 2;
+        top: 8vh;
+        width: 33vw;
+    }
+    .register-icon {
+        font-size: 6em;
+    }
+    .login-title {
+        margin-top: 3em;
+    }
+}
+
+/* Big screen */
+@media screen and (min-width: 1285px) {
+    #map {
+        top: 7vh;
+        height: 93vh;
+    }
+    .search {
+        top: 4vh;
+    }
+    .festival-cards{
+        margin-top: 20vh;
+    }
+}
+
+/************************************************\
+==================================================
+4. Forms
+==================================================
+\************************************************/
+
+#appbundle_concert_isCancelled{
+    display: inline;
+}
+
+/************************************************\
+==================================================
+5. Register
+==================================================
+\************************************************/
+
+.register-icon {
+    font-size: 3em;
+    color: #26a69a;
+}
+.login-title {
+    font-size: 2em;
+    font-weight: 600;
+}
+.card-panel {
+    margin-top: 2em;
+}
+.card-panel-size {
+    height: 20em;
+}

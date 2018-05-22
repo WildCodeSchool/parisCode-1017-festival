@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-top">
+
+        <div class="row">
+            <h2 class="center-align col s6 hide-on-small-only">Already have an account</h2>
+            <h2 class="center-align col s6 hide-on-small-only">Create an account</h2>
+        </div>
+
+        <div class="row">
+            <div class="col s12 m6">
+                <h2 class="center-align hide-on-med-and-up">Already have an account</h2>
+                <form class="col s12 card-panel card-panel-size" action="{{ path("fos_user_security_check") }}" method="post">
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}"
+                                   required="required"/>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="_password" required="required"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            {% if error %}
+                                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col s12 m6">
+                <h2 class="center-align hide-on-med-and-up">Create an account</h2>
+                <div class="row center-align card-panel card-panel-size">
+                    <div class="col s4">
+                        <i class="material-icons register-icon">account_box</i>
+                        <p>Create an account</p>
+                    </div>
+                    <div class="col s4">
+                        <i class="material-icons register-icon">add_circle</i>
+                        <p>Add festivals and concerts to my wishlist</p>
+                    </div>
+                    <div class="col s4">
+                        <i class="material-icons register-icon">today</i>
+                        <p>Access to my wishlist through a calendar</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <a href="{{ path('fos_user_registration_register') }}" class="waves-effect waves-light btn">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    {#<script src="https://use.fontawesome.com/a4cc06d132.js"></script>#}
+    {#<script type="text/javascript" src="{{ asset('js/scriptform.js') }}"></script>#}
+
+{% endblock javascripts %}

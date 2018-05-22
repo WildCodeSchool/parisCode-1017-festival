@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/stylediscover.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row center-align">
+        <div class="col s12">
+            <h2>{{ app.request.get('_route') == 'fos_user_registration_register' ? 'Create your ' : 'Edit ' }}Account</h2>
+        </div>
+    </div>
+
+
+    <div class="card-panel">
+    <!-- FORM -->
+    <div class="row">
+        {{ form_start(form) }}
+        <!-- $username -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">face</i>
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+                {{ form_errors(form.username) }}
+            </div>
+        </div>
+        <!-- $email -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mail</i>
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <!-- $passwordFirst -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">https</i>
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first) }}
+                {{ form_errors(form.plainPassword.first) }}
+            </div>
+        </div>
+        <!-- $passwordSecond -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">https</i>
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second) }}
+                {{ form_errors(form.plainPassword.second) }}
+            </div>
+        </div>
+        <!-- $address -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">map</i>
+                    {{ form_label(form.location.address) }}
+                    {{ form_widget(form.location.address) }}
+                    {{ form_errors(form.location.address) }}
+            </div>
+        </div>
+        <!-- $linkWebsite -->
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">photo</i>
+                {{ form_label(form.imageIcon) }}
+                {{ form_widget(form.imageIcon) }}
+                {{ form_errors(form.imageIcon) }}
+            </div>
+        </div>
+        <div class="row center-align">
+            <input type="submit" class="waves-effect waves-light btn" value={{ app.request.get('_route') == 'fos_user_registration_register' ? 'Register' : 'Edit' }}>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <!-- .FORM -->
+    </div>
+
+{% endblock body %}
+
+{% block javascripts %}
+
+    <script>
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** @type {!HTMLInputElement} */(document.getElementById('app_user_account_location_address'))
+                // {types: ['geocode']} /** NB LN-T Remove to get places autocomplete
+            );
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+    </script>
+
+    <script async defer
+            src={{ 'https://maps.googleapis.com/maps/api/js?key=' ~ google_maps_api  ~ '&libraries=places&callback=initAutocomplete' }}>
+    </script>
+
+{% endblock javascripts %}
